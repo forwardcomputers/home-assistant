@@ -1,0 +1,338 @@
+# https://www.home-assistant.io/lovelace/
+
+title: Home Assistant
+
+resources:
+  - url: /local/lovelace/card-tools.js?v=297fcc
+    type: js
+  - url: /local/lovelace/compact-custom-header.js?v=0.2.9
+    type: js
+  - url: /local/lovelace/fold-entity-row.js?v=6d11d3
+    type: js
+  - url: /local/lovelace/monster-card.js?v=0.2.3
+    type: js
+  - url: /local/lovelace/slider-entity-row.js?v=ba8f50
+    type: js
+  - url: /local/lovelace/tracker-card.js?v=0.2.0
+    type: js
+  - url: /local/lovelace/secondaryinfo-entity-row.js?v=0.1
+    type: module
+  - url: /local/lovelace/simple-thermostat.min.js?v=0.14.0
+    type: module
+  - url: /local/lovelace/custom-weather-card-chart.js?v=0.2.4
+    type: module
+
+views:
+  - title: Home
+    icon: mdi:home
+    cards:
+      - type: custom:compact-custom-header
+        dir: '/www/lovelace/'
+        header: true
+        menu: true
+        notification: true
+        voice: false
+        options: true
+        tabs: true
+      - type: custom:monster-card
+        show_empty: false
+        card:
+          type: glance
+        filter:
+          include:
+            - entity_id: "*toner_pct*"
+              state: '< 25'
+            - entity_id: "*drum_pct*"
+              state: '< 25'
+            - entity_id: "*kitchen_battery*"
+              state: '< 25'
+            - entity_id: "*tradfri_remote*"
+              state: '< 25'
+            - entity_id: "*tradfri_motion*"
+              state: '< 25'
+            - attributes:
+                battery: '< 25'
+            - attributes:
+                battery_level: '< 25'
+      - type: entities
+        title: Lights
+        show_header_toggle: true
+        entities:
+          - light.bedroom
+          - light.hallway
+          - type: custom:slider-entity-row
+            entity: light.led
+            toggle: true
+          - type: custom:slider-entity-row
+            entity: light.floor
+            toggle: true
+          - switch.kitchen
+          - switch.desk
+          - type: custom:slider-entity-row
+            entity: light.office
+            toggle: true
+      - type: custom:simple-thermostat
+        entity: climate.thermostat
+        name: Climate
+        hide:
+          state: true
+        sensors:
+          - entity: sensor.indoor_humidity
+            name: Indoor humidity
+          - entity: sensor.pws_relative_humidity
+            name: Outside humidity
+          - entity: sensor.pws_temp_c
+            name: Outside temperature
+          - entity: sensor.pws_feelslike_c
+            name: Feels like
+          - entity: sensor.pws_uv
+            name: UV
+          - entity: sensor.sunrise_time
+            name: Sunrise
+          - entity: sensor.sunset_time
+            name: Sunset
+#
+  - title: Weather
+    icon: mdi:weather-cloudy
+    # panel: true
+    cards:
+      - type: 'custom:weather-card-chart'
+        title: Weather
+        weather: weather.openweathermap
+      - type: vertical-stack
+        cards:
+        - type: entities
+          title: Today
+          show_header_toggle: false
+          entities:
+            - sensor.pws_weather_1d_metric
+            - sensor.pws_weather_1n_metric
+        - type: entities
+          title: Tomorrow
+          show_header_toggle: false
+          entities:
+            - sensor.pws_weather_2d_metric
+            - sensor.pws_weather_2n_metric
+        - type: entities
+          title: Day after
+          show_header_toggle: false
+          entities:
+            - sensor.pws_weather_3d_metric
+            - sensor.pws_weather_3n_metric
+      - type: vertical-stack
+        cards:
+        - type: entities
+          title: Environmental
+          show_header_toggle: false
+          entities:
+            - sensor.pollen
+            - sensor.flu
+            - entity: sensor.aqhi_friendly
+              type: "custom:secondaryinfo-entity-row"
+              secondary_info: "[[ sensor.aqhi.state ]]"
+            - sensor.cigarettes
+            - entity: sensor.o3_friendly
+              type: "custom:secondaryinfo-entity-row"
+              secondary_info: "[[ sensor.o3.state ]] ppb"
+            - entity: sensor.pm_friendly
+              type: "custom:secondaryinfo-entity-row"
+              secondary_info: "[[ sensor.pm.state ]] µg/m³"
+            - entity: sensor.no2_friendly
+              type: "custom:secondaryinfo-entity-row"
+              secondary_info: "[[ sensor.no2.state ]] ppb"
+            - entity: sensor.co_friendly
+              type: "custom:secondaryinfo-entity-row"
+              secondary_info: "[[ sensor.co.state ]] ppm"
+            - entity: sensor.so2_friendly
+              type: "custom:secondaryinfo-entity-row"
+              secondary_info: "[[ sensor.so2.state ]] ppb"
+        - type: entities
+          title: Plant
+          show_header_toggle: false
+          entities:
+            - sensor.kitchen_conductivity
+            - sensor.kitchen_light_intensity
+            - sensor.kitchen_moisture
+            - sensor.kitchen_temperature
+#
+  - type: vertical-stack
+    title: Rooms
+    icon: mdi:checkbox-multiple-blank-outline
+    cards:
+      - type: entities
+        title: Livingroom
+        entities:
+          - light.led
+          - light.floor
+          - entity: media_player.alis_echo_dot
+            name: Echo Dot
+          - entity: remote.livingroom
+            name: Harmony hub
+          - entity: media_player.livingroom_tv
+            name: Panasonic TV
+          - entity: media_player.shield
+            name: nVidia Shield
+          - entity: media_player.livingroom_apple_tv
+            name: Apple TV
+          - entity: remote.livingroom_apple_tv
+            name: Apple TV remote
+      - type: entities
+        title: Bedroom
+        entities:
+          - light.bedroom_left
+          - light.bedroom_right
+          - entity: media_player.alis_echo_spot
+            name: Echo Spot
+          - sensor.tradfri_remote_control
+      - type: entities
+        title: Office
+        entities:
+          - switch.desk
+          - light.office
+          - entity: media_player.office_tv
+            name: Samsung TV
+          - entity: media_player.office_speaker
+            name: Google Home
+      - type: entities
+        title: Hallway
+        entities:
+          - light.hallway_center
+          - light.hallway_door
+          - light.hallway_kitchen
+          - sensor.tradfri_motion_sensor
+      - type: entities
+        title: Kitchen
+        entities:
+          - switch.kitchen
+          - sensor.kitchen_battery
+#
+  - title: Radio
+    icon: mdi:play-circle-outline
+    cards:
+      - type: entities
+        title: Radio
+        show_header_toggle: false
+        entities:
+          - input_select.radio_speaker
+          - input_select.radio_station
+          - input_number.radio_volume
+          - input_boolean.radio_onoff
+#
+  - title: Devices
+    icon: mdi:server
+    cards:
+      - type: entities
+        title: NAS
+        show_header_toggle: false
+        entities:
+          - sensor.speedtest_download
+          - sensor.speedtest_upload
+          - sensor.speedtest_ping
+      - type: entities
+        title: NAS
+        show_header_toggle: false
+        entities:
+          - sensor.model_name
+          - sensor.serial_number
+          - sensor.cpu_load_total
+          - sensor.memory_usage_real
+          - sensor.volume_used_volume_1
+          - sensor.status_volume_1
+          - sensor.status_smart_sda
+          - sensor.status_smart_sdb
+      - type: entities
+        title: UPS
+        show_header_toggle: false
+        entities:
+          - sensor.office_ups_model
+          - sensor.office_ups_serial_number
+          - sensor.office_ups_status
+          - sensor.office_ups_load
+          - sensor.office_ups_battery_runtime_mins
+          - sensor.office_ups_battery_charge
+      - type: entities
+        title: Printer
+        show_header_toggle: false
+        entities:
+          - sensor.printer_product
+          - sensor.printer_serial
+          - sensor.printer_name
+          - sensor.printer_status
+          - entity: sensor.printer_toner_pct_remain
+            type: "custom:secondaryinfo-entity-row"
+            secondary_info: "[[ sensor.printer_toner_page_remain.state ]] pages remaining"
+          - entity: sensor.printer_drum_pct_remain
+            type: "custom:secondaryinfo-entity-row"
+            secondary_info: "[[ sensor.printer_drum_page_remain.state ]] pages remaining"
+          - script.cleaning_mode
+      - type: entities
+        title: Web Links
+        show_header_toggle: false
+        entities:
+          - type: weblink
+            name: Modem
+            url: !secret modem_url
+            icon: mdi:router-wireless
+          - type: weblink
+            name: Router
+            url: !secret router_url
+            icon: mdi:router-wireless
+          - type: weblink
+            name: Filer
+            url: !secret filer_url
+            icon: mdi:server-network
+          - type: weblink
+            name: Laser
+            url: !secret laser_url
+            icon: mdi:printer
+          - type: weblink
+            name: Powerline
+            url: !secret powerliving_url
+            icon: mdi:router-wireless
+#
+  - title: HASS
+    icon: mdi:home-assistant
+    cards:
+      - type: entities
+        title: NUC i5
+        show_header_toggle: false
+        entities:
+          - sensor.os
+          - sensor.distro
+          - sensor.kernel_version
+          - sensor.glances_total
+          - sensor.glances_cpu_temp
+          - sensor.processor_use
+          - sensor.glances_ram_used
+          - sensor.glances_disk_used
+          - sensor.glances_swap_used
+          - sensor.last_boot
+      - type: entities
+        title: Docker
+        show_header_toggle: false
+        entities:
+          - sensor.docker_version
+          - sensor.glances_containers_active
+      - type: entities
+        title: Home Assistant
+        show_header_toggle: false
+        entities:
+          - entity: sensor.home_assistant_version
+            type: "custom:secondaryinfo-entity-row"
+            secondary_info: "Released version [[ sensor.released_version.state ]]"
+          - sensor.connected_clients
+          - sensor.uptime
+      - type: custom:tracker-card
+        title:
+        trackers:
+          - sensor.custom_card_tracker
+          - sensor.custom_component_tracker
+#
+  - title: Debug
+    icon: mdi:bug
+    cards:
+      - type: custom:monster-card
+        card:
+          type: glance
+        filter:
+          include: [{}]

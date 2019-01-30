@@ -1,0 +1,12 @@
+show_installable: false
+hide_sensor: false
+track:
+  - components
+  - cards
+  - python_scripts
+component_urls:
+  - https://raw.githubusercontent.com/pnbruckner/homeassistant-config/master/custom_components.json
+card_urls:
+  - https://raw.githubusercontent.com/sgttrs/lovelace-weather-card-chart/master/custom-updater.json
+  - https://raw.githubusercontent.com/nervetattoo/simple-thermostat/master/tracker.json
+python_script_urls:

@@ -1,0 +1,9 @@
+# https://www.home-assistant.io/components/sensor.imap_email_content/
+#
+notify:
+  - name: me
+    platform: smtp
+    port: 25
+    sender: !secret from_email
+    username: !secret from_email
+    recipient: !secret to_email

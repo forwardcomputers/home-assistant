@@ -1,0 +1,13 @@
+# https://www.home-assistant.io/docs/automation/
+
+- id: sunrise_lights
+  alias: All lights off at sunrise
+  initial_state: true
+  trigger:
+    platform: numeric_state
+    entity_id: sun.sun
+    value_template: '{{ states.sun.sun.attributes.elevation }}'
+    above: 1
+  action:
+    service: homeassistant.turn_off
+    entity_id: group.all_lights

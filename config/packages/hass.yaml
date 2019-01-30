@@ -1,0 +1,19 @@
+# https://www.home-assistant.io/components/sensor.version/
+# https://www.home-assistant.io/components/sensor.command_line/
+# https://www.home-assistant.io/components/sensor.uptime/
+# https://www.home-assistant.io/components/api/
+
+homeassistant:
+  customize:
+    sensor.home_assistant_version:
+      friendly_name: Installed Version
+
+sensor:
+  - platform: api_streams
+  - platform: version
+    name: Home Assistant Version
+  - platform: uptime
+    unit_of_measurement: hours
+  - platform: command_line
+    command: python3 -c "import requests; print(requests.get('https://pypi.python.org/pypi/homeassistant/json').json()['info']['version'])"
+    name: Released Version

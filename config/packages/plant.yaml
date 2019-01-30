@@ -1,0 +1,35 @@
+# https://www.home-assistant.io/components/sensor.miflora/
+# https://github.com/andrey-git/home-assistant-custom-ui
+
+homeassistant:
+  customize:
+    sensor.kitchen_battery:
+      friendly_name: Kitchen Battery
+      device_class: battery
+      templates:
+        theme: >-
+          var l = entities['sensor.kitchen_battery'].state; 
+          if (l <= 30) { return 'card-critical'; }
+          else if (l <= 70) {return 'card-warning' }
+    sensor.kitchen_conductivity:
+      friendly_name: Kitchen Nutrition
+      icon: mdi:pot
+    sensor.kitchen_light_intensity:
+      friendly_name: Kitchen Intensity
+      icon: mdi:weather-sunny
+    sensor.kitchen_moisture:
+      friendly_name: Kitchen Moisture
+      icon: mdi:water
+    sensor.kitchen_temperature:
+      friendly_name: Indoor Temperature
+
+sensor:
+  - platform: miflora
+    name: kitchen
+    mac: !secret plant1_mac
+    monitored_conditions:
+      - battery
+      - conductivity
+      - light
+      - moisture
+      - temperature

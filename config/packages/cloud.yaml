@@ -1,0 +1,39 @@
+# https://www.home-assistant.io/components/cloud/
+# https://www.home-assistant.io/components/alexa/
+# https://www.home-assistant.io/cloud/google_assistant/
+# https://www.home-assistant.io/components/homekit/
+
+cloud:
+  alexa:
+    filter:
+      include_domains:
+        - climate
+        - light
+        - switch
+      exclude_entities:
+        - light.bedroom_left
+        - light.bedroom_right
+        - light.hallway_door
+        - light.hallway_center
+        - light.hallway_kitchen
+  google_actions:
+    filter:
+      include_domains:
+        - climate
+        - light
+        - switch
+      exclude_entities:
+        - light.bedroom_left
+        - light.bedroom_right
+        - light.hallway_door
+        - light.hallway_center
+        - light.hallway_kitchen
+
+homekit:
+  auto_start: true
+  filter:
+    include_domains:
+      - climate
+      - light
+      - switch
+

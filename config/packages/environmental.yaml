@@ -1,0 +1,211 @@
+# https://www.home-assistant.io/components/sensor.waqi/
+# https://www.home-assistant.io/components/sensor.command_line/
+# https://www.home-assistant.io/components/sensor.scrape/
+# https://github.com/andrey-git/home-assistant-custom-ui
+
+homeassistant:
+  customize:
+    sensor.flu:
+      friendly_name: Flu
+      icon: mdi:bug
+      templates:
+        theme: >-
+          var l = entities['sensor.flu'].state; 
+          if (l == 'Localized' || l == 'Widespread') { return 'card-critical'; }
+          else if (l == 'Sporadic') { return 'card-warning' }
+    sensor.pollen:
+      friendly_name: Pollen
+      icon: mdi:flower
+      templates:
+        theme: >-
+          var l = entities['sensor.pollen'].state; 
+          if (l == 'High' || l == 'Very High') { return 'card-critical'; }
+          else if (l == 'Moderate') { return 'card-warning' }
+    sensor.aqhi:
+      icon: mdi:chemical-weapon
+      hidden: true
+    sensor.aqhi_friendly:
+      extra_badge:
+        entity_id: sensor.aqhi
+      templates:
+        theme: >-
+          var l = parseInt(entities['sensor.aqhi'].state); 
+          if (l >= 7) { return 'card-critical'; }
+          else if (l >= 4) {return 'card-warning' }
+    sensor.o3:
+      icon: mdi:earth
+      hidden: true
+    sensor.o3_friendly:
+      extra_badge:
+        entity_id: sensor.o3
+      templates:
+        theme: >-
+          var l = parseInt(entities['sensor.o3'].state); 
+          if (l >= 78) { return 'card-critical'; }
+          else if (l >= 55) {return 'card-warning' }
+    sensor.pm:
+      icon: mdi:chart-bubble
+      hidden: true
+    sensor.pm_friendly:
+      extra_badge:
+        entity_id: sensor.pm
+      templates:
+        theme: >-
+          var l = parseInt(entities['sensor.pm'].state); 
+          if (l >= 56) { return 'card-critical'; }
+          else if (l >= 12) {return 'card-warning' }
+    sensor.no2:
+      icon: mdi:car
+      hidden: true
+    sensor.no2_friendly:
+      extra_badge:
+        entity_id: sensor.no2
+      templates:
+        theme: >-
+          var l = parseInt(entities['sensor.no2'].state); 
+          if (l >= 95) { return 'card-critical'; }
+          else if (l >= 43) {return 'card-warning' }
+    sensor.co:
+      icon: mdi:fire
+      hidden: true
+    sensor.co_friendly:
+      extra_badge:
+        entity_id: sensor.co
+      templates:
+        theme: >-
+          var l = parseFloat(entities['sensor.co'].state); 
+          if (l >= 10.4) { return 'card-critical'; }
+          else if (l >= 1.8) {return 'card-warning' }
+    sensor.so2:
+      icon: mdi:factory
+      hidden: true
+    sensor.so2_friendly:
+      extra_badge:
+        entity_id: sensor.so2
+      templates:
+        theme: >-
+          var l = parseInt(entities['sensor.so2'].state); 
+          if (l >= 81) { return 'card-critical'; }
+          else if (l >= 44) {return 'card-warning' }
+
+sensor:
+  # - platform: waqi
+  #   token: !secret waqi_token_key
+  #   locations:
+  #     - toronto west
+  - platform: command_line
+    name: flu
+    command: "/usr/bin/curl \"https://www.theweathernetwork.com/ca/health/ontario/toronto\" 2>&1 | awk -F '[ \"]' '/activity-colour/ {print toupper( substr( $4, 1, 1 ) ) substr( $4, 2 )}'"
+    scan_interval: 3600
+    select: "#local_flu_activity > div.content"
+  - platform: scrape
+    name: pollen
+    resource: https://www.theweathernetwork.com/ca/forecasts/pollen/ontario/toronto
+    select: "#pollen-report > p"
+    # select: "#pollen-details > div.threeday_outlook.clearfix > div:nth-of-type(1) > div:nth-of-type(1) > span.date-level"
+    value_template: >
+      {% if value == "Pollen station out of season" %} N/A
+      {% else %} N/A
+      {% endif %}
+  - platform: command_line
+    name: aqhi
+    command: "/usr/bin/curl \"http://dd.weather.gc.ca/air_quality/aqhi/ont/observation/realtime/xml/AQ_OBS_FDQBX_CURRENT.xml\" 2>&1 | awk -F '[><]' '/airQualityHealthIndex/ {printf \"%.0f\\n\",$3}'"
+    scan_interval: 3600
+  - platform: command_line
+    name: o3
+    command:  "/usr/bin/curl \"http://www.airqualityontario.com/history/summary.php\" 2>&1 | awk -F '[><]' '/p-122 s-35125/ {print $5}'"
+    unit_of_measurement: 'ppb'
+    scan_interval: 3600
+  - platform: command_line
+    name: pm
+    command:  "/usr/bin/curl \"http://www.airqualityontario.com/history/summary.php\" 2>&1 | awk -F '[><]' '/p-124 s-35125/ {print $5}'"
+    unit_of_measurement: 'µg/m³'
+    scan_interval: 3600
+  - platform: command_line
+    name: no2
+    command:  "/usr/bin/curl \"http://www.airqualityontario.com/history/summary.php\" 2>&1 | awk -F '[><]' '/p-36 s-35125/ {print $5}'"
+    unit_of_measurement: 'ppb'
+    scan_interval: 3600
+  - platform: command_line
+    name: so2
+    command:  "/usr/bin/curl \"http://www.airqualityontario.com/history/summary.php\" 2>&1 | awk -F '[><]' '/p-9 s-35125/ {print $5}'"
+    unit_of_measurement: 'ppb'
+    scan_interval: 3600
+  - platform: command_line
+    name: co
+    command:  "/usr/bin/curl \"http://www.airqualityontario.com/history/summary.php\" 2>&1 | awk -F '[><]' '/p-46 s-35125/ {print $5}'"
+    unit_of_measurement: 'ppm'
+    scan_interval: 3600
+ 
+  - platform: template
+    sensors:
+      aqhi_friendly:
+        friendly_name: AQHI
+        icon_template: mdi:chemical-weapon
+        value_template: >-
+          {% set l = states('sensor.aqhi') | int %}
+          {% if l <= 3 %} Good
+          {% elif l <= 6 %} Moderate
+          {% elif l <= 10 %} High
+          {% elif l > 10 %} Hazardous
+          {% endif %}
+      o3_friendly:
+        friendly_name: O₃
+        icon_template: mdi:earth
+        value_template: >-
+          {% set l = states('sensor.o3') | int %}
+          {% if l < 0 %} unknown
+          {% elif l <= 54 %} Good
+          {% elif l <= 70 %} Moderate
+          {% elif l <= 85 %} Unhealthy
+          {% elif l > 85 %} Hazardous
+          {% endif %}
+      pm_friendly:
+        friendly_name: PM₂.₅
+        icon_template: mdi:chart-bubble
+        value_template: >-
+          {% set l = states('sensor.pm') | int %}
+          {% if l < 0 %} unknown
+          {% elif l <= 11 %} Good
+          {% elif l <= 34 %} Moderate
+          {% elif l <= 149 %} Unhealthy
+          {% elif l > 149 %} Hazardous
+          {% endif %}
+      no2_friendly:
+        friendly_name: NO₂
+        icon_template: mdi:car
+        value_template: >-
+          {% set l = states('sensor.no2') | int %}
+          {% if l < 0 %} unknown
+          {% elif l <= 53 %} Good
+          {% elif l <= 100 %} Moderate
+          {% elif l <= 360 %} Unhealthy
+          {% elif l > 360 %} Hazardous
+          {% endif %}
+      co_friendly:
+        friendly_name: CO
+        icon_template: mdi:fire
+        value_template: >-
+          {% set l = states('sensor.co') | float %}
+          {% if l < 0 %} unknown
+          {% elif l <= 1.7 %} Good
+          {% elif l <= 10.3 %} Moderate
+          {% elif l <= 14.7 %} Unhealthy
+          {% elif l > 14.7 %} Hazardous
+          {% endif %}
+      so2_friendly:
+        friendly_name: SO₂
+        icon_template: mdi:factory
+        value_template: >-
+          {% set l = states('sensor.so2') | int %}
+          {% if l < 0 %} unknown
+          {% elif l <= 35 %} Good
+          {% elif l <= 75 %} Moderate
+          {% elif l <= 185 %} Unhealthy
+          {% elif l > 185 %} Hazardous
+          {% endif %}
+      cigarettes:
+        friendly_name: Cigarettes / Day
+        icon_template: mdi:smoking
+        unit_of_measurement: 'Cigarettes'
+        value_template: "{{ ( float(states('sensor.pm')) / 22 ) | round(1) }}"

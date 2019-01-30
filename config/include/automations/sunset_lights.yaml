@@ -1,0 +1,20 @@
+# https://www.home-assistant.io/docs/automation/
+
+- id: sunset_lights
+  alias: Kitchen lights on at sunset
+  initial_state: true
+  trigger:
+    - platform: time
+      at: '16:00:00'
+    - platform: numeric_state
+      entity_id: sun.sun
+      value_template: '{{ states.sun.sun.attributes.elevation }}'
+      below: 3
+  condition:
+    condition: template
+    value_template: '{{ now().hour > 16 and ((states.sun.sun.attributes.elevation | float) < 3 or (states.sensor.yr_cloudiness.state | float) > 70.0) }}'
+  action:
+    service: homeassistant.turn_on
+    entity_id:
+      - switch.kitchen
+

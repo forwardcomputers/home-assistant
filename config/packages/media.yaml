@@ -1,0 +1,37 @@
+# https://www.home-assistant.io/components/media_player.panasonic_viera/
+# https://www.home-assistant.io/components/media_player.samsungtv/
+# https://github.com/JeffLIrion/homeassistant_native_firetv
+# https://www.home-assistant.io/components/media_player.firetv/
+# https://www.home-assistant.io/components/cast/
+
+media_player:
+  - platform: alexa
+    email: !secret amz_email
+    password: !secret amz_password_key
+    url: 'amazon.com'
+  # - platform: firetv
+  #   adbkey: "/packages/firetv/adbkey"
+  #   host: !secret firetvbox_url
+  #   name: Fire TV
+  # - platform: firetv
+  #   adbkey: "/packages/firetv/adbkey"
+  #   host: !secret firetvstick_url
+  #   name: Fire TV Stick
+  - platform: panasonic_viera
+    name: Livingroom TV
+    host: !secret livingroom_tv_ip
+  - platform: samsungtv
+    name: Office TV
+    host: !secret office_tv_ip
+
+cast:
+  media_player:
+    - host: !secret ghomem1_ip
+    # - host: !secret livingroom_cast_ip
+    - host: !secret shield_ip
+
+remote:
+  - platform: harmony
+    name: Livingroom
+    host: !secret harmonyhub_ip
+    activity: Watch TV

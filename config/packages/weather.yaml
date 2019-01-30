@@ -1,0 +1,203 @@
+# https://www.home-assistant.io/components/sensor.wunderground/
+# https://www.home-assistant.io/components/sensor.yr/
+# https://www.home-assistant.io/components/sensor.template/
+# https://github.com/pnbruckner/homeassistant-config/blob/master/custom_components/sun.py
+# https://github.com/andrey-git/home-assistant-custom-ui
+# https://community.home-assistant.io/t/custom-ui-weather-state-card/23008/245
+
+homeassistant:
+  customize:
+    input_text.weather:
+      custom_ui_state_card: custom-weather-card
+      config:
+        weather: weather.openweathermap
+        humidity: sensor.pws_relative_humidity
+        indoor: sensor.kitchen_temperature
+        humidex: sensor.humidex
+        windchill: sensor.windchill
+        uv: sensor.pws_uv
+        sunup: sensor.sunrise_time
+        sundown: sensor.sunset_time
+    sensor.environment_canada_radar:
+      hidden: true
+    sensor.humidex:
+      hidden: true
+    sensor.humidex_friendly:
+      extra_badge:
+        entity_id: sensor.humidex
+      templates:
+        theme: >-
+          var l = parseInt(entities['sensor.humidex'].state); 
+          if (l >= 40) { return 'card-critical'; }
+          else if (l >= 30) {return 'card-warning' }
+    sensor.pws_dewpoint_c:
+      hidden: true
+    sensor.pws_feelslike_c:
+      friendly_name: 'Outdoor Feels Like'
+    sensor.pws_relative_humidity:
+      friendly_name: 'Outdoor Humidity'
+    sensor.pws_temp_c:
+      friendly_name: 'Outdoor Temperature'
+    sensor.pws_weather:
+      friendly_name: 'Weather Summary'
+    sensor.pws_uv:
+      friendly_name: UV Index
+    sensor.uv:
+      hidden: true
+    sensor.uv_friendly:
+      extra_badge:
+        entity_id: sensor.uv
+      templates:
+        theme: >-
+          var l = parseInt(entities['sensor.uv'].state); 
+          if (l >= 6) { return 'card-critical'; }
+          else if (l >= 3) {return 'card-warning' }
+    sensor.windchill:
+      hidden: true
+    sensor.windchill_friendly:
+      extra_badge:
+        entity_id: sensor.windchill
+      templates:
+        theme: >-
+          var l = parseInt(entities['sensor.windchill'].state); 
+          if (l <= -40) { return 'card-critical'; }
+          else if (l <= -10) {return 'card-warning' }
+    sun.sun:
+      hidden: true
+    sensor.yr_cloudiness:
+      hidden: true
+
+
+sun:
+  monitored_conditions:
+    - azimuth
+    - elevation
+    - next_dawn
+    - next_dusk
+    - next_midnight
+    - next_noon
+    - sunrise
+    - sunset
+  scan_interval:
+    minutes: 1
+
+weather:
+  - platform: openweathermap
+    api_key: !secret openweathermap_api_key
+    mode: daily
+
+input_text:
+  weather:
+    name: weather 
+
+sensor:
+  - platform: wunderground
+    api_key: !secret wu_api_key
+    pws_id: !secret wu_station_name
+    monitored_conditions:
+      - dewpoint_c
+      - feelslike_c
+      - relative_humidity
+      - pressure_mb
+      - temp_c
+      - UV
+      - visibility_km
+      - weather
+      - weather_1d_metric
+      - weather_1n_metric
+      - weather_2d_metric
+      - weather_2n_metric
+      - weather_3d_metric
+      - weather_3n_metric
+      - wind_dir
+      - wind_kph
+      - wind_gust_kph
+  - platform: yr
+    monitored_conditions:
+      - cloudiness
+  - platform: template
+    sensors:
+      indoor_humidity:
+        friendly_name: 'Indoor Humidity'
+        unit_of_measurement: '%'
+        icon_template: mdi:water-percent
+        value_template: '{{ states.climate.thermostat.attributes.current_humidity | int }}'
+      sunrise_time:
+        friendly_name: Sunrise
+        unit_of_measurement: AM
+        icon_template: mdi:weather-sunset-up
+        value_template: '{{ as_timestamp(states.sun.sun.attributes.next_dawn) | timestamp_custom("%-I:%M") }}'
+      sunset_time:
+        friendly_name: Sunset
+        unit_of_measurement: PM
+        icon_template: mdi:weather-sunset-down
+        value_template: '{{ as_timestamp(states.sun.sun.attributes.next_dusk) | timestamp_custom("%-I:%M") }}'
+      environment_canada_radar:
+        friendly_name: Environment Canada Radar
+        value_template: WKR
+      humidex:
+        friendly_name: Humidex
+        icon_template: mdi:oil-temperature
+        value_template: >-
+          {% set l = states('sensor.pws_temp_c') | float %}
+          {% set k = states('sensor.pws_dewpoint_c') | float | round  %}
+          {% set j = l + ( 5/9 ) * ( 6.11 * 2.71828 ** ( 5417.7530 * (( 1/273.16 )-( 1/( 273.15 + k )))) - 10 ) %}
+          {% if l > 20 %} {{ j | round }}
+          {% else %} {{ '' | round }}
+          {% endif %}
+      humidex_friendly:
+        friendly_name: Humidex
+        icon_template: mdi:oil-temperature
+        value_template: >-
+          {% set l = states('sensor.humidex') | float %}
+          {% if l >= 46 %} Dangerous
+          {% elif l >= 40 %} Great Discomfort
+          {% elif l >= 30 %} Some Discomfort
+          {% elif l > 0 %} Comfortable
+          {% else %} N/A
+          {% endif %}
+      uv:
+        friendly_name: UV
+        icon_template: mdi:sunglasses
+        value_template: >-
+          {{ states('sensor.pws_uv') }}
+      uv_friendly:
+        friendly_name: UV
+        icon_template: mdi:sunglasses
+        value_template: >-
+          {% set l = states('sensor.uv') | float %}
+          {% if 0 <= l < 3 %} Low
+          {% elif 3 <= l < 6 %} Moderate
+          {% elif 6 <= l < 8 %} High
+          {% elif 8 <= l < 11 %} Very high
+          {% elif 11 <= l %} Extreme
+          {% else %} N/A
+          {% endif %}
+      windchill:
+        friendly_name: Windchill
+        icon_template: mdi:snowman
+            # {% if k > 4.8 %} {{ j | round }}
+        value_template: >-
+          {% set l = states('sensor.pws_temp_c') | float %}
+          {% set k = states('sensor.pws_wind_kph') | float %}
+          {% set j = (13.12 + 0.6215 * l - 11.37 * k ** 0.16 + 0.3965 * l * k ** 0.16) | round(1) %}
+          {% if j > 0 %}
+          {% elif l < 10 %}
+            {% if k >= 0.1 %} {{ j | round }}
+            {% else %} {{ '' | round }}
+            {% endif %} 
+          {% else %} {{ '' | round }}
+          {% endif %}
+      windchill_friendly:
+        friendly_name: Windchill
+        icon_template: mdi:snowman
+        value_template: >-
+          {% set l = states('sensor.windchill') | float %}
+          {% if l <= -55 %} Danger
+          {% elif l <= -54 %} Severe
+          {% elif l <= -43 %} Very High
+          {% elif l <= -35 %} High
+          {% elif l <= -27 %} Moderate
+          {% elif l <= 0 %} low
+          {% elif l > 0 %} N/A
+          {% endif %}

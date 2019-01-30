@@ -1,0 +1,61 @@
+# https://www.home-assistant.io/components/sensor.glances/
+# https://www.home-assistant.io/components/sensor.systemmonitor/
+# https://github.com/andrey-git/home-assistant-custom-ui
+
+homeassistant:
+  customize:
+    group.glancesbadges:
+      state_card_mode: badges
+      badges_list:
+        - sensor.processor_use
+        - sensor.glances_ram_used
+        - sensor.glances_disk_used
+        - sensor.glances_swap_used
+
+    sensor.glances_disk_used:
+      friendly_name: 'Disk used'
+    sensor.glances_ram_used:
+      friendly_name: 'RAM used'
+    sensor.glances_swap_used:
+      friendly_name: 'Swap used'
+    sensor.glances_total:
+      friendly_name: 'Process'
+    sensor.glances_cpu_temp:
+      friendly_name: 'CPU Temp'
+    sensor.glances_containers_active:
+      friendly_name: 'Active Containers'
+    sensor.processor_use:
+      friendly_name: 'CPU used'
+      icon: mdi:chip
+    sensor.os:
+      icon: mdi:linux
+    sensor.distro:
+      icon: mdi:ubuntu
+
+sensor:
+  - platform: glances
+    host: !secret server_ip
+    version: 3
+    resources:
+      - disk_use_percent
+      - memory_use_percent
+      - swap_use_percent
+      - process_total
+      - cpu_temp
+      - docker_active
+  - platform: systemmonitor
+    resources:
+      - type: processor_use
+      - type: last_boot
+  - platform: command_line
+    command: python3 -c "import requests; print(requests.get('http://localhost:61208/api/3/system').json()['os_name'])"
+    name: OS
+  - platform: command_line
+    command: python3 -c "import requests; print(requests.get('http://localhost:61208/api/3/system').json()['linux_distro'])"
+    name: Distro
+  - platform: command_line
+    command: python3 -c "import requests; print(requests.get('http://localhost:61208/api/3/system').json()['os_version'])"
+    name: Kernel Version
+  - platform: command_line
+    command: python3 -c "import requests; print(requests.get('http://localhost:61208/api/3/docker').json()['version']['Components'][0]['Version'])"
+    name: Docker Version

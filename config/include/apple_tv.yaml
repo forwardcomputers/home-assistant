@@ -1,0 +1,6 @@
+# https://www.home-assistant.io/components/apple_tv/
+
+host: !secret atv_livingroom_ip
+name: Livingroom Apple TV
+login_id: !secret atv_livingroom_login_key
+start_off: true

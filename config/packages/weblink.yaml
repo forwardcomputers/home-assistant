@@ -1,0 +1,31 @@
+# https://www.home-assistant.io/components/weblink/
+# https://github.com/andrey-git/home-assistant-custom-ui
+
+homeassistant:
+  customize:
+    group.weblinkbadges:
+      state_card_mode: badges
+      badges_list:
+        - weblink.modem
+        - weblink.router
+        - weblink.filer
+        - weblink.laser
+        - weblink.powerline
+
+weblink:
+  entities:
+    - name: Modem
+      url: !secret modem_url
+      icon: mdi:router-wireless
+    - name: Router
+      url: !secret router_url
+      icon: mdi:router-wireless
+    - name: Filer
+      url: !secret filer_url
+      icon: mdi:server-network
+    - name: Laser
+      url: !secret laser_url
+      icon: mdi:printer
+    - name: Powerline
+      url: !secret powerliving_url
+      icon: mdi:router-wireless

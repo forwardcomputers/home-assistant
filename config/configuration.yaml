@@ -1,0 +1,38 @@
+# Home Assistant (https://home-assistant.io) configuration
+
+homeassistant:
+  name: Home
+  latitude: !secret home_lat
+  longitude: !secret home_lng
+  elevation: 177
+  unit_system: metric
+  temperature_unit: C
+  time_zone: America/Toronto
+  packages: !include_dir_named packages/
+  customize_glob: !include include/customize_glob.yaml
+
+api:
+apple_tv: !include include/apple_tv.yaml
+automation: !include_dir_merge_list include/automations/
+config:
+camera: !include include/camera.yaml
+custom_updater: !include include/custom_updater.yaml
+discovery: !include include/discovery.yaml
+history: !include include/history.yaml
+http: !include include/http.yaml
+ifttt: !include include/ifttt.yaml
+notify: !include include/notify.yaml
+panel_iframe: !include include/panel.yaml
+recorder: !include include/recorder.yaml
+upnp: !include include/upnp.yaml
+wink:
+zwave: !include include/zwave.yaml
+
+lovelace:
+  mode: yaml
+
+logger:
+  default: warn
+  logs:
+    homeassistant.components.shell_command: debug
+

@@ -1,0 +1,95 @@
+# https://www.home-assistant.io/components/sensor.command_line/
+# https://github.com/andrey-git/home-assistant-custom-ui
+
+homeassistant:
+  customize:
+    sensor.printer_status:
+      friendly_name: Status
+      icon: mdi:information-outline
+    sensor.printer_product:
+      friendly_name: Model
+      icon: mdi:printer
+    sensor.printer_serial:
+      friendly_name: Serial Number
+    sensor.printer_name:
+      friendly_name: Queue Name
+      icon: mdi:printer
+    sensor.printer_drum_pct_remain:
+      friendly_name: Drum Remaining
+      icon: mdi:panorama-vertical
+      hidden: true
+    sensor.printer_drum_page_remain:
+      friendly_name: Drum Pages Remaining
+      icon: mdi:file-document
+      custom_ui_state_card: state-card-custom-ui
+      extra_badge:
+        entity_id: sensor.printer_drum_pct_remain
+      templates:
+        theme: >-
+          var l = parseInt(entities['sensor.printer_drum_pct_remain'].state); 
+          return l <= 30 ? 'card-critical'
+          : l <= 60 ? 'card-warning'
+          : null;
+    sensor.printer_toner_pct_remain:
+      friendly_name: Toner Remaining
+      icon: mdi:blur
+      hidden: true
+    sensor.printer_toner_page_remain:
+      friendly_name: Toner Pages Remaining
+      icon: mdi:file-document
+      custom_ui_state_card: state-card-custom-ui
+      extra_badge:
+        entity_id: sensor.printer_toner_pct_remain
+      templates:
+        theme: >-
+          var l = parseInt(entities['sensor.printer_toner_pct_remain'].state);
+          return l <= 30 ? 'card-critical'
+          : l <= 60 ? 'card-warning'
+          : null;
+    script.cleaning_mode:
+      icon: mdi:printer
+
+sensor:
+  - platform: command_line
+    name: printer_name
+    command: !secret printer_product_name_url
+    scan_interval: 86400
+  - platform: command_line
+    name: printer_serial
+    command: !secret printer_serial_number_url
+    scan_interval: 86400
+  - platform: command_line
+    name: printer_product
+    command: !secret printer_host_name_url
+    scan_interval: 86400
+  - platform: command_line
+    name: printer_status
+    command: !secret printer_status_url
+    scan_interval: 3600
+  - platform: command_line
+    name: printer_toner_pct_remain
+    unit_of_measurement: '%'
+    command: !secret printer_toner_percent_url
+    scan_interval: 86400
+  - platform: command_line
+    name: printer_toner_page_remain
+    command: !secret printer_toner_pages_url
+    scan_interval: 86400
+  - platform: command_line
+    name: printer_drum_pct_remain
+    unit_of_measurement: '%'
+    command: !secret printer_drum_percent_url
+    scan_interval: 86400
+  - platform: command_line
+    name: printer_drum_page_remain
+    command: !secret printer_drum_pages_url
+    scan_interval: 86400
+
+shell_command:
+  clean_printer: !secret printer_cleaning_mode_url
+
+script:
+  cleaning_mode:
+    alias: Cleaning mode
+    sequence:
+      - service: shell_command.clean_printer

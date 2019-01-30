@@ -1,0 +1,159 @@
+# https://www.home-assistant.io/components/input_select/
+# https://www.home-assistant.io/components/input_number/
+# https://www.home-assistant.io/components/input_boolean/
+# https://www.home-assistant.io/docs/automation/
+
+input_select:
+  radio_speaker:
+    name: Speaker
+    options:
+      - Office speaker
+      - Echo dot
+      - Echo spot
+    initial: Office speaker
+    icon: mdi:speaker-wireless
+  radio_station:
+    name: Station
+    options:
+      - BBC World Service
+      - MC Doualiya
+      - أجيال
+      - 590 The Fan
+      - 680 News
+      - 1010 Newstalk
+      - 1050 TSN
+      - 91.9 CHIN
+      - 92.5 Kiss
+      - 95.9 KX 96
+      - 97.3 Boom
+      - 99.1 CBC Radio 1
+      - 99.9 Virgin Radio
+      - 102.1 The Edge
+      - 107.1 Q107
+    initial: 1010 Newstalk
+    icon: mdi:radio
+
+input_number: 
+  radio_volume:
+    name: Volume
+    min: 0
+    max: 10
+    step: 0.5
+    initial: 2.5
+    icon: mdi:volume-high
+    mode: slider
+
+input_boolean:
+  radio_onoff:
+    name: On / Off
+    icon: mdi:radio
+    # initial: false
+
+automation:
+  - alias: Radio on
+    initial_state: true
+    hide_entity: true
+    trigger:
+    - platform: state
+      entity_id: input_boolean.radio_onoff
+      to: 'on'
+    - platform: state
+      entity_id: input_select.radio_station
+      # to: 'on'
+    action:
+    - service: input_boolean.turn_on
+      data_template:
+        entity_id: input_boolean.radio_onoff
+    - service: media_player.volume_set
+      data_template:
+        entity_id: >
+          {% if is_state("input_select.radio_speaker", "Office speaker") %} media_player.office_speaker
+          {% elif is_state("input_select.radio_speaker", "Echo dot") %} media_player.alis_echo_dot
+          {% elif is_state("input_select.radio_speaker", "Echo spot") %} media_player.alis_echo_spot
+          {% endif %}
+        volume_level: "{{ states.input_number.radio_volume.state | float / 10 }}"
+    - service: media_player.play_media
+      data_template:
+        entity_id: >
+          {% if is_state("input_select.radio_speaker", "Office speaker") %} media_player.office_speaker
+          {% elif is_state("input_select.radio_speaker", "Echo dot") %} media_player.alis_echo_dot
+          {% elif is_state("input_select.radio_speaker", "Echo spot") %} media_player.alis_echo_spot
+          {% endif %}
+        media_content_id: >
+          {% if 'Echo' in states.input_select.radio_speaker.state %}
+            {% if is_state("input_select.radio_station", "BBC World Service") %} BBC World Service News
+            {% elif is_state("input_select.radio_station", "MC Doualiya") %} Monte Carlo Doualiya
+            {% elif is_state("input_select.radio_station", "أجيال") %} Ajyal Radio
+            {% elif is_state("input_select.radio_station", "590 The Fan") %} Sportsnet 590 The FAN
+            {% elif is_state("input_select.radio_station", "680 News") %} 680 News
+            {% elif is_state("input_select.radio_station", "1010 Newstalk") %} Newstalk 1010
+            {% elif is_state("input_select.radio_station", "1050 TSN") %} TSN Radio 1050
+            {% elif is_state("input_select.radio_station", "91.9 CHIN") %} CHIN 91.9
+            {% elif is_state("input_select.radio_station", "92.5 Kiss") %} KISS 92.5
+            {% elif is_state("input_select.radio_station", "95.9 KX 96") %} KX96
+            {% elif is_state("input_select.radio_station", "97.3 Boom") %} boom 97.3
+            {% elif is_state("input_select.radio_station", "99.1 CBC Radio One") %} CBC Radio One Toronto
+            {% elif is_state("input_select.radio_station", "99.9 Virgin Radio") %} 99.9 Virgin Radio
+            {% elif is_state("input_select.radio_station", "102.1 The Edge") %} 102.1 the edge
+            {% elif is_state("input_select.radio_station", "107.1 Q107") %} Q107
+            {% endif %}
+          {% else %}
+            {% if is_state("input_select.radio_station", "BBC World Service") %} http://bbcwssc.ic.llnwd.net/stream/bbcwssc_mp1_ws-einws
+            {% elif is_state("input_select.radio_station", "MC Doualiya") %} https://montecarlodoualiya128k.ice.infomaniak.ch/mc-doualiya.mp3
+            {% elif is_state("input_select.radio_station", "أجيال") %} http://streamer.mada.ps:8008/AJYAL
+            {% elif is_state("input_select.radio_station", "590 The Fan") %} http://radio_cjcl-lh.akamaihd.net/i/TOR590_1@176950/master.m3u8
+            {% elif is_state("input_select.radio_station", "680 News") %} https://rogers-hls.leanstream.co/rogers/tor680.stream/playlist.m3u8
+            {% elif is_state("input_select.radio_station", "1010 Newstalk") %} http://20803.live.streamtheworld.com/CFRBAMAAC.aac
+            {% elif is_state("input_select.radio_station", "1050 TSN") %} http://20803.live.streamtheworld.com/CHUMAMAAC.aac
+            {% elif is_state("input_select.radio_station", "91.9 CHIN") %} http://radio.securenetsystems.net/stick/index.cfm?stationCallSign=CHINFM1
+            {% elif is_state("input_select.radio_station", "92.5 Kiss") %} https://rogers-hls.leanstream.co/rogers/tor925.stream/playlist.m3u8
+            {% elif is_state("input_select.radio_station", "95.9 KX 96") %} http://14153.live.streamtheworld.com/CJKXFMAAC.aac
+            {% elif is_state("input_select.radio_station", "97.3 Boom") %} http://live.leanstream.co/CHBMFM
+            {% elif is_state("input_select.radio_station", "99.1 CBC Radio One") %} https://cbcliveradio-lh.akamaihd.net/i/CBCR1_TOR@118420/master.m3u8
+            {% elif is_state("input_select.radio_station", "99.9 Virgin Radio") %} http://16143.live.streamtheworld.com/CKFMFMAAC_SC
+            {% elif is_state("input_select.radio_station", "102.1 The Edge") %} http://live.leanstream.co/CFNYFM
+            {% elif is_state("input_select.radio_station", "107.1 Q107") %} http://live.leanstream.co/CILQFM
+            {% endif %}
+          {% endif %}
+        media_content_type: 'TUNEIN'
+
+  - alias: Radio off
+    initial_state: true
+    hide_entity: true
+    trigger:
+    - platform: state
+      entity_id: input_boolean.radio_onoff
+      to: 'off'
+    - platform: state
+      entity_id: media_player.office_speaker, media_player.alis_echo_dot, media_player.alis_echo_spot
+      to: 'off'
+    action:
+    - service: input_boolean.turn_off
+      data_template:
+        entity_id: input_boolean.radio_onoff
+    - service: media_player.turn_off
+      data_template:
+        entity_id: >
+          {% if is_state("input_select.radio_speaker", "Office speaker") %} media_player.office_speaker
+          {% elif is_state("input_select.radio_speaker", "Echo dot") %} media_player.alis_echo_dot
+          {% elif is_state("input_select.radio_speaker", "Echo spot") %} media_player.alis_echo_spot
+          {% endif %}
+
+  - alias: Change volume
+    initial_state: true
+    hide_entity: true
+    trigger:
+    - entity_id: input_number.radio_volume
+      platform: state
+    condition:
+    - condition: template
+      value_template: "{{ states.input_select.radio_speaker.state != 'OFF' }}"
+    action:
+    - service: media_player.volume_set
+      data_template:
+        entity_id: >
+          {% if is_state("input_select.radio_speaker", "Office speaker") %} media_player.office_speaker
+          {% elif is_state("input_select.radio_speaker", "Echo dot") %} media_player.alis_echo_dot
+          {% elif is_state("input_select.radio_speaker", "Echo spot") %} media_player.alis_echo_spot
+          {% endif %}
+        volume_level: "{{ states.input_number.radio_volume.state | float / 10 }}"

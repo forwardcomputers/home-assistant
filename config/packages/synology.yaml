@@ -1,0 +1,56 @@
+# https://www.home-assistant.io/components/sensor.synologydsm/
+# https://www.home-assistant.io/components/sensor.template/
+# https://github.com/andrey-git/home-assistant-custom-ui
+
+homeassistant:
+  customize:
+    sensor.model_name:
+      friendly_name: Model
+      icon: mdi:nas
+    sensor.serial_number:
+      friendly_name: Serial Number
+    sensor.cpu_load_total:
+      friendly_name: CPU Used
+    sensor.memory_usage_real:
+      friendly_name: Memory Used
+    sensor.volume_used_volume_1:
+      friendly_name: Volume Used
+    sensor.status_smart_sda:
+      templates:
+        theme: >-
+          var l = entities['sensor.status_smart_sda'].state; 
+          if (l != 'normal') { return 'card-critical' }
+    sensor.status_smart_sdb:
+      templates:
+        theme: >-
+          var l = entities['sensor.status_smart_sdb'].state; 
+          if (l != 'normal') { return 'card-critical' }
+    sensor.status_volume_1:
+      templates:
+        theme: >-
+          var l = entities['sensor.status_volume_1'].state; 
+          if (l != 'normal') { return 'card-critical' }
+    group.synologybadges:
+      state_card_mode: badges
+      badges_list:
+        - sensor.cpu_load_total
+        - sensor.memory_usage_real
+        - sensor.volume_used_volume_1
+ 
+sensor:
+  - platform: synologydsm
+    host: !secret synology_ip
+    username: !secret synology_user_name
+    password: !secret synology_password_key
+    monitored_conditions:
+      - cpu_total_load
+      - memory_real_usage
+      - disk_smart_status
+      - volume_status
+      - volume_percentage_used
+  - platform: template
+    sensors:
+      model_name:
+        value_template: 'Synology DS212+'
+      serial_number:
+        value_template: 'C3KNN05953'

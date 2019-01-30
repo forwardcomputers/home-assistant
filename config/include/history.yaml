@@ -1,0 +1,16 @@
+# https://www.home-assistant.io/components/history/
+
+include:
+  entities:
+    - sensor.speedtest_ping
+    - sensor.speedtest_download
+    - sensor.speedtest_upload
+    - sensor.kitchen_temperature
+    - sensor.pws_temp_c
+    - sensor.humidex
+    - sensor.windchill
+    - sensor.living_room_thermostat_humidity
+    - sensor.pws_relative_humidity
+    - sensor.pws_uv
+  domains:
+    - sun

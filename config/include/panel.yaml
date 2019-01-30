@@ -1,0 +1,10 @@
+# https://www.home-assistant.io/components/panel_iframe/
+
+glances:
+  title: Glances
+  icon: mdi:stack-exchange
+  url: !secret glances_url
+portainer:
+  title: Portainer
+  icon: mdi:docker
+  url: !secret portainer_url
