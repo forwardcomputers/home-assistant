@@ -32,7 +32,7 @@ lovelace:
   mode: yaml
 
 logger:
-  default: warn
+  default: info
   logs:
     homeassistant.components.shell_command: debug
 

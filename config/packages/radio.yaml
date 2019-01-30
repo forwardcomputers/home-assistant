@@ -60,6 +60,10 @@ automation:
     - platform: state
       entity_id: input_select.radio_station
       # to: 'on'
+    - platform: event
+      event_type: state_changed
+      event_data:
+        entity_id: input_select.radio_speaker
     action:
     - service: input_boolean.turn_on
       data_template:
