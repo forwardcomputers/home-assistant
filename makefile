@@ -45,7 +45,7 @@ stop: ## Stop docker container
 
 .PHONY: test
 test:
-	@cp -f .circleci/secrets.test config/secret.yaml ;\
+	@cp -f .circleci/secrets.test config/secrets.yaml ;\
 	hass -c ./config --script check_config --info all
 
 .PHONY: redact
