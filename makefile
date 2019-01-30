@@ -45,7 +45,7 @@ stop: ## Stop docker container
 
 .PHONY: test
 test:
-	@cp -f .circleci/secrets.yaml . ;\
+	@cp -f .circleci/secrets.test ./secret.yaml ;\
 	hass -c ./config --script check_config --info all
 
 .PHONY: redact
@@ -59,10 +59,11 @@ redact: ## Redact secrets file
     -e 's/_mac:.*$$/_mac: 12:34:56:78:90:AB/' \
     -e 's/_email:.*$$/_email: john@doe.com/' \
     -e 's/_key:.*$$/_key: 1234567890ABCDEFGHIJKLMNOPQRTUVWXYZ/' \
-    config/secrets.yaml > .circleci/secrets.yaml
+    config/secrets.yaml > .circleci/secrets.test
 
 .PHONY: update
 update: ## Update scripts
 	@printf '%b' '${GREEN}***** Updating other files *****${NC}\n' ;\
 	cd config ;\
 	. script/update_various_files.sh
+

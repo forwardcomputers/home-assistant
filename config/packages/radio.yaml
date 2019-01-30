@@ -10,7 +10,6 @@ input_select:
       - Office speaker
       - Echo dot
       - Echo spot
-    initial: Office speaker
     icon: mdi:speaker-wireless
   radio_station:
     name: Station
@@ -30,7 +29,6 @@ input_select:
       - 99.9 Virgin Radio
       - 102.1 The Edge
       - 107.1 Q107
-    initial: 1010 Newstalk
     icon: mdi:radio
 
 input_number: 
@@ -47,7 +45,6 @@ input_boolean:
   radio_onoff:
     name: On / Off
     icon: mdi:radio
-    # initial: false
 
 automation:
   - alias: Radio on
@@ -59,15 +56,10 @@ automation:
       to: 'on'
     - platform: state
       entity_id: input_select.radio_station
-      # to: 'on'
-    - platform: event
-      event_type: state_changed
-      event_data:
-        entity_id: input_select.radio_speaker
     action:
-    - service: input_boolean.turn_on
-      data_template:
-        entity_id: input_boolean.radio_onoff
+    # - service: input_boolean.turn_on
+    #   data_template:
+    #     entity_id: input_boolean.radio_onoff
     - service: media_player.volume_set
       data_template:
         entity_id: >
@@ -132,9 +124,9 @@ automation:
       entity_id: media_player.office_speaker, media_player.alis_echo_dot, media_player.alis_echo_spot
       to: 'off'
     action:
-    - service: input_boolean.turn_off
-      data_template:
-        entity_id: input_boolean.radio_onoff
+    # - service: input_boolean.turn_off
+    #   data_template:
+    #     entity_id: input_boolean.radio_onoff
     - service: media_player.turn_off
       data_template:
         entity_id: >

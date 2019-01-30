@@ -14,7 +14,7 @@ known_devices.yaml
 OZW_Log.txt
 options.xml
 __pycache__
-/config/secrets.yaml
+secrets.yaml
 *.sqlite
 .storage
 tts
