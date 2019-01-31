@@ -4,13 +4,13 @@
 - platform: generic
   name: Environment Canada Jet Stream
   content_type: image/gif
-  scan_interval: 600
+  scan_interval: 10800
   still_image_url: http://weather.gc.ca/data/jet_stream/tempmapwx_e.gif
 # Radar of surrounding rain conditions
 - platform: generic
   name: Environment Canada Rain
   content_type: image/gif
-  scan_interval: 600
+  scan_interval: 900
   still_image_url: >-
     {% set delta = 10 %}
     {% set time = states('sensor.time') %}
@@ -24,7 +24,7 @@
 - platform: generic
   name: Environment Canada Snow
   content_type: image/gif
-  scan_interval: 600
+  scan_interval: 900
   still_image_url: >-
     {% set delta = 10 %}
     {% set time = states('sensor.time') %}
@@ -39,8 +39,3 @@
   name: Toronto Downtown Camera
   scan_interval: 600
   still_image_url: http://www.metcam.navcanada.ca/dawc_images/wxcam/CYTZ/CYTZ_E-full-e.jpeg
-# Caye Caulker camera
-- platform: generic
-  name: Caye Caulker Camera
-  scan_interval: 600
-  still_image_url: http://cayecaulkerweather.com/weatherdata/webcamimage.jpg

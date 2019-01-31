@@ -7,17 +7,6 @@
 
 homeassistant:
   customize:
-    input_text.weather:
-      custom_ui_state_card: custom-weather-card
-      config:
-        weather: weather.openweathermap
-        humidity: sensor.pws_relative_humidity
-        indoor: sensor.kitchen_temperature
-        humidex: sensor.humidex
-        windchill: sensor.windchill
-        uv: sensor.pws_uv
-        sunup: sensor.sunrise_time
-        sundown: sensor.sunset_time
     sensor.environment_canada_radar:
       hidden: true
     sensor.humidex:
@@ -85,10 +74,6 @@ weather:
   - platform: openweathermap
     api_key: !secret openweathermap_api_key
     mode: daily
-
-input_text:
-  weather:
-    name: weather 
 
 sensor:
   - platform: wunderground

@@ -21,18 +21,13 @@ discovery: !include include/discovery.yaml
 history: !include include/history.yaml
 http: !include include/http.yaml
 ifttt: !include include/ifttt.yaml
+lovelace:
+  mode: yaml
+logger:
+  default: warn
 notify: !include include/notify.yaml
 panel_iframe: !include include/panel.yaml
 recorder: !include include/recorder.yaml
 upnp: !include include/upnp.yaml
 wink:
 zwave: !include include/zwave.yaml
-
-lovelace:
-  mode: yaml
-
-logger:
-  default: info
-  logs:
-    homeassistant.components.shell_command: debug
-

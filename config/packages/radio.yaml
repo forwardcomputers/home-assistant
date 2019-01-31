@@ -57,9 +57,6 @@ automation:
     - platform: state
       entity_id: input_select.radio_station
     action:
-    # - service: input_boolean.turn_on
-    #   data_template:
-    #     entity_id: input_boolean.radio_onoff
     - service: media_player.volume_set
       data_template:
         entity_id: >
@@ -124,9 +121,6 @@ automation:
       entity_id: media_player.office_speaker, media_player.alis_echo_dot, media_player.alis_echo_spot
       to: 'off'
     action:
-    # - service: input_boolean.turn_off
-    #   data_template:
-    #     entity_id: input_boolean.radio_onoff
     - service: media_player.turn_off
       data_template:
         entity_id: >
