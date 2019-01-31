@@ -222,7 +222,7 @@ views:
     icon: mdi:server
     cards:
       - type: entities
-        title: NAS
+        title: ISP
         show_header_toggle: false
         entities:
           - sensor.speedtest_download
