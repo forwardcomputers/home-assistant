@@ -12,6 +12,7 @@ jobs:
           command: |
             apk update && apk add make
             mv /hass/config /
+            mv /hass/.circleci/test.secrets /config/secrets.yaml
             mv /hass/makefile /config 
             make --directory=/config test
 

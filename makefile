@@ -43,15 +43,9 @@ restart: ## Restart docker container
 stop: ## Stop docker container
 	@docker container stop ${CONTAINER_ID} > /dev/null
 
-#	mkdir -p /config/packages/firetv/ ;\
-#	cp -f .circleci/test.adbkey /config/packages/firetv/adbkey ;\
-#	cp -f .circleci/test.adbkey config/packages/firetv/adbkey ;\
-#	cp -f .circleci/test.adbkey.pub /config/packages/firetv/adbkey.pub ;\
-
 .PHONY: test
 test:
-	@cp -f .circleci/test.secrets /config/secrets.yaml ;\
-	hass -c /config --script check_config --info all
+	@hass -c /config --script check_config --info all
 
 .PHONY: redact
 redact: ## Redact secrets file
