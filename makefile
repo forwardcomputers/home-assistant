@@ -48,8 +48,8 @@ stop: ## Stop docker container
 
 .PHONY: test
 test:
-	@cp -f .circleci/test.secrets /config/secrets.yaml ;\
-	mkdir -p /config/packages/firetv
+	@cp -f .circleci/test.secrets config/secrets.yaml ;\
+	mkdir -p config/packages/firetv
 	hass -c ./config --script check_config --info all
 
 .PHONY: redact
