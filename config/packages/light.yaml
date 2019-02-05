@@ -128,6 +128,7 @@ homeassistant:
           : null;
 
 emulated_hue:
+  host_ip: !secret emulated_hue_ip
   expose_by_default: false
   entities:
     light.led:

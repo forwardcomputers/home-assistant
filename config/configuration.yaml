@@ -30,4 +30,5 @@ panel_iframe: !include include/panel.yaml
 recorder: !include include/recorder.yaml
 upnp: !include include/upnp.yaml
 wink:
+zeroconf:
 zwave: !include include/zwave.yaml

@@ -61,16 +61,16 @@ automation:
       data_template:
         entity_id: >
           {% if is_state("input_select.radio_speaker", "Office speaker") %} media_player.office_speaker
-          {% elif is_state("input_select.radio_speaker", "Echo dot") %} media_player.alis_echo_dot
-          {% elif is_state("input_select.radio_speaker", "Echo spot") %} media_player.alis_echo_spot
+          {% elif is_state("input_select.radio_speaker", "Echo dot") %} media_player.ali_s_echo_dot
+          {% elif is_state("input_select.radio_speaker", "Echo spot") %} media_player.ali_s_echo_spot
           {% endif %}
         volume_level: "{{ states.input_number.radio_volume.state | float / 10 }}"
     - service: media_player.play_media
       data_template:
         entity_id: >
           {% if is_state("input_select.radio_speaker", "Office speaker") %} media_player.office_speaker
-          {% elif is_state("input_select.radio_speaker", "Echo dot") %} media_player.alis_echo_dot
-          {% elif is_state("input_select.radio_speaker", "Echo spot") %} media_player.alis_echo_spot
+          {% elif is_state("input_select.radio_speaker", "Echo dot") %} media_player.ali_s_echo_dot
+          {% elif is_state("input_select.radio_speaker", "Echo spot") %} media_player.ali_s_echo_spot
           {% endif %}
         media_content_id: >
           {% if 'Echo' in states.input_select.radio_speaker.state %}
@@ -118,15 +118,15 @@ automation:
       entity_id: input_boolean.radio_onoff
       to: 'off'
     - platform: state
-      entity_id: media_player.office_speaker, media_player.alis_echo_dot, media_player.alis_echo_spot
+      entity_id: media_player.office_speaker, media_player.ali_s_echo_dot, media_player.ali_s_echo_spot
       to: 'off'
     action:
     - service: media_player.turn_off
       data_template:
         entity_id: >
           {% if is_state("input_select.radio_speaker", "Office speaker") %} media_player.office_speaker
-          {% elif is_state("input_select.radio_speaker", "Echo dot") %} media_player.alis_echo_dot
-          {% elif is_state("input_select.radio_speaker", "Echo spot") %} media_player.alis_echo_spot
+          {% elif is_state("input_select.radio_speaker", "Echo dot") %} media_player.ali_s_echo_dot
+          {% elif is_state("input_select.radio_speaker", "Echo spot") %} media_player.ali_s_echo_spot
           {% endif %}
 
   - alias: Change volume
@@ -143,7 +143,7 @@ automation:
       data_template:
         entity_id: >
           {% if is_state("input_select.radio_speaker", "Office speaker") %} media_player.office_speaker
-          {% elif is_state("input_select.radio_speaker", "Echo dot") %} media_player.alis_echo_dot
-          {% elif is_state("input_select.radio_speaker", "Echo spot") %} media_player.alis_echo_spot
+          {% elif is_state("input_select.radio_speaker", "Echo dot") %} media_player.ali_s_echo_dot
+          {% elif is_state("input_select.radio_speaker", "Echo spot") %} media_player.ali_s_echo_spot
           {% endif %}
         volume_level: "{{ states.input_number.radio_volume.state | float / 10 }}"

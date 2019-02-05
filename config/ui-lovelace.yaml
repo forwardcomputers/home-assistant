@@ -13,7 +13,7 @@ resources:
     type: js
   - url: /local/lovelace/slider-entity-row.js?v=ba8f50
     type: js
-  - url: /local/lovelace/tracker-card.js?v=0.2.0
+  - url: /local/lovelace/tracker-card.js?v=0.3.0
     type: js
   - url: /local/lovelace/secondaryinfo-entity-row.js?v=0.1
     type: module
@@ -164,7 +164,7 @@ views:
         entities:
           - light.led
           - light.floor
-          - entity: media_player.alis_echo_dot
+          - entity: media_player.ali_s_echo_dot
             name: Echo Dot
           - entity: remote.livingroom
             name: Harmony hub
@@ -181,7 +181,7 @@ views:
         entities:
           - light.bedroom_left
           - light.bedroom_right
-          - entity: media_player.alis_echo_spot
+          - entity: media_player.ali_s_echo_spot
             name: Echo Spot
           - sensor.tradfri_remote_control
       - type: entities
@@ -191,8 +191,14 @@ views:
           - light.office
           - entity: media_player.office_tv
             name: Samsung TV
+          - entity: media_player.chromecast_office
+            name: Google Chromecast
+          - entity: media_player.fire_tv
+            name: Amazon Fire TV
+          - entity: media_player.fire_tv_stick
+            name: Amazon Fire TV Stick
           - entity: media_player.office_speaker
-            name: Google Home
+            name: Google Home Mini
       - type: entities
         title: Hallway
         entities:
