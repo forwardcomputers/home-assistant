@@ -12,7 +12,7 @@ jobs:
           command: |
             apk update && apk add make
             mv /hass/config /
-            mv /hass/.circleci/test.secrets /config/secrets.yaml
+            mv /hass/.circleci/secrets.test /config/secrets.yaml
             touch /config/packages/firetv/adbkey
             touch /config/packages/firetv/adbkey.pub
             mv /hass/makefile /config 

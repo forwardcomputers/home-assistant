@@ -58,7 +58,7 @@ redact: ## Redact secrets file
     -e 's/_mac:.*$$/_mac: 12:34:56:78:90:AB/' \
     -e 's/_email:.*$$/_email: john@doe.com/' \
     -e 's/_key:.*$$/_key: 1234567890ABCDEFGHIJKLMNOPQRTUVWXYZ/' \
-    config/secrets.yaml > .circleci/test.secrets
+    config/secrets.yaml > .circleci/secrets.test
 
 .PHONY: update
 update: ## Update scripts
