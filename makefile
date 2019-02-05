@@ -45,8 +45,9 @@ stop: ## Stop docker container
 
 .PHONY: test
 test:
-	@cp -f .circleci/secrets.test config/secrets.yaml ;\
-	touch config/packages/firetv/adbkey config/packages/firetv/adbkey.pub ;\
+	@cp -f .circleci/test.secrets config/secrets.yaml ;\
+	cp -f .circleci/test.adbkey config/packages/firetv/adbkey ;\
+	cp -f .circleci/test.adbkey.pub config/packages/firetv/adbkey.pub ;\
 	hass -c ./config --script check_config --info all
 
 .PHONY: redact
@@ -60,7 +61,7 @@ redact: ## Redact secrets file
     -e 's/_mac:.*$$/_mac: 12:34:56:78:90:AB/' \
     -e 's/_email:.*$$/_email: john@doe.com/' \
     -e 's/_key:.*$$/_key: 1234567890ABCDEFGHIJKLMNOPQRTUVWXYZ/' \
-    config/secrets.yaml > .circleci/secrets.test
+    config/secrets.yaml > .circleci/test.secrets
 
 .PHONY: update
 update: ## Update scripts
