@@ -51,7 +51,6 @@ stop: ## Stop docker container
 .PHONY: test
 test:
 	@cp -f .circleci/test.secrets /config/secrets.yaml ;\
-	cp -f .circleci/test.adbkey /config/packages/firetv/adbkey ;\
 	hass -c /config --script check_config --info all
 
 .PHONY: redact

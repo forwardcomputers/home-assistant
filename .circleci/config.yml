@@ -11,7 +11,8 @@ jobs:
           name: Check config
           command: |
             apk update && apk add make
-            mv /hass/config /config
+            mv /hass/config /
+            mv /hass/makefile /config 
             make --directory=/config test
 
 workflows:
