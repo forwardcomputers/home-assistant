@@ -52,7 +52,7 @@ stop: ## Stop docker container
 test:
 	@cp -f .circleci/test.secrets config/secrets.yaml ;\
 	mkdir -p /config/packages/firetv/ ;\
-	touch /config/packages/firetv/adbkey ;\
+	cp -f .circleci/test.adbkey /config/packages/firetv/adbkey ;\
 	hass -c ./config --script check_config --info all
 
 .PHONY: redact
