@@ -2,7 +2,7 @@ version: 2.1
 
 jobs:
   test:
-    working_directory: /hass
+    working_directory: /config
     docker:
       - image: homeassistant/amd64-homeassistant
     steps:
@@ -11,7 +11,7 @@ jobs:
           name: Check config
           command: |
             apk update && apk add make
-            make --directory=/hass test
+            make --directory=/config test
 
 workflows:
   version: 2.1
