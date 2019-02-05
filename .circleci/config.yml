@@ -13,8 +13,8 @@ jobs:
             apk update && apk add make
             mv /hass/config /
             mv /hass/.circleci/test.secrets /config/secrets.yaml
-            mv /hass/.circleci/test.adbkey /config/packages/firetv/adbkey
-            mv /hass/.circleci/test.adbkey.pub /config/packages/firetv/adbkey.pub
+            touch /config/packages/firetv/adbkey
+            touch /config/packages/firetv/adbkey.pub
             mv /hass/makefile /config 
             make --directory=/config test
 
