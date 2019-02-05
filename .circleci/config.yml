@@ -2,7 +2,7 @@ version: 2.1
 
 jobs:
   test:
-    working_directory: /config
+    working_directory: /
     docker:
       - image: homeassistant/amd64-homeassistant
     steps:
