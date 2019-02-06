@@ -12,7 +12,7 @@
       below: 3
   condition:
     condition: template
-    value_template: '{{ now().hour > 16 and ((states.sun.sun.attributes.elevation | float) < 3 or (states.sensor.yr_cloudiness.state | float) > 70.0) }}'
+    value_template: '{{ now().hour > 16 and ( (states.sun.sun.attributes.elevation | float) < 3 or (states.sensor.yr_cloudiness.state | float) > 70.0 ) }}'
   action:
     service: homeassistant.turn_on
     entity_id:
