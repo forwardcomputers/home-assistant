@@ -69,6 +69,5 @@ if [ ! -f configuration.yaml ]; then
 fi
 
 check_dir "custom_components/media_player"
-get_file firetv.py https://github.com/JeffLIrion/homeassistant_native_firetv/blob/master/media_player/firetv.py custom_components/media_player/
 get_file alexa.py https://github.com/keatontaylor/custom_components/blob/master/media_player/alexa.py custom_components/media_player/
 
