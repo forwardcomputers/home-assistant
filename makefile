@@ -60,9 +60,3 @@ redact: ## Redact secrets file
     -e 's/_key:.*$$/_key: 1234567890ABCDEFGHIJKLMNOPQRTUVWXYZ/' \
     config/secrets.yaml > .circleci/secrets.test
 
-.PHONY: update
-update: ## Update scripts
-	@printf '%b' '${GREEN}***** Updating other files *****${NC}\n' ;\
-	cd config ;\
-	. script/update_various_files.sh
-
