@@ -1,5 +1,9 @@
 # https://www.home-assistant.io/components/panel_iframe/
 
+cockpit:
+  title: Cockpit
+  icon: mdi:stack-console
+  url: !secret cockpit_url
 glances:
   title: Glances
   icon: mdi:stack-exchange
