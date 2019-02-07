@@ -41,6 +41,6 @@ shell_command:
 
 script:
   update_alexa :
-    alias: Update alexa
+    alias: Update alexa component
     sequence:
       - service: shell_command.update_alexa_command

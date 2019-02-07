@@ -2,7 +2,7 @@
 
 cockpit:
   title: Cockpit
-  icon: mdi:stack-console
+  icon: mdi:stack-console-line
   url: !secret cockpit_url
 glances:
   title: Glances
