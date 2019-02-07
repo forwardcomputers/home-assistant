@@ -9,14 +9,14 @@ media_player:
     email: !secret amz_email
     password: !secret amz_password_key
     url: 'amazon.com'
-  - platform: firetv
-    adbkey: "/config/packages/firetv/adbkey"
-    host: !secret firetvbox_ip
-    name: Fire TV
-  - platform: firetv
-    adbkey: "/config/packages/firetv/adbkey"
-    host: !secret firetvstick_ip
-    name: Fire TV Stick
+  # - platform: firetv
+  #   adbkey: "/config/packages/firetv/adbkey"
+  #   host: !secret firetvbox_ip
+  #   name: Fire TV
+  # - platform: firetv
+  #   adbkey: "/config/packages/firetv/adbkey"
+  #   host: !secret firetvstick_ip
+  #   name: Fire TV Stick
   - platform: panasonic_viera
     name: Livingroom TV
     host: !secret livingroom_tv_ip
@@ -27,7 +27,7 @@ media_player:
 cast:
   media_player:
     - host: !secret ghomem1_ip
-    - host: !secret googlecast1_ip
+    # - host: !secret googlecast1_ip
     - host: !secret shield_ip
 
 remote:

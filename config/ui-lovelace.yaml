@@ -17,7 +17,7 @@ resources:
     type: js
   - url: /local/lovelace/secondaryinfo-entity-row.js?v=0.1
     type: module
-  - url: /local/lovelace/simple-thermostat.min.js?v=0.14.0
+  - url: /local/lovelace/simple-thermostat.js?v=0.15.1
     type: module
   - url: /local/lovelace/custom-weather-card-chart.js?v=0.2.4
     type: module
@@ -191,12 +191,12 @@ views:
           - light.office
           - entity: media_player.office_tv
             name: Samsung TV
-          - entity: media_player.chromecast_office
-            name: Google Chromecast
-          - entity: media_player.fire_tv
-            name: Amazon Fire TV
-          - entity: media_player.fire_tv_stick
-            name: Amazon Fire TV Stick
+          # - entity: media_player.chromecast_office
+          #   name: Google Chromecast
+          # - entity: media_player.fire_tv
+          #   name: Amazon Fire TV
+          # - entity: media_player.fire_tv_stick
+          #   name: Amazon Fire TV Stick
           - entity: media_player.office_speaker
             name: Google Home Mini
       - type: entities

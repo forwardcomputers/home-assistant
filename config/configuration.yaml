@@ -28,6 +28,7 @@ logger:
 notify: !include include/notify.yaml
 panel_iframe: !include include/panel.yaml
 recorder: !include include/recorder.yaml
+system_health:
 upnp: !include include/upnp.yaml
 wink:
 zeroconf:

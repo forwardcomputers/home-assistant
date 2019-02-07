@@ -68,21 +68,7 @@ if [ ! -f configuration.yaml ]; then
   fi
 fi
 
-check_dir "custom_components"
-get_file sun.py https://github.com/pnbruckner/homeassistant-config/blob/master/custom_components/sun.py custom_components/
-get_file custom_updater.py https://github.com/custom-components/custom_updater/blob/master/custom_components/custom_updater.py custom_components/
-
 check_dir "custom_components/media_player"
 get_file firetv.py https://github.com/JeffLIrion/homeassistant_native_firetv/blob/master/media_player/firetv.py custom_components/media_player/
 get_file alexa.py https://github.com/keatontaylor/custom_components/blob/master/media_player/alexa.py custom_components/media_player/
 
-check_dir "www/lovelace"
-get_file card-tools.js https://github.com/thomasloven/lovelace-card-tools/blob/master/card-tools.js www/lovelace/
-get_file compact-custom-header.js https://github.com/maykar/compact-custom-header/blob/master/compact-custom-header.js www/lovelace/
-get_file custom-weather-card-chart.js https://github.com/sgttrs/lovelace-weather-card-chart/blob/master/custom-weather-card-chart.js www/lovelace/
-get_file fold-entity-row.js https://github.com/thomasloven/lovelace-fold-entity-row/blob/master/fold-entity-row.js www/lovelace/
-get_file monster-card.js https://github.com/ciotlosm/custom-lovelace/blob/master/monster-card/monster-card.js www/lovelace/
-get_file slider-entity-row.js https://github.com/thomasloven/lovelace-slider-entity-row/blob/master/slider-entity-row.js www/lovelace/
-get_file secondaryinfo-entity-row.js https://github.com/MizterB/lovelace-secondaryinfo-entity-row/blob/master/secondaryinfo-entity-row.js www/lovelace/
-get_file simple-thermostat.min.js https://github.com/nervetattoo/simple-thermostat/releases/download/0.14.0/simple-thermostat.min.js www/lovelace/
-get_file tracker-card.js https://github.com/custom-cards/tracker-card/blob/master/tracker-card.js www/lovelace/
