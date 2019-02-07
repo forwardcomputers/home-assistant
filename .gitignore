@@ -4,6 +4,7 @@
 alexa_media.pickle
 adbkey*
 .cloud
+!custom_components.json
 deps
 emulated*
 entity_registry.yaml
