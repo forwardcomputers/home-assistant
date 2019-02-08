@@ -22,3 +22,4 @@ tts
 .wink.conf
 zw*
 !zwave.yaml
+!custom_components.json
