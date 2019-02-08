@@ -4,6 +4,6 @@
     "version": "0.10.1",
     "local_location": "/custom_components/media_player/firetv.py",
     "remote_location": "https://github.com/keatontaylor/custom_components/master/media_player/alexa.py",
-    "visit_repo": "https://github.com/keatontaylor/custom_components",
+    "visit_repo": "https://github.com/keatontaylor/custom_components"
   }
 }
