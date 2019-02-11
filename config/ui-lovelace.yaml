@@ -17,7 +17,7 @@ resources:
     type: js
   - url: /local/lovelace/secondaryinfo-entity-row.js?v=0.1
     type: module
-  - url: /local/lovelace/simple-thermostat.js?v=0.16.0
+  - url: /local/lovelace/simple-thermostat.js?v=0.17.0
     type: module
   - url: /local/lovelace/custom-weather-card-chart.js?v=0.2.4
     type: module
