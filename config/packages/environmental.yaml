@@ -97,7 +97,7 @@ sensor:
     name: flu
     command: "/usr/bin/curl \"https://www.theweathernetwork.com/ca/health/ontario/toronto\" 2>&1 | awk -F '[ \"]' '/activity-colour/ {print toupper( substr( $4, 1, 1 ) ) substr( $4, 2 )}'"
     scan_interval: 3600
-    select: "#local_flu_activity > div.content"
+    # select: "#local_flu_activity > div.content"
   - platform: scrape
     name: pollen
     resource: https://www.theweathernetwork.com/ca/forecasts/pollen/ontario/toronto
