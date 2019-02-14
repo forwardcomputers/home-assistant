@@ -6,11 +6,6 @@ homeassistant:
     sensor.kitchen_battery:
       friendly_name: Kitchen Battery
       device_class: battery
-      templates:
-        theme: >-
-          var l = entities['sensor.kitchen_battery'].state; 
-          if (l <= 30) { return 'card-critical'; }
-          else if (l <= 70) {return 'card-warning' }
     sensor.kitchen_conductivity:
       friendly_name: Kitchen Nutrition
       icon: mdi:pot

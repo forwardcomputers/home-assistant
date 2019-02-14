@@ -112,20 +112,8 @@ homeassistant:
       state_card_mode: single-line
     sensor.tradfri_motion_sensor:
       device_class: battery
-      templates:
-        theme: >-
-          var l = parseInt(state);
-          return l <= 30 ? 'card-critical'
-          : l <= 70 ? 'card-warning'
-          : null;
     sensor.tradfri_remote_control:
       device_class: battery
-      templates:
-        theme: >-
-          var l = parseInt(entities['sensor.tradfri_remote_control'].state);
-          return l <= 30 ? 'card-critical'
-          : l <= 70 ? 'card-warning'
-          : null;
 
 emulated_hue:
   host_ip: !secret emulated_hue_ip

@@ -22,11 +22,6 @@ homeassistant:
       icon: mdi:eye
     sensor.office_ups_battery_charge:
       friendly_name: UPS Battery
-      templates:
-        theme: >-
-          var l = entities['sensor.office_ups_battery_charge'].state; 
-          if (l <= 30) { return 'card-critical'; }
-          else if (l <= 70) {return 'card-warning' }
     group.upsbadges:
       state_card_mode: badges
       badges_list:

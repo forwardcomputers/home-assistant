@@ -9,16 +9,6 @@ homeassistant:
   customize:
     sensor.environment_canada_radar:
       hidden: true
-    sensor.humidex:
-      hidden: true
-    sensor.humidex_friendly:
-      extra_badge:
-        entity_id: sensor.humidex
-      templates:
-        theme: >-
-          var l = parseInt(entities['sensor.humidex'].state); 
-          if (l >= 40) { return 'card-critical'; }
-          else if (l >= 30) {return 'card-warning' }
     sensor.pws_dewpoint_c:
       hidden: true
     sensor.pws_feelslike_c:
@@ -31,26 +21,6 @@ homeassistant:
       friendly_name: 'Weather Summary'
     sensor.pws_uv:
       friendly_name: UV Index
-    sensor.uv:
-      hidden: true
-    sensor.uv_friendly:
-      extra_badge:
-        entity_id: sensor.uv
-      templates:
-        theme: >-
-          var l = parseInt(entities['sensor.uv'].state); 
-          if (l >= 6) { return 'card-critical'; }
-          else if (l >= 3) {return 'card-warning' }
-    sensor.windchill:
-      hidden: true
-    sensor.windchill_friendly:
-      extra_badge:
-        entity_id: sensor.windchill
-      templates:
-        theme: >-
-          var l = parseInt(entities['sensor.windchill'].state); 
-          if (l <= -40) { return 'card-critical'; }
-          else if (l <= -10) {return 'card-warning' }
     sun.sun:
       hidden: true
     sensor.yr_cloudiness:

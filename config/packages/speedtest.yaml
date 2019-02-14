@@ -7,26 +7,12 @@ homeassistant:
     sensor.speedtest_download:
       friendly_name: Download
       icon: mdi:arrow-down-bold-circle-outline
-      templates:
-        theme: >-
-          var l = parseInt(entities['sensor.speedtest_download'].state); 
-          if (l <= 40) { return 'card-critical'; }
-          else if (l <= 60) {return 'card-warning' }
     sensor.speedtest_upload:
       friendly_name: Upload
       icon: mdi:arrow-up-bold-circle-outline
-      templates:
-        theme: >-
-          var l = parseInt(entities['sensor.speedtest_upload'].state); 
-          if (l <= 6) { return 'card-critical'; }
-          else if (l <= 10) {return 'card-warning' }
     sensor.speedtest_ping:
       friendly_name: Ping
       templates:
-        theme: >-
-          var l = parseInt(entities['sensor.speedtest_ping'].state); 
-          if (l >= 25) { return 'card-critical'; }
-          else if (l >= 22) {return 'card-warning' }
     sensor.external_ip:
       icon: mdi:wan
       show_last_changed: true

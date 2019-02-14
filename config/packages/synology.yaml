@@ -15,21 +15,6 @@ homeassistant:
       friendly_name: Memory Used
     sensor.volume_used_volume_1:
       friendly_name: Volume Used
-    sensor.status_smart_sda:
-      templates:
-        theme: >-
-          var l = entities['sensor.status_smart_sda'].state; 
-          if (l != 'normal') { return 'card-critical' }
-    sensor.status_smart_sdb:
-      templates:
-        theme: >-
-          var l = entities['sensor.status_smart_sdb'].state; 
-          if (l != 'normal') { return 'card-critical' }
-    sensor.status_volume_1:
-      templates:
-        theme: >-
-          var l = entities['sensor.status_volume_1'].state; 
-          if (l != 'normal') { return 'card-critical' }
     group.synologybadges:
       state_card_mode: badges
       badges_list:

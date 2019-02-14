@@ -21,15 +21,6 @@ homeassistant:
     sensor.printer_drum_page_remain:
       friendly_name: Drum Pages Remaining
       icon: mdi:file-document
-      custom_ui_state_card: state-card-custom-ui
-      extra_badge:
-        entity_id: sensor.printer_drum_pct_remain
-      templates:
-        theme: >-
-          var l = parseInt(entities['sensor.printer_drum_pct_remain'].state); 
-          return l <= 30 ? 'card-critical'
-          : l <= 60 ? 'card-warning'
-          : null;
     sensor.printer_toner_pct_remain:
       friendly_name: Toner Remaining
       icon: mdi:blur
@@ -37,15 +28,6 @@ homeassistant:
     sensor.printer_toner_page_remain:
       friendly_name: Toner Pages Remaining
       icon: mdi:file-document
-      custom_ui_state_card: state-card-custom-ui
-      extra_badge:
-        entity_id: sensor.printer_toner_pct_remain
-      templates:
-        theme: >-
-          var l = parseInt(entities['sensor.printer_toner_pct_remain'].state);
-          return l <= 30 ? 'card-critical'
-          : l <= 60 ? 'card-warning'
-          : null;
     script.cleaning_mode:
       icon: mdi:printer
 
