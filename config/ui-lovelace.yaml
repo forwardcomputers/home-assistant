@@ -5,8 +5,6 @@ title: Home Assistant
 resources:
   - url: /local/lovelace/card-tools.js?v=297fcc
     type: js
-  - url: /local/lovelace/compact-custom-header.js?v=1.0.0b1
-    type: js
   - url: /local/lovelace/fold-entity-row.js?v=6d11d3
     type: js
   - url: /local/lovelace/monster-card.js?v=0.2.3
@@ -15,11 +13,13 @@ resources:
     type: js
   - url: /local/lovelace/tracker-card.js?v=0.3.2
     type: js
+  - url: /local/lovelace/compact-custom-header.js?v=1.0.0b2
+    type: module
+  - url: /local/lovelace/custom-weather-card-chart.js?v=0.2.4
+    type: module
   - url: /local/lovelace/secondaryinfo-entity-row.js?v=0.1
     type: module
   - url: /local/lovelace/simple-thermostat.js?v=0.17.0
-    type: module
-  - url: /local/lovelace/custom-weather-card-chart.js?v=0.2.4
     type: module
 
 views:
