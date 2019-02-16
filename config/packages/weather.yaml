@@ -9,23 +9,10 @@ homeassistant:
   customize:
     sensor.environment_canada_radar:
       hidden: true
-    sensor.pws_dewpoint_c:
-      hidden: true
-    sensor.pws_feelslike_c:
-      friendly_name: 'Outdoor Feels Like'
-    sensor.pws_relative_humidity:
-      friendly_name: 'Outdoor Humidity'
-    sensor.pws_temp_c:
-      friendly_name: 'Outdoor Temperature'
-    sensor.pws_weather:
-      friendly_name: 'Weather Summary'
-    sensor.pws_uv:
-      friendly_name: UV Index
     sun.sun:
       hidden: true
     sensor.yr_cloudiness:
       hidden: true
-
 
 sun:
   monitored_conditions:
@@ -46,32 +33,213 @@ weather:
     mode: daily
 
 sensor:
-  - platform: wunderground
-    api_key: !secret wu_api_key
-    pws_id: !secret wu_station_name
-    monitored_conditions:
-      - dewpoint_c
-      - feelslike_c
-      - relative_humidity
-      - pressure_mb
-      - temp_c
-      - UV
-      - visibility_km
-      - weather
-      - weather_1d_metric
-      - weather_1n_metric
-      - weather_2d_metric
-      - weather_2n_metric
-      - weather_3d_metric
-      - weather_3n_metric
-      - wind_dir
-      - wind_kph
-      - wind_gust_kph
+  - platform: command_line
+    name: ec_forecast_summary_text
+    command: "xmllint --xpath 'string(//currentConditions/condition)' /tmp/toronto.xml"
+  - platform: command_line
+    name: ec_forecast_icon
+    command: "xmllint --xpath 'string(//currentConditions/iconCode)' /tmp/toronto.xml"
+  - platform: command_line
+    name: ec_temperature
+    command: "xmllint --xpath 'string(//currentConditions/temperature)' /tmp/toronto.xml"
+    unit_of_measurement: "°C"
+  - platform: command_line
+    name: ec_dewpoint
+    command: "xmllint --xpath 'string(//currentConditions/dewpoint)' /tmp/toronto.xml"
+    unit_of_measurement: "°C"
+  - platform: command_line
+    name: ec_humidex
+    command: "xmllint --xpath 'string(//currentConditions/humidex)' /tmp/toronto.xml"
+  - platform: command_line
+    name: ec_wind_chill
+    command: "xmllint --xpath 'string(//currentConditions/windChill)' /tmp/toronto.xml"
+  - platform: command_line
+    name: ec_pressure
+    command: "xmllint --xpath 'string(//currentConditions/pressure)' /tmp/toronto.xml"
+    unit_of_measurement: "kPa"
+  - platform: command_line
+    name: ec_visibility
+    command: "xmllint --xpath 'string(//currentConditions/visibility)' /tmp/toronto.xml"
+    unit_of_measurement: "km"
+  - platform: command_line
+    name: ec_relative_humidity
+    command: "xmllint --xpath 'string(//currentConditions/relativeHumidity)' /tmp/toronto.xml"
+    unit_of_measurement: "%"
+  - platform: command_line
+    name: ec_wind_speed
+    command: "xmllint --xpath 'string(//currentConditions/wind/speed)' /tmp/toronto.xml"
+    unit_of_measurement: "km/h"
+  - platform: command_line
+    name: ec_wind_gust
+    command: "xmllint --xpath 'string(//currentConditions/wind/gust)' /tmp/toronto.xml"
+    unit_of_measurement: "km/h"
+  - platform: command_line
+    name: ec_wind_direction
+    command: "xmllint --xpath 'string(//currentConditions/wind/direction)' /tmp/toronto.xml"
+  - platform: command_line
+    name: ec_pop
+    command: "xmllint --xpath 'string(//forecastGroup/forecast[1]/abbreviatedForecast/pop)' /tmp/toronto.xml"
+    unit_of_measurement: "%"
+  - platform: command_line
+    name: ec_uv
+    command: "xmllint --xpath 'string(//forecastGroup/forecast[1]/uv/@category)' /tmp/toronto.xml"
+  - platform: command_line
+    name: ec_uv_index
+    command: "xmllint --xpath 'string(//forecastGroup/forecast[1]/uv/index)' /tmp/toronto.xml"
+  - platform: command_line
+    name: ec_1_name
+    command: "xmllint --xpath 'string(//forecastGroup/forecast[1]/period)' /tmp/toronto.xml"
+  - platform: command_line
+    name: ec_1_icon
+    command: "xmllint --xpath 'string(//forecastGroup/forecast[1]/abbreviatedForecast/iconCode)' /tmp/toronto.xml"
+  - platform: command_line
+    name: ec_1_summary_text
+    command: "xmllint --xpath 'string(//forecastGroup/forecast[1]/textSummary)' /tmp/toronto.xml"
+  - platform: command_line
+    name: ec_2_name
+    command: "xmllint --xpath 'string(//forecastGroup/forecast[2]/period)' /tmp/toronto.xml"
+  - platform: command_line
+    name: ec_2_icon
+    command: "xmllint --xpath 'string(//forecastGroup/forecast[2]/abbreviatedForecast/iconCode)' /tmp/toronto.xml"
+  - platform: command_line
+    name: ec_2_summary_text
+    command: "xmllint --xpath 'string(//forecastGroup/forecast[2]/textSummary)' /tmp/toronto.xml"
+  - platform: command_line
+    name: ec_3_name
+    command: "xmllint --xpath 'string(//forecastGroup/forecast[3]/period)' /tmp/toronto.xml"
+  - platform: command_line
+    name: ec_3_icon
+    command: "xmllint --xpath 'string(//forecastGroup/forecast[3]/abbreviatedForecast/iconCode)' /tmp/toronto.xml"
+  - platform: command_line
+    name: ec_3_summary_text
+    command: "xmllint --xpath 'string(//forecastGroup/forecast[3]/textSummary)' /tmp/toronto.xml"
+  - platform: command_line
+    name: ec_4_name
+    command: "xmllint --xpath 'string(//forecastGroup/forecast[4]/period)' /tmp/toronto.xml"
+  - platform: command_line
+    name: ec_4_icon
+    command: "xmllint --xpath 'string(//forecastGroup/forecast[4]/abbreviatedForecast/iconCode)' /tmp/toronto.xml"
+  - platform: command_line
+    name: ec_4_summary_text
+    command: "xmllint --xpath 'string(//forecastGroup/forecast[4]/textSummary)' /tmp/toronto.xml"
+  - platform: command_line
+    name: ec_5_name
+    command: "xmllint --xpath 'string(//forecastGroup/forecast[5]/period)' /tmp/toronto.xml"
+  - platform: command_line
+    name: ec_5_icon
+    command: "xmllint --xpath 'string(//forecastGroup/forecast[5]/abbreviatedForecast/iconCode)' /tmp/toronto.xml"
+  - platform: command_line
+    name: ec_5_summary_text
+    command: "xmllint --xpath 'string(//forecastGroup/forecast[5]/textSummary)' /tmp/toronto.xml"
+  - platform: command_line
+    name: ec_6_name
+    command: "xmllint --xpath 'string(//forecastGroup/forecast[6]/period)' /tmp/toronto.xml"
+  - platform: command_line
+    name: ec_6_icon
+    command: "xmllint --xpath 'string(//forecastGroup/forecast[6]/abbreviatedForecast/iconCode)' /tmp/toronto.xml"
+  - platform: command_line
+    name: ec_6_summary_text
+    command: "xmllint --xpath 'string(//forecastGroup/forecast[6]/textSummary)' /tmp/toronto.xml"
+
+  # - platform: environment_canada
+  #   monitored_conditions:
+  #     - temperature
+  #     - dewpoint
+  #     - wind_chill
+  #     - humidex
+  #     - pressure
+  #     - tendency
+  #     - humidity
+  #     - visibility
+  #     - condition
+  #     - wind_speed
+  #     - wind_gust
+  #     - wind_dir
+  #     - high_temp
+  #     - low_temp
+  #     - pop
+  #     - warning
+  #     - weather_1d
+  #     - weather_1n
   - platform: yr
     monitored_conditions:
       - cloudiness
   - platform: template
     sensors:
+      ec_forecast_summary:
+        friendly_name: Weather Summary
+        value_template: >-
+          Currently {{ states('sensor.ec_temperature') }}°C with {{ states('sensor.ec_forecast_summary_text') }}
+        entity_picture_template: >-
+          "https://weather.gc.ca/weathericons/{{ states('sensor.ec_forecast_icon') }}.gif"
+        icon_template: >-
+          mdi:gauge
+      ec_feels_like:
+        friendly_name: Feels like
+        value_template: >-
+          {% if not is_state('sensor.ec_wind_chill', '') %}
+            {{ states('sensor.ec_wind_chill') }}
+          {% elif not is_state('sensor.ec_humidex', '') %}
+            {{ states('sensor.ec_humidex') }}
+          {% else %}
+            {{ states('sensor.ec_temperature') }}°C 
+          {% endif %}
+        icon_template: >-
+          mdi:gauge
+      ec_1_summary:
+        friendly_name_template: >-
+          {{ states('sensor.ec_1_name') }}
+        value_template: >-
+          {{ states('sensor.ec_1_summary_text') }}
+        entity_picture_template: >-
+          "https://weather.gc.ca/weathericons/{{ states('sensor.ec_1_icon') }}.gif"
+        icon_template: >-
+          mdi:gauge
+      ec_2_summary:
+        friendly_name_template: >-
+          {{ states('sensor.ec_2_name') }}
+        value_template: >-
+          {{ states('sensor.ec_2_summary_text') }}
+        entity_picture_template: >-
+          "https://weather.gc.ca/weathericons/{{ states('sensor.ec_2_icon') }}.gif"
+        icon_template: >-
+          mdi:gauge
+      ec_3_summary:
+        friendly_name_template: >-
+          {{ states('sensor.ec_3_name') }}
+        value_template: >-
+          {{ states('sensor.ec_3_summary_text') }}
+        entity_picture_template: >-
+          "https://weather.gc.ca/weathericons/{{ states('sensor.ec_3_icon') }}.gif"
+        icon_template: >-
+          mdi:gauge
+      ec_4_summary:
+        friendly_name_template: >-
+          {{ states('sensor.ec_4_name') }}
+        value_template: >-
+          {{ states('sensor.ec_4_summary_text') }}
+        entity_picture_template: >-
+          "https://weather.gc.ca/weathericons/{{ states('sensor.ec_4_icon') }}.gif"
+        icon_template: >-
+          mdi:gauge
+      ec_5_summary:
+        friendly_name_template: >-
+          {{ states('sensor.ec_5_name') }}
+        value_template: >-
+          {{ states('sensor.ec_5_summary_text') }}
+        entity_picture_template: >-
+          "https://weather.gc.ca/weathericons/{{ states('sensor.ec_5_icon') }}.gif"
+        icon_template: >-
+          mdi:gauge
+      ec_6_summary:
+        friendly_name_template: >-
+          {{ states('sensor.ec_6_name') }}
+        value_template: >-
+          {{ states('sensor.ec_6_summary_text') }}
+        entity_picture_template: >-
+          "https://weather.gc.ca/weathericons/{{ states('sensor.ec_6_icon') }}.gif"
+        icon_template: >-
+          mdi:gauge
       indoor_humidity:
         friendly_name: 'Indoor Humidity'
         unit_of_measurement: '%'
@@ -90,69 +258,17 @@ sensor:
       environment_canada_radar:
         friendly_name: Environment Canada Radar
         value_template: WKR
-      humidex:
-        friendly_name: Humidex
-        icon_template: mdi:oil-temperature
-        value_template: >-
-          {% set l = states('sensor.pws_temp_c') | float %}
-          {% set k = states('sensor.pws_dewpoint_c') | float | round  %}
-          {% set j = l + ( 5/9 ) * ( 6.11 * 2.71828 ** ( 5417.7530 * (( 1/273.16 )-( 1/( 273.15 + k )))) - 10 ) %}
-          {% if l > 20 %} {{ j | round }}
-          {% else %} {{ '' | round }}
-          {% endif %}
-      humidex_friendly:
-        friendly_name: Humidex
-        icon_template: mdi:oil-temperature
-        value_template: >-
-          {% set l = states('sensor.humidex') | float %}
-          {% if l >= 46 %} Dangerous
-          {% elif l >= 40 %} Great Discomfort
-          {% elif l >= 30 %} Some Discomfort
-          {% elif l > 0 %} Comfortable
-          {% else %} N/A
-          {% endif %}
-      uv:
-        friendly_name: UV
-        icon_template: mdi:sunglasses
-        value_template: >-
-          {{ states('sensor.pws_uv') }}
-      uv_friendly:
-        friendly_name: UV
-        icon_template: mdi:sunglasses
-        value_template: >-
-          {% set l = states('sensor.uv') | float %}
-          {% if 0 <= l < 3 %} Low
-          {% elif 3 <= l < 6 %} Moderate
-          {% elif 6 <= l < 8 %} High
-          {% elif 8 <= l < 11 %} Very high
-          {% elif 11 <= l %} Extreme
-          {% else %} N/A
-          {% endif %}
-      windchill:
-        friendly_name: Windchill
-        icon_template: mdi:snowman
-            # {% if k > 4.8 %} {{ j | round }}
-        value_template: >-
-          {% set l = states('sensor.pws_temp_c') | float %}
-          {% set k = states('sensor.pws_wind_kph') | float %}
-          {% set j = (13.12 + 0.6215 * l - 11.37 * k ** 0.16 + 0.3965 * l * k ** 0.16) | round(1) %}
-          {% if j > 0 %}
-          {% elif l < 10 %}
-            {% if k >= 0.1 %} {{ j | round }}
-            {% else %} {{ '' | round }}
-            {% endif %} 
-          {% else %} {{ '' | round }}
-          {% endif %}
-      windchill_friendly:
-        friendly_name: Windchill
-        icon_template: mdi:snowman
-        value_template: >-
-          {% set l = states('sensor.windchill') | float %}
-          {% if l <= -55 %} Danger
-          {% elif l <= -54 %} Severe
-          {% elif l <= -43 %} Very High
-          {% elif l <= -35 %} High
-          {% elif l <= -27 %} Moderate
-          {% elif l <= 0 %} low
-          {% elif l > 0 %} N/A
-          {% endif %}
+
+shell_command:
+  download_toronto_forecast: curl -s --retry 3 --output /tmp/toronto.xml http://dd.weatheroffice.ec.gc.ca/citypage_weather/xml/ON/s0000458_e.xml
+
+automation:
+  - id: Download EC forecast
+    alias: Download EC forecast
+    trigger:
+      - platform: homeassistant
+        event: start
+      - platform: time_pattern
+        minutes: 30
+    action:
+      - service: shell_command.download_toronto_forecast
