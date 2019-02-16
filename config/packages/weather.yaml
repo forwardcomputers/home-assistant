@@ -13,12 +13,42 @@ homeassistant:
       hidden: true
     sensor.yr_cloudiness:
       hidden: true
-    sensor.ec_uv_index:
-      friendly_name: UV index
+    sensor.ec_dewpoint:
+      friendly_name: Dewpoint
+      icon: mdi:water
+    sensor.ec_humidex:
+      friendly_name: Humidex
+      icon: mdi:oil-temperature
+    sensor.ec_pop:
+      friendly_name: Probability of precipitation
+      icon: weather-rainy
+    sensor.ec_pressure:
+      friendly_name: Pressure
+      icon: mdi:gauge
     sensor.ec_relative_humidity:
       friendly_name: Outside humidity
+      icon: mdi:water-percent
     sensor.ec_temperature:
       friendly_name: Outside temperature
+      icon: mdi:thermometer
+    sensor.ec_uv_index:
+      friendly_name: UV index
+      icon: mdi:sunglasses
+    sensor.ec_visibility:
+      friendly_name: Visibility
+      icon: mdi:eye
+    sensor.ec_wind_chill:
+      friendly_name: Wind chill
+      icon: mdi:snowman
+    sensor.ec_wind_direction:
+      friendly_name: Wind direction
+      icon: compas
+    sensor.ec_wind_gust:
+      friendly_name: Wind gust
+      icon: weather-windy
+    sensor.ec_wind_speed:
+      friendly_name: Wind speed
+      icon: weather-windy
 
 sun:
   monitored_conditions:
@@ -40,10 +70,10 @@ weather:
 
 sensor:
   - platform: command_line
-    name: ec_forecast_summary_text
+    name: ec_current_summary_text
     command: "xmllint --xpath 'string(//currentConditions/condition)' /tmp/toronto.xml"
   - platform: command_line
-    name: ec_forecast_icon
+    name: ec_current_icon
     command: "xmllint --xpath 'string(//currentConditions/iconCode)' /tmp/toronto.xml"
   - platform: command_line
     name: ec_temperature
@@ -175,17 +205,13 @@ sensor:
       thermostat_temperature:
         friendly_name: Indoor temperature
         value_template: '{{ states.climate.thermostat.attributes.current_temperature }}'
+        icon_template: >-
+          mdi:thermometer
       thermostat_humidity:
         friendly_name: Indoor humidity
         value_template: '{{ states.climate.thermostat.attributes.current_humidity }}'
-      ec_forecast_summary:
-        friendly_name: Weather Summary
-        value_template: >-
-          Currently {{ states('sensor.ec_temperature') }}°C with {{ states('sensor.ec_forecast_summary_text') }}
-        entity_picture_template: >-
-          "https://weather.gc.ca/weathericons/{{ states('sensor.ec_forecast_icon') }}.gif"
         icon_template: >-
-          mdi:gauge
+          mdi:water-percent
       ec_feels_like:
         friendly_name: Feels like
         value_template: >-
@@ -196,8 +222,14 @@ sensor:
           {% else %}
             {{ states('sensor.ec_temperature') }}°C 
           {% endif %}
+      ec_current_summary:
+        friendly_name: Currently
+        value_template: >-
+          Currently {{ states('sensor.ec_temperature') }}°C (Feels like {{ states('sensor.ec_feels_like') }}) and {{ states('sensor.ec_current_summary_text') }}
+        entity_picture_template: >-
+          "https://weather.gc.ca/weathericons/{{ states('sensor.ec_current_icon') }}.gif"
         icon_template: >-
-          mdi:gauge
+          mdi:thermometer
       ec_1_summary:
         friendly_name_template: >-
           {{ states('sensor.ec_1_name') }}
@@ -205,8 +237,6 @@ sensor:
           {{ states('sensor.ec_1_summary_text') }}
         entity_picture_template: >-
           "https://weather.gc.ca/weathericons/{{ states('sensor.ec_1_icon') }}.gif"
-        icon_template: >-
-          mdi:gauge
       ec_2_summary:
         friendly_name_template: >-
           {{ states('sensor.ec_2_name') }}
@@ -214,8 +244,6 @@ sensor:
           {{ states('sensor.ec_2_summary_text') }}
         entity_picture_template: >-
           "https://weather.gc.ca/weathericons/{{ states('sensor.ec_2_icon') }}.gif"
-        icon_template: >-
-          mdi:gauge
       ec_3_summary:
         friendly_name_template: >-
           {{ states('sensor.ec_3_name') }}
@@ -223,8 +251,6 @@ sensor:
           {{ states('sensor.ec_3_summary_text') }}
         entity_picture_template: >-
           "https://weather.gc.ca/weathericons/{{ states('sensor.ec_3_icon') }}.gif"
-        icon_template: >-
-          mdi:gauge
       ec_4_summary:
         friendly_name_template: >-
           {{ states('sensor.ec_4_name') }}
@@ -232,8 +258,6 @@ sensor:
           {{ states('sensor.ec_4_summary_text') }}
         entity_picture_template: >-
           "https://weather.gc.ca/weathericons/{{ states('sensor.ec_4_icon') }}.gif"
-        icon_template: >-
-          mdi:gauge
       ec_5_summary:
         friendly_name_template: >-
           {{ states('sensor.ec_5_name') }}
@@ -241,8 +265,6 @@ sensor:
           {{ states('sensor.ec_5_summary_text') }}
         entity_picture_template: >-
           "https://weather.gc.ca/weathericons/{{ states('sensor.ec_5_icon') }}.gif"
-        icon_template: >-
-          mdi:gauge
       ec_6_summary:
         friendly_name_template: >-
           {{ states('sensor.ec_6_name') }}
@@ -250,8 +272,6 @@ sensor:
           {{ states('sensor.ec_6_summary_text') }}
         entity_picture_template: >-
           "https://weather.gc.ca/weathericons/{{ states('sensor.ec_6_icon') }}.gif"
-        icon_template: >-
-          mdi:gauge
       indoor_humidity:
         friendly_name: 'Indoor Humidity'
         unit_of_measurement: '%'
@@ -272,15 +292,15 @@ sensor:
         value_template: WKR
 
 shell_command:
-  download_toronto_forecast: curl -s --retry 3 --output /tmp/toronto.xml http://dd.weatheroffice.ec.gc.ca/citypage_weather/xml/ON/s0000458_e.xml
+  download_ec_forecast_toronto: curl -s --retry 3 --output /tmp/toronto.xml http://dd.weatheroffice.ec.gc.ca/citypage_weather/xml/ON/s0000458_e.xml
 
 automation:
-  - id: Download EC forecast
-    alias: Download EC forecast
+  - id: download_ec_forecast
+    # alias: Download EC forecast
     trigger:
       - platform: homeassistant
         event: start
       - platform: time_pattern
         minutes: 30
     action:
-      - service: shell_command.download_toronto_forecast
+      - service: shell_command.download_ec_forecast_toronto
