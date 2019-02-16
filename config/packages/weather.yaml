@@ -13,6 +13,9 @@ homeassistant:
       hidden: true
     sensor.yr_cloudiness:
       hidden: true
+    sensor.ec_warning:
+      friendly_name: Weather Warning
+      icon: mdi:alert
     sensor.ec_dewpoint:
       friendly_name: Dewpoint
       icon: mdi:water
@@ -69,6 +72,9 @@ weather:
     mode: daily
 
 sensor:
+  - platform: command_line
+    name: ec_warning
+    command: "xmllint --xpath 'string(//warnings/event/@description)' /tmp/toronto.xml"
   - platform: command_line
     name: ec_current_summary_text
     command: "xmllint --xpath 'string(//currentConditions/condition)' /tmp/toronto.xml"
@@ -212,6 +218,14 @@ sensor:
         value_template: '{{ states.climate.thermostat.attributes.current_humidity }}'
         icon_template: >-
           mdi:water-percent
+      # ec_warning_alert:
+      #   friendly_name: Weather Warning
+      #   value_template: >-
+      #     {% if is_state('sensor.ec_warning', '') %}
+      #       NONE
+      #     {% endif %}
+      #   icon_template: >-
+      #     mdi:alert
       ec_feels_like:
         friendly_name: Feels like
         value_template: >-

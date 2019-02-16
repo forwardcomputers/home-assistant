@@ -25,6 +25,7 @@ resources:
 views:
   - title: Home
     icon: mdi:home
+    # panel: true
     cards:
       - type: custom:compact-custom-header
         dir: '/www/lovelace/'
@@ -94,7 +95,6 @@ views:
 #
   - title: Weather
     icon: mdi:weather-cloudy
-    # panel: true
     cards:
       - type: 'custom:weather-card-chart'
         title: Weather
