@@ -13,6 +13,12 @@ homeassistant:
       hidden: true
     sensor.yr_cloudiness:
       hidden: true
+    sensor.ec_uv_index:
+      friendly_name: UV index
+    sensor.ec_relative_humidity:
+      friendly_name: Outside humidity
+    sensor.ec_temperature:
+      friendly_name: Outside temperature
 
 sun:
   monitored_conditions:
@@ -166,6 +172,12 @@ sensor:
       - cloudiness
   - platform: template
     sensors:
+      thermostat_temperature:
+        friendly_name: Indoor temperature
+        value_template: '{{ states.climate.thermostat.attributes.current_temperature }}'
+      thermostat_humidity:
+        friendly_name: Indoor humidity
+        value_template: '{{ states.climate.thermostat.attributes.current_humidity }}'
       ec_forecast_summary:
         friendly_name: Weather Summary
         value_template: >-

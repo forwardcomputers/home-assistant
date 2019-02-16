@@ -5,11 +5,11 @@ include:
     - sensor.speedtest_ping
     - sensor.speedtest_download
     - sensor.speedtest_upload
-    - climate.thermostat.attributes.current_temperature
+    - sensor.thermostat_temperature
     - sensor.ec_temperature
     - sensor.humidex
     - sensor.wind_chill
-    - climate.thermostat.attributes.current_humidity
+    - sensor.thermostat_humidity
     - sensor.ec_relative_humidity
     - sensor.ec_uv_index
   domains:
