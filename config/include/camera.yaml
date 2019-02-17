@@ -2,13 +2,13 @@
 
 # Radar of Jet Stream
 - platform: generic
-  name: Environment Canada Jet Stream
+  name: EC jet stream
   content_type: image/gif
   scan_interval: 10800
   still_image_url: http://weather.gc.ca/data/jet_stream/tempmapwx_e.gif
-# Radar of surrounding rain conditions
+# Radar of surrounding rain or snow conditions
 - platform: generic
-  name: Environment Canada Rain
+  name: EC radar
   content_type: image/gif
   scan_interval: 900
   still_image_url: >-
@@ -19,21 +19,13 @@
     {% set timestamp = as_timestamp(utcnow()) - offset %}
     {% set minutes = ((timestamp | timestamp_custom('%M', false)) | int / 10) | int | string + '0' %}
     {% set datestamp = timestamp | timestamp_custom('%Y%m%d%H', false) + minutes %}
-    http://dd.weather.gc.ca/radar/PRECIPET/GIF/{{location}}/{{datestamp}}_{{location}}_PRECIPET_RAIN.gif
-# Radar of surrounding snow conditions
-- platform: generic
-  name: Environment Canada Snow
-  content_type: image/gif
-  scan_interval: 900
-  still_image_url: >-
-    {% set delta = 10 %}
-    {% set time = states('sensor.time') %}
-    {% set location = states('sensor.environment_canada_radar') %}
-    {% set offset = delta * 60 %}
-    {% set timestamp = as_timestamp(utcnow()) - offset %}
-    {% set minutes = ((timestamp | timestamp_custom('%M', false)) | int / 10) | int | string + '0' %}
-    {% set datestamp = timestamp | timestamp_custom('%Y%m%d%H', false) + minutes %}
-    http://dd.weather.gc.ca/radar/PRECIPET/GIF/{{location}}/{{datestamp}}_{{location}}_PRECIPET_SNOW.gif
+    {% set month = timestamp | timestamp_custom('%-m', false) | int %}
+    {% if 4 <= month <= 10 %}
+        {% set season = 'RAIN' %}
+    {% else %}
+        {% set season = 'SNOW' %}
+    {% endif %}
+    http://dd.weather.gc.ca/radar/PRECIPET/GIF/{{location}}/{{datestamp}}_{{location}}_PRECIPET_{{season}}.gif
 # Toronto downtown camera
 - platform: generic
   name: Toronto Downtown Camera

@@ -109,7 +109,7 @@ sensor:
       {% endif %}
   - platform: command_line
     name: aqhi
-    command: "/usr/bin/curl \"http://dd.weather.gc.ca/air_quality/aqhi/ont/observation/realtime/xml/AQ_OBS_FDQBX_CURRENT.xml\" 2>&1 | awk -F '[><]' '/airQualityHealthIndex/ {printf \"%.0f\\n\",$3}'"
+    command: "/usr/bin/curl \"http://dd.weather.gc.ca/air_quality/aqhi/ont/observation/realtime/xml/AQ_OBS_FCKTB_CURRENT.xml\" 2>&1 | awk -F '[><]' '/airQualityHealthIndex/ {printf \"%.0f\\n\",$3}'"
     scan_interval: 3600
   - platform: command_line
     name: o3
@@ -144,7 +144,7 @@ sensor:
         icon_template: mdi:chemical-weapon
         value_template: >-
           {% set l = states('sensor.aqhi') | int %}
-          {% if l <= 3 %} Good
+          {% if l <= 3 %} Low
           {% elif l <= 6 %} Moderate
           {% elif l <= 10 %} High
           {% elif l > 10 %} Hazardous
