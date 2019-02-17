@@ -147,6 +147,13 @@ views:
             - sensor.kitchen_moisture
             - sensor.kitchen_temperature
 #
+  - title: Weather
+    icon: mdi:weather-cloudy
+    cards:
+      - type: iframe
+        url: !secret windy_url
+        aspect_ratio: 75%
+#
   - type: vertical-stack
     title: Rooms
     icon: mdi:checkbox-multiple-blank-outline
