@@ -11,7 +11,12 @@ homeassistant:
         - sensor.glances_ram_used
         - sensor.glances_disk_used
         - sensor.glances_swap_used
-
+    sensor.sys_name:
+      friendly_name: Name
+      ico: mdi:network
+    sensor.sys_current_firmware:
+      friendly_name: Firmware
+      icon: mdi:code-tags
     sensor.glances_disk_used:
       friendly_name: 'Disk used'
     sensor.glances_ram_used:
@@ -59,3 +64,13 @@ sensor:
   - platform: command_line
     command: python3 -c "import requests; print(requests.get('http://localhost:61208/api/3/docker').json()['version']['Components'][0]['Version'])"
     name: Docker Version
+  - platform: command_line
+    name: sys_name
+    command: awk '{ printf "%s ", $1 ;next ; print "%s" $1}' /sys/class/dmi/id/product_family /sys/class/dmi/id/board_name
+  - platform: command_line
+    name: sys_current_firmware
+    command: awk -F. '{print $3}' <  /sys/class/dmi/id/bios_version
+  - platform: command_line
+    name: sys_latest_firmware
+    command: python3 -c "from lxml import html; import requests; print('Latest is',(html.fromstring((requests.get('https://downloadcenter.intel.com/download/28475/BIOS-Update-BNKBL357-86A')).content).xpath('/html/head/meta[19]/@content')[0]),'relesed',(html.fromstring((requests.get('https://downloadcenter.intel.com/download/28475/BIOS-Update-BNKBL357-86A')).content).xpath('/html/head/meta[23]/@content')[0]).split(' ')[0])"
+

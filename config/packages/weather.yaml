@@ -310,7 +310,7 @@ shell_command:
 
 automation:
   - id: download_ec_forecast
-    # alias: Download EC forecast
+    alias: Download EC forecast
     trigger:
       - platform: homeassistant
         event: start

@@ -5,19 +5,20 @@ For more details about this component, please refer to the documentation at
 https://github.com/custom-components/custom_updater
 """
 import logging
-from datetime import timedelta
-from aiohttp import web
 import os.path
-import voluptuous as vol
-import homeassistant.helpers.config_validation as cv
-from homeassistant.helpers.event import track_time_interval
-from homeassistant.components.http import HomeAssistantView
+from datetime import timedelta
 
-VERSION = '4.0.4'
+import voluptuous as vol
+from aiohttp import web
+import homeassistant.helpers.config_validation as cv
+from homeassistant.components.http import HomeAssistantView
+from homeassistant.helpers.event import track_time_interval
+
+VERSION = '4.0.5'
 
 _LOGGER = logging.getLogger(__name__)
 
-REQUIREMENTS = ['pyupdate==0.2.28']
+REQUIREMENTS = ['pyupdate==0.2.29']
 
 CONF_TRACK = 'track'
 CONF_HIDE_SENSOR = 'hide_sensor'

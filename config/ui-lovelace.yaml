@@ -7,6 +7,8 @@ resources:
     type: js
   - url: /local/lovelace/fold-entity-row.js?v=6d11d3
     type: js
+  - url: /local/lovelace/layout-card.js?v=0.1
+    type: js
   - url: /local/lovelace/monster-card.js?v=0.2.3
     type: js
   - url: /local/lovelace/slider-entity-row.js?v=be80ff
@@ -95,12 +97,13 @@ views:
 #
   - title: Weather
     icon: mdi:weather-cloudy
+    panel: true
     cards:
-      - type: 'custom:weather-card-chart'
-        title: Weather
-        weather: weather.openweathermap
-      - type: vertical-stack
+      - type: horizontal-stack
         cards:
+        - type: 'custom:weather-card-chart'
+          title: Weather
+          weather: weather.openweathermap
         - type: entities
           show_header_toggle: false
           entities:
@@ -111,7 +114,34 @@ views:
             - sensor.ec_4_summary
             - sensor.ec_5_summary
             - sensor.ec_6_summary
-      - type: vertical-stack
+#
+  - title: Weather
+    icon: mdi:weather-windy
+    panel: true
+    cards:
+      - type: custom:layout-card
+        layout: horizontal
+        column_num: 2
+        cards:
+          - type: iframe
+            url: !secret windy_url
+            aspect_ratio: 83%
+          - type: picture-glance
+            entities: []
+            camera_image: camera.ec_radar
+            tap_action:
+              action: none
+          - type: picture-glance
+            entities: []
+            camera_image: camera.ec_jet_stream
+            tap_action:
+              action: none
+#
+  - title: Environment
+    icon: mdi:earth
+    panel: true
+    cards:
+      - type: horizontal-stack
         cards:
         - type: entities
           title: Environmental
@@ -146,13 +176,6 @@ views:
             - sensor.kitchen_light_intensity
             - sensor.kitchen_moisture
             - sensor.kitchen_temperature
-#
-  - title: Weather
-    icon: mdi:weather-cloudy
-    cards:
-      - type: iframe
-        url: !secret windy_url
-        aspect_ratio: 75%
 #
   - type: vertical-stack
     title: Rooms
@@ -225,118 +248,140 @@ views:
 #
   - title: Devices
     icon: mdi:server
+    panel: true
     cards:
-      - type: entities
-        title: ISP
-        show_header_toggle: false
-        entities:
-          - sensor.speedtest_download
-          - sensor.speedtest_upload
-          - sensor.speedtest_ping
-      - type: entities
-        title: NAS
-        show_header_toggle: false
-        entities:
-          - sensor.model_name
-          - sensor.serial_number
-          - sensor.cpu_load_total
-          - sensor.memory_usage_real
-          - sensor.volume_used_volume_1
-          - sensor.status_volume_1
-          - sensor.status_smart_sda
-          - sensor.status_smart_sdb
-      - type: entities
-        title: UPS
-        show_header_toggle: false
-        entities:
-          - sensor.office_ups_model
-          - sensor.office_ups_serial_number
-          - sensor.office_ups_status
-          - sensor.office_ups_load
-          - sensor.office_ups_battery_runtime_mins
-          - sensor.office_ups_battery_charge
-      - type: entities
-        title: Printer
-        show_header_toggle: false
-        entities:
-          - sensor.printer_product
-          - sensor.printer_serial
-          - sensor.printer_name
-          - sensor.printer_status
-          - entity: sensor.printer_toner_pct_remain
-            type: "custom:secondaryinfo-entity-row"
-            secondary_info: "[[ sensor.printer_toner_page_remain.state ]] pages remaining"
-          - entity: sensor.printer_drum_pct_remain
-            type: "custom:secondaryinfo-entity-row"
-            secondary_info: "[[ sensor.printer_drum_page_remain.state ]] pages remaining"
-          - script.cleaning_mode
-      - type: entities
-        title: Web Links
-        show_header_toggle: false
-        entities:
-          - type: weblink
-            name: Modem
-            url: !secret modem_url
-            icon: mdi:router-wireless
-          - type: weblink
-            name: Router
-            url: !secret router_url
-            icon: mdi:router-wireless
-          - type: weblink
-            name: Filer
-            url: !secret filer_url
-            icon: mdi:server-network
-          - type: weblink
-            name: Laser
-            url: !secret laser_url
-            icon: mdi:printer
-          - type: weblink
-            name: Powerline
-            url: !secret powerliving_url
-            icon: mdi:router-wireless
+      - type: custom:layout-card
+        layout: vertical
+        column_num: 3
+        cards:
+          - type: entities
+            title: NAS
+            show_header_toggle: false
+            entities:
+              - sensor.model_name
+              - sensor.serial_number
+              - sensor.cpu_load_total
+              - sensor.memory_usage_real
+              - sensor.volume_used_volume_1
+              - sensor.status_volume_1
+              - sensor.status_smart_sda
+              - sensor.status_smart_sdb
+          - break
+          - type: entities
+            title: Printer
+            show_header_toggle: false
+            entities:
+              - sensor.printer_product
+              - sensor.printer_serial
+              - sensor.printer_name
+              - sensor.printer_status
+              - entity: sensor.printer_toner_pct_remain
+                type: "custom:secondaryinfo-entity-row"
+                secondary_info: "[[ sensor.printer_toner_page_remain.state ]] pages remaining"
+              - entity: sensor.printer_drum_pct_remain
+                type: "custom:secondaryinfo-entity-row"
+                secondary_info: "[[ sensor.printer_drum_page_remain.state ]] pages remaining"
+              - script.cleaning_mode
+          - type: entities
+            title: ISP
+            show_header_toggle: false
+            entities:
+              - sensor.speedtest_download
+              - sensor.speedtest_upload
+              - sensor.speedtest_ping
+          - break
+          - type: entities
+            title: UPS
+            show_header_toggle: false
+            entities:
+              - sensor.office_ups_model
+              - sensor.office_ups_serial_number
+              - sensor.office_ups_status
+              - sensor.office_ups_load
+              - sensor.office_ups_battery_runtime_mins
+              - sensor.office_ups_battery_charge
+          - type: entities
+            title: Web Links
+            show_header_toggle: false
+            entities:
+              - type: weblink
+                name: Modem
+                url: !secret modem_url
+                icon: mdi:router-wireless
+              - type: weblink
+                name: Router
+                url: !secret router_url
+                icon: mdi:router-wireless
+              - type: weblink
+                name: Filer
+                url: !secret filer_url
+                icon: mdi:server-network
+              - type: weblink
+                name: Laser
+                url: !secret laser_url
+                icon: mdi:printer
+              - type: weblink
+                name: Powerline
+                url: !secret powerliving_url
+                icon: mdi:router-wireless
 #
   - title: HASS
     icon: mdi:home-assistant
+    panel: true
     cards:
-      - type: entities
-        title: NUC i5
-        show_header_toggle: false
-        entities:
-          - sensor.os
-          - sensor.distro
-          - sensor.kernel_version
-          - sensor.glances_total
-          - sensor.glances_cpu_temp
-          - sensor.processor_use
-          - sensor.glances_ram_used
-          - sensor.glances_disk_used
-          - sensor.glances_swap_used
-          - sensor.last_boot
-      - type: entities
-        title: Docker
-        show_header_toggle: false
-        entities:
-          - sensor.docker_version
-          - sensor.glances_containers_active
-      - type: entities
-        title: Home Assistant
-        show_header_toggle: false
-        entities:
-          - entity: sensor.home_assistant_version
-            type: "custom:secondaryinfo-entity-row"
-            secondary_info: "Released version [[ sensor.released_version.state ]]"
-          - sensor.connected_clients
-          - sensor.uptime
-      - type: custom:tracker-card
-        title:
-        trackers:
-          - sensor.custom_card_tracker
-          - sensor.custom_component_tracker
-      - type: entities
-        title: Update scripts
-        show_header_toggle: false
-        entities:
-          - script.update_alexa
+      - type: custom:layout-card
+        layout: vertical
+        column_num: 3
+        cards:
+          - type: entities
+            title: Server
+            show_header_toggle: false
+            entities:
+              - sensor.sys_name
+              - entity: sensor.sys_current_firmware
+                type: "custom:secondaryinfo-entity-row"
+                secondary_info: "[[ sensor.sys_latest_firmware ]]"
+              - sensor.glances_total
+              - sensor.glances_cpu_temp
+              - sensor.processor_use
+              - sensor.glances_ram_used
+              - sensor.glances_disk_used
+              - sensor.glances_swap_used
+              - sensor.last_boot
+          - break
+          - type: entities
+            title: OS
+            show_header_toggle: false
+            entities:
+              - sensor.os
+              - sensor.distro
+              - sensor.kernel_version
+          - type: entities
+            title: Docker
+            show_header_toggle: false
+            entities:
+              - sensor.docker_version
+              - sensor.glances_containers_active
+          - type: entities
+            title: Home Assistant
+            show_header_toggle: false
+            entities:
+              - entity: sensor.home_assistant_version
+                type: "custom:secondaryinfo-entity-row"
+                secondary_info: "Released version [[ sensor.released_version.state ]]"
+              - sensor.connected_clients
+              - sensor.uptime
+          - break
+          - type: custom:tracker-card
+            title:
+            trackers:
+              - sensor.custom_card_tracker
+              - sensor.custom_component_tracker
+          - type: entities
+            title: Update scripts
+            show_header_toggle: false
+            entities:
+              - script.update_alexa
 #
   - title: Debug
     icon: mdi:bug
