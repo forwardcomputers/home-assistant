@@ -31,6 +31,7 @@ cloud:
 
 homekit:
   auto_start: true
+  ip_address: !secret emulated_hue_ip
   filter:
     include_domains:
       - climate
