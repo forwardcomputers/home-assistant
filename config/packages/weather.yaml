@@ -311,6 +311,7 @@ shell_command:
 automation:
   - id: download_ec_forecast
     alias: Download EC forecast
+    initial_state: on
     trigger:
       - platform: homeassistant
         event: start

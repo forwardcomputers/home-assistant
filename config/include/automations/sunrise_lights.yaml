@@ -2,7 +2,7 @@
 
 - id: sunrise_lights
   alias: All lights off at sunrise
-  initial_state: true
+  initial_state: on
   trigger:
     platform: numeric_state
     entity_id: sun.sun

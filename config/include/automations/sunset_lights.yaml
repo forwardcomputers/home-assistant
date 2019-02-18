@@ -2,7 +2,7 @@
 
 - id: sunset_lights
   alias: Kitchen lights on at sunset
-  initial_state: true
+  initial_state: on
   trigger:
     - platform: time
       at: '16:00:00'
