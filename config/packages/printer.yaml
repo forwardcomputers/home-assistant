@@ -3,17 +3,17 @@
 
 homeassistant:
   customize:
-    sensor.printer_status:
-      friendly_name: Status
-      icon: mdi:information-outline
-    sensor.printer_product:
+    sensor.printer_name:
       friendly_name: Model
       icon: mdi:printer
     sensor.printer_serial:
       friendly_name: Serial Number
-    sensor.printer_name:
-      friendly_name: Queue Name
-      icon: mdi:printer
+    sensor.printer_firmware:
+      friendly_name: Firmware
+      icon: mdi:code-tags
+    sensor.printer_status:
+      friendly_name: Status
+      icon: mdi:information-outline
     sensor.printer_drum_pct_remain:
       friendly_name: Drum Remaining
       icon: mdi:panorama-vertical
@@ -41,8 +41,8 @@ sensor:
     command: !secret printer_serial_number_url
     scan_interval: 86400
   - platform: command_line
-    name: printer_product
-    command: !secret printer_host_name_url
+    name: printer_firmware
+    command: !secret printer_firmware_url
     scan_interval: 86400
   - platform: command_line
     name: printer_status

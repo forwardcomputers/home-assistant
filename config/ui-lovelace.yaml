@@ -271,9 +271,9 @@ views:
             title: Printer
             show_header_toggle: false
             entities:
-              - sensor.printer_product
-              - sensor.printer_serial
               - sensor.printer_name
+              - sensor.printer_serial
+              - sensor.printer_firmware
               - sensor.printer_status
               - entity: sensor.printer_toner_pct_remain
                 type: "custom:secondaryinfo-entity-row"
