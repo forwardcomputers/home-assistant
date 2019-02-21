@@ -1,7 +1,7 @@
 # https://www.home-assistant.io/docs/z-wave
 
 usb_path: /dev/zwave
-config_path: /usr/local/lib/python3.6/site-packages/python_openzwave/ozw_config
+config_path: /usr/local/lib/python3.7/site-packages/python_openzwave/ozw_config
 network_key: !secret zwave_network_key
 autoheal: true
 polling_interval: 60000

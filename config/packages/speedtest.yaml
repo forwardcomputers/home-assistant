@@ -17,16 +17,16 @@ homeassistant:
       icon: mdi:wan
       show_last_changed: true
 
+speedtestdotnet:
+  scan_interval:
+    minutes: 30
+  monitored_conditions:
+    - download
+    - ping
+    - upload
+  server_id: 17394
+
 sensor:
-  - platform: speedtest
-    minute:
-      - 0
-      - 30
-    monitored_conditions:
-      - download
-      - ping
-      - upload
-    server_id: 17394
   - platform: rest
     resource: http://icanhazip.com
     name: External IP
