@@ -10,7 +10,7 @@ jobs:
       - run:
           name: Check config
           command: |
-            apk update && apk add make
+            apk update && apk add make curl
             mv /hass/config /
             mv /hass/.circleci/secrets.test /config/secrets.yaml
             touch /config/packages/firetv/adbkey
