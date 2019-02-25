@@ -1,0 +1,11 @@
+# https://www.home-assistant.io/components/discovery/
+
+ignore:
+  - apple_tv
+  - google_cast
+  - harmony
+  - ikea_tradfri
+  - panasonic_viera
+  - samsung_tv
+  - philips_hue
+

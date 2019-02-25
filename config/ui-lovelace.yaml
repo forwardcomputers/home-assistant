@@ -3,25 +3,25 @@
 title: Home Assistant
 
 resources:
-  - url: /local/lovelace/card-tools.js?v=9203a1
+  - url: /customcards/lovelace/card-tools.js?track=true
     type: js
-  - url: /local/lovelace/fold-entity-row.js?v=6d11d3
+  - url: /customcards/lovelace/fold-entity-row.js?track=true
     type: js
-  - url: /local/lovelace/layout-card.js?v=0.1
+  - url: /customcards/lovelace/layout-card.js?track=true
     type: js
-  - url: /local/lovelace/monster-card.js?v=0.2.3
+  - url: /customcards/lovelace/monster-card.js?track=true
     type: js
-  - url: /local/lovelace/slider-entity-row.js?v=be80ff
+  - url: /customcards/lovelace/slider-entity-row.js?track=true
     type: js
-  - url: /local/lovelace/tracker-card.js?v=0.3.2
-    type: js
-  - url: /local/lovelace/compact-custom-header.js?v=1.0.0b4
+  - url: /customcards/lovelace/compact-custom-header.js?track=true
     type: module
-  - url: /local/lovelace/custom-weather-card-chart.js?v=0.2.4
+  - url: /customcards/lovelace/custom-weather-card-chart.js?track=true
     type: module
-  - url: /local/lovelace/secondaryinfo-entity-row.js?v=0.1
+  - url: /customcards/lovelace/secondaryinfo-entity-row.js?track=true
     type: module
-  - url: /local/lovelace/simple-thermostat.js?v=0.17.0
+  - url: /customcards/lovelace/simple-thermostat.js?track=true
+    type: module
+  - url: /customcards/lovelace/tracker-card.js?track=true
     type: module
 
 views:
@@ -99,6 +99,14 @@ views:
     icon: mdi:weather-cloudy
     panel: true
     cards:
+      - type: custom:compact-custom-header
+        dir: '/www/lovelace/'
+        header: true
+        menu: true
+        notification: true
+        voice: false
+        options: true
+        tabs: true
       - type: horizontal-stack
         cards:
         - type: 'custom:weather-card-chart'
@@ -115,10 +123,18 @@ views:
             - sensor.ec_5_summary
             - sensor.ec_6_summary
 #
-  - title: Weather
+  - title: Images
     icon: mdi:weather-windy
     panel: true
     cards:
+      - type: custom:compact-custom-header
+        dir: '/www/lovelace/'
+        header: true
+        menu: true
+        notification: true
+        voice: false
+        options: true
+        tabs: true
       - type: custom:layout-card
         layout: horizontal
         column_num: 2
@@ -141,6 +157,14 @@ views:
     icon: mdi:earth
     panel: true
     cards:
+      - type: custom:compact-custom-header
+        dir: '/www/lovelace/'
+        header: true
+        menu: true
+        notification: true
+        voice: false
+        options: true
+        tabs: true
       - type: horizontal-stack
         cards:
         - type: entities
@@ -181,6 +205,14 @@ views:
     title: Rooms
     icon: mdi:checkbox-multiple-blank-outline
     cards:
+      - type: custom:compact-custom-header
+        dir: '/www/lovelace/'
+        header: true
+        menu: true
+        notification: true
+        voice: false
+        options: true
+        tabs: true
       - type: entities
         title: Livingroom
         entities:
@@ -237,6 +269,14 @@ views:
   - title: Radio
     icon: mdi:play-circle-outline
     cards:
+      - type: custom:compact-custom-header
+        dir: '/www/lovelace/'
+        header: true
+        menu: true
+        notification: true
+        voice: false
+        options: true
+        tabs: true
       - type: entities
         title: Radio
         show_header_toggle: false
@@ -250,6 +290,14 @@ views:
     icon: mdi:server
     panel: true
     cards:
+      - type: custom:compact-custom-header
+        dir: '/www/lovelace/'
+        header: true
+        menu: true
+        notification: true
+        voice: false
+        options: true
+        tabs: true
       - type: custom:layout-card
         layout: vertical
         column_num: 3
@@ -329,6 +377,14 @@ views:
     icon: mdi:home-assistant
     panel: true
     cards:
+      - type: custom:compact-custom-header
+        dir: '/www/lovelace/'
+        header: true
+        menu: true
+        notification: true
+        voice: false
+        options: true
+        tabs: true
       - type: custom:layout-card
         layout: vertical
         column_num: 3
@@ -386,6 +442,14 @@ views:
   - title: Debug
     icon: mdi:bug
     cards:
+      - type: custom:compact-custom-header
+        dir: '/www/lovelace/'
+        header: true
+        menu: true
+        notification: true
+        voice: false
+        options: true
+        tabs: true
       - type: custom:monster-card
         card:
           type: glance

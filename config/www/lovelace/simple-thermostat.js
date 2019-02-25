@@ -53,14 +53,6 @@
       table:empty {
         display: none;
       }
-      .mode-selector {
-        --paper-dropdown-menu: {
-          display: inline;
-        }
-        --paper-input-container: {
-          padding: 0;
-        }
-      }
       header {
         display: flex;
         flex-direction: row;
@@ -122,9 +114,6 @@
       }
       .sensors td.clickable {
         cursor: pointer;
-      }
-      .mode-selector-container {
-        max-width: 90%;
       }
       .modes {
         display: flex;
@@ -202,7 +191,9 @@
       <div class="modes">
         ${t.map(t=>$`
             <mwc-button
-              class="${t===e?"mode--active":""}"
+              ?disabled=${t===e}
+              ?outlined=${t===e}
+              ?dense=${!0}
               @click=${()=>this.setMode(t)}
             >
               <ha-icon class="mode__icon" .icon=${at[t]}></ha-icon>
