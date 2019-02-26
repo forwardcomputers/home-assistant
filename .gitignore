@@ -1,5 +1,4 @@
 .cloud/
-custom_components/
 deps/
 .storage/
 tts/
@@ -17,6 +16,7 @@ home-assistant*
 known_devices.yaml
 OZW_Log.txt
 options.xml
+__pycache__
 secrets.yaml
 *.sqlite
 .uuid
