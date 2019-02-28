@@ -6,7 +6,7 @@ tts/
 *.conf
 *.json
 *.tmp
-alexa_media.pickle
+alexa_media*
 adbkey*
 emulated*
 entity_registry.yaml
