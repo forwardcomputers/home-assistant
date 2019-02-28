@@ -10,5 +10,5 @@ card_urls:
   - https://raw.githubusercontent.com/nervetattoo/simple-thermostat/master/tracker.json
 
 component_urls:
+  - https://raw.githubusercontent.com/keatontaylor/custom_components/master/custom_components.json
   - https://raw.githubusercontent.com/pnbruckner/homeassistant-config/master/custom_components.json
-  # - https://raw.githubusercontent.com/forwardcomputers/home-assistant/master/config/custom_components/custom_components.json

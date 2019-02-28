@@ -4,17 +4,17 @@
 # https://www.home-assistant.io/components/media_player.firetv/
 # https://www.home-assistant.io/components/cast/
 
-# alexa_media:
-#   accounts:
-#     - email: !secret amz_email
-#       password: !secret amz_password_key
-#       url: 'amazon.com'
+alexa_media:
+  accounts:
+    - email: !secret amz_email
+      password: !secret amz_password_key
+      url: 'amazon.com'
 
 media_player:
-  - platform: alexa
-    email: !secret amz_email
-    password: !secret amz_password_key
-    url: 'amazon.com'
+  # - platform: alexa
+  #   email: !secret amz_email
+  #   password: !secret amz_password_key
+  #   url: 'amazon.com'
 # - platform: firetv
   #   adbkey: "/config/packages/firetv/adbkey"
   #   host: !secret firetvbox_ip
