@@ -129,13 +129,11 @@ views:
           - type: picture-glance
             entities: []
             camera_image: camera.ec_radar
-            tap_action:
-              action: none
+            aspect_ratio: 83%
           - type: picture-glance
             entities: []
             camera_image: camera.ec_jet_stream
-            tap_action:
-              action: none
+            aspect_ratio: 83%
 #
   - title: Environment
     icon: mdi:earth
@@ -186,8 +184,6 @@ views:
         entities:
           - light.led
           - light.floor
-          - entity: media_player.ali_s_echo_dot
-            name: Echo Dot
           - entity: remote.livingroom
             name: Harmony hub
           - entity: media_player.livingroom_tv
@@ -203,8 +199,6 @@ views:
         entities:
           - light.bedroom_left
           - light.bedroom_right
-          - entity: media_player.ali_s_echo_spot
-            name: Echo Spot
           - sensor.tradfri_remote_control
       - type: entities
         title: Office
@@ -213,12 +207,6 @@ views:
           - light.office
           - entity: media_player.office_tv
             name: Samsung TV
-          # - entity: media_player.chromecast_office
-          #   name: Google Chromecast
-          # - entity: media_player.fire_tv
-          #   name: Amazon Fire TV
-          # - entity: media_player.fire_tv_stick
-          #   name: Amazon Fire TV Stick
           - entity: media_player.office_speaker
             name: Google Home Mini
       - type: entities
