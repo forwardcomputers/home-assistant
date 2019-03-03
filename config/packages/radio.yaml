@@ -8,8 +8,6 @@ input_select:
     name: Speaker
     options:
       - Office speaker
-      - Echo dot
-      - Echo spot
     icon: mdi:speaker-wireless
   radio_station:
     name: Station

@@ -37,12 +37,3 @@ remote:
     name: Livingroom
     host: !secret harmonyhub_ip
     activity: Watch TV
-
-shell_command:
-  update_alexa_command: '/usr/bin/curl -L -o /config/custom_components/media_player/alexa.py https://github.com/keatontaylor/custom_components/raw/master/media_player/alexa.py'
-
-script:
-  update_alexa :
-    alias: Update alexa component
-    sequence:
-      - service: shell_command.update_alexa_command
