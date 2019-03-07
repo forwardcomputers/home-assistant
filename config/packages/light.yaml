@@ -161,10 +161,8 @@ light:
       - light.led
       - light.floor
 
-switch:
-  - platform: tplink
-    name: Desk
-    host: !secret plugdesk_ip
-  - platform: tplink
-    name: Kitchen
-    host: !secret plugkitchen_ip
+tplink:
+  discovery: false
+  switch:
+    - host: !secret plugdesk_ip
+    - host: !secret plugkitchen_ip
