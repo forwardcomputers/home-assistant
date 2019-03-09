@@ -11,9 +11,25 @@ homeassistant:
 sensor:
   - platform: api_streams
   - platform: version
-    name: Home Assistant Version
+    name: installed_version
   - platform: uptime
     unit_of_measurement: hours
   - platform: command_line
     command: python3 -c "import requests; print(requests.get('https://pypi.python.org/pypi/homeassistant/json').json()['info']['version'])"
-    name: Released Version
+    name: pypi_version
+  - platform: command_line
+    command: python3 -c "import requests; print(requests.get('https://api.github.com/repos/home-assistant/home-assistant/releases/latest').json()['tag_name'])"
+    name: github_version
+  - platform: rest
+    name: docker_version
+    scan_interval: 300
+    resource: https://registry.hub.docker.com/v1/repositories/homeassistant/home-assistant/tags
+    headers:
+      Content-Type: application/json
+      User-Agent: Home Assistant REST sensor
+    value_template: >-
+      {%- for image_build in value_json | reverse if image_build.name.split(".")[0]=="0" and "b" not in image_build.name.split(".")[2] -%}
+        {%- if loop.first -%}
+          {{ image_build.name }}
+        {%- endif -%}
+      {% endfor %}

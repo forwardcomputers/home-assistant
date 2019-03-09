@@ -356,7 +356,7 @@ views:
             entities:
               - entity: sensor.home_assistant_version
                 type: "custom:secondaryinfo-entity-row"
-                secondary_info: "Released version [[ sensor.released_version.state ]]"
+                secondary_info: "GitHub [[ sensor.github_version.state ]] PyPi [[ sensor.pypi_version.state ]] Docker [[ sensor.docker_version.state ]]"
               - sensor.connected_clients
               - sensor.uptime
           - break
