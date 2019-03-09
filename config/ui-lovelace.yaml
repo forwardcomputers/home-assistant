@@ -354,9 +354,9 @@ views:
             title: Home Assistant
             show_header_toggle: false
             entities:
-              - entity: sensor.home_assistant_version
+              - entity: sensor.installed_version
                 type: "custom:secondaryinfo-entity-row"
-                secondary_info: "GitHub [[ sensor.github_version.state ]] PyPi [[ sensor.pypi_version.state ]] Docker [[ sensor.docker_version.state ]]"
+                secondary_info: "GitHub [[ sensor.github_version.state ]] - PyPi [[ sensor.pypi_version.state ]] - Docker [[ sensor.docker_version.state ]]"
               - sensor.connected_clients
               - sensor.uptime
           - break
