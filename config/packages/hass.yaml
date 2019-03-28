@@ -9,7 +9,6 @@ homeassistant:
       friendly_name: Installed Version
 
 sensor:
-  - platform: api_streams
   - platform: version
     name: installed_version
   - platform: uptime
