@@ -4,8 +4,9 @@ track:
   - cards
   - components
 
+#  - https://raw.githubusercontent.com/MizterB/lovelace-secondaryinfo-entity-row/master/custom_cards.json
 card_urls:
-  - https://raw.githubusercontent.com/MizterB/lovelace-secondaryinfo-entity-row/master/custom_cards.json
+  - https://raw.githubusercontent.com/custom-cards/secondaryinfo-entity-row/master/custom_cards.json
   - https://raw.githubusercontent.com/sgttrs/lovelace-weather-card-chart/master/custom-updater.json
   - https://raw.githubusercontent.com/nervetattoo/simple-thermostat/master/tracker.json
 
