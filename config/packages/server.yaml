@@ -72,5 +72,5 @@ sensor:
     command: awk -F. '{print $3}' <  /sys/class/dmi/id/bios_version
   - platform: command_line
     name: sys_latest_firmware
-    command: python3 -c "from lxml import html; import requests; print('Latest is',(html.fromstring((requests.get('https://downloadcenter.intel.com/download/28475/BIOS-Update-BNKBL357-86A')).content).xpath('/html/head/meta[19]/@content')[0]),'relesed',(html.fromstring((requests.get('https://downloadcenter.intel.com/download/28475/BIOS-Update-BNKBL357-86A')).content).xpath('/html/head/meta[23]/@content')[0]).split(' ')[0])"
+    command: python3 -c "import lxml.html; import requests; html=requests.get('https://downloadcenter.intel.com/search?keyword=NUC7i5BNK+bios'); doc=lxml.html.fromstring(html.text); rev=doc.xpath('//*[@id=\"search-results\"]/tbody/tr/td[4]/text()')[0]; rel=doc.xpath('//*[@id=\"search-results\"]/tbody/tr/td[5]/text()')[0]; print('Latest is',rev,'relesed',rel)"
 
