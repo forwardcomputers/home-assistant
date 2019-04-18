@@ -31,12 +31,13 @@ views:
     cards:
       - type: custom:compact-custom-header
         dir: '/www/lovelace/'
+        main_config: true
         header: true
         menu: true
         notification: true
         voice: false
         options: true
-        tabs: true
+        chevrons: true
       - type: custom:monster-card
         show_empty: false
         card:
@@ -114,6 +115,7 @@ views:
             - sensor.ec_4_summary
             - sensor.ec_5_summary
             - sensor.ec_6_summary
+        - type: custom:compact-custom-header
 #
   - title: Images
     icon: mdi:weather-windy
@@ -134,6 +136,7 @@ views:
             entities: []
             camera_image: camera.ec_jet_stream
             aspect_ratio: 83%
+          - type: custom:compact-custom-header
 #
   - title: Environment
     icon: mdi:earth
@@ -174,6 +177,7 @@ views:
             - sensor.kitchen_light_intensity
             - sensor.kitchen_moisture
             - sensor.kitchen_temperature
+        - type: custom:compact-custom-header
 #
   - type: vertical-stack
     title: Rooms
@@ -221,6 +225,7 @@ views:
         entities:
           - switch.kitchen
           - sensor.kitchen_battery
+      - type: custom:compact-custom-header
 #
   - title: Radio
     icon: mdi:play-circle-outline
@@ -233,6 +238,7 @@ views:
           - input_select.radio_station
           - input_number.radio_volume
           - input_boolean.radio_onoff
+      - type: custom:compact-custom-header
 #
   - title: Devices
     icon: mdi:server
@@ -312,6 +318,7 @@ views:
                 name: Powerline
                 url: !secret powerliving_url
                 icon: mdi:router-wireless
+          - type: custom:compact-custom-header
 #
   - title: HASS
     icon: mdi:home-assistant
@@ -364,6 +371,7 @@ views:
             trackers:
               - sensor.custom_card_tracker
               - sensor.custom_component_tracker
+          - type: custom:compact-custom-header
 #
   - title: Debug
     icon: mdi:bug
@@ -373,3 +381,4 @@ views:
           type: glance
         filter:
           include: [{}]
+      - type: custom:compact-custom-header
