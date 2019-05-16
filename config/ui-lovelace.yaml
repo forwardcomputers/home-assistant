@@ -33,10 +33,10 @@ views:
         dir: '/www/lovelace/'
         main_config: true
         header: true
-        menu: true
-        notification: true
-        voice: false
-        options: true
+        menu: show
+        notification: show
+        voice: hide
+        options: show
         chevrons: true
       - type: custom:monster-card
         show_empty: false
