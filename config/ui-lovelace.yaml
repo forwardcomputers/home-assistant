@@ -3,25 +3,25 @@
 title: Home Assistant
 
 resources:
-  - url: /customcards/lovelace/card-tools.js?track=true
+  - url: /local/lovelace/card-tools.js?track=true
     type: js
-  - url: /customcards/lovelace/fold-entity-row.js?track=true
+  - url: /local/lovelace/fold-entity-row.js?track=true
     type: js
-  - url: /customcards/lovelace/layout-card.js?track=true
+  - url: /local/lovelace/layout-card.js?track=true
     type: js
-  - url: /customcards/lovelace/monster-card.js?track=true
+  - url: /local/lovelace/monster-card.js?track=true
     type: js
-  - url: /customcards/lovelace/slider-entity-row.js?track=true
+  - url: /local/lovelace/slider-entity-row.js?track=true
     type: js
-  - url: /customcards/lovelace/compact-custom-header.js?track=true
+  - url: /local/lovelace/compact-custom-header.js?track=true
     type: module
-  - url: /customcards/lovelace/custom-weather-card-chart.js?track=true
+  - url: /local/lovelace/custom-weather-card-chart.js?track=true
     type: module
-  - url: /customcards/lovelace/secondaryinfo-entity-row.js?track=true
+  - url: /local/lovelace/secondaryinfo-entity-row.js?track=true
     type: module
-  - url: /customcards/lovelace/simple-thermostat.js?track=true
+  - url: /local/lovelace/simple-thermostat.js?track=true
     type: module
-  - url: /customcards/lovelace/tracker-card.js?track=true
+  - url: /local/lovelace/tracker-card.js?track=true
     type: module
 
 views:
