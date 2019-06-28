@@ -24,20 +24,20 @@ resources:
   - url: /local/lovelace/tracker-card.js?track=true
     type: module
 
+cch:
+  dir: '/www/lovelace/'
+  main_config: true
+  header: true
+  menu: show
+  notification: show
+  voice: hide
+  options: show
+  chevrons: true
 views:
   - title: Home
     icon: mdi:home
     # panel: true
     cards:
-      - type: custom:compact-custom-header
-        dir: '/www/lovelace/'
-        main_config: true
-        header: true
-        menu: show
-        notification: show
-        voice: hide
-        options: show
-        chevrons: true
       - type: custom:monster-card
         show_empty: false
         card:
@@ -115,7 +115,6 @@ views:
             - sensor.ec_4_summary
             - sensor.ec_5_summary
             - sensor.ec_6_summary
-        - type: custom:compact-custom-header
 #
   - title: Images
     icon: mdi:weather-windy
@@ -136,7 +135,6 @@ views:
             entities: []
             camera_image: camera.ec_jet_stream
             aspect_ratio: 83%
-          - type: custom:compact-custom-header
 #
   - title: Environment
     icon: mdi:earth
@@ -177,7 +175,6 @@ views:
             - sensor.kitchen_light_intensity
             - sensor.kitchen_moisture
             - sensor.kitchen_temperature
-        - type: custom:compact-custom-header
 #
   - type: vertical-stack
     title: Rooms
@@ -225,7 +222,6 @@ views:
         entities:
           - switch.kitchen
           - sensor.kitchen_battery
-      - type: custom:compact-custom-header
 #
   - title: Radio
     icon: mdi:play-circle-outline
@@ -238,7 +234,6 @@ views:
           - input_select.radio_station
           - input_number.radio_volume
           - input_boolean.radio_onoff
-      - type: custom:compact-custom-header
 #
   - title: Devices
     icon: mdi:server
@@ -254,12 +249,12 @@ views:
             entities:
               - sensor.model_name
               - sensor.serial_number
-              - sensor.cpu_load_total
-              - sensor.memory_usage_real
-              - sensor.volume_used_volume_1
-              - sensor.status_volume_1
-              - sensor.status_smart_sda
-              - sensor.status_smart_sdb
+              - sensor.synology_dsm_cpu_load_total
+              - sensor.synology_dsm_memory_usage_real
+              - sensor.synology_dsm_volume_used_volume_1
+              - sensor.synology_dsm_status_volume_1
+              - sensor.synology_dsm_status_smart_sda
+              - sensor.synology_dsm_status_smart_sdb
           - break
           - type: entities
             title: Printer
@@ -318,7 +313,6 @@ views:
                 name: Powerline
                 url: !secret powerliving_url
                 icon: mdi:router-wireless
-          - type: custom:compact-custom-header
 #
   - title: HASS
     icon: mdi:home-assistant
@@ -339,9 +333,9 @@ views:
               - sensor.glances_total
               - sensor.glances_cpu_temp
               - sensor.processor_use
-              - sensor.glances_ram_used
-              - sensor.glances_disk_used
-              - sensor.glances_swap_used
+              - sensor.glances_ram_used_percent
+              - sensor.glances_disk_used_percent
+              - sensor.glances_swap_used_percent
               - sensor.last_boot
           - break
           - type: entities
@@ -371,7 +365,6 @@ views:
             trackers:
               - sensor.custom_card_tracker
               - sensor.custom_component_tracker
-          - type: custom:compact-custom-header
 #
   - title: Debug
     icon: mdi:bug
@@ -381,4 +374,3 @@ views:
           type: glance
         filter:
           include: [{}]
-      - type: custom:compact-custom-header
