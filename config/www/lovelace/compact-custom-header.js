@@ -75,22 +75,22 @@ let editMode, cchConfig;
 let redirectedToDefaultTab = false;
 let sidebarClosed = false;
 let firstRun = true;
+let overflowButtons = [];
 
 if (
-  firstRun &&
   lovelace.config.cch == undefined &&
   JSON.stringify(lovelace.config.views).includes("custom:compact-custom-header")
 ) {
   breakingChangeNotification();
 }
 
-if (firstRun) buildConfig();
+buildConfig();
 run();
 
 function run() {
   const disable = cchConfig.disable;
   const urlDisable = window.location.href.includes("disable_cch");
-  const buttons = getButtonElements();
+  let buttons = getButtonElements();
   const tabContainer = root.querySelector("paper-tabs");
   const tabs = tabContainer
     ? Array.from(tabContainer.querySelectorAll("paper-tab"))
@@ -122,7 +122,9 @@ function run() {
     if (firstRun && !disable && !urlDisable) {
       window.hassConnection.then(({ conn }) => {
         conn.socket.onmessage = () => {
-          if (!editMode && huiRoot) conditionalStyling(buttons, tabs);
+          if (!editMode && huiRoot) {
+            conditionalStyling(getButtonElements(), tabs);
+          }
         };
       });
     }
@@ -144,7 +146,7 @@ function run() {
     }
     window.dispatchEvent(new Event("resize"));
   }
-  if (firstRun && !disable) monitorElements(tabs, urlDisable);
+  if (!disable) monitorElements(tabs, urlDisable);
   firstRun = false;
 }
 
@@ -404,6 +406,7 @@ function styleHeader(tabContainer, tabs) {
 
 function styleButtons(buttons, tabs) {
   let topMargin = tabs.length > 0 ? "margin-top:111px;" : "";
+  let iteration = 0;
   for (const button in buttons) {
     if (button == "options" && cchConfig[button] == "overflow") {
       cchConfig[button] = "show";
@@ -415,13 +418,22 @@ function styleButtons(buttons, tabs) {
               ${button == "options" ? "margin-right:-5px; padding:0;" : ""}
             `;
     } else if (cchConfig[button] == "overflow") {
+      const menu_items = buttons.options.querySelector("paper-listbox");
       const paperIconButton = buttons[button].querySelector("paper-icon-button")
         ? buttons[button].querySelector("paper-icon-button")
         : buttons[button].shadowRoot.querySelector("paper-icon-button");
+      if (!paperIconButton && iteration < 10) {
+        setTimeout(function() {
+          styleButtons(buttons, tabs);
+        }, 500);
+        iteration++
+        break;
+      } else if (!paperIconButton) {
+        throw new Error("CCH: Cannot find button element.");
+      }
       if (paperIconButton.hasAttribute("hidden")) {
         continue;
       }
-      const menu_items = buttons.options.querySelector("paper-listbox");
       const id = `menu_item_${button}`;
       if (!menu_items.querySelector(`[id="${id}"]`)) {
         const wrapper = document.createElement("paper-item");
@@ -500,7 +512,7 @@ function getTranslation(button) {
 }
 
 function defaultTab(tabs, tabContainer) {
-  if (cchConfig.default_tab && !redirectedToDefaultTab) {
+  if (cchConfig.default_tab && !redirectedToDefaultTab && tabContainer) {
     let default_tab = cchConfig.default_tab;
     let activeTab = tabs.indexOf(tabContainer.querySelector(".iron-selected"));
     if (
@@ -567,7 +579,7 @@ function hideTabs(tabContainer, tabs) {
     tabs[tab].style.display = "none";
   }
 
-  if (cchConfig.redirect) {
+  if (cchConfig.redirect && tabContainer) {
     const activeTab = tabContainer.querySelector("paper-tab.iron-selected");
     const activeTabIndex = tabs.indexOf(activeTab);
     // Is the current tab hidden and is there at least one tab is visible.
@@ -914,10 +926,10 @@ function buildRanges(array) {
 }
 
 function showEditor() {
+  import("./compact-custom-header-editor.js?v=1.1.7").then(() => {
+    document.createElement("compact-custom-header-editor");
+  });
   if (!root.querySelector("ha-app-layout").querySelector("editor")) {
-    import("./compact-custom-header-editor.js").then(() => {
-      document.createElement("compact-custom-header-editor");
-    });
     const container = document.createElement("editor");
     const nest = document.createElement("div");
     const cchEditor = document.createElement("compact-custom-header-editor");
