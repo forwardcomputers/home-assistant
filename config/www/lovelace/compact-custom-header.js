@@ -59,10 +59,10 @@ ll = ll && ll.querySelector("app-drawer-layout partial-panel-resolver");
 ll = (ll && ll.shadowRoot) || ll;
 ll = ll && ll.querySelector("ha-panel-lovelace");
 ll = ll && ll.shadowRoot;
-const huiRoot = ll && ll.querySelector("hui-root");
 
+const huiRoot = ll && ll.querySelector("hui-root");
 export const hass = document.querySelector("home-assistant").hass;
-export const lovelace = huiRoot.lovelace;
+const lovelace = huiRoot.lovelace;
 const root = huiRoot.shadowRoot;
 const config = lovelace.config.cch || {};
 const header = root.querySelector("app-header");
@@ -70,12 +70,16 @@ const view = root.querySelector("ha-app-layout").querySelector('[id="view"]');
 const notifDrawer = huiRoot.shadowRoot
   .querySelector("hui-notification-drawer")
   .shadowRoot.querySelector(".notifications");
-let notifications = notifDrawer.querySelectorAll(".notification").length;
-let editMode, cchConfig;
+let notifications = notificationCount();
+let cchConfig = buildConfig();
 let redirectedToDefaultTab = false;
 let sidebarClosed = false;
 let firstRun = true;
-let overflowButtons = [];
+let buttons = {};
+let editMode = false;
+let condState = [];
+let prevColor = {};
+let prevState = [];
 
 if (
   lovelace.config.cch == undefined &&
@@ -84,22 +88,19 @@ if (
   breakingChangeNotification();
 }
 
-buildConfig();
 run();
 
 function run() {
   const disable = cchConfig.disable;
   const urlDisable = window.location.href.includes("disable_cch");
-  let buttons = getButtonElements();
+  if (firstRun) buttons = getButtonElements();
   const tabContainer = root.querySelector("paper-tabs");
   const tabs = tabContainer
     ? Array.from(tabContainer.querySelectorAll("paper-tab"))
     : [];
 
-  if (editMode) {
-    if (!disable) removeStyles(tabContainer, tabs);
+  if (!disable && !urlDisable) {
     insertEditMenu(buttons, tabs);
-  } else if (!disable && !urlDisable) {
     styleButtons(buttons, tabs);
     styleHeader(tabContainer, tabs);
     restoreTabs(tabs, hideTabs(tabContainer, tabs));
@@ -122,9 +123,8 @@ function run() {
     if (firstRun && !disable && !urlDisable) {
       window.hassConnection.then(({ conn }) => {
         conn.socket.onmessage = () => {
-          if (!editMode && huiRoot) {
-            conditionalStyling(getButtonElements(), tabs);
-          }
+          notifications = notificationCount();
+          if (cchConfig.conditional_styles) conditionalStyling(buttons, tabs);
         };
       });
     }
@@ -134,10 +134,12 @@ function run() {
         .querySelector("paper-listbox")
         .querySelectorAll("paper-item");
       [].forEach.call(menuItems, function(item) {
-        if (item.innerHTML == "<!---->Help<!---->" && cchConfig.hide_help) {
+        if (item.innerHTML.includes("Help") && cchConfig.hide_help) {
+          item.parentNode.removeChild(item);
+        } else if (item.innerHTML.includes("Unused entities") && cchConfig.hide_unused) {
           item.parentNode.removeChild(item);
         } else if (
-          item.innerHTML == "<!---->Configure UI<!---->" &&
+          item.innerHTML.includes("Configure UI") &&
           cchConfig.hide_config
         ) {
           item.parentNode.removeChild(item);
@@ -146,8 +148,19 @@ function run() {
     }
     window.dispatchEvent(new Event("resize"));
   }
-  if (!disable) monitorElements(tabs, urlDisable);
+  if (!disable && firstRun) {
+    monitorElements(tabContainer, tabs, urlDisable);
+  }
   firstRun = false;
+}
+
+function notificationCount() {
+  let i = 0;
+  let notif = notifDrawer.querySelectorAll(".notification");
+  [].forEach.call(notif, function(item) {
+    if (item.style.display !== "none") i++;
+  });
+  return i;
 }
 
 function buildConfig() {
@@ -179,7 +192,7 @@ function buildConfig() {
     delete config.hide_tabs;
   }
 
-  cchConfig = { ...defaultConfig, ...config, ...exceptionConfig };
+  return { ...defaultConfig, ...config, ...exceptionConfig };
 
   function countMatches(conditions) {
     const userVars = { user: hass.user.name, user_agent: navigator.userAgent };
@@ -199,40 +212,31 @@ function buildConfig() {
   }
 }
 
-function monitorElements(tabs, urlDisable) {
+function monitorElements(tabContainer, tabs, urlDisable) {
   const callback = function(mutations) {
     mutations.forEach(mutation => {
-      if (mutation.target.className == "empty") {
-        notifications = mutation.target.style.display == "none" ? true : false;
-        if (!editMode && !firstRun && huiRoot && !urlDisable) {
-          conditionalStyling(getButtonElements(), tabs);
-        }
-        return;
-      } else if (mutation.attributeName === "class") {
-        editMode = mutation.target.className == "edit-mode";
-        if (huiRoot) run();
+      if (mutation.target.className == "edit-mode") {
+        editMode = true;
+        if (!cchConfig.disable) removeStyles(tabContainer, tabs);
+        buttons.options = root.querySelector("paper-menu-button");
+        insertEditMenu(buttons, tabs);
+      } else if (mutation.target.nodeName == "APP-HEADER") {
+        editMode = false;
+        buttons = getButtonElements()
+        run();
       } else if (mutation.addedNodes.length) {
-        if (mutation.addedNodes[0].nodeName == "HUI-UNUSED-ENTITIES") {
-          return;
-        }
-        let editor = !editMode
-          ? root.querySelector("ha-app-layout").querySelector("editor")
-          : null;
+        if (mutation.addedNodes[0].nodeName == "HUI-UNUSED-ENTITIES") return;
+        let editor = root.querySelector("ha-app-layout").querySelector("editor");
         if (editor) root.querySelector("ha-app-layout").removeChild(editor);
-        if (!editMode && !urlDisable) {
-          conditionalStyling(getButtonElements(), tabs);
+        if (!editMode && !urlDisable && cchConfig.conditional_styles) {
+          conditionalStyling(buttons, tabs);
         }
       }
     });
   };
   new MutationObserver(callback).observe(view, { childList: true });
-  new MutationObserver(callback).observe(notifDrawer.querySelector(".empty"), {
-    attributes: true,
-    attributeFilter: ["style"]
-  });
-  new MutationObserver(callback).observe(header, {
-    attributes: true,
-    attributeFilter: ["class"]
+  new MutationObserver(callback).observe(root.querySelector("app-header"), {
+    childList: true
   });
 }
 
@@ -248,7 +252,7 @@ function tabContainerMargin(buttons, tabContainer) {
       const clockWidth =
         (cchConfig.clock_format == 12 && cchConfig.clock_am_pm) ||
         cchConfig.clock_date
-          ? 90
+          ? 110
           : 80;
       if (button == "menu") marginLeft += clockWidth + 15;
       else marginRight += clockWidth;
@@ -261,15 +265,7 @@ function tabContainerMargin(buttons, tabContainer) {
 }
 
 function insertEditMenu(buttons, tabs) {
-  if (cchConfig.hide_tabs && buttons.options) {
-    let editor = document.createElement("paper-item");
-    editor.setAttribute("id", "cch_settings");
-    editor.addEventListener("click", () => {
-      showEditor();
-    });
-    editor.innerHTML = "CCH Settings";
-    insertMenuItem(buttons.options.querySelector("paper-listbox"), editor);
-
+  if (cchConfig.hide_tabs && buttons.options && editMode) {
     let show_tabs = document.createElement("paper-item");
     show_tabs.setAttribute("id", "show_tabs");
     show_tabs.addEventListener("click", () => {
@@ -279,13 +275,19 @@ function insertEditMenu(buttons, tabs) {
     });
     show_tabs.innerHTML = "Show all tabs";
     insertMenuItem(buttons.options.querySelector("paper-listbox"), show_tabs);
+
+    let cchSettings = document.createElement("paper-item");
+    cchSettings.setAttribute("id", "cch_settings");
+    cchSettings.addEventListener("click", () => {
+      showEditor();
+    });
+    cchSettings.innerHTML = "CCH Settings";
+    insertMenuItem(buttons.options.querySelector("paper-listbox"), cchSettings);
   }
 }
 
 function getButtonElements() {
-  const buttons = {};
   buttons.options = root.querySelector("paper-menu-button");
-
   if (!editMode) {
     buttons.menu = root.querySelector("ha-menu-button");
     buttons.voice = root.querySelector("ha-start-voice-button");
@@ -406,7 +408,7 @@ function styleHeader(tabContainer, tabs) {
 
 function styleButtons(buttons, tabs) {
   let topMargin = tabs.length > 0 ? "margin-top:111px;" : "";
-  let iteration = 0;
+  buttons = reverseObject(buttons);
   for (const button in buttons) {
     if (button == "options" && cchConfig[button] == "overflow") {
       cchConfig[button] = "show";
@@ -419,18 +421,9 @@ function styleButtons(buttons, tabs) {
             `;
     } else if (cchConfig[button] == "overflow") {
       const menu_items = buttons.options.querySelector("paper-listbox");
-      const paperIconButton = buttons[button].querySelector("paper-icon-button")
+      let paperIconButton = buttons[button].querySelector("paper-icon-button")
         ? buttons[button].querySelector("paper-icon-button")
         : buttons[button].shadowRoot.querySelector("paper-icon-button");
-      if (!paperIconButton && iteration < 10) {
-        setTimeout(function() {
-          styleButtons(buttons, tabs);
-        }, 500);
-        iteration++
-        break;
-      } else if (!paperIconButton) {
-        throw new Error("CCH: Cannot find button element.");
-      }
       if (paperIconButton.hasAttribute("hidden")) {
         continue;
       }
@@ -611,7 +604,7 @@ function insertClock(buttons, clock_button) {
   const clockWidth =
     (cchConfig.clock_format == 12 && cchConfig.clock_am_pm) ||
     cchConfig.clock_date
-      ? 90
+      ? 110
       : 80;
 
   if (
@@ -702,11 +695,7 @@ function updateClock(clock, clockFormat) {
   window.setTimeout(() => updateClock(clock, clockFormat), 60000);
 }
 
-let condState = [];
-let prevColor = {};
-let prevState = [];
 function conditionalStyling(buttons, tabs) {
-  if (!cchConfig.conditional_styles) return;
   let _hass = document.querySelector("home-assistant").hass;
   const conditional_styles = cchConfig.conditional_styles;
   let tabContainer = tabs[0] ? tabs[0].parentNode : "";
@@ -926,12 +915,16 @@ function buildRanges(array) {
 }
 
 function showEditor() {
+  window.scrollTo(0, 0);
   import("./compact-custom-header-editor.js?v=1.1.7").then(() => {
     document.createElement("compact-custom-header-editor");
   });
   if (!root.querySelector("ha-app-layout").querySelector("editor")) {
     const container = document.createElement("editor");
     const nest = document.createElement("div");
+    const loader = document.createElement("div");
+    loader.classList.add("lds-ring");
+    loader.innerHTML = "<div></div><div></div><div></div><div></div>";
     const cchEditor = document.createElement("compact-custom-header-editor");
     nest.style.cssText = `
       padding: 20px;
@@ -949,15 +942,69 @@ function showEditor() {
       z-index: 1;
       padding: 5px;
     `;
+    nest.innerHTML += `
+      <style>
+      .lds-ring {
+        left: 50%;
+        margin-left: -32px;
+        display: inline-block;
+        position: relative;
+        width: 64px;
+        height: 64px;
+      }
+      .lds-ring div {
+        box-sizing: border-box;
+        display: block;
+        position: absolute;
+        width: 51px;
+        height: 51px;
+        margin: 6px;
+        border: 6px solid #fff;
+        border-radius: 50%;
+        animation: lds-ring 1.2s cubic-bezier(0.5, 0, 0.5, 1) infinite;
+        border-color: var(--primary-color) transparent transparent transparent;
+      }
+      .lds-ring div:nth-child(1) {
+        animation-delay: -0.45s;
+      }
+      .lds-ring div:nth-child(2) {
+        animation-delay: -0.3s;
+      }
+      .lds-ring div:nth-child(3) {
+        animation-delay: -0.15s;
+      }
+      @keyframes lds-ring {
+        0% {
+          transform: rotate(0deg);
+        }
+        100% {
+          transform: rotate(360deg);
+        }
+      }
+      </style>
+      `;
     root.querySelector("ha-app-layout").insertBefore(container, view);
     container.appendChild(nest);
+    nest.appendChild(loader);
     nest.appendChild(cchEditor);
   }
+}
+
+function reverseObject(object) {
+  let newObject = {};
+  let keys = [];
+  for (let key in object) keys.push(key);
+  for (let i = keys.length - 1; i >= 0; i--) {
+    let value = object[keys[i]];
+    newObject[keys[i]] = value;
+  }
+  return newObject;
 }
 
 function breakingChangeNotification() {
   hass.callService("persistent_notification", "create", {
     title: "CCH Breaking Change",
+    notification_id: "CCH_Breaking_Change",
     message:
       "Compact-Custom-Header's configuration method has changed. You are " +
       "receiving this notification because you have updated CCH, but are " +
