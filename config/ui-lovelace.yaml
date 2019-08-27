@@ -189,8 +189,6 @@ views:
             name: Harmony hub
           - entity: media_player.livingroom_tv
             name: Panasonic TV
-          - entity: media_player.shield
-            name: nVidia Shield
           - entity: media_player.livingroom_apple_tv
             name: Apple TV
           - entity: remote.livingroom_apple_tv
@@ -208,6 +206,8 @@ views:
           - light.office
           - entity: media_player.office_tv
             name: Samsung TV
+          - entity: media_player.shield
+            name: nVidia Shield
           - entity: media_player.office_speaker
             name: Google Home Mini
       - type: entities
