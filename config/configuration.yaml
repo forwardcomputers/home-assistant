@@ -19,7 +19,6 @@ camera: !include include/camera.yaml
 custom_updater: !include include/custom_updater.yaml
 discovery: !include include/discovery.yaml
 history: !include include/history.yaml
-http: !include include/http.yaml
 ifttt: !include include/ifttt.yaml
 lovelace:
   mode: yaml

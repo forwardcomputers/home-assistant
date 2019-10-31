@@ -1,5 +1,0 @@
-# https://www.home-assistant.io/components/http/
-
-trusted_networks:
-    - 127.0.0.1
-    - !secret trusted_ip

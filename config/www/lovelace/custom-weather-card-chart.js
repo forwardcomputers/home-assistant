@@ -11,6 +11,18 @@ const locale = {
       'S', 'S-SV', 'SV', 'V-SV', 'V', 'V-NV', 'NV', 'N-NV', 'N'
     ]
   },
+  de: {
+    tempHi: "Höchsttemperatur",
+    tempLo: "Tiefsttemperatur",
+    precip: "Niederschlag",
+    uPress: "hPa",
+    uSpeed: "m/s",
+    uPrecip: "mm",
+    cardinalDirections: [
+      'N', 'N-NO', 'NO', 'O-NO', 'O', 'O-SO', 'SO', 'S-SO',
+      'S', 'S-SW', 'SW', 'W-SW', 'W', 'W-NW', 'NW', 'N-NW', 'N'
+    ]
+  },
   en: {
     tempHi: "Temperature",
     tempLo: "Temperature night",
@@ -21,6 +33,18 @@ const locale = {
     cardinalDirections: [
       'N', 'N-NE', 'NE', 'E-NE', 'E', 'E-SE', 'SE', 'S-SE',
       'S', 'S-SW', 'SW', 'W-SW', 'W', 'W-NW', 'NW', 'N-NW', 'N'
+    ]
+  },
+  es: {
+    tempHi: "Temperatura máxima",
+    tempLo: "Temperatura mínima",
+    precip: "Precipitations",
+    uPress: "hPa",
+    uSpeed: "m/s",
+    uPrecip: "mm",
+    cardinalDirections: [
+      'N', 'N-NE', 'NE', 'E-NE', 'E', 'E-SE', 'SE', 'S-SE',
+      'S', 'S-SO', 'SO', 'O-SO', 'O', 'O-NO', 'NO', 'N-NO', 'N'
     ]
   },
   fr: {
@@ -57,6 +81,18 @@ const locale = {
     cardinalDirections: [
       'С', 'С-СВ', 'СВ', 'В-СВ', 'В', 'В-ЮВ', 'ЮВ', 'Ю-ЮВ',
       'Ю', 'Ю-ЮЗ', 'ЮЗ', 'З-ЮЗ', 'З', 'З-СЗ', 'СЗ', 'С-СЗ', 'С'
+    ]
+  },
+  sv: {
+    tempHi: "Temperatur",
+    tempLo: "Temperatur natt",
+    precip: "Nederbörd",
+    uPress: "hPa",
+    uSpeed: "m/s",
+    uPrecip: "mm",
+    cardinalDirections: [
+      'N', 'N-NO', 'NO', 'O-NO', 'O', 'O-SO', 'SO', 'S-SO',
+      'S', 'S-SV', 'SV', 'V-SV', 'V', 'V-NV', 'NV', 'N-NV', 'N'
     ]
   }
 };
@@ -171,7 +207,7 @@ class WeatherCardChart extends Polymer.Element {
       'hail': 'hass:weather-hail',
       'lightning': 'hass:weather-lightning',
       'lightning-rainy': 'hass:weather-lightning-rainy',
-      'partlycloudy': 'hass:weather-partlycloudy',
+      'partlycloudy': 'hass:weather-partly-cloudy',
       'pouring': 'hass:weather-pouring',
       'rainy': 'hass:weather-rainy',
       'snowy': 'hass:weather-snowy',
