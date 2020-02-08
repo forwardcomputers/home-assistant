@@ -2,8 +2,9 @@
 *
 
 # Except these
-LICENCE
-README.md
-makefile
-homeassistant/configuration.yml
+!.gitignore
+!LICENCE
+!README.md
+!makefile
+!*/homeassistant/configuration.yaml
 
