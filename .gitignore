@@ -8,6 +8,9 @@
 !makefile
 #
 !homeassistant/
+!homeassistant/automation.yaml
+!homeassistant/customize.yaml
 !homeassistant/configuration.yaml
+!homeassistant/scripts.yaml
 !homeassistant/.storage/
 !homeassistant/.storage/lovelace
