@@ -1,5 +1,5 @@
 # Ignore everything
-*
+/**
 
 # Except these
 !.gitignore
@@ -7,4 +7,7 @@
 !README.md
 !makefile
 #
+!/**/
+#!homeassistant/**
 !homeassistant/configuration.yaml
+!homeassistant/.storage//lovelace
