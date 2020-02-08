@@ -1,0 +1,830 @@
+# Configure a default setup of Home Assistant (frontend, api, etc)
+default_config:
+
+logger:
+  default: info
+
+# Uncomment this if you are using SSL/TLS, running in Docker container, etc.
+# http:
+#   base_url: example.duckdns.org:8123
+
+apple_tv:
+  host: !secret atv_livingroom_ip
+  login_id: !secret atv_livingroom_login_key
+  start_off: true
+
+automation: !include automations.yaml
+
+camera:
+  - platform: environment_canada
+    name: radar
+    station: WSO
+  - platform: generic
+    name: jet_stream
+    content_type: image/gif
+    still_image_url: https://s.w-x.co/staticmaps/wu/wu/jetstream1200_cur/conus/animate.png
+  - platform: generic
+    name: YTZ
+    still_image_url: http://www.metcam.navcanada.ca/dawc_images/wxcam/CYTZ/CYTZ_N-full-e.jpeg
+  - platform: generic
+    name: YYZ
+    still_image_url: https://511on.ca/map/Cctv/loc33--2
+  - platform: ffmpeg
+    name: CNTowerE
+    input: https://videos3.earthcam.com/fecnetwork/9299.flv/playlist.m3u8
+  - platform: ffmpeg
+    name: CNTowerW
+    input: https://videos3.earthcam.com/fecnetwork/9298.flv/playlist.m3u8
+
+cast:
+  media_player:
+      - host: !secret ghomem1_ip
+
+clean_up_snapshots_service:
+  host: !secret server_port_url
+  token: !secret long_lived_token
+  number_of_snapshots_to_keep: 7
+
+device_tracker:
+  - platform: bluetooth_le_tracker
+
+emulated_hue:
+  host_ip: !secret emulated_hue_ip
+  expose_by_default: false
+  entities:
+    light.led:
+      name: LED
+      hidden: false
+    light.floor:
+      name: Floor
+      hidden: false
+    switch.kitchen:
+      name: Kitchen
+      hidden: false
+
+glances:
+
+group: !include groups.yaml
+
+homeassistant:
+  customize: !include customize.yaml
+
+homekit:
+  auto_start: true
+  filter:
+    include_domains:
+      - climate
+      - light
+      - switch
+
+hue:
+  bridges:
+    - host: !secret hue_ip
+      allow_unreachable: false
+      allow_hue_groups: false
+
+light:
+  - platform: osramlightify
+    host: !secret lightify_ip
+  - platform: group
+    name: hallway
+    entities:
+      - light.hallway_center
+      - light.hallway_door
+      - light.hallway_kitchen
+  - platform: group
+    name: bedroom
+    entities:
+      - light.bedroom_left
+      - light.bedroom_right
+
+media_player:
+#  - platform: panasonic_viera
+#    host: !secret livingroom_tv_ip
+#  - platform: samsungtv
+#    host: !secret office_tv_ip
+  - platform: androidtv
+    name: nvidia_shield
+    host: !secret shield_ip
+
+notify:
+  - name: alimustakim
+    platform: twitter
+    consumer_key: !secret alimustakim_consumer_key
+    consumer_secret: !secret alimustakim_consumer_secret_key
+    access_token: !secret alimustakim_access_token_key
+    access_token_secret: !secret alimustakim_access_token_secret_key
+  - name: forwardcomputers
+    platform: twitter
+    consumer_key: !secret forwardcomputers_consumer_key
+    consumer_secret: !secret forwardcomputers_consumer_secret_key
+    access_token: !secret forwardcomputers_access_token_key
+    access_token_secret: !secret forwardcomputers_access_token_secret_key
+  
+panel_iframe:
+#  adguard:
+#     title: Adguard
+#     icon: mdi:shield-check
+#     url: !secret adguard_url
+  glances:
+     title: Glances
+     icon: mdi:speedometer
+     url: !secret glances_url
+  portainer:
+    title: Portainer
+    icon: mdi:docker
+    url: !secret portainer_url
+
+pi_hole:
+  - host: !secret pihole_ip
+    api_key: !secret pihole_api_key
+    name: pihole
+
+plant:
+  Coleus:
+    sensors:
+      battery: sensor.kitchen_battery
+      brightness: sensor.kitchen_light_intensity
+      conductivity: sensor.kitchen_conductivity
+      moisture: sensor.kitchen_moisture
+      temperature: sensor.kitchen_temperature
+    check_days: 3
+    min_battery: 15
+    min_brightness: 3000
+    max_brightness: 70000
+    min_conductivity: 350
+    max_conductivity: 2000
+    min_moisture: 15
+    max_moisture: 60
+    min_temperature: 10
+    max_temperature: 35
+
+python_script:
+
+script: !include scripts.yaml
+
+shell_command:
+  clean_printer: !secret printer_cleaning_mode_url
+  download_ec_forecast_toronto: curl -s --retry 3 --output /tmp/toronto.xml https://dd.weather.gc.ca/citypage_weather/xml/ON/s0000458_e.xml
+
+speedtestdotnet:
+  scan_interval:
+    minutes: 30
+  monitored_conditions:
+    - ping
+    - download
+    - upload
+  server_id: 2565
+# Teksavvy ---^
+
+tplink:
+  discovery: false
+  switch:
+    - host: !secret plugdesk_ip
+    - host: !secret plugkitchen_ip
+
+tradfri:
+  allow_tradfri_groups: no
+
+weather:
+  - platform: environment_canada
+    station: ON/s0000458
+
+zeroconf:
+
+sensor:
+  - platform: scrape
+    name: pollen
+    resource: https://www.theweathernetwork.com/ca/forecasts/pollen/ontario/toronto
+    select: "#allergy_conditions > div.allergy-summary > div.summary-item.pollen > div.allergy-level"
+  - platform: scrape
+    name: mold
+    resource: https://www.theweathernetwork.com/ca/forecasts/pollen/ontario/toronto
+    select: "#allergy_conditions > div.allergy-summary > div.summary-item.mold > div.allergy-level"
+  - platform: command_line
+    name: flu
+    command: "/usr/bin/curl \"https://www.theweathernetwork.com/ca/health/ontario/toronto\" 2>&1 | awk -F '[ \"]' '/activity-colour/ {print toupper( substr( $4, 1, 1 ) ) substr( $4, 2 )}'"
+    scan_interval: 3600
+  - platform: command_line
+    name: ec_current_summary_text
+    command: "python3 -c \"import lxml.etree; doc=lxml.etree.parse('/tmp/toronto.xml'); rev=doc.xpath('//currentConditions/condition/text()')[0]; print(rev[:250])\""
+  - platform: command_line
+    name: ec_current_icon
+    command: "python3 -c \"import lxml.etree; doc=lxml.etree.parse('/tmp/toronto.xml'); rev=doc.xpath('//currentConditions/iconCode/text()'); print(*rev)\""
+  - platform: command_line
+    name: ec_1_name
+    command: "python3 -c \"import lxml.etree; doc=lxml.etree.parse('/tmp/toronto.xml'); rev=doc.xpath('//forecastGroup/forecast[1]/period/text()'); print(*rev)\""
+  - platform: command_line
+    name: ec_1_icon
+    command: "python3 -c \"import lxml.etree; doc=lxml.etree.parse('/tmp/toronto.xml'); rev=doc.xpath('//forecastGroup/forecast[1]/abbreviatedForecast/iconCode/text()'); print(*rev)\""
+  - platform: command_line
+    name: ec_1_summary_text
+    command: "python3 -c \"import lxml.etree; doc=lxml.etree.parse('/tmp/toronto.xml'); rev=doc.xpath('//forecastGroup/forecast[1]/textSummary/text()')[0]; print(rev[:250])\""
+  - platform: command_line
+    name: ec_2_name
+    command: "python3 -c \"import lxml.etree; doc=lxml.etree.parse('/tmp/toronto.xml'); rev=doc.xpath('//forecastGroup/forecast[2]/period/text()'); print(*rev)\""
+  - platform: command_line
+    name: ec_2_icon
+    command: "python3 -c \"import lxml.etree; doc=lxml.etree.parse('/tmp/toronto.xml'); rev=doc.xpath('//forecastGroup/forecast[2]/abbreviatedForecast/iconCode/text()'); print(*rev)\""
+  - platform: command_line
+    name: ec_2_summary_text
+    command: "python3 -c \"import lxml.etree; doc=lxml.etree.parse('/tmp/toronto.xml'); rev=doc.xpath('//forecastGroup/forecast[2]/textSummary/text()')[0]; print(rev[:250])\""
+  - platform: command_line
+    name: ec_3_name
+    command: "python3 -c \"import lxml.etree; doc=lxml.etree.parse('/tmp/toronto.xml'); rev=doc.xpath('//forecastGroup/forecast[3]/period/text()'); print(*rev)\""
+  - platform: command_line
+    name: ec_3_icon
+    command: "python3 -c \"import lxml.etree; doc=lxml.etree.parse('/tmp/toronto.xml'); rev=doc.xpath('//forecastGroup/forecast[3]/abbreviatedForecast/iconCode/text()'); print(*rev)\""
+  - platform: command_line
+    name: ec_3_summary_text
+    command: "python3 -c \"import lxml.etree; doc=lxml.etree.parse('/tmp/toronto.xml'); rev=doc.xpath('//forecastGroup/forecast[3]/textSummary/text()')[0]; print(rev[:250])\""
+  - platform: command_line
+    name: ec_4_name
+    command: "python3 -c \"import lxml.etree; doc=lxml.etree.parse('/tmp/toronto.xml'); rev=doc.xpath('//forecastGroup/forecast[4]/period/text()'); print(*rev)\""
+  - platform: command_line
+    name: ec_4_icon
+    command: "python3 -c \"import lxml.etree; doc=lxml.etree.parse('/tmp/toronto.xml'); rev=doc.xpath('//forecastGroup/forecast[4]/abbreviatedForecast/iconCode/text()'); print(*rev)\""
+  - platform: command_line
+    name: ec_4_summary_text
+    command: "python3 -c \"import lxml.etree; doc=lxml.etree.parse('/tmp/toronto.xml'); rev=doc.xpath('//forecastGroup/forecast[4]/textSummary/text()')[0]; print(rev[:250])\""
+  - platform: command_line
+    name: ec_5_name
+    command: "python3 -c \"import lxml.etree; doc=lxml.etree.parse('/tmp/toronto.xml'); rev=doc.xpath('//forecastGroup/forecast[5]/period/text()'); print(*rev)\""
+  - platform: command_line
+    name: ec_5_icon
+    command: "python3 -c \"import lxml.etree; doc=lxml.etree.parse('/tmp/toronto.xml'); rev=doc.xpath('//forecastGroup/forecast[5]/abbreviatedForecast/iconCode/text()'); print(*rev)\""
+  - platform: command_line
+    name: ec_5_summary_text
+    command: "python3 -c \"import lxml.etree; doc=lxml.etree.parse('/tmp/toronto.xml'); rev=doc.xpath('//forecastGroup/forecast[5]/textSummary/text()')[0]; print(rev[:250])\""
+  - platform: command_line
+    name: ec_6_name
+    command: "python3 -c \"import lxml.etree; doc=lxml.etree.parse('/tmp/toronto.xml'); rev=doc.xpath('//forecastGroup/forecast[6]/period/text()'); print(*rev)\""
+  - platform: command_line
+    name: ec_6_icon
+    command: "python3 -c \"import lxml.etree; doc=lxml.etree.parse('/tmp/toronto.xml'); rev=doc.xpath('//forecastGroup/forecast[6]/abbreviatedForecast/iconCode/text()'); print(*rev)\""
+  - platform: command_line
+    name: ec_6_summary_text
+    command: "python3 -c \"import lxml.etree; doc=lxml.etree.parse('/tmp/toronto.xml'); rev=doc.xpath('//forecastGroup/forecast[6]/textSummary/text()')[0]; print(rev[:250])\""
+
+  - platform: environment_canada
+    station: ON/s0000458
+
+  - platform: systemmonitor
+    resources:
+      - type: processor_use
+  - platform: command_line
+    command: python3 -c "import requests; print(requests.get('http://localhost:61208/api/3/system').json()['os_name'])"
+    name: OS
+  - platform: command_line
+    command: python3 -c "import requests; print(requests.get('http://localhost:61208/api/3/system').json()['linux_distro'])"
+    name: Distro
+  - platform: command_line
+    command: python3 -c "import requests; print(requests.get('http://localhost:61208/api/3/system').json()['os_version'])"
+    name: Kernel Version
+  - platform: command_line
+    command: python3 -c "import requests; print(requests.get('http://localhost:61208/api/3/docker').json()['version']['Components'][0]['Version'])"
+    name: Docker Version
+  - platform: command_line
+    name: sys_name
+    command: awk '{ printf "%s ", $1 ;next ; print "%s" $1}' /sys/class/dmi/id/product_family /sys/class/dmi/id/product_name
+  - platform: command_line
+    name: sys_current_firmware
+    command: awk -F. '{print $3}' <  /sys/class/dmi/id/bios_version
+  - platform: command_line
+    name: sys_latest_firmware
+    command: python3 -c "import lxml.html; import requests; html=requests.get('https://downloadcenter.intel.com/search?keyword=NUC7i5BNK+bios'); doc=lxml.html.fromstring(html.text); rev=doc.xpath('//*[@id=\"search-results\"]/tbody/tr/td[4]/text()')[0]; print(rev)"
+  - platform: command_line
+    name: sys_firmware_url
+    command: python3 -c "import lxml.html; import requests; html=requests.get('https://downloadcenter.intel.com/search?keyword=NUC7i5BNK+bios'); doc=lxml.html.fromstring(html.text); rev=doc.xpath('//*[@id=\"search-results\"]/tbody/tr/td[1]/a/@href')[0]; print(rev)"
+    value_template: >-
+        {% set link = value %}
+        {{ "https://downloadcenter.intel.com" ~ link }}
+  - platform: snmp
+    name: server_uptime
+    host: !secret server_ip
+    baseoid: 1.3.6.1.2.1.25.1.1.0
+    accept_errors: true
+    scan_interval: 30
+    value_template: >-
+        {% set uptime = float(value) / 100 %}
+        {% set updays = (uptime / 86400) | round(0, "floor") %}
+        {% set uphours = uptime | timestamp_custom('%-H:%-M:%-S', false) | regex_replace('^0:','') %}
+        {% if updays == 0 %}
+            {{- uphours -}}
+        {% elif updays == 1 %}
+            {{- updays ~ " Day, " ~ uphours -}}
+        {% else %}
+            {{- updays ~ " Days, " ~ uphours -}}
+        {% endif %}
+  - platform: command_line
+    command: python3 -c "import requests; print(requests.get('https://api.github.com/repos/docker/docker-ce/releases/latest').json()['name'])"
+    name: docker_github_version
+
+  - platform: version
+    name: installed_version
+  - platform: uptime
+    name: uptime_minutes
+    unit_of_measurement: minutes
+    scan_interval: 30
+  - platform: template
+    sensors:
+      hass_uptime:
+        value_template: >-
+            {% set uptime = states('sensor.uptime_minutes') | float * 60 %}
+            {% set updays = (uptime / 86400) | round(0, "floor") %}
+            {% set uphours = uptime | timestamp_custom('%-H:%-M:%-S', false) | regex_replace('^0:','') %}
+            {% if updays == 0 %}
+                {{- uphours -}}
+            {% elif updays == 1 %}
+                {{- updays ~ " Day, " ~ uphours -}}
+            {% else %}
+                {{- updays ~ " Days, " ~ uphours -}}
+            {% endif %}
+  - platform: command_line
+    command: python3 -c "import requests; print(requests.get('https://pypi.python.org/pypi/homeassistant/json').json()['info']['version'])"
+    name: hass_pypi_version
+  - platform: command_line
+    command: python3 -c "import requests; print(requests.get('https://api.github.com/repos/home-assistant/home-assistant/releases/latest').json()['tag_name'])"
+    name: hass_github_version
+
+  - platform: snmp
+    name: router_id
+    host: !secret router_ip
+    baseoid: 1.3.6.1.3.19811018.1.101.1
+    accept_errors: true
+    scan_interval: 86400
+  - platform: snmp
+    name: router_release
+    host: !secret router_ip
+    baseoid: 1.3.6.1.3.19811018.2.101.1
+    accept_errors: true
+    scan_interval: 3600
+  - platform: snmp
+    name: router_revision
+    host: !secret router_ip
+    baseoid: 1.3.6.1.3.19811018.3.101.1
+    accept_errors: true
+    scan_interval: 3600
+  - platform: snmp
+    name: router_model
+    host: !secret router_ip
+    baseoid: 1.3.6.1.3.19811018.4.101.1
+    accept_errors: true
+    scan_interval: 86400
+  - platform: snmp
+    name: router_target
+    host: !secret router_ip
+    baseoid: 1.3.6.1.3.19811018.5.101.1
+    accept_errors: true
+    scan_interval: 86400
+  - platform: command_line
+    name: router_latest_firmware
+    command: python3 -c "import lxml.html; import requests; html=requests.get('https://downloads.openwrt.org'); doc=lxml.html.fromstring(html.text); rev=doc.xpath('/html/body/div/ul[1]/li/strong/a/text()')[0]; print(rev.split()[-1])"
+  - platform: snmp
+    name: router_uptime
+    host: !secret router_ip
+    baseoid: 1.3.6.1.2.1.25.1.1.0
+    accept_errors: true
+    scan_interval: 30
+    value_template: >-
+        {% set uptime = float(value) / 100 %}
+        {% set updays = (uptime / 86400) | round(0, "floor") %}
+        {% set uphours = uptime | timestamp_custom('%-H:%-M:%-S', false) | regex_replace('^0:','') %}
+        {% if updays == 0 %}
+            {{- uphours -}}
+        {% elif updays == 1 %}
+            {{- updays ~ " Day, " ~ uphours -}}
+        {% else %}
+            {{- updays ~ " Days, " ~ uphours -}}
+        {% endif %}
+  - platform: snmp
+    name: router_cpu_load
+    host: !secret router_ip
+    baseoid: 1.3.6.1.4.1.2021.11.11.0
+    accept_errors: true
+    scan_interval: 30
+    unit_of_measurement: '%'
+    value_template: >-
+        {% set load = 100 - value | int %}
+        {{- load -}}
+  - platform: snmp
+    name: router_ram
+    host: !secret router_ip
+    baseoid: 1.3.6.1.4.1.2021.4.5.0
+    accept_errors: true
+    scan_interval: 30
+    value_template: >-
+        {% set ram = (value.split(" ")[0]) | float %}
+        {{- ram -}}
+  - platform: snmp
+    name: router_mem_used
+    host: !secret router_ip
+    baseoid: 1.3.6.1.4.1.2021.4.6.0
+    accept_errors: true
+    scan_interval: 30
+    unit_of_measurement: '%'
+    value_template: >-
+        {% set free = (value.split(" ")[0]) | float %}
+        {% set total = states('sensor.router_ram') | float %}
+        {% set used = ((total - free) / total * 100) | round(0, "floor") %}
+        {{- used -}}
+
+  - platform: command_line
+    name: printer_latest_firmware
+    command: python3 -c "import ftplib; ftp=ftplib.FTP('ftp.hp.com');ftp.login();ftp.cwd('/pub/networking/software/pfirmware');ftpd=ftp.nlst(); name='HP_LaserJet_Pro_MFP_M130_M132_Ultra_MFP_M134_Printer_'; found=[i for i in ftpd if name in i]; print (found[-1][found[-1].find(name)+len(name):found[-1].rfind('.rfu')])"
+  - platform: snmp
+    name: printer_model
+    host: !secret laser_ip
+    baseoid: 1.3.6.1.4.1.11.2.3.9.4.2.1.1.3.2.0
+    accept_errors: true
+    scan_interval: 86400
+  - platform: snmp
+    name: printer_sn
+    host: !secret laser_ip
+    baseoid: 1.3.6.1.4.1.11.2.3.9.4.2.1.1.3.3.0
+    accept_errors: true
+    scan_interval: 86400
+  - platform: snmp
+    name: printer_fw
+    host: !secret laser_ip
+    baseoid: 1.3.6.1.4.1.11.2.3.9.4.2.1.1.3.5.0
+    accept_errors: true
+    scan_interval: 3600
+  - platform: snmp
+    name: printer_toner
+    host: !secret laser_ip
+#    baseoid: 1.3.6.1.4.1.11.2.3.9.4.2.1.4.1.10.1.1.56.1.0
+    baseoid: 1.3.6.1.2.1.43.11.1.1.6.1.1
+    accept_errors: true
+    scan_interval: 86400
+  - platform: snmp
+    name: printer_toner_now
+    host: !secret laser_ip
+    baseoid: 1.3.6.1.2.1.43.11.1.1.9.1.1
+    accept_errors: true
+    scan_interval: 1800
+  - platform: snmp
+    name: printer_toner_max
+    host: !secret laser_ip
+    baseoid: 1.3.6.1.2.1.43.11.1.1.8.1.1
+    accept_errors: true
+    scan_interval: 86400
+  - platform: template
+    sensors:
+      printer_toner_pct:
+        unit_of_measurement: '%'
+        value_template: >-
+            {% set m = float(states('sensor.printer_toner_max')) %}
+            {% set n = float(states('sensor.printer_toner_now')) %}
+            {% if m == 'unknown' %} {% set m = 0 %}  {% endif %}
+            {% if n == 'unknown' %} {% set n = 0 %}  {% endif %}
+            {% if m != 0 -%}
+                {{ ((n / m) * 100) | round(0) }}
+            {% else %}
+                {{ 0 }}
+            {% endif %}
+  - platform: snmp
+    name: printer_drum
+    host: !secret laser_ip
+#    baseoid: 1.3.6.1.4.1.11.2.3.9.4.2.1.4.1.10.1.1.56.5.0
+    baseoid: 1.3.6.1.2.1.43.11.1.1.6.1.5
+    accept_errors: true
+    scan_interval: 86400
+  - platform: snmp
+    name: printer_drum_now
+    host: !secret laser_ip
+    baseoid: 1.3.6.1.2.1.43.11.1.1.9.1.5
+    accept_errors: true
+    scan_interval: 1800
+  - platform: snmp
+    name: printer_drum_max
+    host: !secret laser_ip
+    baseoid: 1.3.6.1.2.1.43.11.1.1.8.1.5
+    accept_errors: true
+    scan_interval: 86400
+  - platform: template
+    sensors:
+      printer_drum_pct:
+        unit_of_measurement: '%'
+        value_template: >-
+            {% set m = float(states('sensor.printer_drum_max')) %}
+            {% set n = float(states('sensor.printer_drum_now')) %}
+            {% if m == 'unknown' %} {% set m = 0 %}  {% endif %}
+            {% if n == 'unknown' %} {% set n = 0 %}  {% endif %}
+            {% if m != 0 -%}
+                {{ ((n / m) * 100) | round(0) }}
+            {% else %}
+                {{ 0 }}
+            {% endif %}
+  - platform: snmp
+    name: printer_pages
+    host: !secret laser_ip
+    baseoid: 1.3.6.1.2.1.43.10.2.1.4.1.1
+    accept_errors: true
+    scan_interval: 1800
+  - platform: snmp
+    name: printer_uptime
+    host: !secret laser_ip
+    baseoid: 1.3.6.1.2.1.1.3.0
+    accept_errors: true
+    scan_interval: 30
+    value_template: >-
+        {% set uptime = float(value) / 100 %}
+        {% set updays = (uptime / 86400) | round(0, "floor") %}
+        {% set uphours = uptime | timestamp_custom('%-H:%-M:%-S', false) | regex_replace('^0:','') %}
+        {% if updays == 0 %}
+            {{- uphours -}}
+        {% elif updays == 1 %}
+            {{- updays ~ " Day, " ~ uphours -}}
+        {% else %}
+            {{- updays ~ " Days, " ~ uphours -}}
+        {% endif %}
+
+  - platform: template
+    sensors:
+      temperature_in:
+        friendly_name: Inside temperature
+        unit_of_measurement: '°C'
+        value_template: "{{ state_attr('climate.thermostat', 'current_temperature') }}"
+      humidity_in:
+        friendly_name: Inside humidity
+        unit_of_measurement: '%'
+        value_template: "{{ state_attr('climate.thermostat', 'current_humidity') }}"
+      feels_like:
+        friendly_name: Feels like
+        unit_of_measurement: '°C'
+        value_template: >-
+          {% if not is_state('sensor.wind_chill', 'unknown') %}
+            {{ states('sensor.wind_chill') }}
+          {% elif not is_state('sensor.humidex', 'unknown') %}
+            {{ states('sensor.humidex') }}
+          {% else %}
+            {{ states('sensor.temperature') }}
+          {% endif %}
+
+  - platform: template
+    sensors:
+      sun_next_rising:
+        value_template: "{{ as_timestamp(state_attr('sun.sun', 'next_rising')) | timestamp_custom(' %-I:%M %p') }}"
+      sun_next_setting:
+        value_template: "{{ as_timestamp(state_attr('sun.sun', 'next_setting')) | timestamp_custom(' %-I:%M %p') }}"
+
+  - platform: time_date
+    display_options:
+      - 'time'
+      - 'time_utc'
+  - platform: worldclock
+    name: UK
+    time_zone: Europe/London
+  - platform: worldclock
+    name: San Francisco
+    time_zone: America/Los_Angeles
+
+  - platform: nut
+    name: Office UPS
+    host: !secret synology_ip
+    resources:
+      - ups.status.display
+      - ups.load
+      - battery.runtime
+      - battery.charge
+      - ups.model
+      - ups.serial
+      - ups.status
+  - platform: template
+    sensors:
+      office_ups_battery_runtime_mins:
+        unit_of_measurement: 'min'
+        value_template: "{{ float(states('sensor.office_ups_battery_runtime')) / 60 | round(2)}}"
+  - platform: template
+    sensors:
+      office_ups_status_data_short:
+        value_template: "{{ states('sensor.office_ups_status_data').split(' ')[0] }}"
+
+  - platform: synologydsm
+    host: !secret synology_ip
+    username: !secret synology_user_name
+    password: !secret synology_password_key
+    monitored_conditions:
+      - cpu_total_load
+      - memory_real_usage
+      - disk_smart_status
+      - volume_status
+      - volume_percentage_used
+  - platform: snmp
+    name: nas_name
+    host: !secret synology_ip
+    baseoid: 1.3.6.1.4.1.6574.1.5.1.0
+    accept_errors: true
+    scan_interval: 86400
+  - platform: snmp
+    name: nas_serial
+    host: !secret synology_ip
+    baseoid: 1.3.6.1.4.1.6574.1.5.2.0
+    accept_errors: true
+    scan_interval: 86400
+  - platform: snmp
+    name: nas_uptime
+    host: !secret synology_ip
+    baseoid: 1.3.6.1.2.1.25.1.1.0
+    accept_errors: true
+    scan_interval: 30
+    value_template: >-
+        {% set uptime = float(value) / 100 %}
+        {% set updays = (uptime / 86400) | round(0, "floor") %}
+        {% set uphours = uptime | timestamp_custom('%-H:%-M:%-S', false) | regex_replace('^0:','') %}
+        {% if updays == 0 %}
+            {{- uphours -}}
+        {% elif updays == 1 %}
+            {{- updays ~ " Day, " ~ uphours -}}
+        {% else %}
+            {{- updays ~ " Days, " ~ uphours -}}
+        {% endif %}
+
+  - platform: waqi
+    token: !secret waqi_token_key
+    locations: 'Toronto'
+
+  - platform: template
+    sensors:
+      router_firmware_url:
+        value_template: "{{ 'https://downloads.openwrt.org/releases/' ~ states('sensor.router_latest_firmware') ~ '/targets/' ~ states('sensor.router_target') ~ '/generic/' }}"
+      printer_firmware_url:
+        value_template: "{{ 'https://support.hp.com/us-en/drivers/selfservice/HP-LaserJet-Pro-MFP-M130-series/9365370/model/9365374' }}"
+
+      aqhi:
+        value_template: "{{ states('sensor.air_quality_health_index') }}"
+      aqi:
+        value_template: "{{ states('sensor.waqi_toronto') }}"
+      o3:
+        value_template: "{{ state_attr('sensor.waqi_toronto', 'ozone') }}"
+      pm:
+        value_template: "{{ state_attr('sensor.waqi_toronto', 'pm_2_5') }}"
+      no2:
+        value_template: "{{ state_attr('sensor.waqi_toronto', 'nitrogen_dioxide') }}"
+      co:
+        value_template: "{{ state_attr('sensor.waqi_toronto', 'co') }}"
+      so2:
+        value_template: "{{ state_attr('sensor.waqi_toronto', 'sulfur_dioxide') }}"
+      aqhi_friendly:
+        friendly_name: AQHI
+        icon_template: mdi:chemical-weapon
+        value_template: >-
+          {% set l = states('sensor.aqhi') | int %}
+          {% if l <= 3 %} Low
+          {% elif l <= 6 %} Moderate
+          {% elif l <= 10 %} High
+          {% elif l > 10 %} Hazardous
+          {% endif %}
+      aqi_friendly:
+        friendly_name: AQI
+        icon_template: mdi:chemical-weapon
+        value_template: >-
+          {% set l = states('sensor.aqi') | int %}
+          {% if l <= 99 %} Low
+          {% elif l <= 149 %} Moderate
+          {% elif l <= 199 %} High
+          {% elif l > 199 %} Hazardous
+          {% endif %}
+      o3_friendly:
+        friendly_name: O₃
+        icon_template: mdi:earth
+        value_template: >-
+          {% set l = states('sensor.o3') | int %}
+          {% if l < 0 %} unknown
+          {% elif l <= 54 %} Good
+          {% elif l <= 70 %} Moderate
+          {% elif l <= 85 %} Unhealthy
+          {% elif l > 85 %} Hazardous
+          {% endif %}
+      pm_friendly:
+        friendly_name: PM₂.₅
+        icon_template: mdi:chart-bubble
+        value_template: >-
+          {% set l = states('sensor.pm') | int %}
+          {% if l < 0 %} unknown
+          {% elif l <= 50 %} Good
+          {% elif l <= 100 %} Moderate
+          {% elif l <= 300 %} Unhealthy
+          {% elif l > 300 %} Hazardous
+          {% endif %}
+      no2_friendly:
+        friendly_name: NO₂
+        icon_template: mdi:car
+        value_template: >-
+          {% set l = states('sensor.no2') | int %}
+          {% if l < 0 %} unknown
+          {% elif l <= 50 %} Good
+          {% elif l <= 100 %} Moderate
+          {% elif l <= 200 %} Unhealthy
+          {% elif l > 200 %} Hazardous
+          {% endif %}
+      co_friendly:
+        friendly_name: CO
+        icon_template: mdi:fire
+        value_template: >-
+          {% set l = states('sensor.co') | float %}
+          {% if l < 0 %} unknown
+          {% elif l <= 4.4 %} Good
+          {% elif l <= 9.4 %} Moderate
+          {% elif l <= 15.4 %} Unhealthy
+          {% elif l > 15.4 %} Hazardous
+          {% endif %}
+      so2_friendly:
+        friendly_name: SO₂
+        icon_template: mdi:factory
+        value_template: >-
+          {% set l = states('sensor.so2') | int %}
+          {% if l < 0 %} unknown
+          {% elif l <= 34 %} Good
+          {% elif l <= 144 %} Moderate
+          {% elif l <= 304 %} Unhealthy
+          {% elif l > 304 %} Hazardous
+          {% endif %}
+      cigarettes:
+        friendly_name: Cigarettes / Day
+        icon_template: mdi:smoking
+        unit_of_measurement: 'Cigarettes'
+#        value_template: "{{ ( float(states('sensor.pm')) / 22 ) | round(1) }}"
+        value_template: >-
+          {% if states('sensor.pm').isdigit() %}
+            {{ ( float(states('sensor.pm')) / 22 ) | round(1) }}
+          {% else %}
+            {{ float(0) }}
+          {% endif %}
+
+      ec_current_summary:
+        friendly_name: Currently
+        value_template: >-
+          Currently {{ states('sensor.temperature') }}°C (Feels like {{ states('sensor.feels_like') }}) and {{ states('sensor.ec_current_summary_text') }}
+        entity_picture_template: >-
+          "https://weather.gc.ca/weathericons/{{ states('sensor.ec_current_icon') }}.gif"
+        icon_template: >-
+          mdi:thermometer
+      ec_1_summary:
+        friendly_name_template: >-
+          {{ states('sensor.ec_1_name') }}
+        value_template: >-
+          {{ states('sensor.ec_1_summary_text') }}
+        entity_picture_template: >-
+          "https://weather.gc.ca/weathericons/{{ states('sensor.ec_1_icon') }}.gif"
+      ec_2_summary:
+        friendly_name_template: >-
+          {{ states('sensor.ec_2_name') }}
+        value_template: >-
+          {{ states('sensor.ec_2_summary_text') }}
+        entity_picture_template: >-
+          "https://weather.gc.ca/weathericons/{{ states('sensor.ec_2_icon') }}.gif"
+      ec_3_summary:
+        friendly_name_template: >-
+          {{ states('sensor.ec_3_name') }}
+        value_template: >-
+          {{ states('sensor.ec_3_summary_text') }}
+        entity_picture_template: >-
+          "https://weather.gc.ca/weathericons/{{ states('sensor.ec_3_icon') }}.gif"
+      ec_4_summary:
+        friendly_name_template: >-
+          {{ states('sensor.ec_4_name') }}
+        value_template: >-
+          {{ states('sensor.ec_4_summary_text') }}
+        entity_picture_template: >-
+          "https://weather.gc.ca/weathericons/{{ states('sensor.ec_4_icon') }}.gif"
+      ec_5_summary:
+        friendly_name_template: >-
+          {{ states('sensor.ec_5_name') }}
+        value_template: >-
+          {{ states('sensor.ec_5_summary_text') }}
+        entity_picture_template: >-
+          "https://weather.gc.ca/weathericons/{{ states('sensor.ec_5_icon') }}.gif"
+      ec_6_summary:
+        friendly_name_template: >-
+          {{ states('sensor.ec_6_name') }}
+        value_template: >-
+          {{ states('sensor.ec_6_summary_text') }}
+        entity_picture_template: >-
+          "https://weather.gc.ca/weathericons/{{ states('sensor.ec_6_icon') }}.gif"
+
+  - platform: miflora
+    name: kitchen
+    mac: !secret plant1_mac
+    force_update: true
+    monitored_conditions:
+      - battery
+      - conductivity
+      - light
+      - moisture
+      - temperature
+
+  - platform: nextbus
+    agency: ttc
+    route: 97
+    stop: 8543
+    scan_interval: 60
+  - platform: template
+    sensors:
+      97north:
+        friendly_name: '97 North'
+        icon_template: mdi:bus-clock
+        unit_of_measurement: 'min'
+        value_template: '{{ state_attr("sensor.ttc_97", "upcoming").split(",")[0] }}'
+#        value_template: "{{ (as_timestamp(states('sensor.97_north')) - as_timestamp(now())) | default(0) | int | timestamp_custom('%-M:%-S') }}"
