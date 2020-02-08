@@ -7,5 +7,7 @@
 !README.md
 !makefile
 #
+!homeassistant/
 !homeassistant/configuration.yaml
-!homeassistant/.storage//lovelace
+!homeassistant/.storage/
+!homeassistant/.storage/lovelace

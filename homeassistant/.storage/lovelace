@@ -1,0 +1,1266 @@
+{
+    "data": {
+        "config": {
+            "cch": {
+                "hide_help": true,
+                "voice": "hide"
+            },
+            "custom_header": {
+                "compact_mode": true,
+                "menu_hide": true
+            },
+            "resources": [
+                {
+                    "type": "js",
+                    "url": "/community_plugin/lovelace-card-tools/card-tools.js"
+                },
+                {
+                    "type": "js",
+                    "url": "/community_plugin/lovelace-fold-entity-row/fold-entity-row.js"
+                },
+                {
+                    "type": "js",
+                    "url": "/community_plugin/lovelace-slider-entity-row/slider-entity-row.js"
+                },
+                {
+                    "type": "js",
+                    "url": "/community_plugin/lovelace-multiple-entity-row/multiple-entity-row.js"
+                },
+                {
+                    "type": "module",
+                    "url": "/community_plugin/custom-header/custom-header.js"
+                },
+                {
+                    "type": "module",
+                    "url": "/community/lovelace-layout-card/layout-card.js"
+                },
+                {
+                    "type": "module",
+                    "url": "/community_plugin/simple-thermostat/simple-thermostat.js"
+                },
+                {
+                    "type": "module",
+                    "url": "/community_plugin/lovelace-auto-entities/auto-entities.js"
+                },
+                {
+                    "type": "module",
+                    "url": "/community_plugin/mini-graph-card/mini-graph-card-bundle.js"
+                },
+                {
+                    "type": "js",
+                    "url": "/community_plugin/vertical-stack-in-card/vertical-stack-in-card.js"
+                },
+                {
+                    "type": "js",
+                    "url": "/community_plugin/bar-card/bar-card.js"
+                },
+                {
+                    "type": "module",
+                    "url": "/community_plugin/lovelace-layout-card/layout-card.js"
+                },
+                {
+                    "type": "js",
+                    "url": "/community_plugin/ext-weblink/ext-weblink.js"
+                }
+            ],
+            "title": "Home",
+            "views": [
+                {
+                    "badges": [],
+                    "cards": [
+                        {
+                            "entities": [
+                                {
+                                    "entity": "sensor.97north"
+                                },
+                                {
+                                    "entity": "sensor.in_belize"
+                                }
+                            ],
+                            "show_icon": true,
+                            "show_name": true,
+                            "show_state": true,
+                            "type": "glance"
+                        },
+                        {
+                            "entity": "weather.toronto",
+                            "type": "weather-forecast"
+                        },
+                        {
+                            "entities": [
+                                {
+                                    "entity": "light.bedroom",
+                                    "hide_when_off": true,
+                                    "icon": "mdi:lamp",
+                                    "name": "Bed",
+                                    "slider_theme": {
+                                        "max": 255,
+                                        "min": 0,
+                                        "off_when_min": true,
+                                        "report_when_not_changed": false
+                                    },
+                                    "state_card_mode": "single-line",
+                                    "toggle": true,
+                                    "type": "custom:slider-entity-row"
+                                },
+                                {
+                                    "entity": "light.hallway",
+                                    "hide_when_off": true,
+                                    "icon": "mdi:ceiling-light",
+                                    "name": "Hallway",
+                                    "slider_theme": {
+                                        "max": 255,
+                                        "min": 0,
+                                        "off_when_min": true,
+                                        "report_when_not_changed": false
+                                    },
+                                    "state_card_mode": "single-line",
+                                    "toggle": true,
+                                    "type": "custom:slider-entity-row"
+                                },
+                                {
+                                    "entity": "light.led",
+                                    "hide_when_off": true,
+                                    "icon": "mdi:led-strip",
+                                    "name": "LED",
+                                    "slider_theme": {
+                                        "max": 255,
+                                        "min": 0,
+                                        "off_when_min": true,
+                                        "report_when_not_changed": false
+                                    },
+                                    "state_card_mode": "single-line",
+                                    "toggle": true,
+                                    "type": "custom:slider-entity-row"
+                                },
+                                {
+                                    "entity": "light.floor",
+                                    "hide_when_off": true,
+                                    "icon": "mdi:floor-lamp",
+                                    "name": "Floor",
+                                    "slider_theme": {
+                                        "max": 255,
+                                        "min": 0,
+                                        "off_when_min": true,
+                                        "report_when_not_changed": false
+                                    },
+                                    "state_card_mode": "single-line",
+                                    "toggle": true,
+                                    "type": "custom:slider-entity-row"
+                                },
+                                {
+                                    "entity": "light.office",
+                                    "hide_when_off": true,
+                                    "icon": "mdi:lamp",
+                                    "name": "Office",
+                                    "slider_theme": {
+                                        "max": 255,
+                                        "min": 0,
+                                        "off_when_min": true,
+                                        "report_when_not_changed": false
+                                    },
+                                    "state_card_mode": "single-line",
+                                    "toggle": true,
+                                    "type": "custom:slider-entity-row"
+                                },
+                                {
+                                    "entity": "switch.kitchen",
+                                    "icon": "mdi:led-strip",
+                                    "name": "Kitchen"
+                                },
+                                {
+                                    "entity": "switch.desk",
+                                    "icon": "mdi:desk-lamp",
+                                    "name": "Desk"
+                                }
+                            ],
+                            "title": "Light",
+                            "type": "entities"
+                        },
+                        {
+                            "cards": [
+                                {
+                                    "entity": "climate.thermostat",
+                                    "type": "thermostat"
+                                },
+                                {
+                                    "align_state": "center",
+                                    "entities": [
+                                        {
+                                            "aggregate_func": "feel",
+                                            "color": "green",
+                                            "entity": "sensor.feels_like",
+                                            "name": "Feel"
+                                        },
+                                        {
+                                            "aggregate_func": "out",
+                                            "entity": "sensor.temperature",
+                                            "name": "Out"
+                                        },
+                                        {
+                                            "aggregate_func": "in",
+                                            "color": null,
+                                            "entity": "sensor.temperature_in",
+                                            "name": "In"
+                                        }
+                                    ],
+                                    "group_by": "date",
+                                    "hours_to_show": 168,
+                                    "name": "Temperature",
+                                    "type": "custom:mini-graph-card"
+                                },
+                                {
+                                    "align_state": "center",
+                                    "entities": [
+                                        "sensor.humidity_in",
+                                        "sensor.humidity"
+                                    ],
+                                    "icon": "mdi:water-percent",
+                                    "name": "Humidity",
+                                    "type": "custom:mini-graph-card"
+                                }
+                            ],
+                            "type": "horizontal-stack"
+                        },
+                        {
+                            "cards": [
+                                {
+                                    "cards": {
+                                        "entities": [
+                                            "sensor.temperature",
+                                            "sensor.feels_like"
+                                        ],
+                                        "type": "custom:mini-graph-card"
+                                    },
+                                    "name": "Humidity",
+                                    "type": "vertical-stack"
+                                },
+                                {
+                                    "cards": [
+                                        {
+                                            "color_thresholds_transition": "smooth",
+                                            "entities": [
+                                                {
+                                                    "entity": "sensor.speedtest_download",
+                                                    "name": "Download"
+                                                }
+                                            ],
+                                            "font_size": 70,
+                                            "group": false,
+                                            "hour24": true,
+                                            "line_width": 6,
+                                            "lower_bound": 0,
+                                            "points_per_hour": 1,
+                                            "show": {
+                                                "extrema": true,
+                                                "fill": "fade",
+                                                "icon": true,
+                                                "labels": false,
+                                                "name": true,
+                                                "state": true
+                                            },
+                                            "type": "custom:mini-graph-card"
+                                        },
+                                        {
+                                            "color_thresholds_transition": "smooth",
+                                            "entities": [
+                                                {
+                                                    "entity": "sensor.speedtest_ping",
+                                                    "name": "Ping"
+                                                }
+                                            ],
+                                            "font_size": 70,
+                                            "group": false,
+                                            "hour24": true,
+                                            "line_width": 6,
+                                            "lower_bound": 0,
+                                            "points_per_hour": 1,
+                                            "show": {
+                                                "extrema": true,
+                                                "fill": "fade",
+                                                "icon": true,
+                                                "labels": false,
+                                                "name": true,
+                                                "state": true
+                                            },
+                                            "type": "custom:mini-graph-card"
+                                        },
+                                        {
+                                            "color_thresholds_transition": "smooth",
+                                            "entities": [
+                                                {
+                                                    "entity": "sensor.speedtest_upload",
+                                                    "name": "Download"
+                                                }
+                                            ],
+                                            "font_size": 70,
+                                            "group": false,
+                                            "hour24": true,
+                                            "line_width": 6,
+                                            "lower_bound": 0,
+                                            "points_per_hour": 1,
+                                            "show": {
+                                                "extrema": true,
+                                                "fill": "fade",
+                                                "icon": true,
+                                                "labels": false,
+                                                "name": true,
+                                                "state": true
+                                            },
+                                            "type": "custom:mini-graph-card"
+                                        }
+                                    ],
+                                    "name": "Speednet",
+                                    "type": "horizontal-stack"
+                                }
+                            ],
+                            "type": "custom:vertical-stack-in-card"
+                        }
+                    ],
+                    "icon": "mdi:home",
+                    "path": "default_view",
+                    "title": "Home"
+                },
+                {
+                    "badges": [],
+                    "cards": [
+                        {
+                            "entity": "plant.coleus",
+                            "type": "plant-status"
+                        },
+                        {
+                            "entities": [
+                                "sensor.ec_current_summary",
+                                "sensor.ec_1_summary",
+                                "sensor.ec_2_summary",
+                                "sensor.ec_3_summary",
+                                "sensor.ec_4_summary",
+                                "sensor.ec_5_summary",
+                                "sensor.ec_6_summary"
+                            ],
+                            "show_header_toggle": false,
+                            "title": "Weather Forecast",
+                            "type": "entities"
+                        },
+                        {
+                            "entities": [
+                                {
+                                    "entity": "sensor.aqhi_friendly",
+                                    "primary": {
+                                        "entity": "sensor.aqhi",
+                                        "name": false
+                                    },
+                                    "type": "custom:multiple-entity-row"
+                                },
+                                {
+                                    "entity": "sensor.aqi_friendly",
+                                    "primary": {
+                                        "entity": "sensor.aqi",
+                                        "name": false
+                                    },
+                                    "type": "custom:multiple-entity-row"
+                                },
+                                {
+                                    "entity": "sensor.pm_friendly",
+                                    "primary": {
+                                        "entity": "sensor.pm",
+                                        "name": false,
+                                        "unit": "\u00b5g/m\u00b3"
+                                    },
+                                    "type": "custom:multiple-entity-row"
+                                },
+                                {
+                                    "entity": "sensor.o3_friendly",
+                                    "primary": {
+                                        "entity": "sensor.o3",
+                                        "name": false,
+                                        "unit": "ppb"
+                                    },
+                                    "type": "custom:multiple-entity-row"
+                                },
+                                {
+                                    "entity": "sensor.no2_friendly",
+                                    "primary": {
+                                        "entity": "sensor.no2",
+                                        "name": false,
+                                        "unit": "ppb"
+                                    },
+                                    "type": "custom:multiple-entity-row"
+                                },
+                                {
+                                    "entity": "sensor.so2_friendly",
+                                    "primary": {
+                                        "entity": "sensor.so2",
+                                        "name": false,
+                                        "unit": "ppb"
+                                    },
+                                    "type": "custom:multiple-entity-row"
+                                },
+                                {
+                                    "entity": "sensor.co_friendly",
+                                    "primary": {
+                                        "entity": "sensor.co",
+                                        "name": false,
+                                        "unit": "ppm"
+                                    },
+                                    "type": "custom:multiple-entity-row"
+                                },
+                                {
+                                    "entity": "sensor.cigarettes"
+                                },
+                                {
+                                    "entity": "sensor.pollen",
+                                    "icon": "mdi:flower",
+                                    "name": "Pollen"
+                                },
+                                {
+                                    "entity": "sensor.mold",
+                                    "icon": "mdi:chart-bubble",
+                                    "name": "Mold"
+                                },
+                                {
+                                    "entity": "sensor.flu",
+                                    "icon": "mdi:bug",
+                                    "name": "Flu"
+                                }
+                            ],
+                            "show_header_toggle": false,
+                            "title": "Environment",
+                            "type": "entities"
+                        }
+                    ],
+                    "icon": "mdi:clipboard-text",
+                    "path": "environment",
+                    "title": "Environment"
+                },
+                {
+                    "badges": [],
+                    "cards": [
+                        {
+                            "aspect_ratio": "56%",
+                            "camera_view": "live",
+                            "entity": "camera.cntowerw",
+                            "image": "https://www.home-assistant.io/images/merchandise/shirt-frontpage.png",
+                            "name": "West",
+                            "show_name": false,
+                            "show_state": false,
+                            "type": "picture-entity"
+                        },
+                        {
+                            "aspect_ratio": "83%",
+                            "camera_image": "camera.radar",
+                            "entities": [],
+                            "hold_action": {
+                                "action": "none"
+                            },
+                            "image": "https://www.home-assistant.io/images/merchandise/shirt-rontpage.png",
+                            "tap_action": {
+                                "action": "url",
+                                "url_path": "https://weather.gc.ca/city/pages/on-143_metric_e.html"
+                            },
+                            "type": "picture-glance"
+                        },
+                        {
+                            "aspect_ratio": "56%",
+                            "camera_view": "live",
+                            "entity": "camera.cntowere",
+                            "image": "https://www.home-assistant.io/images/merchandise/shirt-frontpage.png",
+                            "name": "East",
+                            "show_name": false,
+                            "show_state": false,
+                            "type": "picture-entity"
+                        },
+                        {
+                            "aspect_ratio": "83%",
+                            "camera_image": "camera.jet_stream",
+                            "entities": [],
+                            "hold_action": {
+                                "action": "none"
+                            },
+                            "tap_action": {
+                                "action": "none"
+                            },
+                            "type": "picture-glance"
+                        }
+                    ],
+                    "icon": "mdi:map",
+                    "path": "maps",
+                    "title": "Maps"
+                },
+                {
+                    "badges": [],
+                    "cards": [
+                        {
+                            "entities": [
+                                {
+                                    "entity": "sensor.tradfri_remote_control",
+                                    "name": "Bedroom Remote Battery"
+                                },
+                                {
+                                    "entity": "light.bedroom_right",
+                                    "hide_when_off": true,
+                                    "icon": "mdi:lamp",
+                                    "name": "Bedroom Right",
+                                    "slider_theme": {
+                                        "max": 255,
+                                        "min": 0,
+                                        "off_when_min": true,
+                                        "report_when_not_changed": false
+                                    },
+                                    "state_card_mode": "single-line",
+                                    "toggle": true,
+                                    "type": "custom:slider-entity-row"
+                                },
+                                {
+                                    "entity": "light.bedroom_left",
+                                    "hide_when_off": true,
+                                    "icon": "mdi:lamp",
+                                    "name": "Bedroom Left",
+                                    "slider_theme": {
+                                        "max": 255,
+                                        "min": 0,
+                                        "off_when_min": true,
+                                        "report_when_not_changed": false
+                                    },
+                                    "state_card_mode": "single-line",
+                                    "toggle": true,
+                                    "type": "custom:slider-entity-row"
+                                }
+                            ],
+                            "show_header_toggle": true,
+                            "title": "Bedroom",
+                            "type": "entities"
+                        },
+                        {
+                            "entities": [
+                                {
+                                    "entity": "sensor.tradfri_motion_sensor",
+                                    "name": "Hallway Motion Sensor Battery"
+                                },
+                                {
+                                    "entity": "light.hallway_center",
+                                    "hide_when_off": true,
+                                    "icon": "mdi:ceiling-light",
+                                    "name": "Hallway Center",
+                                    "slider_theme": {
+                                        "max": 255,
+                                        "min": 0,
+                                        "off_when_min": true,
+                                        "report_when_not_changed": false
+                                    },
+                                    "state_card_mode": "single-line",
+                                    "toggle": true,
+                                    "type": "custom:slider-entity-row"
+                                },
+                                {
+                                    "entity": "light.hallway_kitchen",
+                                    "hide_when_off": true,
+                                    "icon": "mdi:ceiling-light",
+                                    "name": "Hallway Kitchen",
+                                    "slider_theme": {
+                                        "max": 255,
+                                        "min": 0,
+                                        "off_when_min": true,
+                                        "report_when_not_changed": false
+                                    },
+                                    "state_card_mode": "single-line",
+                                    "toggle": true,
+                                    "type": "custom:slider-entity-row"
+                                },
+                                {
+                                    "entity": "light.hallway_door",
+                                    "hide_when_off": true,
+                                    "icon": "mdi:ceiling-light",
+                                    "name": "Hallway Entrance",
+                                    "slider_theme": {
+                                        "max": 255,
+                                        "min": 0,
+                                        "off_when_min": true,
+                                        "report_when_not_changed": false
+                                    },
+                                    "state_card_mode": "single-line",
+                                    "toggle": true,
+                                    "type": "custom:slider-entity-row"
+                                }
+                            ],
+                            "show_header_toggle": true,
+                            "title": "Hallway",
+                            "type": "entities"
+                        },
+                        {
+                            "entities": [
+                                {
+                                    "entity": "switch.kitchen",
+                                    "icon": "mdi:led-strip",
+                                    "name": "Kitchen"
+                                },
+                                {
+                                    "entity": "sensor.kitchen_battery",
+                                    "name": "Kitchen battery"
+                                }
+                            ],
+                            "show_header_toggle": true,
+                            "title": "Kitchen",
+                            "type": "entities"
+                        },
+                        {
+                            "entities": [
+                                {
+                                    "entity": "climate.thermostat",
+                                    "slider_theme": {
+                                        "max": 25,
+                                        "min": 15,
+                                        "off_when_min": true,
+                                        "report_when_not_changed": false
+                                    },
+                                    "state_card_mode": "single-line",
+                                    "type": "custom:slider-entity-row"
+                                },
+                                {
+                                    "entity": "light.led",
+                                    "hide_when_off": true,
+                                    "icon": "mdi:led-strip",
+                                    "name": "LED",
+                                    "slider_theme": {
+                                        "max": 255,
+                                        "min": 0,
+                                        "off_when_min": true,
+                                        "report_when_not_changed": false
+                                    },
+                                    "state_card_mode": "single-line",
+                                    "toggle": true,
+                                    "type": "custom:slider-entity-row"
+                                },
+                                {
+                                    "entity": "light.floor",
+                                    "hide_when_off": true,
+                                    "icon": "mdi:floor-lamp",
+                                    "name": "Floor Lamp",
+                                    "slider_theme": {
+                                        "max": 255,
+                                        "min": 0,
+                                        "off_when_min": true,
+                                        "report_when_not_changed": false
+                                    },
+                                    "state_card_mode": "single-line",
+                                    "toggle": true,
+                                    "type": "custom:slider-entity-row"
+                                }
+                            ],
+                            "show_header_toggle": false,
+                            "title": "Living Room",
+                            "type": "entities"
+                        },
+                        {
+                            "entities": [
+                                {
+                                    "entity": "light.office",
+                                    "hide_when_off": true,
+                                    "icon": "mdi:lamp",
+                                    "name": "Office",
+                                    "slider_theme": {
+                                        "max": 255,
+                                        "min": 0,
+                                        "off_when_min": true,
+                                        "report_when_not_changed": false
+                                    },
+                                    "state_card_mode": "single-line",
+                                    "toggle": true,
+                                    "type": "custom:slider-entity-row"
+                                },
+                                {
+                                    "entity": "switch.desk",
+                                    "icon": "mdi:desk-lamp",
+                                    "name": "Desk"
+                                },
+                                {
+                                    "entity": "media_player.nvidia_shield",
+                                    "name": "nVIDIA Shield TV 2017"
+                                },
+                                {
+                                    "entity": "media_player.office_speaker",
+                                    "icon": "mdi:google",
+                                    "name": "Google Home Mini"
+                                }
+                            ],
+                            "show_header_toggle": false,
+                            "title": "Office",
+                            "type": "entities"
+                        }
+                    ],
+                    "icon": "mdi:checkbox-multiple-blank-outline",
+                    "path": "rooms",
+                    "title": "Rooms"
+                },
+                {
+                    "badges": [],
+                    "cards": [
+                        {
+                            "entities": [
+                                {
+                                    "entity": "sensor.office_ups_model",
+                                    "hide_state": true,
+                                    "icon": "mdi:car-battery",
+                                    "name": "Model",
+                                    "primary": {
+                                        "entity": "sensor.office_ups_model",
+                                        "name": null
+                                    },
+                                    "secondary": {
+                                        "entity": "sensor.office_ups_serial_number",
+                                        "name": "Serial Number"
+                                    },
+                                    "type": "custom:multiple-entity-row"
+                                },
+                                {
+                                    "entity": "sensor.office_ups_status",
+                                    "icon": "mdi:information-outline",
+                                    "name": "Status"
+                                },
+                                {
+                                    "entity": "sensor.office_ups_battery_charge",
+                                    "hide_state": true,
+                                    "name": "Battery",
+                                    "primary": {
+                                        "entity": "sensor.office_ups_battery_runtime_mins",
+                                        "name": "Runtime"
+                                    },
+                                    "secondary": {
+                                        "entity": "sensor.office_ups_load",
+                                        "name": "Load"
+                                    },
+                                    "tertiary": {
+                                        "entity": "sensor.office_ups_battery_charge",
+                                        "name": "Charge"
+                                    },
+                                    "type": "custom:multiple-entity-row"
+                                }
+                            ],
+                            "show_header_toggle": false,
+                            "title": "UPS",
+                            "type": "entities"
+                        },
+                        {
+                            "entities": [
+                                {
+                                    "entity": "sensor.router_model",
+                                    "icon": "mdi:router-wireless",
+                                    "name": "Model"
+                                },
+                                {
+                                    "animation": "off",
+                                    "entity": "sensor.router_cpu_load",
+                                    "height": "30px",
+                                    "indicator": "on",
+                                    "severity": [
+                                        {
+                                            "color": "green",
+                                            "value": 60
+                                        },
+                                        {
+                                            "color": "orange",
+                                            "value": 70
+                                        },
+                                        {
+                                            "color": "red",
+                                            "value": 100
+                                        }
+                                    ],
+                                    "title": "CPU Load",
+                                    "type": "custom:bar-card"
+                                },
+                                {
+                                    "animation": "off",
+                                    "entity": "sensor.router_mem_used",
+                                    "height": "30px",
+                                    "indicator": "off",
+                                    "severity": [
+                                        {
+                                            "color": "green",
+                                            "value": 60
+                                        },
+                                        {
+                                            "color": "orange",
+                                            "value": 70
+                                        },
+                                        {
+                                            "color": "red",
+                                            "value": 100
+                                        }
+                                    ],
+                                    "title": "Ram Used",
+                                    "type": "custom:bar-card"
+                                },
+                                {
+                                    "entity": "sensor.router_id",
+                                    "icon": "mdi:cogs",
+                                    "name": "OS",
+                                    "primary": {
+                                        "entity": "sensor.router_target",
+                                        "name": null
+                                    },
+                                    "type": "custom:multiple-entity-row"
+                                },
+                                {
+                                    "entity": "sensor.router_release",
+                                    "hide_state": true,
+                                    "icon": "mdi:code-tags",
+                                    "name": "Firmware",
+                                    "primary": {
+                                        "entity": "sensor.router_release",
+                                        "name": null
+                                    },
+                                    "secondary": {
+                                        "entity": "sensor.router_latest_firmware",
+                                        "name": "Latest"
+                                    },
+                                    "type": "custom:multiple-entity-row"
+                                },
+                                {
+                                    "entity": "sensor.router_uptime",
+                                    "icon": "mdi:clock",
+                                    "name": "Uptime"
+                                }
+                            ],
+                            "show_header_toggle": false,
+                            "title": "Router",
+                            "type": "entities"
+                        },
+                        {
+                            "entities": [
+                                {
+                                    "entity": "sensor.pihole_dns_queries_today",
+                                    "name": "Queries Today"
+                                },
+                                {
+                                    "entity": "sensor.pihole_ads_blocked_today",
+                                    "name": "Ads Blocked Today"
+                                },
+                                {
+                                    "entity": "sensor.pihole_ads_percentage_blocked_today",
+                                    "name": "Ads Blocked Today"
+                                }
+                            ],
+                            "show_header_toggle": false,
+                            "title": "PiHole",
+                            "type": "entities"
+                        },
+                        {
+                            "entities": [
+                                {
+                                    "entity": "sensor.nas_name",
+                                    "hide_state": true,
+                                    "icon": "mdi:nas",
+                                    "name": "Model",
+                                    "primary": {
+                                        "entity": "sensor.nas_name",
+                                        "name": null
+                                    },
+                                    "secondary": {
+                                        "entity": "sensor.nas_serial",
+                                        "name": "Serial Number"
+                                    },
+                                    "type": "custom:multiple-entity-row"
+                                },
+                                {
+                                    "animation": "off",
+                                    "entity": "sensor.synology_dsm_cpu_load_total",
+                                    "height": "30px",
+                                    "indicator": "on",
+                                    "severity": [
+                                        {
+                                            "color": "green",
+                                            "value": 60
+                                        },
+                                        {
+                                            "color": "orange",
+                                            "value": 70
+                                        },
+                                        {
+                                            "color": "red",
+                                            "value": 100
+                                        }
+                                    ],
+                                    "title": "CPU Load",
+                                    "type": "custom:bar-card"
+                                },
+                                {
+                                    "animation": "off",
+                                    "entity": "sensor.synology_dsm_memory_usage_real",
+                                    "height": "30px",
+                                    "indicator": "off",
+                                    "severity": [
+                                        {
+                                            "color": "green",
+                                            "value": 60
+                                        },
+                                        {
+                                            "color": "orange",
+                                            "value": 70
+                                        },
+                                        {
+                                            "color": "red",
+                                            "value": 100
+                                        }
+                                    ],
+                                    "title": "Ram Used",
+                                    "type": "custom:bar-card"
+                                },
+                                {
+                                    "entity": "sensor.synology_dsm_status_volume_1",
+                                    "hide_state": true,
+                                    "name": "Volume",
+                                    "primary": {
+                                        "entity": "sensor.synology_dsm_volume_used_volume_1",
+                                        "name": "Used"
+                                    },
+                                    "secondary": {
+                                        "entity": "sensor.synology_dsm_status_smart_sda",
+                                        "name": "sda"
+                                    },
+                                    "tertiary": {
+                                        "entity": "sensor.synology_dsm_status_smart_sdb",
+                                        "name": "sdb"
+                                    },
+                                    "type": "custom:multiple-entity-row"
+                                },
+                                {
+                                    "entity": "sensor.nas_uptime",
+                                    "icon": "mdi:clock",
+                                    "name": "Uptime"
+                                }
+                            ],
+                            "show_header_toggle": false,
+                            "title": "NAS",
+                            "type": "entities"
+                        },
+                        {
+                            "entities": [
+                                {
+                                    "entity": "sensor.printer_model",
+                                    "hide_state": true,
+                                    "icon": "mdi:printer",
+                                    "name": "Model",
+                                    "primary": {
+                                        "entity": "sensor.printer_model",
+                                        "name": null
+                                    },
+                                    "secondary": {
+                                        "entity": "sensor.printer_sn",
+                                        "name": "Serial Number"
+                                    },
+                                    "type": "custom:multiple-entity-row"
+                                },
+                                {
+                                    "entity": "sensor.printer_fw",
+                                    "hide_state": true,
+                                    "icon": "mdi:code-tags",
+                                    "name": "Firmware",
+                                    "primary": {
+                                        "entity": "sensor.printer_fw",
+                                        "name": null
+                                    },
+                                    "secondary": {
+                                        "entity": "sensor.printer_latest_firmware",
+                                        "name": "Latest"
+                                    },
+                                    "type": "custom:multiple-entity-row"
+                                },
+                                {
+                                    "entity": "sensor.printer_toner_pct",
+                                    "hide_state": true,
+                                    "icon": "mdi:blur",
+                                    "name": "Toner",
+                                    "primary": {
+                                        "entity": "sensor.printer_toner",
+                                        "name": null
+                                    },
+                                    "secondary": {
+                                        "entity": "sensor.printer_toner_pct",
+                                        "name": null
+                                    },
+                                    "type": "custom:multiple-entity-row"
+                                },
+                                {
+                                    "entity": "sensor.printer_drum_pct",
+                                    "hide_state": true,
+                                    "icon": "mdi:panorama-vertical",
+                                    "name": "Drum",
+                                    "primary": {
+                                        "entity": "sensor.printer_drum",
+                                        "name": null
+                                    },
+                                    "secondary": {
+                                        "entity": "sensor.printer_drum_pct",
+                                        "name": null
+                                    },
+                                    "type": "custom:multiple-entity-row"
+                                },
+                                {
+                                    "entity": "sensor.printer_pages",
+                                    "icon": "mdi:file-document",
+                                    "name": "Pages printed"
+                                },
+                                {
+                                    "entity": "sensor.printer_uptime",
+                                    "icon": "mdi:clock",
+                                    "name": "Uptime"
+                                },
+                                "script.1574869457721"
+                            ],
+                            "show_header_toggle": false,
+                            "title": "Printer",
+                            "type": "entities"
+                        }
+                    ],
+                    "icon": "mdi:server",
+                    "path": "devices",
+                    "title": "Devices"
+                },
+                {
+                    "badges": [],
+                    "cards": [
+                        {
+                            "entities": [
+                                {
+                                    "entity": "sensor.sys_name",
+                                    "icon": "mdi:network",
+                                    "name": "Name"
+                                },
+                                {
+                                    "animation": "off",
+                                    "entity": "sensor.processor_use",
+                                    "height": "30px",
+                                    "icon": "mdi:chip",
+                                    "indicator": "off",
+                                    "severity": [
+                                        {
+                                            "color": "green",
+                                            "value": 60
+                                        },
+                                        {
+                                            "color": "orange",
+                                            "value": 70
+                                        },
+                                        {
+                                            "color": "red",
+                                            "value": 100
+                                        }
+                                    ],
+                                    "title": "CPU Used",
+                                    "type": "custom:bar-card"
+                                },
+                                {
+                                    "animation": "off",
+                                    "entity": "sensor.glances_cpu_temp",
+                                    "height": "30px",
+                                    "indicator": "off",
+                                    "severity": [
+                                        {
+                                            "color": "green",
+                                            "value": 60
+                                        },
+                                        {
+                                            "color": "orange",
+                                            "value": 70
+                                        },
+                                        {
+                                            "color": "red",
+                                            "value": 100
+                                        }
+                                    ],
+                                    "title": "CPU Temp",
+                                    "type": "custom:bar-card"
+                                },
+                                {
+                                    "animation": "off",
+                                    "entity": "sensor.glances_ram_used_percent",
+                                    "height": "30px",
+                                    "indicator": "off",
+                                    "severity": [
+                                        {
+                                            "color": "green",
+                                            "value": 60
+                                        },
+                                        {
+                                            "color": "orange",
+                                            "value": 70
+                                        },
+                                        {
+                                            "color": "red",
+                                            "value": 100
+                                        }
+                                    ],
+                                    "title": "Ram Used",
+                                    "type": "custom:bar-card"
+                                },
+                                {
+                                    "animation": "off",
+                                    "entity": "sensor.glances_disk_used_percent",
+                                    "height": "30px",
+                                    "indicator": "off",
+                                    "severity": [
+                                        {
+                                            "color": "green",
+                                            "value": 60
+                                        },
+                                        {
+                                            "color": "orange",
+                                            "value": 70
+                                        },
+                                        {
+                                            "color": "red",
+                                            "value": 100
+                                        }
+                                    ],
+                                    "title": "Disk Used",
+                                    "type": "custom:bar-card"
+                                },
+                                {
+                                    "animation": "off",
+                                    "entity": "sensor.glances_swap_used_percent",
+                                    "height": "30px",
+                                    "indicator": "off",
+                                    "severity": [
+                                        {
+                                            "color": "green",
+                                            "value": 60
+                                        },
+                                        {
+                                            "color": "orange",
+                                            "value": 70
+                                        },
+                                        {
+                                            "color": "red",
+                                            "value": 100
+                                        }
+                                    ],
+                                    "title": "Swap Used",
+                                    "type": "custom:bar-card"
+                                },
+                                {
+                                    "entity": "sensor.sys_current_firmware",
+                                    "hide_state": true,
+                                    "icon": "mdi:code-tags",
+                                    "name": "Firmware",
+                                    "primary": {
+                                        "entity": "sensor.sys_current_firmware",
+                                        "name": null
+                                    },
+                                    "secondary": {
+                                        "entity": "sensor.sys_latest_firmware",
+                                        "name": "Latest"
+                                    },
+                                    "type": "custom:multiple-entity-row"
+                                },
+                                {
+                                    "entity": "sensor.glances_total",
+                                    "name": "Process"
+                                },
+                                {
+                                    "entity": "sensor.server_uptime",
+                                    "icon": "mdi:clock",
+                                    "name": "Uptime"
+                                }
+                            ],
+                            "show_header_toggle": false,
+                            "title": "Server",
+                            "type": "entities"
+                        },
+                        {
+                            "entities": [
+                                {
+                                    "entity": "sensor.os",
+                                    "hide_state": true,
+                                    "icon": "mdi:cogs",
+                                    "primary": {
+                                        "entity": "sensor.os",
+                                        "name": null
+                                    },
+                                    "secondary": {
+                                        "entity": "sensor.distro",
+                                        "name": null
+                                    },
+                                    "tertiary": {
+                                        "entity": "sensor.kernel_version",
+                                        "name": null
+                                    },
+                                    "type": "custom:multiple-entity-row"
+                                },
+                                {
+                                    "entity": "sensor.docker_version",
+                                    "hide_state": true,
+                                    "icon": "mdi:code-tags",
+                                    "name": "Docker Version",
+                                    "primary": {
+                                        "entity": "sensor.docker_version",
+                                        "name": null
+                                    },
+                                    "secondary": {
+                                        "entity": "sensor.docker_github_version",
+                                        "name": "Latest"
+                                    },
+                                    "type": "custom:multiple-entity-row"
+                                },
+                                {
+                                    "entity": "sensor.glances_containers_active",
+                                    "name": "Docker Active Containers"
+                                },
+                                {
+                                    "entity": "sensor.installed_version",
+                                    "hide_state": true,
+                                    "icon": "mdi:code-tags",
+                                    "name": "HASS Version",
+                                    "primary": {
+                                        "entity": "sensor.installed_version",
+                                        "name": null
+                                    },
+                                    "secondary": {
+                                        "entity": "sensor.hass_github_version",
+                                        "name": "Latest"
+                                    },
+                                    "type": "custom:multiple-entity-row"
+                                },
+                                {
+                                    "entity": "sensor.hass_uptime",
+                                    "icon": "mdi:clock",
+                                    "name": "HASS Uptime"
+                                }
+                            ],
+                            "show_header_toggle": false,
+                            "title": "Software",
+                            "type": "entities"
+                        }
+                    ],
+                    "icon": "mdi:home-assistant",
+                    "path": "hass",
+                    "title": "HASS"
+                },
+                {
+                    "badges": [],
+                    "cards": [
+                        {
+                            "card": {
+                                "type": "glance"
+                            },
+                            "filter": {
+                                "include": [
+                                    {}
+                                ]
+                            },
+                            "sort": {
+                                "method": "name"
+                            },
+                            "type": "custom:auto-entities"
+                        }
+                    ],
+                    "icon": "mdi:bug",
+                    "path": "other",
+                    "title": "Other"
+                }
+            ]
+        }
+    },
+    "key": "lovelace",
+    "version": 1
+}
