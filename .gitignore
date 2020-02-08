@@ -1,13 +1,11 @@
 # Ignore everything
-*
-*addons/
+*/*
+*.*
 
 # Except these
-!/.gitignore
-!/LICENCE
-!/README.md
-!/makefile
-!configuration.yaml
-
-# ...even if they are in subdirectories
-!*/
+!.gitignore
+!LICENCE
+!README.md
+!makefile
+#
+!homeassistant/configuration.yaml
