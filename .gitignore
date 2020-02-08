@@ -3,8 +3,8 @@
 
 # Except these
 !.gitignore
-#!LICENCE
-#!README.md
-#!makefile
+!LICENCE
+!README.md
+!makefile
 #
-#!homeassistant/configuration.yaml
+!homeassistant/configuration.yaml
