@@ -2,5 +2,8 @@
 *
 
 # Except these
-#homeassistant/configuration.yml
+LICENCE
+README.md
+makefile
+homeassistant/configuration.yml
 
