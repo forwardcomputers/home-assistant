@@ -1,0 +1,9 @@
+'1574869457721':
+  alias: Clean Printer
+  sequence:
+  - data: {}
+    service: shell_command.clean_printer
+'1579273628605':
+  alias: Update Speedtest
+  sequence:
+  - service: speedtestdotnet.speedtest

@@ -8,7 +8,7 @@
 !makefile
 #
 !homeassistant/
-!homeassistant/automation.yaml
+!homeassistant/automations.yaml
 !homeassistant/customize.yaml
 !homeassistant/configuration.yaml
 !homeassistant/scripts.yaml

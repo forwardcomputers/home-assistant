@@ -1,0 +1,13 @@
+sensor.speedtest_download:
+  friendly_name: Download speed
+  icon: mdi:cloud-download
+sensor.speedtest_upload:
+  friendly_name: Upload speed
+  icon: mdi:cloud-upload
+sensor.speedtest_ping:
+  friendly_name: Ping
+  icon: mdi:mixcloud
+sensor.humidity:
+  friendly_name: Out
+sensor.humidity_in:
+  friendly_name: In
