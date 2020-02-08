@@ -1,26 +1,6 @@
-.cloud/
-deps/
-.storage/
-tts/
+# Ignore everything
+*
 
-*.conf
-*.json
-*.tmp
-alexa_media*
-adbkey*
-emulated*
-entity_registry.yaml
-harmony*
-home-assistant*
-.homekit.state
-known_devices.yaml
-OZW_Log.txt
-options.xml
-__pycache__
-secrets.yaml
-*.sqlite
-.uuid
-.wink.conf
-zw*
-!zwave.yaml
-!custom_components.json
+# Except these
+#homeassistant/configuration.yml
+
