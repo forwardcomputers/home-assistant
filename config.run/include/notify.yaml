@@ -1,9 +1,0 @@
-# https://www.home-assistant.io/components/notify.twitter/
-
-- name: twitter
-  platform: twitter
-  username: !secret twitter_name
-  consumer_key: !secret twitter_consumer_key
-  consumer_secret: !secret twitter_consumer_secret_key
-  access_token: !secret twitter_access_token_key
-  access_token_secret: !secret twitter_access_token_secret_key

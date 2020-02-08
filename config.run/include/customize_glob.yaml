@@ -1,5 +1,0 @@
-# https://www.home-assistant.io/docs/configuration/customizing-devices/
-# https://github.com/andrey-git/home-assistant-custom-ui
-
-"automation.*":
-  hidden: true

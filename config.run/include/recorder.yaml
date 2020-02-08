@@ -1,4 +1,0 @@
-# https://www.home-assistant.io/components/logger/
-
-purge_interval: 2
-purge_keep_days: 5
