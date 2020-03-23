@@ -2,9 +2,8 @@
   alias: Sunset lights
   description: ''
   trigger:
-  - at: '16:00:00'
-    platform: time
   - event: sunset
+    offset: -0:30
     platform: sun
   condition: []
   action:
@@ -122,3 +121,13 @@
   condition: []
   action:
   - service: speedtestdotnet.speedtest
+- id: '1584890507989'
+  alias: Mount filer share
+  description: ''
+  trigger:
+  - event: start
+    platform: homeassistant
+  condition: []
+  action:
+  - data: {}
+    service: shell_command.mount_filer

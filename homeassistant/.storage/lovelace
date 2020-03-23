@@ -9,60 +9,6 @@
                 "compact_mode": true,
                 "menu_hide": true
             },
-            "resources": [
-                {
-                    "type": "js",
-                    "url": "/community_plugin/lovelace-card-tools/card-tools.js"
-                },
-                {
-                    "type": "js",
-                    "url": "/community_plugin/lovelace-fold-entity-row/fold-entity-row.js"
-                },
-                {
-                    "type": "js",
-                    "url": "/community_plugin/lovelace-slider-entity-row/slider-entity-row.js"
-                },
-                {
-                    "type": "js",
-                    "url": "/community_plugin/lovelace-multiple-entity-row/multiple-entity-row.js"
-                },
-                {
-                    "type": "module",
-                    "url": "/community_plugin/custom-header/custom-header.js"
-                },
-                {
-                    "type": "module",
-                    "url": "/community/lovelace-layout-card/layout-card.js"
-                },
-                {
-                    "type": "module",
-                    "url": "/community_plugin/simple-thermostat/simple-thermostat.js"
-                },
-                {
-                    "type": "module",
-                    "url": "/community_plugin/lovelace-auto-entities/auto-entities.js"
-                },
-                {
-                    "type": "module",
-                    "url": "/community_plugin/mini-graph-card/mini-graph-card-bundle.js"
-                },
-                {
-                    "type": "js",
-                    "url": "/community_plugin/vertical-stack-in-card/vertical-stack-in-card.js"
-                },
-                {
-                    "type": "js",
-                    "url": "/community_plugin/bar-card/bar-card.js"
-                },
-                {
-                    "type": "module",
-                    "url": "/community_plugin/lovelace-layout-card/layout-card.js"
-                },
-                {
-                    "type": "js",
-                    "url": "/community_plugin/ext-weblink/ext-weblink.js"
-                }
-            ],
             "title": "Home",
             "views": [
                 {
@@ -74,7 +20,7 @@
                                     "entity": "sensor.97north"
                                 },
                                 {
-                                    "entity": "sensor.in_belize"
+                                    "entity": "binary_sensor.updater"
                                 }
                             ],
                             "show_icon": true,
@@ -145,6 +91,7 @@
                                         "report_when_not_changed": false
                                     },
                                     "state_card_mode": "single-line",
+                                    "state_color": true,
                                     "toggle": true,
                                     "type": "custom:slider-entity-row"
                                 },
@@ -166,12 +113,14 @@
                                 {
                                     "entity": "switch.kitchen",
                                     "icon": "mdi:led-strip",
-                                    "name": "Kitchen"
+                                    "name": "Kitchen",
+                                    "state_color": true
                                 },
                                 {
                                     "entity": "switch.desk",
                                     "icon": "mdi:desk-lamp",
-                                    "name": "Desk"
+                                    "name": "Desk",
+                                    "state_color": true
                                 }
                             ],
                             "title": "Light",
@@ -190,17 +139,20 @@
                                             "aggregate_func": "feel",
                                             "color": "green",
                                             "entity": "sensor.feels_like",
+                                            "index": 0,
                                             "name": "Feel"
                                         },
                                         {
                                             "aggregate_func": "out",
                                             "entity": "sensor.temperature",
+                                            "index": 1,
                                             "name": "Out"
                                         },
                                         {
                                             "aggregate_func": "in",
                                             "color": null,
                                             "entity": "sensor.temperature_in",
+                                            "index": 2,
                                             "name": "In"
                                         }
                                     ],
@@ -212,8 +164,14 @@
                                 {
                                     "align_state": "center",
                                     "entities": [
-                                        "sensor.humidity_in",
-                                        "sensor.humidity"
+                                        {
+                                            "entity": "sensor.humidity_in",
+                                            "index": 0
+                                        },
+                                        {
+                                            "entity": "sensor.humidity",
+                                            "index": 1
+                                        }
                                     ],
                                     "icon": "mdi:water-percent",
                                     "name": "Humidity",
@@ -225,96 +183,83 @@
                         {
                             "cards": [
                                 {
-                                    "cards": {
-                                        "entities": [
-                                            "sensor.temperature",
-                                            "sensor.feels_like"
-                                        ],
-                                        "type": "custom:mini-graph-card"
-                                    },
-                                    "name": "Humidity",
-                                    "type": "vertical-stack"
-                                },
-                                {
-                                    "cards": [
+                                    "color_thresholds_transition": "smooth",
+                                    "entities": [
                                         {
-                                            "color_thresholds_transition": "smooth",
-                                            "entities": [
-                                                {
-                                                    "entity": "sensor.speedtest_download",
-                                                    "name": "Download"
-                                                }
-                                            ],
-                                            "font_size": 70,
-                                            "group": false,
-                                            "hour24": true,
-                                            "line_width": 6,
-                                            "lower_bound": 0,
-                                            "points_per_hour": 1,
-                                            "show": {
-                                                "extrema": true,
-                                                "fill": "fade",
-                                                "icon": true,
-                                                "labels": false,
-                                                "name": true,
-                                                "state": true
-                                            },
-                                            "type": "custom:mini-graph-card"
-                                        },
-                                        {
-                                            "color_thresholds_transition": "smooth",
-                                            "entities": [
-                                                {
-                                                    "entity": "sensor.speedtest_ping",
-                                                    "name": "Ping"
-                                                }
-                                            ],
-                                            "font_size": 70,
-                                            "group": false,
-                                            "hour24": true,
-                                            "line_width": 6,
-                                            "lower_bound": 0,
-                                            "points_per_hour": 1,
-                                            "show": {
-                                                "extrema": true,
-                                                "fill": "fade",
-                                                "icon": true,
-                                                "labels": false,
-                                                "name": true,
-                                                "state": true
-                                            },
-                                            "type": "custom:mini-graph-card"
-                                        },
-                                        {
-                                            "color_thresholds_transition": "smooth",
-                                            "entities": [
-                                                {
-                                                    "entity": "sensor.speedtest_upload",
-                                                    "name": "Download"
-                                                }
-                                            ],
-                                            "font_size": 70,
-                                            "group": false,
-                                            "hour24": true,
-                                            "line_width": 6,
-                                            "lower_bound": 0,
-                                            "points_per_hour": 1,
-                                            "show": {
-                                                "extrema": true,
-                                                "fill": "fade",
-                                                "icon": true,
-                                                "labels": false,
-                                                "name": true,
-                                                "state": true
-                                            },
-                                            "type": "custom:mini-graph-card"
+                                            "entity": "sensor.speedtest_download",
+                                            "index": 0,
+                                            "name": "Download"
                                         }
                                     ],
-                                    "name": "Speednet",
-                                    "type": "horizontal-stack"
+                                    "font_size": 70,
+                                    "group": false,
+                                    "hour24": true,
+                                    "line_width": 6,
+                                    "lower_bound": 0,
+                                    "points_per_hour": 1,
+                                    "show": {
+                                        "extrema": true,
+                                        "fill": "fade",
+                                        "icon": true,
+                                        "labels": false,
+                                        "name": true,
+                                        "state": true
+                                    },
+                                    "type": "custom:mini-graph-card"
+                                },
+                                {
+                                    "color_thresholds_transition": "smooth",
+                                    "entities": [
+                                        {
+                                            "entity": "sensor.speedtest_ping",
+                                            "index": 0,
+                                            "name": "Ping"
+                                        }
+                                    ],
+                                    "font_size": 70,
+                                    "group": false,
+                                    "hour24": true,
+                                    "line_width": 6,
+                                    "lower_bound": 0,
+                                    "points_per_hour": 1,
+                                    "show": {
+                                        "extrema": true,
+                                        "fill": "fade",
+                                        "icon": true,
+                                        "labels": false,
+                                        "name": true,
+                                        "state": true
+                                    },
+                                    "type": "custom:mini-graph-card"
+                                },
+                                {
+                                    "color_thresholds_transition": "smooth",
+                                    "entities": [
+                                        {
+                                            "entity": "sensor.speedtest_upload",
+                                            "index": 0,
+                                            "name": "Download"
+                                        }
+                                    ],
+                                    "font_size": 70,
+                                    "group": false,
+                                    "hour24": true,
+                                    "line_width": 6,
+                                    "lower_bound": 0,
+                                    "points_per_hour": 1,
+                                    "show": {
+                                        "extrema": true,
+                                        "fill": "fade",
+                                        "icon": true,
+                                        "labels": false,
+                                        "name": true,
+                                        "state": true
+                                    },
+                                    "type": "custom:mini-graph-card"
                                 }
                             ],
-                            "type": "custom:vertical-stack-in-card"
+                            "name": "Speednet",
+                            "type": "horizontal-stack"
                         }
                     ],
                     "icon": "mdi:home",
@@ -345,64 +290,78 @@
                         {
                             "entities": [
                                 {
+                                    "entities": [
+                                        {
+                                            "entity": "sensor.aqhi",
+                                            "name": false
+                                        }
+                                    ],
                                     "entity": "sensor.aqhi_friendly",
-                                    "primary": {
-                                        "entity": "sensor.aqhi",
-                                        "name": false
-                                    },
                                     "type": "custom:multiple-entity-row"
                                 },
                                 {
+                                    "entities": [
+                                        {
+                                            "entity": "sensor.aqi",
+                                            "name": false
+                                        }
+                                    ],
                                     "entity": "sensor.aqi_friendly",
-                                    "primary": {
-                                        "entity": "sensor.aqi",
-                                        "name": false
-                                    },
                                     "type": "custom:multiple-entity-row"
                                 },
                                 {
+                                    "entities": [
+                                        {
+                                            "entity": "sensor.pm",
+                                            "name": false,
+                                            "unit": "\u00b5g/m\u00b3"
+                                        }
+                                    ],
                                     "entity": "sensor.pm_friendly",
-                                    "primary": {
-                                        "entity": "sensor.pm",
-                                        "name": false,
-                                        "unit": "\u00b5g/m\u00b3"
-                                    },
                                     "type": "custom:multiple-entity-row"
                                 },
                                 {
+                                    "entities": [
+                                        {
+                                            "entity": "sensor.o3",
+                                            "name": false,
+                                            "unit": "ppb"
+                                        }
+                                    ],
                                     "entity": "sensor.o3_friendly",
-                                    "primary": {
-                                        "entity": "sensor.o3",
-                                        "name": false,
-                                        "unit": "ppb"
-                                    },
                                     "type": "custom:multiple-entity-row"
                                 },
                                 {
+                                    "entities": [
+                                        {
+                                            "entity": "sensor.no2",
+                                            "name": false,
+                                            "unit": "ppb"
+                                        }
+                                    ],
                                     "entity": "sensor.no2_friendly",
-                                    "primary": {
-                                        "entity": "sensor.no2",
-                                        "name": false,
-                                        "unit": "ppb"
-                                    },
                                     "type": "custom:multiple-entity-row"
                                 },
                                 {
+                                    "entities": [
+                                        {
+                                            "entity": "sensor.so2",
+                                            "name": false,
+                                            "unit": "ppb"
+                                        }
+                                    ],
                                     "entity": "sensor.so2_friendly",
-                                    "primary": {
-                                        "entity": "sensor.so2",
-                                        "name": false,
-                                        "unit": "ppb"
-                                    },
                                     "type": "custom:multiple-entity-row"
                                 },
                                 {
+                                    "entities": [
+                                        {
+                                            "entity": "sensor.co",
+                                            "name": false,
+                                            "unit": "ppm"
+                                        }
+                                    ],
                                     "entity": "sensor.co_friendly",
-                                    "primary": {
-                                        "entity": "sensor.co",
-                                        "name": false,
-                                        "unit": "ppm"
-                                    },
                                     "type": "custom:multiple-entity-row"
                                 },
                                 {
@@ -493,7 +452,7 @@
                         {
                             "entities": [
                                 {
-                                    "entity": "sensor.tradfri_remote_control",
+                                    "entity": "sensor.bedroom_remote_battery_level",
                                     "name": "Bedroom Remote Battery"
                                 },
                                 {
@@ -534,7 +493,7 @@
                         {
                             "entities": [
                                 {
-                                    "entity": "sensor.tradfri_motion_sensor",
+                                    "entity": "sensor.hallway_sensor_battery_level",
                                     "name": "Hallway Motion Sensor Battery"
                                 },
                                 {
@@ -645,6 +604,17 @@
                                     "state_card_mode": "single-line",
                                     "toggle": true,
                                     "type": "custom:slider-entity-row"
+                                },
+                                {
+                                    "entity": "media_player.apple_tv"
+                                },
+                                {
+                                    "entity": "remote.apple_tv",
+                                    "name": "Apple TV remote"
+                                },
+                                {
+                                    "entity": "remote.harmony",
+                                    "name": "Harmony Remote"
                                 }
                             ],
                             "show_header_toggle": false,
@@ -654,10 +624,10 @@
                         {
                             "entities": [
                                 {
-                                    "entity": "light.office",
+                                    "entity": "light.table",
                                     "hide_when_off": true,
                                     "icon": "mdi:lamp",
-                                    "name": "Office",
+                                    "name": "Table",
                                     "slider_theme": {
                                         "max": 255,
                                         "min": 0,
@@ -698,18 +668,15 @@
                         {
                             "entities": [
                                 {
+                                    "entities": [
+                                        {
+                                            "entity": "sensor.office_ups_serial_number",
+                                            "name": "Serial Number"
+                                        }
+                                    ],
                                     "entity": "sensor.office_ups_model",
-                                    "hide_state": true,
                                     "icon": "mdi:car-battery",
                                     "name": "Model",
-                                    "primary": {
-                                        "entity": "sensor.office_ups_model",
-                                        "name": null
-                                    },
-                                    "secondary": {
-                                        "entity": "sensor.office_ups_serial_number",
-                                        "name": "Serial Number"
-                                    },
                                     "type": "custom:multiple-entity-row"
                                 },
                                 {
@@ -718,26 +685,116 @@
                                     "name": "Status"
                                 },
                                 {
+                                    "entities": [
+                                        {
+                                            "entity": "sensor.office_ups_battery_runtime_mins",
+                                            "name": "Runtime"
+                                        },
+                                        {
+                                            "entity": "sensor.office_ups_load",
+                                            "name": "Load"
+                                        },
+                                        {
+                                            "entity": "sensor.office_ups_battery_charge",
+                                            "name": "Charge"
+                                        }
+                                    ],
                                     "entity": "sensor.office_ups_battery_charge",
-                                    "hide_state": true,
                                     "name": "Battery",
-                                    "primary": {
-                                        "entity": "sensor.office_ups_battery_runtime_mins",
-                                        "name": "Runtime"
-                                    },
-                                    "secondary": {
-                                        "entity": "sensor.office_ups_load",
-                                        "name": "Load"
-                                    },
-                                    "tertiary": {
-                                        "entity": "sensor.office_ups_battery_charge",
-                                        "name": "Charge"
-                                    },
+                                    "show_state": false,
                                     "type": "custom:multiple-entity-row"
                                 }
                             ],
                             "show_header_toggle": false,
                             "title": "UPS",
+                            "type": "entities"
+                        },
+                        {
+                            "entities": [
+                                {
+                                    "entities": [
+                                        {
+                                            "entity": "sensor.nas_serial",
+                                            "name": "Serial Number"
+                                        }
+                                    ],
+                                    "entity": "sensor.nas_name",
+                                    "icon": "mdi:nas",
+                                    "name": "Model",
+                                    "type": "custom:multiple-entity-row"
+                                },
+                                {
+                                    "animation": "off",
+                                    "entity": "sensor.synology_dsm_cpu_load_total",
+                                    "height": "30px",
+                                    "indicator": "on",
+                                    "severity": [
+                                        {
+                                            "color": "green",
+                                            "value": 60
+                                        },
+                                        {
+                                            "color": "orange",
+                                            "value": 70
+                                        },
+                                        {
+                                            "color": "red",
+                                            "value": 100
+                                        }
+                                    ],
+                                    "title": "CPU Load",
+                                    "type": "custom:bar-card"
+                                },
+                                {
+                                    "animation": "off",
+                                    "entity": "sensor.synology_dsm_memory_usage_real",
+                                    "height": "30px",
+                                    "indicator": "off",
+                                    "severity": [
+                                        {
+                                            "color": "green",
+                                            "value": 60
+                                        },
+                                        {
+                                            "color": "orange",
+                                            "value": 70
+                                        },
+                                        {
+                                            "color": "red",
+                                            "value": 100
+                                        }
+                                    ],
+                                    "title": "Ram Used",
+                                    "type": "custom:bar-card"
+                                },
+                                {
+                                    "entities": [
+                                        {
+                                            "entity": "sensor.synology_dsm_volume_used_volume_1",
+                                            "name": "Used"
+                                        },
+                                        {
+                                            "entity": "sensor.synology_dsm_status_smart_sda",
+                                            "name": "sda"
+                                        },
+                                        {
+                                            "entity": "sensor.synology_dsm_status_smart_sdb",
+                                            "name": "sdb"
+                                        }
+                                    ],
+                                    "entity": "sensor.synology_dsm_status_volume_1",
+                                    "name": "Volume",
+                                    "show_state": false,
+                                    "type": "custom:multiple-entity-row"
+                                },
+                                {
+                                    "entity": "sensor.nas_uptime",
+                                    "icon": "mdi:clock",
+                                    "name": "Uptime"
+                                }
+                            ],
+                            "show_header_toggle": false,
+                            "title": "NAS",
                             "type": "entities"
                         },
                         {
@@ -792,35 +849,35 @@
                                     "type": "custom:bar-card"
                                 },
                                 {
+                                    "entities": [
+                                        {
+                                            "entity": "sensor.router_target",
+                                            "name": null
+                                        }
+                                    ],
                                     "entity": "sensor.router_id",
                                     "icon": "mdi:cogs",
                                     "name": "OS",
-                                    "primary": {
-                                        "entity": "sensor.router_target",
-                                        "name": null
-                                    },
                                     "type": "custom:multiple-entity-row"
                                 },
                                 {
+                                    "entities": [
+                                        {
+                                            "entity": "sensor.router_latest_firmware",
+                                            "name": "Latest"
+                                        }
+                                    ],
                                     "entity": "sensor.router_release",
-                                    "hide_state": true,
                                     "icon": "mdi:code-tags",
                                     "name": "Firmware",
-                                    "primary": {
-                                        "entity": "sensor.router_release",
-                                        "name": null
-                                    },
-                                    "secondary": {
-                                        "entity": "sensor.router_latest_firmware",
-                                        "name": "Latest"
-                                    },
                                     "type": "custom:multiple-entity-row"
                                 },
                                 {
                                     "entity": "sensor.router_uptime",
                                     "icon": "mdi:clock",
                                     "name": "Uptime"
-                                }
+                                },
+                                "script.1584891193341"
                             ],
                             "show_header_toggle": false,
                             "title": "Router",
@@ -829,171 +886,51 @@
                         {
                             "entities": [
                                 {
-                                    "entity": "sensor.pihole_dns_queries_today",
-                                    "name": "Queries Today"
-                                },
-                                {
-                                    "entity": "sensor.pihole_ads_blocked_today",
-                                    "name": "Ads Blocked Today"
-                                },
-                                {
-                                    "entity": "sensor.pihole_ads_percentage_blocked_today",
-                                    "name": "Ads Blocked Today"
-                                }
-                            ],
-                            "show_header_toggle": false,
-                            "title": "PiHole",
-                            "type": "entities"
-                        },
-                        {
-                            "entities": [
-                                {
-                                    "entity": "sensor.nas_name",
-                                    "hide_state": true,
-                                    "icon": "mdi:nas",
-                                    "name": "Model",
-                                    "primary": {
-                                        "entity": "sensor.nas_name",
-                                        "name": null
-                                    },
-                                    "secondary": {
-                                        "entity": "sensor.nas_serial",
-                                        "name": "Serial Number"
-                                    },
-                                    "type": "custom:multiple-entity-row"
-                                },
-                                {
-                                    "animation": "off",
-                                    "entity": "sensor.synology_dsm_cpu_load_total",
-                                    "height": "30px",
-                                    "indicator": "on",
-                                    "severity": [
+                                    "entities": [
                                         {
-                                            "color": "green",
-                                            "value": 60
-                                        },
-                                        {
-                                            "color": "orange",
-                                            "value": 70
-                                        },
-                                        {
-                                            "color": "red",
-                                            "value": 100
+                                            "entity": "sensor.printer_sn",
+                                            "name": "Serial Number"
                                         }
                                     ],
-                                    "title": "CPU Load",
-                                    "type": "custom:bar-card"
-                                },
-                                {
-                                    "animation": "off",
-                                    "entity": "sensor.synology_dsm_memory_usage_real",
-                                    "height": "30px",
-                                    "indicator": "off",
-                                    "severity": [
-                                        {
-                                            "color": "green",
-                                            "value": 60
-                                        },
-                                        {
-                                            "color": "orange",
-                                            "value": 70
-                                        },
-                                        {
-                                            "color": "red",
-                                            "value": 100
-                                        }
-                                    ],
-                                    "title": "Ram Used",
-                                    "type": "custom:bar-card"
-                                },
-                                {
-                                    "entity": "sensor.synology_dsm_status_volume_1",
-                                    "hide_state": true,
-                                    "name": "Volume",
-                                    "primary": {
-                                        "entity": "sensor.synology_dsm_volume_used_volume_1",
-                                        "name": "Used"
-                                    },
-                                    "secondary": {
-                                        "entity": "sensor.synology_dsm_status_smart_sda",
-                                        "name": "sda"
-                                    },
-                                    "tertiary": {
-                                        "entity": "sensor.synology_dsm_status_smart_sdb",
-                                        "name": "sdb"
-                                    },
-                                    "type": "custom:multiple-entity-row"
-                                },
-                                {
-                                    "entity": "sensor.nas_uptime",
-                                    "icon": "mdi:clock",
-                                    "name": "Uptime"
-                                }
-                            ],
-                            "show_header_toggle": false,
-                            "title": "NAS",
-                            "type": "entities"
-                        },
-                        {
-                            "entities": [
-                                {
                                     "entity": "sensor.printer_model",
-                                    "hide_state": true,
                                     "icon": "mdi:printer",
                                     "name": "Model",
-                                    "primary": {
-                                        "entity": "sensor.printer_model",
-                                        "name": null
-                                    },
-                                    "secondary": {
-                                        "entity": "sensor.printer_sn",
-                                        "name": "Serial Number"
-                                    },
                                     "type": "custom:multiple-entity-row"
                                 },
                                 {
+                                    "entities": [
+                                        {
+                                            "entity": "sensor.printer_latest_firmware",
+                                            "name": "Latest"
+                                        }
+                                    ],
                                     "entity": "sensor.printer_fw",
-                                    "hide_state": true,
                                     "icon": "mdi:code-tags",
                                     "name": "Firmware",
-                                    "primary": {
-                                        "entity": "sensor.printer_fw",
-                                        "name": null
-                                    },
-                                    "secondary": {
-                                        "entity": "sensor.printer_latest_firmware",
-                                        "name": "Latest"
-                                    },
                                     "type": "custom:multiple-entity-row"
                                 },
                                 {
+                                    "entities": [
+                                        {
+                                            "entity": "sensor.printer_toner",
+                                            "name": null
+                                        }
+                                    ],
                                     "entity": "sensor.printer_toner_pct",
-                                    "hide_state": true,
                                     "icon": "mdi:blur",
                                     "name": "Toner",
-                                    "primary": {
-                                        "entity": "sensor.printer_toner",
-                                        "name": null
-                                    },
-                                    "secondary": {
-                                        "entity": "sensor.printer_toner_pct",
-                                        "name": null
-                                    },
                                     "type": "custom:multiple-entity-row"
                                 },
                                 {
+                                    "entities": [
+                                        {
+                                            "entity": "sensor.printer_drum",
+                                            "name": null
+                                        }
+                                    ],
                                     "entity": "sensor.printer_drum_pct",
-                                    "hide_state": true,
                                     "icon": "mdi:panorama-vertical",
                                     "name": "Drum",
-                                    "primary": {
-                                        "entity": "sensor.printer_drum",
-                                        "name": null
-                                    },
-                                    "secondary": {
-                                        "entity": "sensor.printer_drum_pct",
-                                        "name": null
-                                    },
                                     "type": "custom:multiple-entity-row"
                                 },
                                 {
@@ -1006,7 +943,8 @@
                                     "icon": "mdi:clock",
                                     "name": "Uptime"
                                 },
-                                "script.1574869457721"
+                                "script.1574869457721",
+                                "script.1584890689297"
                             ],
                             "show_header_toggle": false,
                             "title": "Printer",
@@ -1052,7 +990,7 @@
                                 },
                                 {
                                     "animation": "off",
-                                    "entity": "sensor.glances_cpu_temp",
+                                    "entity": "sensor.glances_package_id_0_temp",
                                     "height": "30px",
                                     "indicator": "off",
                                     "severity": [
@@ -1096,7 +1034,7 @@
                                 },
                                 {
                                     "animation": "off",
-                                    "entity": "sensor.glances_disk_used_percent",
+                                    "entity": "sensor.glances_data_used_percent",
                                     "height": "30px",
                                     "indicator": "off",
                                     "severity": [
@@ -1139,18 +1077,15 @@
                                     "type": "custom:bar-card"
                                 },
                                 {
+                                    "entities": [
+                                        {
+                                            "entity": "sensor.sys_latest_firmware",
+                                            "name": "Latest"
+                                        }
+                                    ],
                                     "entity": "sensor.sys_current_firmware",
-                                    "hide_state": true,
                                     "icon": "mdi:code-tags",
                                     "name": "Firmware",
-                                    "primary": {
-                                        "entity": "sensor.sys_current_firmware",
-                                        "name": null
-                                    },
-                                    "secondary": {
-                                        "entity": "sensor.sys_latest_firmware",
-                                        "name": "Latest"
-                                    },
                                     "type": "custom:multiple-entity-row"
                                 },
                                 {
@@ -1161,7 +1096,8 @@
                                     "entity": "sensor.server_uptime",
                                     "icon": "mdi:clock",
                                     "name": "Uptime"
-                                }
+                                },
+                                "script.1584900906090"
                             ],
                             "show_header_toggle": false,
                             "title": "Server",
@@ -1170,36 +1106,35 @@
                         {
                             "entities": [
                                 {
+                                    "entities": [
+                                        {
+                                            "entity": "sensor.os",
+                                            "name": null
+                                        },
+                                        {
+                                            "entity": "sensor.distro",
+                                            "name": null
+                                        },
+                                        {
+                                            "entity": "sensor.kernel_version",
+                                            "name": null
+                                        }
+                                    ],
                                     "entity": "sensor.os",
-                                    "hide_state": true,
                                     "icon": "mdi:cogs",
-                                    "primary": {
-                                        "entity": "sensor.os",
-                                        "name": null
-                                    },
-                                    "secondary": {
-                                        "entity": "sensor.distro",
-                                        "name": null
-                                    },
-                                    "tertiary": {
-                                        "entity": "sensor.kernel_version",
-                                        "name": null
-                                    },
+                                    "show_state": false,
                                     "type": "custom:multiple-entity-row"
                                 },
                                 {
+                                    "entities": [
+                                        {
+                                            "entity": "sensor.docker_github_version",
+                                            "name": "Latest"
+                                        }
+                                    ],
                                     "entity": "sensor.docker_version",
-                                    "hide_state": true,
                                     "icon": "mdi:code-tags",
                                     "name": "Docker Version",
-                                    "primary": {
-                                        "entity": "sensor.docker_version",
-                                        "name": null
-                                    },
-                                    "secondary": {
-                                        "entity": "sensor.docker_github_version",
-                                        "name": "Latest"
-                                    },
                                     "type": "custom:multiple-entity-row"
                                 },
                                 {
@@ -1207,18 +1142,15 @@
                                     "name": "Docker Active Containers"
                                 },
                                 {
+                                    "entities": [
+                                        {
+                                            "entity": "sensor.hass_github_version",
+                                            "name": "Latest"
+                                        }
+                                    ],
                                     "entity": "sensor.installed_version",
-                                    "hide_state": true,
                                     "icon": "mdi:code-tags",
                                     "name": "HASS Version",
-                                    "primary": {
-                                        "entity": "sensor.installed_version",
-                                        "name": null
-                                    },
-                                    "secondary": {
-                                        "entity": "sensor.hass_github_version",
-                                        "name": "Latest"
-                                    },
                                     "type": "custom:multiple-entity-row"
                                 },
                                 {

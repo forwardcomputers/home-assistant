@@ -7,3 +7,18 @@
   alias: Update Speedtest
   sequence:
   - service: speedtestdotnet.speedtest
+'1584890689297':
+  alias: Download printer firmware
+  sequence:
+  - data: {}
+    service: shell_command.download_printer_firmware
+'1584891193341':
+  alias: Download router firmware
+  sequence:
+  - data: {}
+    service: shell_command.download_router_firmware
+'1584900906090':
+  alias: Download system firmware
+  sequence:
+  - data: {}
+    service: shell_command.download_system_firmware
