@@ -624,6 +624,10 @@
                         {
                             "entities": [
                                 {
+                                    "entity": "sensor.office_remote_battery_level",
+                                    "name": "Office Remote Battery"
+                                },
+                                {
                                     "entity": "light.table",
                                     "hide_when_off": true,
                                     "icon": "mdi:lamp",

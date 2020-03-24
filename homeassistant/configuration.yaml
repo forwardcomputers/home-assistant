@@ -127,10 +127,10 @@ notify:
     access_token_secret: !secret forwardcomputers_access_token_secret_key
   
 panel_iframe:
-#  adguard:
-#     title: Adguard
-#     icon: mdi:shield-check
-#     url: !secret adguard_url
+  adguard:
+     title: Adguard
+     icon: mdi:shield-check
+     url: !secret adguard_url
   glances:
      title: Glances
      icon: mdi:speedometer
