@@ -3,7 +3,7 @@
   description: ''
   trigger:
   - event: sunset
-    offset: -0:30
+    offset: -0:35
     platform: sun
   condition: []
   action:

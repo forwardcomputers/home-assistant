@@ -15,6 +15,11 @@ cloud:
         - light.hallway_center
         - light.hallway_door
         - light.hallway_kitchen
+        - switch.adguard_filtering
+        - switch.adguard_parental_control
+        - switch.adguard_protection
+        - switch.adguard_safe_browsing
+        - switch.adguard_safe_search
   google_actions:
     filter:
       include_domains:
@@ -28,6 +33,11 @@ cloud:
         - light.hallway_center
         - light.hallway_door
         - light.hallway_kitchen
+        - switch.adguard_filtering
+        - switch.adguard_parental_control
+        - switch.adguard_protection
+        - switch.adguard_safe_browsing
+        - switch.adguard_safe_search
 config:
 frontend:
 history:
@@ -87,9 +97,17 @@ emulated_hue:
   host_ip: !secret emulated_hue_ip
   expose_by_default: false
   entities:
-    switch.kitchen:
-      name: Kitchen
+    light.floor:
+      name: floor
       hidden: false
+    light.led:
+      name: led
+      hidden: false
+    switch.kitchen:
+      name: kitchen
+      hidden: false
+
+ffmpeg:
 
 glances:
   - host: !secret server_ip
@@ -162,6 +180,236 @@ plant:
 python_script:
 
 recorder:
+  exclude:
+    domains:
+      - automation
+      - binary_sensor
+      - camera
+      - device_tracker
+      - media_player
+      - person
+      - plant
+      - remote
+      - script
+      - weather
+      - zone
+    entities:
+      - sensor.97north
+      - sensor.adguard_average_processing_speed
+      - sensor.adguard_dns_queries
+      - sensor.adguard_dns_queries_blocked_ratio
+      - sensor.adguard_parental_control_blocked
+      - sensor.adguard_safe_browsing_blocked
+      - sensor.adguard_safe_searches_enforced
+      - sensor.activity
+      - sensor.activity_2
+      - sensor.advisories
+      - sensor.average_active_pace
+      - sensor.average_active_pace_2
+      - sensor.battery_level
+      - sensor.battery_level_2
+      - sensor.battery_level_3
+      - sensor.battery_state
+      - sensor.battery_state_2
+      - sensor.battery_state_3
+      - sensor.bssid
+      - sensor.bssid_2
+      - sensor.bssid_3
+      - sensor.canada_coronavirus_confirmed
+      - sensor.canada_coronavirus_current
+      - sensor.canada_coronavirus_deaths
+      - sensor.canada_coronavirus_recovered
+      - sensor.connection_type
+      - sensor.connection_type_2
+      - sensor.connection_type_3
+      - sensor.distance
+      - sensor.distance_2
+      - sensor.distro
+      - sensor.docker_github_version
+      - sensor.docker_version
+      - sensor.ec_1_icon
+      - sensor.ec_1_name
+      - sensor.ec_1_summary
+      - sensor.ec_1_summary_text
+      - sensor.ec_2_icon
+      - sensor.ec_2_name
+      - sensor.ec_2_summary
+      - sensor.ec_2_summary_text
+      - sensor.ec_3_icon
+      - sensor.ec_3_name
+      - sensor.ec_3_summary
+      - sensor.ec_3_summary_text
+      - sensor.ec_4_icon
+      - sensor.ec_4_name
+      - sensor.ec_4_summary
+      - sensor.ec_4_summary_text
+      - sensor.ec_5_icon
+      - sensor.ec_5_name
+      - sensor.ec_5_summary
+      - sensor.ec_5_summary_text
+      - sensor.ec_6_icon
+      - sensor.ec_6_name
+      - sensor.ec_6_summary
+      - sensor.ec_6_summary_text
+      - sensor.ec_current_icon
+      - sensor.ec_current_summary
+      - sensor.ec_current_summary_text
+      - sensor.endings
+      - sensor.floors_ascended
+      - sensor.floors_ascended_2
+      - sensor.floors_descended
+      - sensor.floors_descended_2
+      - sensor.forecast
+      - sensor.geocoded_location
+      - sensor.geocoded_location_2
+      - sensor.geocoded_location_3
+      - sensor.glances_acpitz_1_temp
+      - sensor.glances_acpitz_1_temp_2
+      - sensor.glances_containers_active
+      - sensor.glances_containers_active_2
+      - sensor.glances_containers_cpu_used
+      - sensor.glances_containers_cpu_used_2
+      - sensor.glances_containers_ram_used
+      - sensor.glances_containers_ram_used_2
+      - sensor.glances_core_0_temp
+      - sensor.glances_core_0_temp_2
+      - sensor.glances_core_1_temp
+      - sensor.glances_core_1_temp_2
+      - sensor.glances_cpu_load
+      - sensor.glances_cpu_load_2
+      - sensor.glances_cpu_used
+      - sensor.glances_cpu_used_2
+      - sensor.glances_data_free
+      - sensor.glances_data_free_2
+      - sensor.glances_data_used
+      - sensor.glances_data_used_2
+      - sensor.glances_data_used_percent
+      - sensor.glances_data_used_percent_2
+      - sensor.glances_etc_hostname_free
+      - sensor.glances_etc_hostname_used
+      - sensor.glances_etc_hostname_used_percent
+      - sensor.glances_etc_hosts_free
+      - sensor.glances_etc_hosts_used
+      - sensor.glances_etc_hosts_used_percent
+      - sensor.glances_etc_resolv_conf_free
+      - sensor.glances_etc_resolv_conf_used
+      - sensor.glances_etc_resolv_conf_used_percent
+      - sensor.glances_glances_conf_free
+      - sensor.glances_glances_conf_used
+      - sensor.glances_glances_conf_used_percent
+      - sensor.glances_iwlwifi_1_temp
+      - sensor.glances_iwlwifi_1_temp_2
+      - sensor.glances_package_id_0_temp
+      - sensor.glances_package_id_0_temp_2
+      - sensor.glances_pch_skylake_1_temp
+      - sensor.glances_pch_skylake_1_temp_2
+      - sensor.glances_ram_free
+      - sensor.glances_ram_free_2
+      - sensor.glances_ram_used
+      - sensor.glances_ram_used_2
+      - sensor.glances_ram_used_percent
+      - sensor.glances_ram_used_percent_2
+      - sensor.glances_running
+      - sensor.glances_running_2
+      - sensor.glances_sleeping
+      - sensor.glances_sleeping_2
+      - sensor.glances_swap_free
+      - sensor.glances_swap_free_2
+      - sensor.glances_swap_used
+      - sensor.glances_swap_used_2
+      - sensor.glances_swap_used_percent
+      - sensor.glances_swap_used_percent_2
+      - sensor.glances_thread
+      - sensor.glances_thread_2
+      - sensor.glances_total
+      - sensor.glances_total_2
+      - sensor.hacs
+      - sensor.hass_github_version
+      - sensor.hass_uptime
+      - sensor.icon_code
+      - sensor.in_belize
+      - sensor.installed_version
+      - sensor.kernel_version
+      - sensor.last_update_trigger
+      - sensor.last_update_trigger_2
+      - sensor.last_update_trigger_3
+      - sensor.lenovo_tb_8704f_battery_level
+      - sensor.lenovo_tb_8704f_geocoded_location
+      - sensor.lenovo_tb_8704f_wifi_connection
+      - sensor.nas_name
+      - sensor.nas_serial
+      - sensor.nas_uptime
+      - sensor.office_ups_model
+      - sensor.office_ups_serial_number
+      - sensor.os
+      - sensor.powerliving_bytes_received
+      - sensor.powerliving_bytes_sent
+      - sensor.powerliving_kib_sec_received
+      - sensor.powerliving_kib_sec_sent
+      - sensor.powerliving_packets_received
+      - sensor.powerliving_packets_sec_received
+      - sensor.powerliving_packets_sec_sent
+      - sensor.powerliving_packets_sent
+      - sensor.printer_drum
+      - sensor.printer_drum_max
+      - sensor.printer_drum_now
+      - sensor.printer_drum_pct
+      - sensor.printer_fw
+      - sensor.printer_latest_firmware
+      - sensor.printer_model
+      - sensor.printer_pages
+      - sensor.printer_sn
+      - sensor.printer_toner
+      - sensor.printer_toner_max
+      - sensor.printer_toner_now
+      - sensor.printer_toner_pct
+      - sensor.printer_uptime
+      - sensor.processor_use
+      - sensor.router_cpu_load
+      - sensor.router_filename
+      - sensor.router_id
+      - sensor.router_latest_firmware
+      - sensor.router_mem_used
+      - sensor.router_model
+      - sensor.router_ram
+      - sensor.router_release
+      - sensor.router_revision
+      - sensor.router_target
+      - sensor.router_uptime
+      - sensor.san_francisco
+      - sensor.server_uptime
+      - sensor.sim_1
+      - sensor.sim_1_2
+      - sensor.sim_2
+      - sensor.ssid
+      - sensor.ssid_2
+      - sensor.ssid_3
+      - sensor.statements
+      - sensor.steps
+      - sensor.steps_2
+      - sensor.synology_dsm_cpu_load_total
+      - sensor.synology_dsm_memory_usage_real
+      - sensor.synology_dsm_status_smart_sda
+      - sensor.synology_dsm_status_smart_sdb
+      - sensor.synology_dsm_status_volume_1
+      - sensor.synology_dsm_volume_used_volume_1
+      - sensor.sys_current_firmware
+      - sensor.sys_latest_firmware
+      - sensor.sys_name
+      - sensor.tendency
+      - sensor.time
+      - sensor.time_utc
+      - sensor.ttc_97
+      - sensor.uk
+      - sensor.uptime_minutes
+      - sensor.warnings
+      - sensor.watches
+      - sun.sun
+      - switch.adguard_filtering
+      - switch.adguard_parental_control
+      - switch.adguard_protection
+      - switch.adguard_safe_browsing
+      - switch.adguard_safe_search
   purge_keep_days: 7
 
 remote:
@@ -198,6 +446,11 @@ weather:
     station: ON/s0000458
 
 sensor:
+  - platform: seventeentrack
+    username: !secret seventeen_username
+    password: !secret seventeen_password
+  - platform: aftership
+    api_key: !secret aftership_api_key
   - platform: scrape
     name: pollen
     resource: https://www.theweathernetwork.com/ca/forecasts/pollen/ontario/toronto
