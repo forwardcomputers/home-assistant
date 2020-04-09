@@ -215,10 +215,6 @@ recorder:
       - sensor.bssid
       - sensor.bssid_2
       - sensor.bssid_3
-      - sensor.canada_coronavirus_confirmed
-      - sensor.canada_coronavirus_current
-      - sensor.canada_coronavirus_deaths
-      - sensor.canada_coronavirus_recovered
       - sensor.connection_type
       - sensor.connection_type_2
       - sensor.connection_type_3
@@ -446,6 +442,47 @@ weather:
     station: ON/s0000458
 
 sensor:
+  - platform: command_line
+    name: ontario_coronavirus_current
+    command: python3 -c "import lxml.html; import requests; html=requests.get('https://covid-19.ontario.ca'); doc=lxml.html.fromstring(html.text); rev=doc.xpath('//*[@id=\"main-content\"]/div[3]/div[1]/div[2]/ul/li[1]/div[1]/text()')[0]; print(rev)"
+    scan_interval: 3600
+    value_template: '{{ value | replace(",", "") | int }}'
+  - platform: command_line
+    name: ontario_coronavirus_confirmed
+    command: python3 -c "import lxml.html; import requests; html=requests.get('https://covid-19.ontario.ca'); doc=lxml.html.fromstring(html.text); rev=doc.xpath('//*[@id=\"main-content\"]/div[3]/div[1]/div[2]/ul/li[1]/div[1]/text()')[0]; print(rev)"
+    scan_interval: 3600
+    value_template: '{{ value | replace(",", "") | int }}'
+  - platform: command_line
+    name: ontario_coronavirus_recovered
+    command: python3 -c "import lxml.html; import requests; html=requests.get('https://covid-19.ontario.ca'); doc=lxml.html.fromstring(html.text); rev=doc.xpath('//*[@id=\"main-content\"]/div[3]/div[1]/div[2]/ul/li[2]/div[1]/text()')[0]; print(rev)"
+    scan_interval: 3600
+    value_template: '{{ value | replace(",", "") | int }}'
+  - platform: command_line
+    name: ontario_coronavirus_deaths
+    command: python3 -c "import lxml.html; import requests; html=requests.get('https://covid-19.ontario.ca'); doc=lxml.html.fromstring(html.text); rev=doc.xpath('//*[@id=\"main-content\"]/div[3]/div[1]/div[2]/ul/li[3]/div[1]/text()')[0]; print(rev)"
+    scan_interval: 3600
+    value_template: '{{ value | replace(",", "") | int }}'
+  - platform: command_line
+    name: toronto_coronavirus_current
+    command: python3 -c "import lxml.html; import requests; html=requests.get('https://www.toronto.ca/home/covid-19/media-room/covid-19-status-of-cases-in-toronto/'); doc=lxml.html.fromstring(html.text); rev=doc.xpath('//*[@id=\"page-content\"]/div/table/tbody/tr[2]/td[2]/text()')[0]; print(rev)"
+    scan_interval: 3600
+    value_template: '{{ value | replace(",", "") | int }}'
+  - platform: command_line
+    name: toronto_coronavirus_confirmed
+    command: python3 -c "import lxml.html; import requests; html=requests.get('https://www.toronto.ca/home/covid-19/media-room/covid-19-status-of-cases-in-toronto/'); doc=lxml.html.fromstring(html.text); rev=doc.xpath('//*[@id=\"page-content\"]/div/table/tbody/tr[1]/td[2]/text()')[0]; print(rev)"
+    scan_interval: 3600
+    value_template: '{{ value | replace(",", "") | int }}'
+  - platform: command_line
+    name: toronto_coronavirus_recovered
+    command: python3 -c "import lxml.html; import requests; html=requests.get('https://www.toronto.ca/home/covid-19/media-room/covid-19-status-of-cases-in-toronto/'); doc=lxml.html.fromstring(html.text); rev=doc.xpath('//*[@id=\"page-content\"]/div/table/tbody/tr[7]/td[2]/text()')[0]; print(rev)"
+    scan_interval: 3600
+    value_template: '{{ value | replace(",", "") | int }}'
+  - platform: command_line
+    name: toronto_coronavirus_deaths
+    command: python3 -c "import lxml.html; import requests; html=requests.get('https://www.toronto.ca/home/covid-19/media-room/covid-19-status-of-cases-in-toronto/'); doc=lxml.html.fromstring(html.text); rev=doc.xpath('//*[@id=\"page-content\"]/div/table/tbody/tr[6]/td[2]/text()')[0]; print(rev)"
+    scan_interval: 3600
+    value_template: '{{ value | replace(",", "") | int }}'
+
   - platform: seventeentrack
     username: !secret seventeen_username
     password: !secret seventeen_password
@@ -862,20 +899,23 @@ sensor:
 
   - platform: nut
     name: Office UPS
+    username: ups
     host: !secret synology_ip
     resources:
       - ups.status.display
       - ups.load
       - battery.runtime
       - battery.charge
-      - ups.model
-      - ups.serial
       - ups.status
   - platform: template
     sensors:
       office_ups_battery_runtime_mins:
         unit_of_measurement: 'min'
         value_template: "{{ float(states('sensor.office_ups_battery_runtime')) / 60 | round(2)}}"
+      office_ups_model:
+        value_template: "Back-UPS BX1500G"
+      office_ups_serial_number:
+        value_template: "3B1106X32967"
   - platform: template
     sensors:
       office_ups_status_data_short:

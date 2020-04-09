@@ -32,23 +32,6 @@
                             "type": "glance"
                         },
                         {
-                            "entities": [
-                                {
-                                    "entity": "sensor.canada_coronavirus_confirmed"
-                                },
-                                {
-                                    "entity": "sensor.canada_coronavirus_deaths"
-                                },
-                                {
-                                    "entity": "sensor.canada_coronavirus_recovered"
-                                }
-                            ],
-                            "show_icon": true,
-                            "show_name": true,
-                            "show_state": true,
-                            "type": "glance"
-                        },
-                        {
                             "entity": "weather.toronto",
                             "type": "weather-forecast"
                         },
@@ -291,6 +274,277 @@
                     "icon": "mdi:home",
                     "path": "default_view",
                     "title": "Home"
+                },
+                {
+                    "badges": [],
+                    "cards": [
+                        {
+                            "cards": [
+                                {
+                                    "cards": [
+                                        {
+                                            "decimals": 0,
+                                            "entities": [
+                                                {
+                                                    "color": "green",
+                                                    "entity": "sensor.toronto_coronavirus_confirmed",
+                                                    "name": "Confirmed"
+                                                },
+                                                {
+                                                    "color": "blue",
+                                                    "entity": "sensor.toronto_coronavirus_current",
+                                                    "name": "Current"
+                                                },
+                                                {
+                                                    "color": "pink",
+                                                    "entity": "sensor.toronto_coronavirus_recovered",
+                                                    "name": "Recovered"
+                                                },
+                                                {
+                                                    "color": "red",
+                                                    "entity": "sensor.toronto_coronavirus_deaths",
+                                                    "name": "Deaths"
+                                                }
+                                            ],
+                                            "extrema": true,
+                                            "font_size": 100,
+                                            "font_size_header": 15,
+                                            "hour24": true,
+                                            "hours_to_show": 240,
+                                            "icon": "none",
+                                            "line_color": "#E53935",
+                                            "name": "Toronto",
+                                            "points_per_hour": 5,
+                                            "show": {
+                                                "fill": "fade",
+                                                "points": false
+                                            },
+                                            "type": "custom:mini-graph-card"
+                                        },
+                                        {
+                                            "decimals": 0,
+                                            "entities": [
+                                                {
+                                                    "color": "green",
+                                                    "entity": "sensor.ontario_coronavirus_confirmed",
+                                                    "name": "Confirmed"
+                                                },
+                                                {
+                                                    "color": "blue",
+                                                    "entity": "sensor.ontario_coronavirus_current",
+                                                    "name": "Current"
+                                                },
+                                                {
+                                                    "color": "pink",
+                                                    "entity": "sensor.ontario_coronavirus_recovered",
+                                                    "name": "Recovered"
+                                                },
+                                                {
+                                                    "color": "red",
+                                                    "entity": "sensor.ontario_coronavirus_deaths",
+                                                    "name": "Deaths"
+                                                }
+                                            ],
+                                            "extrema": true,
+                                            "font_size": 100,
+                                            "font_size_header": 15,
+                                            "hour24": true,
+                                            "hours_to_show": 240,
+                                            "icon": "none",
+                                            "line_color": "#E53935",
+                                            "name": "Ontario",
+                                            "points_per_hour": 5,
+                                            "show": {
+                                                "fill": "fade",
+                                                "points": false
+                                            },
+                                            "type": "custom:mini-graph-card"
+                                        }
+                                    ],
+                                    "type": "horizontal-stack"
+                                },
+                                {
+                                    "cards": [
+                                        {
+                                            "decimals": 0,
+                                            "entities": [
+                                                {
+                                                    "color": "green",
+                                                    "entity": "sensor.canada_coronavirus_confirmed",
+                                                    "name": "Confirmed"
+                                                },
+                                                {
+                                                    "color": "blue",
+                                                    "entity": "sensor.canada_coronavirus_current",
+                                                    "name": "Current"
+                                                },
+                                                {
+                                                    "color": "pink",
+                                                    "entity": "sensor.canada_coronavirus_recovered",
+                                                    "name": "Recovered"
+                                                },
+                                                {
+                                                    "color": "red",
+                                                    "entity": "sensor.canada_coronavirus_deaths",
+                                                    "name": "Deaths"
+                                                }
+                                            ],
+                                            "extrema": true,
+                                            "font_size": 100,
+                                            "font_size_header": 15,
+                                            "hour24": true,
+                                            "hours_to_show": 240,
+                                            "icon": "none",
+                                            "line_color": "#E53935",
+                                            "name": "Canada",
+                                            "points_per_hour": 5,
+                                            "show": {
+                                                "fill": "fade",
+                                                "points": false
+                                            },
+                                            "type": "custom:mini-graph-card",
+                                            "unit": " "
+                                        },
+                                        {
+                                            "decimals": 0,
+                                            "entities": [
+                                                {
+                                                    "color": "green",
+                                                    "entity": "sensor.worldwide_coronavirus_confirmed",
+                                                    "name": "Confirmed"
+                                                },
+                                                {
+                                                    "color": "blue",
+                                                    "entity": "sensor.worldwide_coronavirus_current",
+                                                    "name": "Current"
+                                                },
+                                                {
+                                                    "color": "pink",
+                                                    "entity": "sensor.worldwide_coronavirus_recovered",
+                                                    "name": "Recovered"
+                                                },
+                                                {
+                                                    "color": "red",
+                                                    "entity": "sensor.worldwide_coronavirus_deaths",
+                                                    "name": "Deaths"
+                                                }
+                                            ],
+                                            "extrema": true,
+                                            "font_size": 100,
+                                            "font_size_header": 15,
+                                            "hour24": true,
+                                            "hours_to_show": 240,
+                                            "icon": "none",
+                                            "line_color": "#E53935",
+                                            "name": "Worldwide",
+                                            "points_per_hour": 5,
+                                            "show": {
+                                                "fill": "fade",
+                                                "points": false
+                                            },
+                                            "type": "custom:mini-graph-card",
+                                            "unit": " "
+                                        }
+                                    ],
+                                    "type": "horizontal-stack"
+                                }
+                            ],
+                            "type": "vertical-stack"
+                        },
+                        {
+                            "cards": [
+                                {
+                                    "cards": [
+                                        {
+                                            "decimals": 0,
+                                            "entities": [
+                                                {
+                                                    "color": "green",
+                                                    "entity": "sensor.us_coronavirus_confirmed",
+                                                    "name": "Confirmed"
+                                                },
+                                                {
+                                                    "color": "blue",
+                                                    "entity": "sensor.us_coronavirus_current",
+                                                    "name": "Current"
+                                                },
+                                                {
+                                                    "color": "pink",
+                                                    "entity": "sensor.us_coronavirus_recovered",
+                                                    "name": "Recovered"
+                                                },
+                                                {
+                                                    "color": "red",
+                                                    "entity": "sensor.us_coronavirus_deaths",
+                                                    "name": "Deaths"
+                                                }
+                                            ],
+                                            "extrema": true,
+                                            "font_size": 100,
+                                            "font_size_header": 15,
+                                            "hour24": true,
+                                            "hours_to_show": 240,
+                                            "icon": "none",
+                                            "line_color": "#E53935",
+                                            "name": "USA",
+                                            "points_per_hour": 5,
+                                            "show": {
+                                                "fill": "fade",
+                                                "points": false
+                                            },
+                                            "type": "custom:mini-graph-card",
+                                            "unit": " "
+                                        },
+                                        {
+                                            "decimals": 0,
+                                            "entities": [
+                                                {
+                                                    "color": "green",
+                                                    "entity": "sensor.united_kingdom_coronavirus_confirmed",
+                                                    "name": "Confirmed"
+                                                },
+                                                {
+                                                    "color": "blue",
+                                                    "entity": "sensor.united_kingdom_coronavirus_current",
+                                                    "name": "Current"
+                                                },
+                                                {
+                                                    "color": "pink",
+                                                    "entity": "sensor.united_kingdom_coronavirus_recovered",
+                                                    "name": "Recovered"
+                                                },
+                                                {
+                                                    "color": "red",
+                                                    "entity": "sensor.united_kingdom_coronavirus_deaths",
+                                                    "name": "Deaths"
+                                                }
+                                            ],
+                                            "extrema": true,
+                                            "font_size": 100,
+                                            "font_size_header": 15,
+                                            "hour24": true,
+                                            "hours_to_show": 240,
+                                            "icon": "none",
+                                            "line_color": "#E53935",
+                                            "name": "UK",
+                                            "points_per_hour": 5,
+                                            "show": {
+                                                "fill": "fade",
+                                                "points": false
+                                            },
+                                            "type": "custom:mini-graph-card",
+                                            "unit": " "
+                                        }
+                                    ],
+                                    "type": "horizontal-stack"
+                                }
+                            ],
+                            "type": "vertical-stack"
+                        }
+                    ],
+                    "icon": "mdi:biohazard",
+                    "path": "coronavirus",
+                    "title": "Coronavirus"
                 },
                 {
                     "badges": [],
@@ -754,47 +1008,51 @@
                                     "type": "custom:multiple-entity-row"
                                 },
                                 {
-                                    "animation": "off",
                                     "entity": "sensor.synology_dsm_cpu_load_total",
+                                    "entity_row": true,
                                     "height": "30px",
-                                    "indicator": "on",
+                                    "name": "CPU Load",
                                     "severity": [
                                         {
                                             "color": "green",
-                                            "value": 60
+                                            "from": 0,
+                                            "to": 74
                                         },
                                         {
                                             "color": "orange",
-                                            "value": 70
+                                            "from": 75,
+                                            "to": 89
                                         },
                                         {
                                             "color": "red",
-                                            "value": 100
+                                            "from": 90,
+                                            "to": 100
                                         }
                                     ],
-                                    "title": "CPU Load",
                                     "type": "custom:bar-card"
                                 },
                                 {
-                                    "animation": "off",
                                     "entity": "sensor.synology_dsm_memory_usage_real",
+                                    "entity_row": true,
                                     "height": "30px",
-                                    "indicator": "off",
+                                    "name": "Ram Used",
                                     "severity": [
                                         {
                                             "color": "green",
-                                            "value": 60
+                                            "from": 0,
+                                            "to": 74
                                         },
                                         {
                                             "color": "orange",
-                                            "value": 70
+                                            "from": 75,
+                                            "to": 89
                                         },
                                         {
                                             "color": "red",
-                                            "value": 100
+                                            "from": 90,
+                                            "to": 100
                                         }
                                     ],
-                                    "title": "Ram Used",
                                     "type": "custom:bar-card"
                                 },
                                 {
@@ -835,47 +1093,53 @@
                                     "name": "Model"
                                 },
                                 {
-                                    "animation": "off",
                                     "entity": "sensor.router_cpu_load",
+                                    "entity_row": true,
                                     "height": "30px",
-                                    "indicator": "on",
+                                    "icon": "mdi:chip",
+                                    "name": "CPU Load",
                                     "severity": [
                                         {
                                             "color": "green",
-                                            "value": 60
+                                            "from": 0,
+                                            "to": 74
                                         },
                                         {
                                             "color": "orange",
-                                            "value": 70
+                                            "from": 75,
+                                            "to": 89
                                         },
                                         {
                                             "color": "red",
-                                            "value": 100
+                                            "from": 90,
+                                            "to": 100
                                         }
                                     ],
-                                    "title": "CPU Load",
                                     "type": "custom:bar-card"
                                 },
                                 {
-                                    "animation": "off",
                                     "entity": "sensor.router_mem_used",
+                                    "entity_row": true,
                                     "height": "30px",
-                                    "indicator": "off",
+                                    "icon": "mdi:memory",
+                                    "name": "Ram Used",
                                     "severity": [
                                         {
                                             "color": "green",
-                                            "value": 60
+                                            "from": 0,
+                                            "to": 74
                                         },
                                         {
                                             "color": "orange",
-                                            "value": 70
+                                            "from": 75,
+                                            "to": 89
                                         },
                                         {
                                             "color": "red",
-                                            "value": 100
+                                            "from": 90,
+                                            "to": 100
                                         }
                                     ],
-                                    "title": "Ram Used",
                                     "type": "custom:bar-card"
                                 },
                                 {
@@ -996,114 +1260,125 @@
                                     "name": "Name"
                                 },
                                 {
-                                    "animation": "off",
                                     "entity": "sensor.processor_use",
+                                    "entity_row": true,
                                     "height": "30px",
                                     "icon": "mdi:chip",
-                                    "indicator": "off",
+                                    "name": "CPU Used",
                                     "severity": [
                                         {
                                             "color": "green",
-                                            "value": 60
+                                            "from": 0,
+                                            "to": 74
                                         },
                                         {
                                             "color": "orange",
-                                            "value": 70
+                                            "from": 75,
+                                            "to": 89
                                         },
                                         {
                                             "color": "red",
-                                            "value": 100
+                                            "from": 90,
+                                            "to": 100
                                         }
                                     ],
-                                    "title": "CPU Used",
                                     "type": "custom:bar-card"
                                 },
                                 {
-                                    "animation": "off",
                                     "entity": "sensor.glances_package_id_0_temp",
+                                    "entity_row": true,
                                     "height": "30px",
                                     "indicator": "off",
+                                    "name": "CPU Temp",
                                     "severity": [
                                         {
                                             "color": "green",
-                                            "value": 60
+                                            "from": 0,
+                                            "to": 74
                                         },
                                         {
                                             "color": "orange",
-                                            "value": 70
+                                            "from": 75,
+                                            "to": 89
                                         },
                                         {
                                             "color": "red",
-                                            "value": 100
+                                            "from": 90,
+                                            "to": 100
                                         }
                                     ],
-                                    "title": "CPU Temp",
                                     "type": "custom:bar-card"
                                 },
                                 {
-                                    "animation": "off",
                                     "entity": "sensor.glances_ram_used_percent",
+                                    "entity_row": true,
                                     "height": "30px",
-                                    "indicator": "off",
+                                    "name": "Ram Used",
                                     "severity": [
                                         {
                                             "color": "green",
-                                            "value": 60
+                                            "from": 0,
+                                            "to": 74
                                         },
                                         {
                                             "color": "orange",
-                                            "value": 70
+                                            "from": 75,
+                                            "to": 89
                                         },
                                         {
                                             "color": "red",
-                                            "value": 100
+                                            "from": 90,
+                                            "to": 100
                                         }
                                     ],
-                                    "title": "Ram Used",
                                     "type": "custom:bar-card"
                                 },
                                 {
-                                    "animation": "off",
                                     "entity": "sensor.glances_data_used_percent",
+                                    "entity_row": true,
                                     "height": "30px",
-                                    "indicator": "off",
+                                    "name": "Disk Used",
                                     "severity": [
                                         {
                                             "color": "green",
-                                            "value": 60
+                                            "from": 0,
+                                            "to": 74
                                         },
                                         {
                                             "color": "orange",
-                                            "value": 70
+                                            "from": 75,
+                                            "to": 89
                                         },
                                         {
                                             "color": "red",
-                                            "value": 100
+                                            "from": 90,
+                                            "to": 100
                                         }
                                     ],
-                                    "title": "Disk Used",
                                     "type": "custom:bar-card"
                                 },
                                 {
-                                    "animation": "off",
                                     "entity": "sensor.glances_swap_used_percent",
+                                    "entity_row": true,
                                     "height": "30px",
-                                    "indicator": "off",
+                                    "name": "Swap Used",
                                     "severity": [
                                         {
                                             "color": "green",
-                                            "value": 60
+                                            "from": 0,
+                                            "to": 74
                                         },
                                         {
                                             "color": "orange",
-                                            "value": 70
+                                            "from": 75,
+                                            "to": 89
                                         },
                                         {
                                             "color": "red",
-                                            "value": 100
+                                            "from": 90,
+                                            "to": 100
                                         }
                                     ],
-                                    "title": "Swap Used",
                                     "type": "custom:bar-card"
                                 },
                                 {
