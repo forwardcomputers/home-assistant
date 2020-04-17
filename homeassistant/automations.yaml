@@ -2,9 +2,8 @@
   alias: Sunset lights
   description: ''
   trigger:
-  - event: sunset
-    offset: -0:35
-    platform: sun
+  - platform: template
+    value_template: '{{ states.sun.sun.attributes.elevation | int < 8 }}'
   condition: []
   action:
   - data: {}

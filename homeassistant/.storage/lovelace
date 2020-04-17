@@ -99,7 +99,7 @@
                                     "type": "custom:slider-entity-row"
                                 },
                                 {
-                                    "entity": "light.office",
+                                    "entity": "light.table",
                                     "hide_when_off": true,
                                     "icon": "mdi:lamp",
                                     "name": "Office",
@@ -263,12 +263,6 @@
                             ],
                             "name": "Speednet",
                             "type": "horizontal-stack"
-                        },
-                        {
-                            "entity": "sensor.aftership",
-                            "show_add": true,
-                            "title": "Packages",
-                            "type": "custom:aftership-card"
                         }
                     ],
                     "icon": "mdi:home",
@@ -280,89 +274,6 @@
                     "cards": [
                         {
                             "cards": [
-                                {
-                                    "cards": [
-                                        {
-                                            "decimals": 0,
-                                            "entities": [
-                                                {
-                                                    "color": "green",
-                                                    "entity": "sensor.toronto_coronavirus_confirmed",
-                                                    "name": "Confirmed"
-                                                },
-                                                {
-                                                    "color": "blue",
-                                                    "entity": "sensor.toronto_coronavirus_current",
-                                                    "name": "Current"
-                                                },
-                                                {
-                                                    "color": "pink",
-                                                    "entity": "sensor.toronto_coronavirus_recovered",
-                                                    "name": "Recovered"
-                                                },
-                                                {
-                                                    "color": "red",
-                                                    "entity": "sensor.toronto_coronavirus_deaths",
-                                                    "name": "Deaths"
-                                                }
-                                            ],
-                                            "extrema": true,
-                                            "font_size": 100,
-                                            "font_size_header": 15,
-                                            "hour24": true,
-                                            "hours_to_show": 240,
-                                            "icon": "none",
-                                            "line_color": "#E53935",
-                                            "name": "Toronto",
-                                            "points_per_hour": 5,
-                                            "show": {
-                                                "fill": "fade",
-                                                "points": false
-                                            },
-                                            "type": "custom:mini-graph-card"
-                                        },
-                                        {
-                                            "decimals": 0,
-                                            "entities": [
-                                                {
-                                                    "color": "green",
-                                                    "entity": "sensor.ontario_coronavirus_confirmed",
-                                                    "name": "Confirmed"
-                                                },
-                                                {
-                                                    "color": "blue",
-                                                    "entity": "sensor.ontario_coronavirus_current",
-                                                    "name": "Current"
-                                                },
-                                                {
-                                                    "color": "pink",
-                                                    "entity": "sensor.ontario_coronavirus_recovered",
-                                                    "name": "Recovered"
-                                                },
-                                                {
-                                                    "color": "red",
-                                                    "entity": "sensor.ontario_coronavirus_deaths",
-                                                    "name": "Deaths"
-                                                }
-                                            ],
-                                            "extrema": true,
-                                            "font_size": 100,
-                                            "font_size_header": 15,
-                                            "hour24": true,
-                                            "hours_to_show": 240,
-                                            "icon": "none",
-                                            "line_color": "#E53935",
-                                            "name": "Ontario",
-                                            "points_per_hour": 5,
-                                            "show": {
-                                                "fill": "fade",
-                                                "points": false
-                                            },
-                                            "type": "custom:mini-graph-card"
-                                        }
-                                    ],
-                                    "type": "horizontal-stack"
-                                },
                                 {
                                     "cards": [
                                         {
@@ -676,16 +587,6 @@
                     "badges": [],
                     "cards": [
                         {
-                            "aspect_ratio": "56%",
-                            "camera_view": "live",
-                            "entity": "camera.cntowerw",
-                            "image": "https://www.home-assistant.io/images/merchandise/shirt-frontpage.png",
-                            "name": "West",
-                            "show_name": false,
-                            "show_state": false,
-                            "type": "picture-entity"
-                        },
-                        {
                             "aspect_ratio": "83%",
                             "camera_image": "camera.radar",
                             "entities": [],
@@ -698,16 +599,6 @@
                                 "url_path": "https://weather.gc.ca/city/pages/on-143_metric_e.html"
                             },
                             "type": "picture-glance"
-                        },
-                        {
-                            "aspect_ratio": "56%",
-                            "camera_view": "live",
-                            "entity": "camera.cntowere",
-                            "image": "https://www.home-assistant.io/images/merchandise/shirt-frontpage.png",
-                            "name": "East",
-                            "show_name": false,
-                            "show_state": false,
-                            "type": "picture-entity"
                         },
                         {
                             "aspect_ratio": "83%",
