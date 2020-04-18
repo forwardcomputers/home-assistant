@@ -143,6 +143,10 @@ panel_iframe:
      title: Adguard
      icon: mdi:shield-check
      url: !secret adguard_url
+  deconz:
+     title: deCONZ
+     icon: mdi:zigbee
+     url: !secret deconz_url
   glances:
      title: Glances
      icon: mdi:speedometer
@@ -433,6 +437,7 @@ sensor:
   - platform: seventeentrack
     username: !secret seventeen_username
     password: !secret seventeen_password
+
   - platform: scrape
     name: pollen
     resource: https://www.theweathernetwork.com/ca/forecasts/pollen/ontario/toronto
