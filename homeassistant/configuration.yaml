@@ -109,6 +109,15 @@ glances:
 group: !include groups.yaml
 
 homeassistant:
+  auth_providers:
+    - type: trusted_networks
+      trusted_networks:
+        - 192.168.1.0/24
+        - 10.10.10.0/24
+        - 10.14.0.0/24
+        - 127.0.0.1
+      allow_bypass_login: true
+    - type: homeassistant
   customize: !include customize.yaml
 
 homekit:

@@ -1040,7 +1040,7 @@
                                     "entity": "sensor.glances_data_used_percent",
                                     "entity_row": true,
                                     "height": "30px",
-                                    "name": "Disk Used",
+                                    "name": "Root Partition Used",
                                     "severity": [
                                         {
                                             "color": "green",
