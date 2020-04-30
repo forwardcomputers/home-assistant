@@ -238,7 +238,7 @@ speedtestdotnet:
     - ping
     - download
     - upload
-  server_id: 2565
+#  server_id: 2565
 # Teksavvy ---^
 
 weather:
