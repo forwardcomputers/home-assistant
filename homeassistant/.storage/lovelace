@@ -711,7 +711,7 @@
                                     "type": "custom:multiple-entity-row"
                                 },
                                 {
-                                    "entity": "sensor.synology_dsm_cpu_load_total",
+                                    "entity": "sensor.synology_cpu_load_total",
                                     "entity_row": true,
                                     "height": "30px",
                                     "name": "CPU Load",
@@ -735,7 +735,7 @@
                                     "type": "custom:bar-card"
                                 },
                                 {
-                                    "entity": "sensor.synology_dsm_memory_usage_real",
+                                    "entity": "sensor.synology_memory_usage_real",
                                     "entity_row": true,
                                     "height": "30px",
                                     "name": "Ram Used",
@@ -761,19 +761,19 @@
                                 {
                                     "entities": [
                                         {
-                                            "entity": "sensor.synology_dsm_volume_used_volume_1",
+                                            "entity": "sensor.synology_volume_used_volume_1",
                                             "name": "Used"
                                         },
                                         {
-                                            "entity": "sensor.synology_dsm_status_smart_sda",
+                                            "entity": "sensor.synology_status_smart_sda",
                                             "name": "sda"
                                         },
                                         {
-                                            "entity": "sensor.synology_dsm_status_smart_sdb",
+                                            "entity": "sensor.synology_status_smart_sdb",
                                             "name": "sdb"
                                         }
                                     ],
-                                    "entity": "sensor.synology_dsm_status_volume_1",
+                                    "entity": "sensor.synology_status_volume_1",
                                     "name": "Volume",
                                     "show_state": false,
                                     "type": "custom:multiple-entity-row"
