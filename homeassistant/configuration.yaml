@@ -262,7 +262,7 @@ sensor:
     scan_interval: 3600
   - platform: command_line
     name: flu
-    command: "/usr/bin/curl -L \"https://www.theweathernetwork.com/ca/health/ontario/toronto\" 2>&1 | awk -F '[ \"]' '/activity-colour/ {print toupper( substr( $4, 1, 1 ) ) substr( $4, 2 )}'"
+    command: "/usr/bin/curl -L \"https://www.theweathernetwork.com/ca/health/ontario/toronto\" 2>&1 | awk -F '[ \"]' '/activity-colour/ {gsub(/_/,\" \",$4); print toupper( substr( $4, 1, 1 ) ) substr( $4, 2 )}'"
     scan_interval: 3600
   - platform: command_line
     name: ec_current_summary_text
@@ -869,6 +869,19 @@ sensor:
           {{ states('sensor.ec_6_summary_text') }}
         entity_picture_template: >-
           "https://weather.gc.ca/weathericons/{{ states('sensor.ec_6_icon') }}.gif"
+
+  - platform: darksky
+    api_key: !secret darksky_api_key
+    forecast:
+      - 0
+      - 1
+      - 2
+      - 3
+      - 4
+      - 5
+      - 6
+    monitored_conditions:
+      - precip_intensity_max
 
   - platform: miflora
     name: kitchen

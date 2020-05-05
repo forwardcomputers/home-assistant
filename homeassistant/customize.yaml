@@ -11,3 +11,9 @@ sensor.humidity:
   friendly_name: Out
 sensor.humidity_in:
   friendly_name: In
+media_player.panasonic_viera_tv:
+  friendly_name: Panasonic Viera P55ST50 TV
+media_player.samsung_un32f5500:
+  friendly_name: Samsung UN32F5500 TV
+media_player.apple_tv:
+  friendly_name: Apple TV 4K
