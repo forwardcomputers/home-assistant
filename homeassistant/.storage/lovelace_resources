@@ -1,0 +1,68 @@
+{
+    "data": {
+        "items": [
+            {
+                "id": "e2331c0fa6aa429d8d86c4617c042b95",
+                "type": "js",
+                "url": "/hacsfiles/lovelace-card-tools/card-tools.js"
+            },
+            {
+                "id": "21cc616f18104639bc754289b33180ca",
+                "type": "js",
+                "url": "/hacsfiles/lovelace-slider-entity-row/slider-entity-row.js"
+            },
+            {
+                "id": "81fc1a3a627e48719f8c7c422cd732ac",
+                "type": "js",
+                "url": "/hacsfiles/lovelace-multiple-entity-row/multiple-entity-row.js"
+            },
+            {
+                "id": "e7185a02559b4a9e93409756913bb4ef",
+                "type": "module",
+                "url": "/hacsfiles/custom-header/custom-header.js"
+            },
+            {
+                "id": "8b869187600c4c488854ce7e520e7325",
+                "type": "module",
+                "url": "/community/lovelace-layout-card/layout-card.js"
+            },
+            {
+                "id": "ed3616ef07fc4ceca6cd53d3bed8ba9e",
+                "type": "module",
+                "url": "/hacsfiles/lovelace-auto-entities/auto-entities.js"
+            },
+            {
+                "id": "7bd25256ce2c4776ac520b725be25de1",
+                "type": "module",
+                "url": "/hacsfiles/mini-graph-card/mini-graph-card-bundle.js"
+            },
+            {
+                "id": "3cbeef3a33784627b0c36b30f1a440e4",
+                "type": "module",
+                "url": "/hacsfiles/bar-card/bar-card.js"
+            },
+            {
+                "id": "fb56cbeb21f048a9a4bacdd4474310a1",
+                "type": "module",
+                "url": "/hacsfiles/canvas-gauge-card/canvas-gauge-card.js"
+            },
+            {
+                "id": "281dc18fe8f0432b9d0347361eeb7e2b",
+                "type": "module",
+                "url": "/hacsfiles/lovelace-layout-card/layout-card.js"
+            },
+            {
+                "id": "750b4c99c8854b6e980f34c452f46ce2",
+                "type": "module",
+                "url": "/hacsfiles/vertical-stack-in-card/vertical-stack-in-card.js"
+            },
+            {
+                "id": "3cd313ee084544f8a8bec2d0304dd1f1",
+                "type": "module",
+                "url": "/hacsfiles/lovelace-card-mod/card-mod.js"
+            }
+        ]
+    },
+    "key": "lovelace_resources",
+    "version": 1
+}
