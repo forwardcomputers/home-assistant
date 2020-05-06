@@ -167,7 +167,7 @@
                                                             "width": "20%"
                                                         },
                                                         {
-                                                            "content": "<center>{{ (states('sensor.dark_sky_daily_max_precip_intensity_0d') | float *24) | round(1)}} mm</center>\n",
+                                                            "content": "<font size=1px><center>{{ (states('sensor.dark_sky_daily_max_precip_intensity_0d') | float *24) | round(1)}} mm</center>\n",
                                                             "type": "markdown"
                                                         }
                                                     ],
@@ -205,7 +205,7 @@
                                                             "width": "20%"
                                                         },
                                                         {
-                                                            "content": "<center>{{ (states('sensor.dark_sky_daily_max_precip_intensity_1d') | float *24) | round(1)}} mm</center>\n",
+                                                            "content": "<font size=1px><center>{{ (states('sensor.dark_sky_daily_max_precip_intensity_1d') | float *24) | round(1)}} mm</center>\n",
                                                             "type": "markdown"
                                                         }
                                                     ],
@@ -243,7 +243,7 @@
                                                             "width": "20%"
                                                         },
                                                         {
-                                                            "content": "<center>{{ (states('sensor.dark_sky_daily_max_precip_intensity_2d') | float *24) | round(1)}} mm</center>\n",
+                                                            "content": "<font size=1px><center>{{ (states('sensor.dark_sky_daily_max_precip_intensity_2d') | float *24) | round(1)}} mm</center>\n",
                                                             "type": "markdown"
                                                         }
                                                     ],
@@ -281,7 +281,7 @@
                                                             "width": "20%"
                                                         },
                                                         {
-                                                            "content": "<center>{{ (states('sensor.dark_sky_daily_max_precip_intensity_3d') | float *24) | round(1)}} mm</center>\n",
+                                                            "content": "<font size=1px><center>{{ (states('sensor.dark_sky_daily_max_precip_intensity_3d') | float *24) | round(1)}} mm</center>\n",
                                                             "type": "markdown"
                                                         }
                                                     ],
@@ -319,7 +319,7 @@
                                                             "width": "20%"
                                                         },
                                                         {
-                                                            "content": "<center>{{ (states('sensor.dark_sky_daily_max_precip_intensity_4d') | float *24) | round(1)}} mm</center>\n",
+                                                            "content": "<font size=1px><center>{{ (states('sensor.dark_sky_daily_max_precip_intensity_4d') | float *24) | round(1)}} mm</center>\n",
                                                             "type": "markdown"
                                                         }
                                                     ],
@@ -341,7 +341,7 @@
                                                     "type": "markdown"
                                                 },
                                                 {
-                                                    "content": "<ha-icon icon=\"mdi:compass-outline\"></ha-icon> {{ states('sensor.wind_direction') }}\n<ha-icon icon=\"mdi:wind-turbine\"></ha-icon> {{ states('sensor.wind_speed') }} km/h",
+                                                    "content": "<ha-icon icon=\"mdi:wind-turbine\"></ha-icon> {{ states('sensor.wind_direction') }} {{ states('sensor.wind_speed') }} km/h\n<ha-icon icon=\"mdi:gauge\"></ha-icon> {{ states('sensor.pressure') }} kPa",
                                                     "type": "markdown"
                                                 }
                                             ],
