@@ -74,17 +74,7 @@ camera:
     name: YYZ
     still_image_url: https://511on.ca/map/Cctv/loc33--2
 
-cast:
-  media_player:
-      - host: !secret ghomem1_ip
-
-clean_up_snapshots_service:
-  host: !secret server_port_url
-  token: !secret long_lived_token
-  number_of_snapshots_to_keep: 7
-
 emulated_hue:
-  host_ip: !secret emulated_hue_ip
   expose_by_default: false
   entities:
     light.floor:
@@ -107,11 +97,7 @@ group: !include groups.yaml
 homeassistant:
   auth_providers:
     - type: trusted_networks
-      trusted_networks:
-        - 192.168.1.0/24
-        - 10.10.10.0/24
-        - 10.14.0.0/24
-        - 127.0.0.1
+      trusted_networks: !secret local_lan
       allow_bypass_login: true
     - type: homeassistant
   customize: !include customize.yaml
@@ -218,18 +204,13 @@ recorder:
       - sensor.speedtest_upload
   purge_keep_days: 30
 
-remote:
-  - platform: harmony
-    name: Harmony
-    host: !secret harmonyhub_ip
-
 shell_command:
   clean_printer: !secret printer_cleaning_mode_url
   download_ec_forecast_toronto: /usr/bin/curl -L -s --retry 3 --output /tmp/toronto.xml https://dd.weather.gc.ca/citypage_weather/xml/ON/s0000458_e.xml
   download_router_firmware: /usr/bin/curl -L -s --retry 3 --output /opt/filer/Firmware/openwrt-{{states('sensor.router_latest_firmware')}}-{{states('sensor.router_target')}}-generic-{{states('sensor.router_filename')}} https://downloads.openwrt.org/releases/{{states('sensor.router_latest_firmware')}}/targets/{{states('sensor.router_target')}}/generic/openwrt-{{states('sensor.router_latest_firmware')}}-{{states('sensor.router_target')}}-generic-{{states('sensor.router_filename')}}
   download_printer_firmware: /usr/bin/curl -L -s --retry 3 --output /opt/filer/Firmware/HP_LaserJet_Pro_MFP_M130_M132_Ultra_MFP_M134_Printer_{{states('sensor.printer_latest_firmware')}}.rfu ftp://ftp.hp.com/pub/networking/software/pfirmware/HP_LaserJet_Pro_MFP_M130_M132_Ultra_MFP_M134_Printer_{{states('sensor.printer_latest_firmware')}}.rfu
   download_system_firmware: /usr/bin/curl -L -s --retry 3 --output /opt/filer/Firmware/NUC7i5BNK-BN{{states('sensor.sys_latest_firmware')}}.bio https://downloadmirror.intel.com/29347/eng/BN{{states('sensor.sys_latest_firmware')}}.bio
-  mount_filer: !secret mount_filer_share
+#  mount_filer: !secret mount_filer_share
 
 speedtestdotnet:
   scan_interval:

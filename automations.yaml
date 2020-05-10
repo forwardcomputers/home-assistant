@@ -64,27 +64,6 @@
       message: 'UPS battery must be replaced. Search on amazon: https://amzn.to/2wzV4Io
         and https://amzn.to/2MXBQH2'
     service: notify.forwardcomputers
-- id: '1574359204128'
-  alias: Daily snapshot clean up
-  description: ''
-  trigger:
-  - at: 03:00:00
-    platform: time
-  condition: []
-  action:
-  - service: clean_up_snapshots_service.clean_up
-- id: '1574360534590'
-  alias: Daily snapshot create
-  description: ''
-  trigger:
-  - at: 02:00:00
-    platform: time
-  condition: []
-  action:
-  - data_template:
-      name: Backup_{{ now().strftime('%Y-%m-%d') }}_{{ states('sensor.installed_version')
-        }}
-    service: hassio.snapshot_full
 - id: '1575054174712'
   alias: Vacation
   description: ''
@@ -120,13 +99,3 @@
   condition: []
   action:
   - service: speedtestdotnet.speedtest
-- id: '1584890507989'
-  alias: Mount filer share
-  description: ''
-  trigger:
-  - event: start
-    platform: homeassistant
-  condition: []
-  action:
-  - data: {}
-    service: shell_command.mount_filer
