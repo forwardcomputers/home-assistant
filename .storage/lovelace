@@ -724,17 +724,17 @@
                                             "type": "custom:slider-entity-row"
                                         },
                                         {
-                                            "entity": "media_player.panasonic_viera_tv"
+                                            "entity": "media_player.panasonic_viera_p55st50_tv"
                                         },
                                         {
-                                            "entity": "media_player.apple_tv"
+                                            "entity": "media_player.apple_tv_living_room"
                                         },
                                         {
-                                            "entity": "remote.apple_tv",
+                                            "entity": "remote.apple_tv_living_room",
                                             "name": "Apple TV remote"
                                         },
                                         {
-                                            "entity": "remote.harmony",
+                                            "entity": "remote.harmony_hub_living_room",
                                             "name": "Harmony Remote"
                                         }
                                     ],

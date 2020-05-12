@@ -55,9 +55,6 @@ logger:
   default: info
 
 apple_tv:
-  host: !secret atv_livingroom_ip
-  login_id: !secret atv_livingroom_login_key
-  start_off: true
 
 camera:
   - platform: environment_canada
