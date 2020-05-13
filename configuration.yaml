@@ -86,9 +86,6 @@ emulated_hue:
 
 ffmpeg:
 
-glances:
-  - host: !secret server_ip
-
 group: !include groups.yaml
 
 homeassistant:
@@ -224,10 +221,6 @@ weather:
     station: ON/s0000458
 
 sensor:
-  - platform: seventeentrack
-    username: !secret seventeen_username
-    password: !secret seventeen_password
-
   - platform: scrape
     name: pollen
     resource: https://www.theweathernetwork.com/ca/forecasts/pollen/ontario/toronto
