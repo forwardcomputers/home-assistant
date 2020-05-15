@@ -59,7 +59,7 @@ apple_tv:
 camera:
   - platform: environment_canada
     name: radar
-    station: WSO
+    station: CASET
   - platform: generic
     name: jet_stream
     content_type: image/gif
