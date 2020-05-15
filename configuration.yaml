@@ -200,10 +200,10 @@ recorder:
 
 shell_command:
   clean_printer: !secret printer_cleaning_mode_url
-  download_ec_forecast_toronto: /usr/bin/curl -L -s --retry 3 --output /tmp/toronto.xml https://dd.weather.gc.ca/citypage_weather/xml/ON/s0000458_e.xml
-  download_ap_firmware: /usr/bin/curl -L -s --retry 3 --output /opt/filer/Firmware/openwrt-{{states('sensor.ap_latest_firmware')}}-{{states('sensor.ap_target')}}-generic-{{states('sensor.ap_filename')}} https://downloads.openwrt.org/releases/{{states('sensor.ap_latest_firmware')}}/targets/{{states('sensor.ap_target')}}/generic/openwrt-{{states('sensor.ap_latest_firmware')}}-{{states('sensor.ap_target')}}-generic-{{states('sensor.ap_filename')}}
-  download_printer_firmware: /usr/bin/curl -L -s --retry 3 --output /opt/filer/Firmware/HP_LaserJet_Pro_MFP_M130_M132_Ultra_MFP_M134_Printer_{{states('sensor.printer_latest_firmware')}}.rfu ftp://ftp.hp.com/pub/networking/software/pfirmware/HP_LaserJet_Pro_MFP_M130_M132_Ultra_MFP_M134_Printer_{{states('sensor.printer_latest_firmware')}}.rfu
-  download_system_firmware: /usr/bin/curl -L -s --retry 3 --output /opt/filer/Firmware/NUC7i5BNK-BN{{states('sensor.sys_latest_firmware')}}.bio https://downloadmirror.intel.com/29347/eng/BN{{states('sensor.sys_latest_firmware')}}.bio
+  download_ec_forecast_toronto: /usr/bin/wget -O /tmp/toronto.xml https://dd.weather.gc.ca/citypage_weather/xml/ON/s0000458_e.xml
+  download_ap_firmware: /usr/bin/wget -O /opt/filer/Firmware/openwrt-{{states('sensor.ap_latest_firmware')}}-{{states('sensor.ap_target')}}-generic-{{states('sensor.ap_filename')}} https://downloads.openwrt.org/releases/{{states('sensor.ap_latest_firmware')}}/targets/{{states('sensor.ap_target')}}/generic/openwrt-{{states('sensor.ap_latest_firmware')}}-{{states('sensor.ap_target')}}-generic-{{states('sensor.ap_filename')}}
+  download_printer_firmware: /usr/bin/wget -O /opt/filer/Firmware/HP_LaserJet_Pro_MFP_M130_M132_Ultra_MFP_M134_Printer_{{states('sensor.printer_latest_firmware')}}.rfu ftp://ftp.hp.com/pub/networking/software/pfirmware/HP_LaserJet_Pro_MFP_M130_M132_Ultra_MFP_M134_Printer_{{states('sensor.printer_latest_firmware')}}.rfu
+  download_system_firmware: /usr/bin/wget -O /opt/filer/Firmware/NUC7i5BNK-BN{{states('sensor.sys_latest_firmware')}}.bio https://downloadmirror.intel.com/29347/eng/BN{{states('sensor.sys_latest_firmware')}}.bio
 #  mount_filer: !secret mount_filer_share
 
 speedtestdotnet:
@@ -233,7 +233,7 @@ sensor:
     scan_interval: 3600
   - platform: command_line
     name: flu
-    command: "/usr/bin/curl -L \"https://www.theweathernetwork.com/ca/health/ontario/toronto\" 2>&1 | awk -F '[ \"]' '/activity-colour/ {gsub(/_/,\" \",$4); print toupper( substr( $4, 1, 1 ) ) substr( $4, 2 )}'"
+    command: "/usr/bin/wget -O - \"https://www.theweathernetwork.com/ca/health/ontario/toronto\" 2>&1 | awk -F '[ \"]' '/activity-colour/ {gsub(/_/,\" \",$4); print toupper( substr( $4, 1, 1 ) ) substr( $4, 2 )}'"
     scan_interval: 3600
   - platform: command_line
     name: ec_current_summary_text
