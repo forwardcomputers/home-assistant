@@ -201,7 +201,7 @@ recorder:
 shell_command:
   clean_printer: !secret printer_cleaning_mode_url
   download_ec_forecast_toronto: /usr/bin/curl -L -s --retry 3 --output /tmp/toronto.xml https://dd.weather.gc.ca/citypage_weather/xml/ON/s0000458_e.xml
-  download_router_firmware: /usr/bin/curl -L -s --retry 3 --output /opt/filer/Firmware/openwrt-{{states('sensor.router_latest_firmware')}}-{{states('sensor.router_target')}}-generic-{{states('sensor.router_filename')}} https://downloads.openwrt.org/releases/{{states('sensor.router_latest_firmware')}}/targets/{{states('sensor.router_target')}}/generic/openwrt-{{states('sensor.router_latest_firmware')}}-{{states('sensor.router_target')}}-generic-{{states('sensor.router_filename')}}
+  download_ap_firmware: /usr/bin/curl -L -s --retry 3 --output /opt/filer/Firmware/openwrt-{{states('sensor.ap_latest_firmware')}}-{{states('sensor.ap_target')}}-generic-{{states('sensor.ap_filename')}} https://downloads.openwrt.org/releases/{{states('sensor.ap_latest_firmware')}}/targets/{{states('sensor.ap_target')}}/generic/openwrt-{{states('sensor.ap_latest_firmware')}}-{{states('sensor.ap_target')}}-generic-{{states('sensor.ap_filename')}}
   download_printer_firmware: /usr/bin/curl -L -s --retry 3 --output /opt/filer/Firmware/HP_LaserJet_Pro_MFP_M130_M132_Ultra_MFP_M134_Printer_{{states('sensor.printer_latest_firmware')}}.rfu ftp://ftp.hp.com/pub/networking/software/pfirmware/HP_LaserJet_Pro_MFP_M130_M132_Ultra_MFP_M134_Printer_{{states('sensor.printer_latest_firmware')}}.rfu
   download_system_firmware: /usr/bin/curl -L -s --retry 3 --output /opt/filer/Firmware/NUC7i5BNK-BN{{states('sensor.sys_latest_firmware')}}.bio https://downloadmirror.intel.com/29347/eng/BN{{states('sensor.sys_latest_firmware')}}.bio
 #  mount_filer: !secret mount_filer_share
@@ -393,45 +393,34 @@ sensor:
       Content-Type: application/json
       User-Agent: Home Assistant REST sensor
 
-  - platform: snmp
-    name: router_id
-    host: !secret router_ip
-    baseoid: 1.3.6.1.3.19811018.1.101.1
-    accept_errors: true
-    scan_interval: 86400
+  - platform: template
+    sensors:
+      router_model:
+        value_template: "Netgate SG-3100"
   - platform: snmp
     name: router_release
     host: !secret router_ip
-    baseoid: 1.3.6.1.3.19811018.2.101.1
-    accept_errors: true
-    scan_interval: 3600
-  - platform: snmp
-    name: router_revision
-    host: !secret router_ip
-    baseoid: 1.3.6.1.3.19811018.3.101.1
-    accept_errors: true
-    scan_interval: 3600
-  - platform: snmp
-    name: router_model
-    host: !secret router_ip
-    baseoid: 1.3.6.1.3.19811018.4.101.1
+    baseoid: 1.3.6.1.4.1.8072.1.3.2.3.1.2.7.118.101.114.115.105.111.110
     accept_errors: true
     scan_interval: 86400
   - platform: snmp
-    name: router_target
+    name: router_os
     host: !secret router_ip
-    baseoid: 1.3.6.1.3.19811018.5.101.1
+    baseoid: 1.3.6.1.4.1.8072.1.3.2.3.1.1.2.111.115
     accept_errors: true
     scan_interval: 86400
   - platform: snmp
-    name: router_filename
+    name: router_new
     host: !secret router_ip
-    baseoid: 1.3.6.1.3.19811018.6.101.1
+    baseoid: 1.3.6.1.4.1.8072.1.3.2.3.1.2.3.110.101.119
     accept_errors: true
     scan_interval: 86400
-  - platform: command_line
-    name: router_latest_firmware
-    command: python3 -c "import lxml.html; import requests; html=requests.get('https://downloads.openwrt.org'); doc=lxml.html.fromstring(html.text); rev=doc.xpath('/html/body/div/ul[1]/li/strong/a/text()')[0]; print(rev.split()[-1])"
+    value_template: >-
+        {% if value == "Your system is up to date" %}
+            {{ states('sensor.router_release') }}
+        {% else %}
+            {{- value -}}
+        {% endif %}
   - platform: snmp
     name: router_uptime
     host: !secret router_ip
@@ -478,6 +467,88 @@ sensor:
     value_template: >-
         {% set free = (value.split(" ")[0]) | float %}
         {% set total = states('sensor.router_ram') | float %}
+        {% set used = ((total - free) / total * 100) | round(0, "floor") %}
+        {{- used -}}
+
+  - platform: template
+    sensors:
+      ap_model:
+        value_template: "Netgear Nighthawk X4S R7800"
+  - platform: template
+    sensors:
+      ap_target:
+        value_template: "ipq806x"
+  - platform: template
+    sensors:
+      ap_id:
+        value_template: "OpenWrt"
+  - platform: snmp
+    name: ap_release
+    host: !secret ap_ip
+    baseoid: 1.3.6.1.3.19811018.1.101.1
+    accept_errors: true
+    scan_interval: 3600
+  - platform: snmp
+    name: ap_revision
+    host: !secret ap_ip
+    baseoid: 1.3.6.1.3.19811018.2.101.1
+    accept_errors: true
+    scan_interval: 3600
+  - platform: snmp
+    name: ap_filename
+    host: !secret ap_ip
+    baseoid: 1.3.6.1.3.19811018.3.101.1
+    accept_errors: true
+    scan_interval: 86400
+  - platform: command_line
+    name: ap_latest_firmware
+    command: python3 -c "import lxml.html; import requests; html=requests.get('https://downloads.openwrt.org'); doc=lxml.html.fromstring(html.text); rev=doc.xpath('/html/body/div/ul[1]/li/strong/a/text()')[0]; print(rev.split()[-1])"
+  - platform: snmp
+    name: ap_uptime
+    host: !secret ap_ip
+    baseoid: 1.3.6.1.2.1.25.1.1.0
+    accept_errors: true
+    scan_interval: 30
+    value_template: >-
+        {% set uptime = float(value) / 100 %}
+        {% set updays = (uptime / 86400) | round(0, "floor") %}
+        {% set uphours = uptime | timestamp_custom('%-H:%-M:%-S', false) | regex_replace('^0:','') %}
+        {% if updays == 0 %}
+            {{- uphours -}}
+        {% elif updays == 1 %}
+            {{- updays ~ " Day, " ~ uphours -}}
+        {% else %}
+            {{- updays ~ " Days, " ~ uphours -}}
+        {% endif %}
+  - platform: snmp
+    name: ap_cpu_load
+    host: !secret ap_ip
+    baseoid: 1.3.6.1.4.1.2021.11.11.0
+    accept_errors: true
+    scan_interval: 30
+    unit_of_measurement: '%'
+    value_template: >-
+        {% set load = 100 - value | int %}
+        {{- load -}}
+  - platform: snmp
+    name: ap_ram
+    host: !secret ap_ip
+    baseoid: 1.3.6.1.4.1.2021.4.5.0
+    accept_errors: true
+    scan_interval: 30
+    value_template: >-
+        {% set ram = (value.split(" ")[0]) | float %}
+        {{- ram -}}
+  - platform: snmp
+    name: ap_mem_used
+    host: !secret ap_ip
+    baseoid: 1.3.6.1.4.1.2021.4.6.0
+    accept_errors: true
+    scan_interval: 30
+    unit_of_measurement: '%'
+    value_template: >-
+        {% set free = (value.split(" ")[0]) | float %}
+        {% set total = states('sensor.ap_ram') | float %}
         {% set used = ((total - free) / total * 100) | round(0, "floor") %}
         {{- used -}}
 
