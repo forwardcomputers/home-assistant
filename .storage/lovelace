@@ -853,7 +853,7 @@
                                             "type": "custom:bar-card"
                                         },
                                         {
-                                            "entity": "sensor.router_mem_used",
+                                            "entity": "sensor.router_mem_available",
                                             "entity_row": true,
                                             "height": "30px",
                                             "icon": "mdi:memory",
