@@ -458,6 +458,15 @@ sensor:
         {% set ram = (value.split(" ")[0]) | float %}
         {{- ram -}}
   - platform: snmp
+    name: router_cache
+    host: !secret router_ip
+    baseoid: 1.3.6.1.4.1.2021.4.15.0
+    accept_errors: true
+    scan_interval: 30
+    value_template: >-
+        {% set ram = (value.split(" ")[0]) | float %}
+        {{- ram -}}
+  - platform: snmp
     name: router_mem_used
     host: !secret router_ip
     baseoid: 1.3.6.1.4.1.2021.4.6.0
@@ -467,7 +476,8 @@ sensor:
     value_template: >-
         {% set free = (value.split(" ")[0]) | float %}
         {% set total = states('sensor.router_ram') | float %}
-        {% set used = ((total - free) / total * 100) | round(0, "floor") %}
+        {% set cache = states('sensor.router_cache') | float %}
+        {% set used = ((total - free - cache) / total * 100) | round(0, "floor") %}
         {{- used -}}
 
   - platform: template
