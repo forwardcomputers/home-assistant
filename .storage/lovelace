@@ -1183,9 +1183,13 @@
                                             "type": "custom:multiple-entity-row"
                                         },
                                         {
-                                            "entity": "sensor.printer_pages",
+                                            "entity": "sensor.hp_laserjet_mfp_m130fw_printer",
                                             "icon": "mdi:file-document",
-                                            "name": "Pages printed"
+                                            "name": "Printed"
+                                        },
+                                        {
+                                            "entity": "sensor.hp_laserjet_mfp_m130fw_scanner",
+                                            "name": "Scanned"
                                         },
                                         {
                                             "entity": "sensor.printer_uptime",
@@ -1424,6 +1428,10 @@
                                     ],
                                     "title": "Software",
                                     "type": "entities"
+                                },
+                                {
+                                    "content": "Site [github](https://github.com/home-assistant/core).",
+                                    "type": "markdown"
                                 }
                             ],
                             "layout": "vertical",
