@@ -96,14 +96,6 @@ homeassistant:
     - type: homeassistant
   customize: !include customize.yaml
 
-homekit:
-  auto_start: true
-  filter:
-    include_domains:
-      - climate
-      - light
-      - switch
-
 media_player:
   - platform: androidtv
     name: nvidia_shield
