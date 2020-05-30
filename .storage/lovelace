@@ -66,7 +66,7 @@
                                             "type": "custom:slider-entity-row"
                                         },
                                         {
-                                            "entity": "light.led",
+                                            "entity": "light.livingroom_led",
                                             "hide_when_off": true,
                                             "icon": "mdi:led-strip",
                                             "name": "LED",
@@ -81,7 +81,7 @@
                                             "type": "custom:slider-entity-row"
                                         },
                                         {
-                                            "entity": "light.floor",
+                                            "entity": "light.livingroom_chair",
                                             "hide_when_off": true,
                                             "icon": "mdi:floor-lamp",
                                             "name": "Floor",
@@ -97,7 +97,7 @@
                                             "type": "custom:slider-entity-row"
                                         },
                                         {
-                                            "entity": "light.table",
+                                            "entity": "light.office_table",
                                             "hide_when_off": true,
                                             "icon": "mdi:lamp",
                                             "name": "Office",
@@ -112,13 +112,13 @@
                                             "type": "custom:slider-entity-row"
                                         },
                                         {
-                                            "entity": "switch.kitchen",
+                                            "entity": "switch.kitchen_sink",
                                             "icon": "mdi:led-strip",
                                             "name": "Kitchen",
                                             "state_color": true
                                         },
                                         {
-                                            "entity": "switch.desk",
+                                            "entity": "switch.office_desk",
                                             "icon": "mdi:desk-lamp",
                                             "name": "Desk",
                                             "state_color": true
@@ -694,7 +694,7 @@
                                             "type": "custom:slider-entity-row"
                                         },
                                         {
-                                            "entity": "light.led",
+                                            "entity": "light.livingroom_led",
                                             "hide_when_off": true,
                                             "icon": "mdi:led-strip",
                                             "name": "LED",
@@ -709,7 +709,7 @@
                                             "type": "custom:slider-entity-row"
                                         },
                                         {
-                                            "entity": "light.floor",
+                                            "entity": "light.livingroom_chair",
                                             "hide_when_off": true,
                                             "icon": "mdi:floor-lamp",
                                             "name": "Floor Lamp",
@@ -749,7 +749,7 @@
                                             "name": "Office Remote Battery"
                                         },
                                         {
-                                            "entity": "light.table",
+                                            "entity": "light.office_table",
                                             "hide_when_off": true,
                                             "icon": "mdi:lamp",
                                             "name": "Table",
@@ -764,7 +764,7 @@
                                             "type": "custom:slider-entity-row"
                                         },
                                         {
-                                            "entity": "switch.desk",
+                                            "entity": "switch.office_desk",
                                             "icon": "mdi:desk-lamp",
                                             "name": "Desk"
                                         },
@@ -794,7 +794,7 @@
                                         {
                                             "entities": [
                                                 {
-                                                    "entity": "switch.kitchen",
+                                                    "entity": "switch.kitchen_sink",
                                                     "icon": "mdi:led-strip",
                                                     "name": "Kitchen"
                                                 }
