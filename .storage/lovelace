@@ -1251,9 +1251,10 @@
                                             "type": "custom:bar-card"
                                         },
                                         {
-                                            "entity": "sensor.glances_package_id_0_temp",
+                                            "entity": "sensor.netdata_cpu_temp",
                                             "entity_row": true,
                                             "height": "30px",
+                                            "icon": "mdi:thermometer",
                                             "indicator": "off",
                                             "name": "CPU Temp",
                                             "severity": [
@@ -1276,9 +1277,10 @@
                                             "type": "custom:bar-card"
                                         },
                                         {
-                                            "entity": "sensor.glances_ram_used_percent",
+                                            "entity": "sensor.netdata_disk_avail",
                                             "entity_row": true,
                                             "height": "30px",
+                                            "icon": "mdi:memory",
                                             "name": "Ram Used",
                                             "severity": [
                                                 {
@@ -1300,34 +1302,11 @@
                                             "type": "custom:bar-card"
                                         },
                                         {
-                                            "entity": "sensor.glances_data_used_percent",
+                                            "entity": "sensor.netdata_disk_used",
                                             "entity_row": true,
                                             "height": "30px",
+                                            "icon": "mdi:harddisk",
                                             "name": "Root Partition Used",
-                                            "severity": [
-                                                {
-                                                    "color": "green",
-                                                    "from": 0,
-                                                    "to": 74
-                                                },
-                                                {
-                                                    "color": "orange",
-                                                    "from": 75,
-                                                    "to": 89
-                                                },
-                                                {
-                                                    "color": "red",
-                                                    "from": 90,
-                                                    "to": 100
-                                                }
-                                            ],
-                                            "type": "custom:bar-card"
-                                        },
-                                        {
-                                            "entity": "sensor.glances_swap_used_percent",
-                                            "entity_row": true,
-                                            "height": "30px",
-                                            "name": "Swap Used",
                                             "severity": [
                                                 {
                                                     "color": "green",
@@ -1360,11 +1339,12 @@
                                             "type": "custom:multiple-entity-row"
                                         },
                                         {
-                                            "entity": "sensor.glances_total",
+                                            "entity": "sensor.netdata_system_processes",
+                                            "icon": "mdi:format-line-spacing",
                                             "name": "Process"
                                         },
                                         {
-                                            "entity": "sensor.server_uptime",
+                                            "entity": "sensor.netdata_server_uptime",
                                             "icon": "mdi:clock",
                                             "name": "Uptime"
                                         },
@@ -1379,7 +1359,7 @@
                                         {
                                             "entities": [
                                                 {
-                                                    "entity": "sensor.distro",
+                                                    "entity": "sensor.os",
                                                     "name": null
                                                 },
                                                 {
@@ -1405,7 +1385,7 @@
                                             "type": "custom:multiple-entity-row"
                                         },
                                         {
-                                            "entity": "sensor.glances_containers_active",
+                                            "entity": "sensor.docker_containers",
                                             "name": "Docker Active Containers"
                                         },
                                         {

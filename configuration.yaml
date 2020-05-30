@@ -294,20 +294,24 @@ sensor:
     resources:
       - type: processor_use
   - platform: command_line
-    command: python3 -c "import requests; print(requests.get('http://localhost:61208/api/3/system').json()['os_name'])"
+    command: python3 -c "import requests; print(requests.get('http://127.0.0.1:19999/api/v1/info').json()['host_labels']['_os_name'])"
     name: OS
     scan_interval: 86400
   - platform: command_line
-    command: python3 -c "import requests; print(requests.get('http://localhost:61208/api/3/system').json()['linux_distro'])"
-    name: Distro
+    command: python3 -c "import requests; print(requests.get('http://127.0.0.1:19999/api/v1/info').json()['host_labels']['_os_version'])"
+    name: Version
     scan_interval: 86400
   - platform: command_line
-    command: python3 -c "import requests; print(requests.get('http://localhost:61208/api/3/system').json()['os_version'])"
+    command: python3 -c "import requests; print(requests.get('http://127.0.0.1:19999/api/v1/info').json()['host_labels']['_kernel_version'])"
     name: Kernel Version
     scan_interval: 86400
   - platform: command_line
-    command: python3 -c "import requests; print(requests.get('http://localhost:61208/api/3/docker').json()['version']['Components'][0]['Version'])"
+    command: python3 -c "import requests; print(requests.get('http://127.0.0.1:2375/info').json()['ServerVersion'])"
     name: Docker Version
+    scan_interval: 86400
+  - platform: command_line
+    command: python3 -c "import requests; print(requests.get('http://127.0.0.1:2375/info').json()['ContainersRunning'])"
+    name: Docker Containers
     scan_interval: 86400
   - platform: command_line
     name: sys_name
@@ -319,25 +323,8 @@ sensor:
     scan_interval: 86400
   - platform: command_line
     name: sys_latest_firmware
-    command: python3 -c "import lxml.html; import requests; html=requests.get('https://downloadcenter.intel.com/search?keyword=NUC7i5BNK+bios'); doc=lxml.html.fromstring(html.text); rev=doc.xpath('//*[@id=\"search-results\"]/tbody/tr/td[4]/text()')[0]; print(rev)"
+    command: python3 -c "import lxml.html; import requests; html=requests.get('https://downloadcenter.intel.com/search?keyword=NUC7i3DNKE+bios'); doc=lxml.html.fromstring(html.text); rev=doc.xpath('//*[@id=\"search-results\"]/tbody/tr/td[4]/text()')[0]; print(rev)"
     scan_interval: 3600
-  - platform: snmp
-    name: server_uptime
-    host: !secret server_ip
-    baseoid: 1.3.6.1.2.1.25.1.1.0
-    accept_errors: true
-    scan_interval: 30
-    value_template: >-
-        {% set uptime = float(value) / 100 %}
-        {% set updays = (uptime / 86400) | round(0, "floor") %}
-        {% set uphours = uptime | timestamp_custom('%-H:%-M:%-S', false) | regex_replace('^0:','') %}
-        {% if updays == 0 %}
-            {{- uphours -}}
-        {% elif updays == 1 %}
-            {{- updays ~ " Day, " ~ uphours -}}
-        {% else %}
-            {{- updays ~ " Days, " ~ uphours -}}
-        {% endif %}
   - platform: rest
     scan_interval: 3600
     name: docker_github_version
@@ -350,6 +337,28 @@ sensor:
       Accept: application/vnd.github.v3+json
       Content-Type: application/json
       User-Agent: Home Assistant REST sensor
+  - platform: netdata
+    host: !secret server_ip
+    scan_interval: 30
+    resources:
+      server_uptime:
+        data_group: "system.uptime"
+        element: "uptime"
+      system_load:
+        data_group: "system.load"
+        element: "load15"
+      system_processes:
+        data_group: "system.active_processes"
+        element: "active"
+      cpu_temp:
+        data_group: "sensors.coretemp-isa-0000_temperature"
+        element: "coretemp-isa-0000_temp1"
+      disk_avail:
+        data_group: "disk_space._"
+        element: "avail"
+      disk_used:
+        data_group: "disk_space._"
+        element: "used"
 
   - platform: version
     name: installed_version
