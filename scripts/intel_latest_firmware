@@ -1,0 +1,17 @@
+#!/usr/local/bin/python3
+
+import sys
+import lxml.html
+import requests
+
+file=open('/sys/class/dmi/id/product_name')
+name=file.read().strip()
+file.close()
+
+url1='https://downloadcenter.intel.com/search?keyword='
+url2='+bios'
+url=''.join([url1, name, url2])
+html=requests.get(url)
+doc=lxml.html.fromstring(html.text)
+rev=doc.xpath('//*[@id=\"search-results\"]/tbody/tr/td[4]/text()')[0]
+print(rev)
