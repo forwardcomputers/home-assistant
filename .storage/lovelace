@@ -1221,9 +1221,21 @@
                                 {
                                     "entities": [
                                         {
-                                            "entity": "sensor.sys_name",
+                                            "entities": [
+                                                {
+                                                    "entity": "sensor.sys_family",
+                                                    "name": null
+                                                },
+                                                {
+                                                    "entity": "sensor.sys_name",
+                                                    "name": null
+                                                }
+                                            ],
+                                            "entity": "sensor.sys_family",
                                             "icon": "mdi:network",
-                                            "name": "Name"
+                                            "name": "Name",
+                                            "show_state": false,
+                                            "type": "custom:multiple-entity-row"
                                         },
                                         {
                                             "entity": "sensor.processor_use",
@@ -1277,7 +1289,7 @@
                                             "type": "custom:bar-card"
                                         },
                                         {
-                                            "entity": "sensor.ram_used_pct",
+                                            "entity": "sensor.memory_use_percent",
                                             "entity_row": true,
                                             "height": "30px",
                                             "icon": "mdi:memory",
@@ -1302,7 +1314,7 @@
                                             "type": "custom:bar-card"
                                         },
                                         {
-                                            "entity": "sensor.disk_used_pct",
+                                            "entity": "sensor.disk_use_percent",
                                             "entity_row": true,
                                             "height": "30px",
                                             "icon": "mdi:harddisk",

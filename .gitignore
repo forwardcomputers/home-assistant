@@ -10,6 +10,7 @@
 !automations.yaml
 !customize.yaml
 !configuration.yaml
+!scripts/
 !scripts.yaml
 !.storage/
 !.storage/lovelace
