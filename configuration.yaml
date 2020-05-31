@@ -341,13 +341,13 @@ sensor:
     host: !secret server_ip
     scan_interval: 30
     resources:
-      server_uptime:
+      server_uptime_raw:
         data_group: "system.uptime"
         element: "uptime"
       system_load:
         data_group: "system.load"
         element: "load15"
-      system_processes:
+      system_processes_raw:
         data_group: "system.active_processes"
         element: "active"
       cpu_temp:
@@ -359,6 +359,57 @@ sensor:
       disk_used:
         data_group: "disk_space._"
         element: "used"
+      disk_reserved:
+        data_group: "disk_space._"
+        element: "reserved_for_root"
+      ram_free:
+        data_group: "system.ram"
+        element: "free"
+      ram_used:
+        data_group: "system.ram"
+        element: "used"
+      ram_cached:
+        data_group: "system.ram"
+        element: "cached"
+      ram_buffers:
+        data_group: "system.ram"
+        element: "buffers"
+  - platform: template
+    sensors:
+      system_processes:
+        value_template: >-
+          {{- states('sensor.netdata_system_processes_raw') | int -}}
+      server_uptime:
+        value_template: >-
+            {% set uptime = states('sensor.netdata_server_uptime_raw') | float %}
+            {% set updays = (uptime / 86400) | round(0, "floor") %}
+            {% set uphours = uptime | timestamp_custom('%-H:%-M:%-S', false) | regex_replace('^0:','') %}
+            {% if updays == 0 %}
+                {{- uphours -}}
+            {% elif updays == 1 %}
+                {{- updays ~ " Day, " ~ uphours -}}
+            {% else %}
+                {{- updays ~ " Days, " ~ uphours -}}
+            {% endif %}
+      disk_used_pct:
+        unit_of_measurement: '%'
+        value_template: >-
+          {% set available = states('sensor.netdata_disk_avail') | float %}
+          {% set used = states('sensor.netdata_disk_used') | float %}
+          {% set reserved = states('sensor.netdata_disk_reserved') | float %}
+          {% set total = (available + used + reserved) | round(0, "ceil") %}
+          {% set used = (used / total * 100) | round(0, "ceil") %}
+          {{- used -}}
+      ram_used_pct:
+        unit_of_measurement: '%'
+        value_template: >-
+          {% set free = states('sensor.netdata_ram_free') | float %}
+          {% set used = states('sensor.netdata_ram_used') | float %}
+          {% set cached = states('sensor.netdata_ram_cached') | float %}
+          {% set buffers = states('sensor.netdata_ram_buffers') | float %}
+          {% set total = (free + used + cached + buffers) | float %}
+          {% set used = ((total - free) / total * 100) | round(0, "floor") %}
+          {{- used -}}
 
   - platform: version
     name: installed_version

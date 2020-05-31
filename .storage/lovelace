@@ -1277,7 +1277,7 @@
                                             "type": "custom:bar-card"
                                         },
                                         {
-                                            "entity": "sensor.netdata_disk_avail",
+                                            "entity": "sensor.ram_used_pct",
                                             "entity_row": true,
                                             "height": "30px",
                                             "icon": "mdi:memory",
@@ -1302,7 +1302,7 @@
                                             "type": "custom:bar-card"
                                         },
                                         {
-                                            "entity": "sensor.netdata_disk_used",
+                                            "entity": "sensor.disk_used_pct",
                                             "entity_row": true,
                                             "height": "30px",
                                             "icon": "mdi:harddisk",
@@ -1339,12 +1339,12 @@
                                             "type": "custom:multiple-entity-row"
                                         },
                                         {
-                                            "entity": "sensor.netdata_system_processes",
+                                            "entity": "sensor.system_processes",
                                             "icon": "mdi:format-line-spacing",
                                             "name": "Process"
                                         },
                                         {
-                                            "entity": "sensor.netdata_server_uptime",
+                                            "entity": "sensor.server_uptime",
                                             "icon": "mdi:clock",
                                             "name": "Uptime"
                                         },
