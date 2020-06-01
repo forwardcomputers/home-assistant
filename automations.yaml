@@ -7,7 +7,7 @@
   condition: []
   action:
   - data: {}
-    entity_id: switch.kitchen
+    entity_id: switch.kitchen_sink
     service: switch.turn_on
 - id: '1574096809868'
   alias: Sunrise lights
