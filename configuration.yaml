@@ -124,6 +124,10 @@ panel_iframe:
      title: deCONZ
      icon: mdi:zigbee
      url: !secret deconz_url
+  cockpit:
+     title: Cockpit
+     icon: mdi:tablet-dashboard
+     url: !secret cockpit_url
   netdata:
      title: Netdata
      icon: mdi:counter
