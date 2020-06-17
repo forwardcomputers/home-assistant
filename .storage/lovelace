@@ -886,11 +886,11 @@
                                         {
                                             "entities": [
                                                 {
-                                                    "entity": "sensor.router_new",
+                                                    "entity": "sensor.router_new_short",
                                                     "name": "Latest"
                                                 }
                                             ],
-                                            "entity": "sensor.router_release",
+                                            "entity": "sensor.router_release_short",
                                             "icon": "mdi:code-tags",
                                             "name": "Firmware",
                                             "type": "custom:multiple-entity-row"

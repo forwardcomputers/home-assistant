@@ -510,6 +510,14 @@ sensor:
         {% set cache = states('sensor.router_cache') | float %}
         {% set used = ((total - available - free - cache) / total * 100) | round(0, "floor") %}
         {{- used -}}
+  - platform: template
+    sensors:
+      router_release_short:
+        value_template: >-
+          {{- states("sensor.router_release").split('-')[0] -}}
+      router_new_short:
+        value_template: >-
+          {{- states("sensor.router_new").split(' ')[0] -}}
 
   - platform: template
     sensors:
