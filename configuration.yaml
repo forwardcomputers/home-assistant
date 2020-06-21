@@ -517,7 +517,7 @@ sensor:
           {{- states("sensor.router_release").split('-')[0] -}}
       router_new_short:
         value_template: >-
-          {{- states("sensor.router_new").split(' ')[0] -}}
+          {{- states("sensor.router_new").replace(' ','-').split('-')[0] -}}
 
   - platform: template
     sensors:
