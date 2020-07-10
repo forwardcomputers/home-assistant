@@ -683,6 +683,50 @@
                                 {
                                     "entities": [
                                         {
+                                            "entity": "sensor.office_remote_battery_level",
+                                            "name": "Office Remote Battery"
+                                        },
+                                        {
+                                            "entity": "light.office_table",
+                                            "hide_when_off": true,
+                                            "icon": "mdi:lamp",
+                                            "name": "Table",
+                                            "slider_theme": {
+                                                "max": 255,
+                                                "min": 0,
+                                                "off_when_min": true,
+                                                "report_when_not_changed": false
+                                            },
+                                            "state_card_mode": "single-line",
+                                            "toggle": true,
+                                            "type": "custom:slider-entity-row"
+                                        },
+                                        {
+                                            "entity": "switch.office_desk",
+                                            "icon": "mdi:desk-lamp",
+                                            "name": "Desk",
+                                            "state_color": true
+                                        },
+                                        {
+                                            "entity": "media_player.samsung_un32f5500"
+                                        },
+                                        {
+                                            "entity": "media_player.nvidia_shield",
+                                            "name": "nVIDIA Shield TV 2017"
+                                        },
+                                        {
+                                            "entity": "media_player.office_speaker",
+                                            "icon": "mdi:google",
+                                            "name": "Google Home Mini"
+                                        }
+                                    ],
+                                    "title": "Office",
+                                    "type": "entities"
+                                },
+                                "break",
+                                {
+                                    "entities": [
+                                        {
                                             "entity": "climate.thermostat",
                                             "slider_theme": {
                                                 "max": 25,
@@ -741,49 +785,6 @@
                                     "title": "Living Room",
                                     "type": "entities"
                                 },
-                                "break",
-                                {
-                                    "entities": [
-                                        {
-                                            "entity": "sensor.office_remote_battery_level",
-                                            "name": "Office Remote Battery"
-                                        },
-                                        {
-                                            "entity": "light.office_table",
-                                            "hide_when_off": true,
-                                            "icon": "mdi:lamp",
-                                            "name": "Table",
-                                            "slider_theme": {
-                                                "max": 255,
-                                                "min": 0,
-                                                "off_when_min": true,
-                                                "report_when_not_changed": false
-                                            },
-                                            "state_card_mode": "single-line",
-                                            "toggle": true,
-                                            "type": "custom:slider-entity-row"
-                                        },
-                                        {
-                                            "entity": "switch.office_desk",
-                                            "icon": "mdi:desk-lamp",
-                                            "name": "Desk"
-                                        },
-                                        {
-                                            "entity": "media_player.samsung_un32f5500"
-                                        },
-                                        {
-                                            "entity": "media_player.nvidia_shield",
-                                            "name": "nVIDIA Shield TV 2017"
-                                        },
-                                        {
-                                            "entity": "media_player.office_speaker",
-                                            "icon": "mdi:google",
-                                            "name": "Google Home Mini"
-                                        }
-                                    ],
-                                    "title": "Office",
-                                    "type": "entities"
-                                },
                                 {
                                     "cards": [
                                         {
@@ -799,6 +800,7 @@
                                                     "name": "Kitchen"
                                                 }
                                             ],
+                                            "state_color": true,
                                             "type": "entities"
                                         }
                                     ],

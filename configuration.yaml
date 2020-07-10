@@ -116,10 +116,10 @@ notify:
     access_token_secret: !secret forwardcomputers_access_token_secret_key
   
 panel_iframe:
-  adguard:
-     title: Adguard
-     icon: mdi:shield-check
-     url: !secret adguard_url
+#  adguard:
+#     title: Adguard
+#     icon: mdi:shield-check
+#     url: !secret adguard_url
   deconz:
      title: deCONZ
      icon: mdi:zigbee
@@ -132,6 +132,10 @@ panel_iframe:
      title: Netdata
      icon: mdi:counter
      url: !secret netdata_url
+  pihole:
+     title: Pi-hole
+     icon: mdi:pi-hole 
+     url: !secret pihole_url
   portainer:
     title: Portainer
     icon: mdi:docker
