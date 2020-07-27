@@ -55,6 +55,11 @@
                 "id": "3cd313ee084544f8a8bec2d0304dd1f1",
                 "type": "module",
                 "url": "/hacsfiles/lovelace-card-mod/card-mod.js"
+            },
+            {
+                "id": "982da24a9d314e2fa3cc70d62c6ab6d3",
+                "type": "module",
+                "url": "/hacsfiles/lovelace-badge-card/badge-card.js"
             }
         ]
     },

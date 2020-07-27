@@ -99,3 +99,26 @@
   condition: []
   action:
   - service: speedtestdotnet.speedtest
+- id: '1595596049319'
+  alias: Night
+  description: ''
+  trigger:
+  - platform: webhook
+    webhook_id: night
+  condition: []
+  action:
+  - data:
+      command: HOME
+    entity_id: media_player.nvidia_shield
+    service: androidtv.adb_command
+  - data:
+      command: SLEEP
+    entity_id: media_player.nvidia_shield
+    service: androidtv.adb_command
+  - data: {}
+    entity_id: light.desk
+    service: light.turn_off
+  - data: {}
+    entity_id: light.office
+    service: light.turn_off
+  mode: single

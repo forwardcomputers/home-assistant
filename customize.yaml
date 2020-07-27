@@ -6,7 +6,7 @@ sensor.speedtest_upload:
   icon: mdi:cloud-upload
 sensor.speedtest_ping:
   friendly_name: Ping
-  icon: mdi:mixcloud
+  icon: mdi:cloud-refresh
 sensor.humidity:
   friendly_name: Out
 sensor.humidity_in:

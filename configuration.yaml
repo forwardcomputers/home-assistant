@@ -142,7 +142,7 @@ panel_iframe:
     url: !secret portainer_url
   webcode:
      title: Webcode
-     icon: mdi:visual-studio-code
+     icon: mdi:microsoft-visual-studio-code
      url: !secret webcode_url
 
 plant:
