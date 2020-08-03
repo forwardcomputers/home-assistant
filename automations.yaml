@@ -116,9 +116,6 @@
     entity_id: media_player.nvidia_shield
     service: androidtv.adb_command
   - data: {}
-    entity_id: light.desk
-    service: light.turn_off
-  - data: {}
     entity_id: light.office
     service: light.turn_off
   mode: single

@@ -825,12 +825,12 @@
                                 {
                                     "entities": [
                                         {
-                                            "entity": "sensor.router_model",
+                                            "entity": "sensor.wrt_model",
                                             "icon": "mdi:router-wireless",
                                             "name": "Model"
                                         },
                                         {
-                                            "entity": "sensor.router_cpu_load",
+                                            "entity": "sensor.wrt_cpu_load",
                                             "entity_row": true,
                                             "height": "30px",
                                             "icon": "mdi:chip",
@@ -855,7 +855,7 @@
                                             "type": "custom:bar-card"
                                         },
                                         {
-                                            "entity": "sensor.router_mem_available",
+                                            "entity": "sensor.wrt_mem_used",
                                             "entity_row": true,
                                             "height": "30px",
                                             "icon": "mdi:memory",
@@ -880,7 +880,13 @@
                                             "type": "custom:bar-card"
                                         },
                                         {
-                                            "entity": "sensor.router_os",
+                                            "entities": [
+                                                {
+                                                    "entity": "sensor.wrt_target",
+                                                    "name": null
+                                                }
+                                            ],
+                                            "entity": "sensor.wrt_id",
                                             "icon": "mdi:cogs",
                                             "name": "OS",
                                             "type": "custom:multiple-entity-row"
@@ -888,24 +894,26 @@
                                         {
                                             "entities": [
                                                 {
-                                                    "entity": "sensor.router_new_short",
+                                                    "entity": "sensor.wrt_latest_firmware",
                                                     "name": "Latest"
                                                 }
                                             ],
-                                            "entity": "sensor.router_release_short",
+                                            "entity": "sensor.wrt_release",
                                             "icon": "mdi:code-tags",
                                             "name": "Firmware",
                                             "type": "custom:multiple-entity-row"
                                         },
                                         {
-                                            "entity": "sensor.router_uptime",
+                                            "entity": "sensor.wrt_uptime",
                                             "icon": "mdi:clock",
                                             "name": "Uptime"
-                                        }
+                                        },
+                                        "script.1584891193341"
                                     ],
                                     "title": "Router",
                                     "type": "entities"
                                 },
+                                "break",
                                 {
                                     "entities": [
                                         {
@@ -996,98 +1004,6 @@
                                         }
                                     ],
                                     "title": "NAS",
-                                    "type": "entities"
-                                },
-                                "break",
-                                {
-                                    "entities": [
-                                        {
-                                            "entity": "sensor.ap_model",
-                                            "icon": "mdi:router-wireless",
-                                            "name": "Model"
-                                        },
-                                        {
-                                            "entity": "sensor.ap_cpu_load",
-                                            "entity_row": true,
-                                            "height": "30px",
-                                            "icon": "mdi:chip",
-                                            "name": "CPU Load",
-                                            "severity": [
-                                                {
-                                                    "color": "green",
-                                                    "from": 0,
-                                                    "to": 74
-                                                },
-                                                {
-                                                    "color": "orange",
-                                                    "from": 75,
-                                                    "to": 89
-                                                },
-                                                {
-                                                    "color": "red",
-                                                    "from": 90,
-                                                    "to": 100
-                                                }
-                                            ],
-                                            "type": "custom:bar-card"
-                                        },
-                                        {
-                                            "entity": "sensor.ap_mem_used",
-                                            "entity_row": true,
-                                            "height": "30px",
-                                            "icon": "mdi:memory",
-                                            "name": "Ram Used",
-                                            "severity": [
-                                                {
-                                                    "color": "green",
-                                                    "from": 0,
-                                                    "to": 74
-                                                },
-                                                {
-                                                    "color": "orange",
-                                                    "from": 75,
-                                                    "to": 89
-                                                },
-                                                {
-                                                    "color": "red",
-                                                    "from": 90,
-                                                    "to": 100
-                                                }
-                                            ],
-                                            "type": "custom:bar-card"
-                                        },
-                                        {
-                                            "entities": [
-                                                {
-                                                    "entity": "sensor.ap_target",
-                                                    "name": null
-                                                }
-                                            ],
-                                            "entity": "sensor.ap_id",
-                                            "icon": "mdi:cogs",
-                                            "name": "OS",
-                                            "type": "custom:multiple-entity-row"
-                                        },
-                                        {
-                                            "entities": [
-                                                {
-                                                    "entity": "sensor.ap_latest_firmware",
-                                                    "name": "Latest"
-                                                }
-                                            ],
-                                            "entity": "sensor.ap_release",
-                                            "icon": "mdi:code-tags",
-                                            "name": "Firmware",
-                                            "type": "custom:multiple-entity-row"
-                                        },
-                                        {
-                                            "entity": "sensor.ap_uptime",
-                                            "icon": "mdi:clock",
-                                            "name": "Uptime"
-                                        },
-                                        "script.1584891193341"
-                                    ],
-                                    "title": "Access Point",
                                     "type": "entities"
                                 },
                                 {
