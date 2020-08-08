@@ -17,8 +17,11 @@ media_player.samsung_un32f5500:
   friendly_name: Samsung UN32F5500 TV
 media_player.apple_tv:
   friendly_name: Apple TV 4K
-sensor.netdata_cpu_temp:
-  icon: mdi:thermometer
+sensor.netdata_server_cpu_temp:
   unit_of_measurement: °C
-sensor.netdata_system_processes:
+sensor.netdata_server_system_processes:
+  unit_of_measurement: ''
+sensor.netdata_pi_hole_1_cpu_temp:
+  unit_of_measurement: °C
+sensor.netdata_pi_hole_1_system_processes:
   unit_of_measurement: ''

@@ -60,6 +60,11 @@
                 "id": "982da24a9d314e2fa3cc70d62c6ab6d3",
                 "type": "module",
                 "url": "/hacsfiles/lovelace-badge-card/badge-card.js"
+            },
+            {
+                "id": "95d3217422994a3985ca8a32459867ba",
+                "type": "module",
+                "url": "/hacsfiles/button-card/button-card.js"
             }
         ]
     },

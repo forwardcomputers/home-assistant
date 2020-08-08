@@ -1,24 +1,25 @@
-'1574869457721':
-  alias: Clean Printer
-  sequence:
-  - data: {}
-    service: shell_command.clean_printer
-'1579273628605':
+update_speedtest:
   alias: Update Speedtest
   sequence:
   - service: speedtestdotnet.speedtest
-'1584890689297':
+download_printer_firmware:
   alias: Download printer firmware
   sequence:
   - data: {}
     service: shell_command.download_printer_firmware
-'1584891193341':
+download_router_firmware:
   alias: Download router firmware
   sequence:
   - data: {}
     service: shell_command.download_router_firmware
-'1584900906090':
+download_system_firmware:
   alias: Download system firmware
   sequence:
   - data: {}
     service: shell_command.download_system_firmware
+clean_printer:
+  alias: Clean Printer
+  mode: single
+  sequence:
+  - data: {}
+    service: shell_command.clean_printer

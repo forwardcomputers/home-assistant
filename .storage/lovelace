@@ -825,95 +825,133 @@
                                 {
                                     "entities": [
                                         {
-                                            "entity": "sensor.wrt_model",
-                                            "icon": "mdi:router-wireless",
-                                            "name": "Model"
-                                        },
-                                        {
-                                            "entity": "sensor.wrt_cpu_load",
-                                            "entity_row": true,
-                                            "height": "30px",
-                                            "icon": "mdi:chip",
-                                            "name": "CPU Load",
-                                            "severity": [
+                                            "cards": [
                                                 {
-                                                    "color": "green",
-                                                    "from": 0,
-                                                    "to": 74
+                                                    "color_type": "card",
+                                                    "custom_fields": {
+                                                        "temp": "[[[\n  return `<ha-icon\n    icon=\"mdi:thermometer\"\n    style=\"width: 14px; height: 14px; color: yellow;\">\n    </ha-icon><span>${states['sensor.netdata_pi_hole_1_cpu_temp'].state}\u00b0C</span>`\n]]]\n"
+                                                    },
+                                                    "double_tap_action": {
+                                                        "action": "call-service",
+                                                        "service": "switch.toggle",
+                                                        "service_data": {
+                                                            "entity_id": "switch.toggle_pi_hole_1"
+                                                        }
+                                                    },
+                                                    "entity": "sensor.pi_hole_1_status",
+                                                    "icon": "mdi:pi-hole",
+                                                    "label": "[[[\n  var line1 = \n  '<p style=\"text-align:left\">Queries Today: ' + \n  states['sensor.pi_hole_1_dns_queries_today'].state +\n  '<br>Blocked Today: ' + \n  states['sensor.pi_hole_1_ads_blocked_today'].state +\n  '<br>Percent Today: ' + \n  states['sensor.pi_hole_1_ads_percentage_blocked_today'].state +\n  '%</p>';\n  return line1;\n]]]\n",
+                                                    "name": "#1",
+                                                    "show_label": true,
+                                                    "state": [
+                                                        {
+                                                            "color": "green",
+                                                            "value": "enabled"
+                                                        },
+                                                        {
+                                                            "color": "red",
+                                                            "icon": "mdi:alert",
+                                                            "styles": {
+                                                                "card": [
+                                                                    {
+                                                                        "animation": "blink 2s ease infinite"
+                                                                    }
+                                                                ]
+                                                            },
+                                                            "value": "disabled"
+                                                        }
+                                                    ],
+                                                    "styles": {
+                                                        "custom_fields": {
+                                                            "temp": [
+                                                                {
+                                                                    "background-color": "[[[\n  if (states['sensor.netdata_pi_hole_1_cpu_temp'].state < 60) return 'green';\n  if (states['sensor.netdata_pi_hole_1_cpu_temp'].state >= 60 && \n      states['sensor.netdata_pi_hole_1_cpu_temp'].state < 80) return 'orange';\n  else return \"red\";\n]]]\n"
+                                                                },
+                                                                {
+                                                                    "border-radius": "50%"
+                                                                },
+                                                                {
+                                                                    "position": "absolute"
+                                                                },
+                                                                {
+                                                                    "left": "0%"
+                                                                },
+                                                                {
+                                                                    "top": "0%"
+                                                                },
+                                                                {
+                                                                    "height": "20px"
+                                                                },
+                                                                {
+                                                                    "width": "80px"
+                                                                },
+                                                                {
+                                                                    "font-size": "12px"
+                                                                },
+                                                                {
+                                                                    "line-height": "20px"
+                                                                }
+                                                            ]
+                                                        },
+                                                        "grid": [
+                                                            {
+                                                                "position": "relative"
+                                                            }
+                                                        ]
+                                                    },
+                                                    "tap_action": {
+                                                        "action": "url",
+                                                        "url_path": "http://pihole1/admin"
+                                                    },
+                                                    "type": "custom:button-card"
                                                 },
                                                 {
-                                                    "color": "orange",
-                                                    "from": 75,
-                                                    "to": 89
-                                                },
-                                                {
-                                                    "color": "red",
-                                                    "from": 90,
-                                                    "to": 100
+                                                    "color_type": "card",
+                                                    "double_tap_action": {
+                                                        "action": "call-service",
+                                                        "service": "switch.toggle",
+                                                        "service_data": {
+                                                            "entity_id": "switch.toggle_pi_hole_2"
+                                                        }
+                                                    },
+                                                    "entity": "sensor.pi_hole_2_status",
+                                                    "icon": "mdi:pi-hole",
+                                                    "label": "[[[\n  var line1 = \n  '<p style=\"text-align:left\">Queries Today: ' + \n  states['sensor.pi_hole_2_dns_queries_today'].state +\n  '<br>Blocked Today: ' + \n  states['sensor.pi_hole_2_ads_blocked_today'].state +\n  '<br>Percent Today: ' + \n  states['sensor.pi_hole_2_ads_percentage_blocked_today'].state +\n  '%</p>';\n  return line1;\n]]]\n",
+                                                    "name": "#2",
+                                                    "show_label": true,
+                                                    "state": [
+                                                        {
+                                                            "color": "green",
+                                                            "value": "enabled"
+                                                        },
+                                                        {
+                                                            "color": "red",
+                                                            "icon": "mdi:alert",
+                                                            "styles": {
+                                                                "card": [
+                                                                    {
+                                                                        "animation": "blink 2s ease infinite"
+                                                                    }
+                                                                ]
+                                                            },
+                                                            "value": "disabled"
+                                                        }
+                                                    ],
+                                                    "tap_action": {
+                                                        "action": "url",
+                                                        "url_path": "http://pihole2/admin"
+                                                    },
+                                                    "type": "custom:button-card"
                                                 }
                                             ],
-                                            "type": "custom:bar-card"
-                                        },
-                                        {
-                                            "entity": "sensor.wrt_mem_used",
-                                            "entity_row": true,
-                                            "height": "30px",
-                                            "icon": "mdi:memory",
-                                            "name": "Ram Used",
-                                            "severity": [
-                                                {
-                                                    "color": "green",
-                                                    "from": 0,
-                                                    "to": 74
-                                                },
-                                                {
-                                                    "color": "orange",
-                                                    "from": 75,
-                                                    "to": 89
-                                                },
-                                                {
-                                                    "color": "red",
-                                                    "from": 90,
-                                                    "to": 100
-                                                }
-                                            ],
-                                            "type": "custom:bar-card"
-                                        },
-                                        {
-                                            "entities": [
-                                                {
-                                                    "entity": "sensor.wrt_target",
-                                                    "name": null
-                                                }
-                                            ],
-                                            "entity": "sensor.wrt_id",
-                                            "icon": "mdi:cogs",
-                                            "name": "OS",
-                                            "type": "custom:multiple-entity-row"
-                                        },
-                                        {
-                                            "entities": [
-                                                {
-                                                    "entity": "sensor.wrt_latest_firmware",
-                                                    "name": "Latest"
-                                                }
-                                            ],
-                                            "entity": "sensor.wrt_release",
-                                            "icon": "mdi:code-tags",
-                                            "name": "Firmware",
-                                            "type": "custom:multiple-entity-row"
-                                        },
-                                        {
-                                            "entity": "sensor.wrt_uptime",
-                                            "icon": "mdi:clock",
-                                            "name": "Uptime"
-                                        },
-                                        "script.1584891193341"
+                                            "column_num": 2,
+                                            "layout": "horizontal",
+                                            "type": "custom:layout-card"
+                                        }
                                     ],
-                                    "title": "Router",
+                                    "title": "Pi-hole",
                                     "type": "entities"
                                 },
-                                "break",
                                 {
                                     "entities": [
                                         {
@@ -1004,6 +1042,98 @@
                                         }
                                     ],
                                     "title": "NAS",
+                                    "type": "entities"
+                                },
+                                "break",
+                                {
+                                    "entities": [
+                                        {
+                                            "entity": "sensor.wrt_model",
+                                            "icon": "mdi:router-wireless",
+                                            "name": "Model"
+                                        },
+                                        {
+                                            "entity": "sensor.wrt_cpu_load",
+                                            "entity_row": true,
+                                            "height": "30px",
+                                            "icon": "mdi:chip",
+                                            "name": "CPU Load",
+                                            "severity": [
+                                                {
+                                                    "color": "green",
+                                                    "from": 0,
+                                                    "to": 74
+                                                },
+                                                {
+                                                    "color": "orange",
+                                                    "from": 75,
+                                                    "to": 89
+                                                },
+                                                {
+                                                    "color": "red",
+                                                    "from": 90,
+                                                    "to": 100
+                                                }
+                                            ],
+                                            "type": "custom:bar-card"
+                                        },
+                                        {
+                                            "entity": "sensor.wrt_mem_used",
+                                            "entity_row": true,
+                                            "height": "30px",
+                                            "icon": "mdi:memory",
+                                            "name": "Ram Used",
+                                            "severity": [
+                                                {
+                                                    "color": "green",
+                                                    "from": 0,
+                                                    "to": 74
+                                                },
+                                                {
+                                                    "color": "orange",
+                                                    "from": 75,
+                                                    "to": 89
+                                                },
+                                                {
+                                                    "color": "red",
+                                                    "from": 90,
+                                                    "to": 100
+                                                }
+                                            ],
+                                            "type": "custom:bar-card"
+                                        },
+                                        {
+                                            "entities": [
+                                                {
+                                                    "entity": "sensor.wrt_target",
+                                                    "name": null
+                                                }
+                                            ],
+                                            "entity": "sensor.wrt_id",
+                                            "icon": "mdi:cogs",
+                                            "name": "OS",
+                                            "type": "custom:multiple-entity-row"
+                                        },
+                                        {
+                                            "entities": [
+                                                {
+                                                    "entity": "sensor.wrt_latest_firmware",
+                                                    "name": "Latest"
+                                                }
+                                            ],
+                                            "entity": "sensor.wrt_release",
+                                            "icon": "mdi:code-tags",
+                                            "name": "Firmware",
+                                            "type": "custom:multiple-entity-row"
+                                        },
+                                        {
+                                            "entity": "sensor.wrt_uptime",
+                                            "icon": "mdi:clock",
+                                            "name": "Uptime"
+                                        },
+                                        "script.download_router_firmware"
+                                    ],
+                                    "title": "Router",
                                     "type": "entities"
                                 },
                                 {
@@ -1114,8 +1244,8 @@
                                             "icon": "mdi:clock",
                                             "name": "Uptime"
                                         },
-                                        "script.1574869457721",
-                                        "script.1584890689297"
+                                        "script.clean_printer",
+                                        "script.download_printer_firmware"
                                     ],
                                     "title": "Printer",
                                     "type": "entities"
@@ -1181,7 +1311,7 @@
                                             "type": "custom:bar-card"
                                         },
                                         {
-                                            "entity": "sensor.netdata_cpu_temp",
+                                            "entity": "sensor.netdata_server_cpu_temp",
                                             "entity_row": true,
                                             "height": "30px",
                                             "icon": "mdi:thermometer",
@@ -1269,7 +1399,7 @@
                                             "type": "custom:multiple-entity-row"
                                         },
                                         {
-                                            "entity": "sensor.system_processes",
+                                            "entity": "sensor.server_system_processes",
                                             "icon": "mdi:format-line-spacing",
                                             "name": "Process"
                                         },
@@ -1278,7 +1408,7 @@
                                             "icon": "mdi:clock",
                                             "name": "Uptime"
                                         },
-                                        "script.1584900906090"
+                                        "script.download_system_firmware"
                                     ],
                                     "title": "Server",
                                     "type": "entities"
@@ -1370,6 +1500,359 @@
                     "icon": "mdi:bug",
                     "path": "other",
                     "title": "Other"
+                },
+                {
+                    "badges": [],
+                    "cards": [
+                        {
+                            "cards": [
+                                {
+                                    "color": "auto",
+                                    "entity": "switch.office_desk",
+                                    "hold_action": {
+                                        "action": "more-info",
+                                        "haptic": "success"
+                                    },
+                                    "icon": "mdi:lightbulb",
+                                    "label": "[[[\n  var bri = Math.round(states[entity.entity_id].attributes.brightness / 2.55);\n  if (bri > 0) return bri + '%';\n]]]\n",
+                                    "name": "Office desk",
+                                    "show_label": true,
+                                    "show_state": true,
+                                    "size": "30%",
+                                    "state": [
+                                        {
+                                            "styles": {
+                                                "name": [
+                                                    {
+                                                        "color": "black"
+                                                    }
+                                                ],
+                                                "state": [
+                                                    {
+                                                        "color": "gray"
+                                                    }
+                                                ]
+                                            },
+                                            "value": "on"
+                                        },
+                                        {
+                                            "style": [
+                                                {
+                                                    "opacity": 0.4
+                                                }
+                                            ],
+                                            "styles": {
+                                                "icon": [
+                                                    {
+                                                        "color": "gray"
+                                                    }
+                                                ],
+                                                "name": [
+                                                    {
+                                                        "color": "gray"
+                                                    }
+                                                ],
+                                                "state": [
+                                                    {
+                                                        "color": "gray"
+                                                    }
+                                                ]
+                                            },
+                                            "value": "off"
+                                        },
+                                        {
+                                            "style": [
+                                                {
+                                                    "opacity": 0.2
+                                                },
+                                                {
+                                                    "color": "black"
+                                                },
+                                                {
+                                                    "--paper-item-icon-color": "black"
+                                                }
+                                            ],
+                                            "value": "unavailable"
+                                        }
+                                    ],
+                                    "styles": {
+                                        "card": [
+                                            {
+                                                "border-radius": "12px"
+                                            },
+                                            {
+                                                "width": "105px"
+                                            },
+                                            {
+                                                "height": "105px"
+                                            },
+                                            {
+                                                "--paper-card-background-color": "rgb(255, 251, 239)"
+                                            }
+                                        ],
+                                        "grid": [
+                                            {
+                                                "grid-template-areas": "\"i\" \"n\" \"s\" \"l\""
+                                            },
+                                            {
+                                                "grid-template-columns": "1fr"
+                                            },
+                                            {
+                                                "grid-template-rows": "1fr min-content min-content"
+                                            }
+                                        ],
+                                        "img_cell": [
+                                            {
+                                                "align-self": "start"
+                                            },
+                                            {
+                                                "text-align": "start"
+                                            },
+                                            {
+                                                "margin-left": "10px"
+                                            }
+                                        ],
+                                        "label": [
+                                            {
+                                                "color": "gray"
+                                            },
+                                            {
+                                                "font-size": "11px"
+                                            },
+                                            {
+                                                "font-family": "Helvetica"
+                                            },
+                                            {
+                                                "padding": "0px 10px"
+                                            },
+                                            {
+                                                "justify-self": "start"
+                                            }
+                                        ],
+                                        "name": [
+                                            {
+                                                "justify-self": "start"
+                                            },
+                                            {
+                                                "padding-left": "10px"
+                                            },
+                                            {
+                                                "font-weight": "bold"
+                                            },
+                                            {
+                                                "font-family": "Helvetica"
+                                            },
+                                            {
+                                                "font-size": "13px"
+                                            }
+                                        ],
+                                        "state": [
+                                            {
+                                                "font-size": "11px"
+                                            },
+                                            {
+                                                "font-family": "Helvetica"
+                                            },
+                                            {
+                                                "padding": "0px 10px"
+                                            },
+                                            {
+                                                "justify-self": "start"
+                                            },
+                                            {
+                                                "text-transform": "capitalize"
+                                            },
+                                            {
+                                                "font-weight": "bold"
+                                            },
+                                            {
+                                                "padding-left": "10px"
+                                            }
+                                        ]
+                                    },
+                                    "tap_action": {
+                                        "action": "toggle",
+                                        "haptic": "light"
+                                    },
+                                    "type": "custom:button-card"
+                                },
+                                {
+                                    "color": "auto",
+                                    "entity": "light.hallway",
+                                    "hold_action": {
+                                        "action": "more-info",
+                                        "haptic": "success"
+                                    },
+                                    "icon": "mdi:lightbulb",
+                                    "label": "[[[\n  var bri = Math.round(states[entity.entity_id].attributes.brightness / 2.55);\n  if (bri > 0) return bri + '%';\n]]]\n",
+                                    "name": "Hallway",
+                                    "show_label": true,
+                                    "show_state": true,
+                                    "size": "30%",
+                                    "state": [
+                                        {
+                                            "styles": {
+                                                "name": [
+                                                    {
+                                                        "color": "black"
+                                                    }
+                                                ],
+                                                "state": [
+                                                    {
+                                                        "color": "gray"
+                                                    }
+                                                ]
+                                            },
+                                            "value": "on"
+                                        },
+                                        {
+                                            "style": [
+                                                {
+                                                    "opacity": 0.4
+                                                }
+                                            ],
+                                            "styles": {
+                                                "icon": [
+                                                    {
+                                                        "color": "gray"
+                                                    }
+                                                ],
+                                                "name": [
+                                                    {
+                                                        "color": "gray"
+                                                    }
+                                                ],
+                                                "state": [
+                                                    {
+                                                        "color": "gray"
+                                                    }
+                                                ]
+                                            },
+                                            "value": "off"
+                                        },
+                                        {
+                                            "style": [
+                                                {
+                                                    "opacity": 0.2
+                                                },
+                                                {
+                                                    "color": "black"
+                                                },
+                                                {
+                                                    "--paper-item-icon-color": "black"
+                                                }
+                                            ],
+                                            "value": "unavailable"
+                                        }
+                                    ],
+                                    "styles": {
+                                        "card": [
+                                            {
+                                                "border-radius": "12px"
+                                            },
+                                            {
+                                                "width": "105px"
+                                            },
+                                            {
+                                                "height": "105px"
+                                            },
+                                            {
+                                                "--paper-card-background-color": "rgb(255, 251, 239)"
+                                            }
+                                        ],
+                                        "grid": [
+                                            {
+                                                "grid-template-areas": "\"i\" \"n\" \"s\" \"l\""
+                                            },
+                                            {
+                                                "grid-template-columns": "1fr"
+                                            },
+                                            {
+                                                "grid-template-rows": "1fr min-content min-content"
+                                            }
+                                        ],
+                                        "img_cell": [
+                                            {
+                                                "align-self": "start"
+                                            },
+                                            {
+                                                "text-align": "start"
+                                            },
+                                            {
+                                                "margin-left": "10px"
+                                            }
+                                        ],
+                                        "label": [
+                                            {
+                                                "color": "gray"
+                                            },
+                                            {
+                                                "font-size": "11px"
+                                            },
+                                            {
+                                                "font-family": "Helvetica"
+                                            },
+                                            {
+                                                "padding": "0px 10px"
+                                            },
+                                            {
+                                                "justify-self": "start"
+                                            }
+                                        ],
+                                        "name": [
+                                            {
+                                                "justify-self": "start"
+                                            },
+                                            {
+                                                "padding-left": "10px"
+                                            },
+                                            {
+                                                "font-weight": "bold"
+                                            },
+                                            {
+                                                "font-family": "Helvetica"
+                                            },
+                                            {
+                                                "font-size": "13px"
+                                            }
+                                        ],
+                                        "state": [
+                                            {
+                                                "font-size": "11px"
+                                            },
+                                            {
+                                                "font-family": "Helvetica"
+                                            },
+                                            {
+                                                "padding": "0px 10px"
+                                            },
+                                            {
+                                                "justify-self": "start"
+                                            },
+                                            {
+                                                "text-transform": "capitalize"
+                                            },
+                                            {
+                                                "font-weight": "bold"
+                                            },
+                                            {
+                                                "padding-left": "10px"
+                                            }
+                                        ]
+                                    },
+                                    "tap_action": {
+                                        "action": "toggle",
+                                        "haptic": "light"
+                                    },
+                                    "type": "custom:button-card"
+                                }
+                            ],
+                            "type": "horizontal-stack"
+                        }
+                    ],
+                    "panel": false,
+                    "path": "qaz",
+                    "title": "qaz"
                 }
             ]
         }

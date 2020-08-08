@@ -90,6 +90,7 @@
   condition: []
   action:
   - service: shell_command.download_ec_forecast_toronto
+  mode: single
 - id: '1578970908730'
   alias: Speedtest @ startup
   description: ''
