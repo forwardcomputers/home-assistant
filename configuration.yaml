@@ -18,6 +18,9 @@ cloud:
         - light.hallway_kitchen
         - light.kitchen
         - light.office
+        - switch.hallway_spare
+        - switch.office_spare
+        - switch.macbook_sleep
         - switch.toggle_pi_hole_1
         - switch.toggle_pi_hole_2
   google_actions:
@@ -36,6 +39,9 @@ cloud:
         - light.hallway_kitchen
         - light.kitchen
         - light.office
+        - switch.hallway_spare
+        - switch.office_spare
+        - switch.macbook_sleep
         - switch.toggle_pi_hole_1
         - switch.toggle_pi_hole_2
 config:
@@ -58,7 +64,9 @@ zeroconf:
 logger:
   default: info
 
-apple_tv:
+#http:
+#  ssl_certificate: /acme/*.home.mustakim.com.cer
+#  ssl_key: /acme/*.home.mustakim.com.key
 
 camera:
   - platform: environment_canada
@@ -74,19 +82,6 @@ camera:
   - platform: generic
     name: YYZ
     still_image_url: https://511on.ca/map/Cctv/loc33--2
-
-emulated_hue:
-  expose_by_default: false
-  entities:
-    light.floor:
-      name: floor
-      hidden: false
-    light.led:
-      name: led
-      hidden: false
-    switch.kitchen:
-      name: kitchen
-      hidden: false
 
 ffmpeg:
 
@@ -108,13 +103,19 @@ homekit:
       - switch
     exclude_entities:
       - light.configuration_tool_1
+      - switch.hallway_spare
+      - switch.office_spare
+      - switch.macbook_sleep
       - switch.toggle_pi_hole_1
       - switch.toggle_pi_hole_2
 
 media_player:
   - platform: androidtv
-    name: nvidia_shield
-    host: !secret shield_ip
+    name: nvidia_oshield
+    host: !secret oshield_ip
+  - platform: androidtv
+    name: nvidia_nshield
+    host: !secret nshield_ip
 
 notify:
   - name: alimustakim
@@ -147,10 +148,6 @@ panel_iframe:
      title: Netdata
      icon: mdi:counter
      url: !secret netdata_url
-  portainer:
-    title: Portainer
-    icon: mdi:docker
-    url: !secret portainer_url
   webcode:
      title: Webcode
      icon: mdi:microsoft-visual-studio-code
@@ -215,23 +212,33 @@ shell_command:
   download_wrt_firmware: /usr/bin/wget -O /opt/filer/Firmware/openwrt-{{states('sensor.wrt_latest_firmware')}}-{{states('sensor.wrt_target')}}-generic-{{states('sensor.wrt_filename')}} https://downloads.openwrt.org/releases/{{states('sensor.wrt_latest_firmware')}}/targets/{{states('sensor.wrt_target')}}/generic/openwrt-{{states('sensor.wrt_latest_firmware')}}-{{states('sensor.wrt_target')}}-generic-{{states('sensor.wrt_filename')}}
   download_printer_firmware: /usr/bin/wget -O /opt/filer/Firmware/HP_LaserJet_Pro_MFP_M130_M132_Ultra_MFP_M134_Printer_{{states('sensor.printer_latest_firmware')}}.rfu ftp://ftp.hp.com/pub/networking/software/pfirmware/HP_LaserJet_Pro_MFP_M130_M132_Ultra_MFP_M134_Printer_{{states('sensor.printer_latest_firmware')}}.rfu
   download_system_firmware: /usr/bin/wget -O /opt/filer/Firmware/NUC7i5BNK-BN{{states('sensor.sys_latest_firmware')}}.bio https://downloadmirror.intel.com/29347/eng/BN{{states('sensor.sys_latest_firmware')}}.bio
+  macbook_sleep: !secret macbook_sleep_cmd
   pi_hole_1_enable: !secret pi_hole_1_enable_url
   pi_hole_1_disable: !secret pi_hole_1_disable_url
   pi_hole_2_enable: !secret pi_hole_2_enable_url
   pi_hole_2_disable: !secret pi_hole_2_disable_url
 
-speedtestdotnet:
-  scan_interval:
-    minutes: 30
-  monitored_conditions:
-    - ping
-    - download
-    - upload
-#  server_id: 2565
-# Teksavvy ---^
+#speedtestdotnet:
+#  scan_interval:
+#    minutes: 30
+#  monitored_conditions:
+#    - ping
+#    - download
+#    - upload
+##  server_id: 2565
+## Teksavvy ---^
+
+spotcast:
+  sp_dc: !secret sp_dc
+  sp_key: !secret sp_key
+
+spotify:
+  client_id: !secret spotify_client_id
+  client_secret: !secret spotify_client_secret
 
 weather:
   - platform: environment_canada
+    name: met_ec
     station: ON/s0000458
 
 sensor:
@@ -949,9 +956,24 @@ sensor:
     resource: !secret pi_hole_2_status_url
     value_template: '{{ value_json.status }}'
 
+input_boolean:
+  night_mode_bool:
+    initial: on
+
 switch:
   - platform: template
     switches:
+      night_mode:
+        friendly_name: night
+        value_template: '{{ states("input_boolean.night_mode_bool") }}'
+        turn_on:
+          - service: input_boolean.turn_on
+            entity_id: input_boolean.night_mode_bool
+        turn_off:
+          - service: automation.trigger
+            data:
+              entity_id: automation.night
+        icon_template: mdi:sleep
       toggle_pi_hole_1:
         friendly_name: Toggle Pi-hole 1
         value_template: "{{ is_state('sensor.pi_hole_1_status', 'enabled') }}"

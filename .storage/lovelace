@@ -1,4 +1,6 @@
 {
+    "version": 1,
+    "key": "lovelace",
     "data": {
         "config": {
             "cch": {
@@ -38,7 +40,6 @@
                                         {
                                             "entity": "light.bedroom",
                                             "hide_when_off": true,
-                                            "icon": "mdi:lamp",
                                             "name": "Bed",
                                             "slider_theme": {
                                                 "max": 255,
@@ -53,7 +54,6 @@
                                         {
                                             "entity": "light.hallway",
                                             "hide_when_off": true,
-                                            "icon": "mdi:ceiling-light",
                                             "name": "Hallway",
                                             "slider_theme": {
                                                 "max": 255,
@@ -68,7 +68,6 @@
                                         {
                                             "entity": "light.livingroom_led",
                                             "hide_when_off": true,
-                                            "icon": "mdi:led-strip",
                                             "name": "LED",
                                             "slider_theme": {
                                                 "max": 255,
@@ -83,7 +82,6 @@
                                         {
                                             "entity": "light.livingroom_chair",
                                             "hide_when_off": true,
-                                            "icon": "mdi:floor-lamp",
                                             "name": "Floor",
                                             "slider_theme": {
                                                 "max": 255,
@@ -99,7 +97,6 @@
                                         {
                                             "entity": "light.office_table",
                                             "hide_when_off": true,
-                                            "icon": "mdi:lamp",
                                             "name": "Office",
                                             "slider_theme": {
                                                 "max": 255,
@@ -113,13 +110,11 @@
                                         },
                                         {
                                             "entity": "switch.kitchen_sink",
-                                            "icon": "mdi:led-strip",
                                             "name": "Kitchen",
                                             "state_color": true
                                         },
                                         {
                                             "entity": "switch.office_desk",
-                                            "icon": "mdi:desk-lamp",
                                             "name": "Desk",
                                             "state_color": true
                                         }
@@ -131,7 +126,8 @@
                                 {
                                     "cards": [
                                         {
-                                            "entity": "weather.toronto",
+                                            "entity": "weather.met_ec",
+                                            "name": "Toronto",
                                             "type": "weather-forecast"
                                         },
                                         {
@@ -593,7 +589,6 @@
                                         {
                                             "entity": "light.bedroom_right",
                                             "hide_when_off": true,
-                                            "icon": "mdi:lamp",
                                             "name": "Bedroom Right",
                                             "slider_theme": {
                                                 "max": 255,
@@ -608,7 +603,6 @@
                                         {
                                             "entity": "light.bedroom_left",
                                             "hide_when_off": true,
-                                            "icon": "mdi:lamp",
                                             "name": "Bedroom Left",
                                             "slider_theme": {
                                                 "max": 255,
@@ -633,7 +627,6 @@
                                         {
                                             "entity": "light.hallway_center",
                                             "hide_when_off": true,
-                                            "icon": "mdi:ceiling-light",
                                             "name": "Hallway Center",
                                             "slider_theme": {
                                                 "max": 255,
@@ -648,7 +641,6 @@
                                         {
                                             "entity": "light.hallway_kitchen",
                                             "hide_when_off": true,
-                                            "icon": "mdi:ceiling-light",
                                             "name": "Hallway Kitchen",
                                             "slider_theme": {
                                                 "max": 255,
@@ -663,7 +655,6 @@
                                         {
                                             "entity": "light.hallway_door",
                                             "hide_when_off": true,
-                                            "icon": "mdi:ceiling-light",
                                             "name": "Hallway Entrance",
                                             "slider_theme": {
                                                 "max": 255,
@@ -683,13 +674,8 @@
                                 {
                                     "entities": [
                                         {
-                                            "entity": "sensor.office_remote_battery_level",
-                                            "name": "Office Remote Battery"
-                                        },
-                                        {
                                             "entity": "light.office_table",
                                             "hide_when_off": true,
-                                            "icon": "mdi:lamp",
                                             "name": "Table",
                                             "slider_theme": {
                                                 "max": 255,
@@ -703,7 +689,6 @@
                                         },
                                         {
                                             "entity": "switch.office_desk",
-                                            "icon": "mdi:desk-lamp",
                                             "name": "Desk",
                                             "state_color": true
                                         },
@@ -711,8 +696,8 @@
                                             "entity": "media_player.samsung_un32f5500"
                                         },
                                         {
-                                            "entity": "media_player.nvidia_shield",
-                                            "name": "nVIDIA Shield TV 2017"
+                                            "entity": "media_player.nvidia_nshield",
+                                            "name": "nVIDIA Shield TV 2019"
                                         },
                                         {
                                             "entity": "media_player.office_speaker",
@@ -740,7 +725,6 @@
                                         {
                                             "entity": "light.livingroom_led",
                                             "hide_when_off": true,
-                                            "icon": "mdi:led-strip",
                                             "name": "LED",
                                             "slider_theme": {
                                                 "max": 255,
@@ -755,7 +739,6 @@
                                         {
                                             "entity": "light.livingroom_chair",
                                             "hide_when_off": true,
-                                            "icon": "mdi:floor-lamp",
                                             "name": "Floor Lamp",
                                             "slider_theme": {
                                                 "max": 255,
@@ -771,11 +754,8 @@
                                             "entity": "media_player.panasonic_viera_p55st50_tv"
                                         },
                                         {
-                                            "entity": "media_player.apple_tv_living_room"
-                                        },
-                                        {
-                                            "entity": "remote.apple_tv_living_room",
-                                            "name": "Apple TV remote"
+                                            "entity": "media_player.nvidia_oshield",
+                                            "name": "nVIDIA Shield TV 2017"
                                         },
                                         {
                                             "entity": "remote.harmony_hub_living_room",
@@ -796,7 +776,6 @@
                                             "entities": [
                                                 {
                                                     "entity": "switch.kitchen_sink",
-                                                    "icon": "mdi:led-strip",
                                                     "name": "Kitchen"
                                                 }
                                             ],
@@ -829,7 +808,7 @@
                                                 {
                                                     "color_type": "card",
                                                     "custom_fields": {
-                                                        "temp": "[[[\n  return `<ha-icon\n    icon=\"mdi:thermometer\"\n    style=\"width: 14px; height: 14px; color: yellow;\">\n    </ha-icon><span>${states['sensor.netdata_pi_hole_1_cpu_temp'].state}\u00b0C</span>`\n]]]\n"
+                                                        "temp": "[[[\n  return `<ha-icon\n    icon=\"mdi:thermometer\"\n    style=\"width: 14px; height: 14px; color: yellow;\">\n    </ha-icon><span>${Math.floor(states['sensor.netdata_pi_hole_1_cpu_temp'].state)}\u00b0</span>`\n]]]\n"
                                                     },
                                                     "double_tap_action": {
                                                         "action": "call-service",
@@ -868,22 +847,22 @@
                                                                     "background-color": "[[[\n  if (states['sensor.netdata_pi_hole_1_cpu_temp'].state < 60) return 'green';\n  if (states['sensor.netdata_pi_hole_1_cpu_temp'].state >= 60 && \n      states['sensor.netdata_pi_hole_1_cpu_temp'].state < 80) return 'orange';\n  else return \"red\";\n]]]\n"
                                                                 },
                                                                 {
-                                                                    "border-radius": "50%"
+                                                                    "border-radius": "100px"
                                                                 },
                                                                 {
                                                                     "position": "absolute"
                                                                 },
                                                                 {
-                                                                    "left": "0%"
+                                                                    "left": "5%"
                                                                 },
                                                                 {
-                                                                    "top": "0%"
+                                                                    "top": "10%"
                                                                 },
                                                                 {
                                                                     "height": "20px"
                                                                 },
                                                                 {
-                                                                    "width": "80px"
+                                                                    "width": "65px"
                                                                 },
                                                                 {
                                                                     "font-size": "12px"
@@ -1507,16 +1486,154 @@
                         {
                             "cards": [
                                 {
+                                    "aspect_ratio": "3/2",
+                                    "custom_fields": {
+                                        "cpu": "[[[\n  return `<ha-icon\n    icon=\"mdi:chip\"\n    style=\"width: 12px; height: 12px; color: deepskyblue;\">\n    </ha-icon><span>CPU: <span style=\"color: var(--text-color-sensor);\">${states['sensor.processor_use'].state}%</span></span>`\n]]]\n",
+                                        "ram": "[[[\n  return `<ha-icon\n    icon=\"mdi:memory\"\n    style=\"width: 12px; height: 12px; color: deepskyblue;\">\n    </ha-icon><span>RAM: <span style=\"color: var(--text-color-sensor);\">${states['sensor.memory_use_percent'].state}%</span></span>`\n]]]\n",
+                                        "sd": "[[[\n  return `<ha-icon\n    icon=\"mdi:harddisk\"\n    style=\"width: 12px; height: 12px; color: deepskyblue;\">\n    </ha-icon><span>SD: <span style=\"color: var(--text-color-sensor);\">${states['sensor.disk_use_percent'].state}%</span></span>`\n]]]\n",
+                                        "temp": "[[[\n  return `<ha-icon\n    icon=\"mdi:thermometer\"\n    style=\"width: 12px; height: 12px; color: yellow;\">\n    </ha-icon><span>${entity.state}\u00b0C</span>`\n]]]\n"
+                                    },
+                                    "entity": "sensor.netdata_server_cpu_temp",
+                                    "icon": "mdi:raspberry-pi",
+                                    "name": "docker",
+                                    "styles": {
+                                        "card": [
+                                            {
+                                                "background-color": "#000044"
+                                            },
+                                            {
+                                                "border-radius": "10%"
+                                            },
+                                            {
+                                                "padding": "10%"
+                                            },
+                                            {
+                                                "color": "ivory"
+                                            },
+                                            {
+                                                "font-size": "10px"
+                                            },
+                                            {
+                                                "text-shadow": "0px 0px 5px black"
+                                            }
+                                        ],
+                                        "custom_fields": {
+                                            "cpu": [
+                                                {
+                                                    "padding-bottom": "2px"
+                                                },
+                                                {
+                                                    "align-self": "middle"
+                                                },
+                                                {
+                                                    "justify-self": "start"
+                                                },
+                                                {
+                                                    "--text-color-sensor": "[[[ if (states[\"sensor.processor_use\"].state > 80) return \"red\"; ]]]"
+                                                }
+                                            ],
+                                            "ram": [
+                                                {
+                                                    "padding-bottom": "2px"
+                                                },
+                                                {
+                                                    "align-self": "middle"
+                                                },
+                                                {
+                                                    "justify-self": "start"
+                                                },
+                                                {
+                                                    "--text-color-sensor": "[[[ if (states[\"sensor.memory_use_percent\"].state > 80) return \"red\"; ]]]"
+                                                }
+                                            ],
+                                            "sd": [
+                                                {
+                                                    "align-self": "middle"
+                                                },
+                                                {
+                                                    "justify-self": "start"
+                                                },
+                                                {
+                                                    "--text-color-sensor": "[[[ if (states[\"sensor.disk_use_percent\"].state > 80) return \"red\"; ]]]"
+                                                }
+                                            ],
+                                            "temp": [
+                                                {
+                                                    "align-self": "start"
+                                                },
+                                                {
+                                                    "justify-self": "end"
+                                                }
+                                            ]
+                                        },
+                                        "grid": [
+                                            {
+                                                "grid-template-areas": "\"i temp\" \"n n\" \"cpu cpu\" \"ram ram\" \"sd sd\""
+                                            },
+                                            {
+                                                "grid-template-columns": "1fr 1fr"
+                                            },
+                                            {
+                                                "grid-template-rows": "1fr min-content min-content min-content min-content"
+                                            }
+                                        ],
+                                        "icon": [
+                                            {
+                                                "color": "[[[\n  if (entity.state < 60) return 'lime';\n  if (entity.state >= 60 && entity.state < 80) return 'orange';\n  else return 'red';\n]]]\n"
+                                            },
+                                            {
+                                                "width": "70%"
+                                            },
+                                            {
+                                                "margin-top": "-10%"
+                                            }
+                                        ],
+                                        "img_cell": [
+                                            {
+                                                "justify-content": "start"
+                                            },
+                                            {
+                                                "align-items": "start"
+                                            },
+                                            {
+                                                "margin": "none"
+                                            }
+                                        ],
+                                        "name": [
+                                            {
+                                                "font-weight": "bold"
+                                            },
+                                            {
+                                                "font-size": "13px"
+                                            },
+                                            {
+                                                "color": "white"
+                                            },
+                                            {
+                                                "align-self": "middle"
+                                            },
+                                            {
+                                                "justify-self": "start"
+                                            },
+                                            {
+                                                "padding-bottom": "4px"
+                                            }
+                                        ]
+                                    },
+                                    "type": "custom:button-card"
+                                },
+                                {
                                     "color": "auto",
+                                    "custom_fields": {
+                                        "notification": "[[[\n  var bri = Math.round(states[entity.entity_id].attributes.brightness / 2.55);\n  if (bri > 0) return bri + '%';\n]]]\n"
+                                    },
                                     "entity": "switch.office_desk",
                                     "hold_action": {
                                         "action": "more-info",
                                         "haptic": "success"
                                     },
                                     "icon": "mdi:lightbulb",
-                                    "label": "[[[\n  var bri = Math.round(states[entity.entity_id].attributes.brightness / 2.55);\n  if (bri > 0) return bri + '%';\n]]]\n",
                                     "name": "Office desk",
-                                    "show_label": true,
                                     "show_state": true,
                                     "size": "30%",
                                     "state": [
@@ -1587,18 +1704,40 @@
                                                 "height": "105px"
                                             },
                                             {
-                                                "--paper-card-background-color": "rgb(255, 251, 239)"
+                                                "--ha-card-background-color": "rgb(255, 251, 239)"
                                             }
                                         ],
+                                        "custom_fields": {
+                                            "notification": [
+                                                {
+                                                    "border-radius": "50%"
+                                                },
+                                                {
+                                                    "position": "absolute"
+                                                },
+                                                {
+                                                    "left": "60%"
+                                                },
+                                                {
+                                                    "top": "10%"
+                                                },
+                                                {
+                                                    "height": "20px"
+                                                },
+                                                {
+                                                    "width": "20px"
+                                                },
+                                                {
+                                                    "font-size": "8px"
+                                                },
+                                                {
+                                                    "line-height": "20px"
+                                                }
+                                            ]
+                                        },
                                         "grid": [
                                             {
-                                                "grid-template-areas": "\"i\" \"n\" \"s\" \"l\""
-                                            },
-                                            {
-                                                "grid-template-columns": "1fr"
-                                            },
-                                            {
-                                                "grid-template-rows": "1fr min-content min-content"
+                                                "position": "relative"
                                             }
                                         ],
                                         "img_cell": [
@@ -1678,15 +1817,16 @@
                                 },
                                 {
                                     "color": "auto",
-                                    "entity": "light.hallway",
+                                    "custom_fields": {
+                                        "notification": "[[[\n  var bri = Math.round(states[entity.entity_id].attributes.brightness / 2.55);\n  if (bri > 0) return bri + '%';\n]]]\n"
+                                    },
+                                    "entity": "light.office_table",
                                     "hold_action": {
                                         "action": "more-info",
                                         "haptic": "success"
                                     },
                                     "icon": "mdi:lightbulb",
-                                    "label": "[[[\n  var bri = Math.round(states[entity.entity_id].attributes.brightness / 2.55);\n  if (bri > 0) return bri + '%';\n]]]\n",
-                                    "name": "Hallway",
-                                    "show_label": true,
+                                    "name": "Office table",
                                     "show_state": true,
                                     "size": "30%",
                                     "state": [
@@ -1739,7 +1879,7 @@
                                                     "color": "black"
                                                 },
                                                 {
-                                                    "--paper-item-icon-color": "black"
+                                                    "--ha-item-icon-color": "black"
                                                 }
                                             ],
                                             "value": "unavailable"
@@ -1757,18 +1897,40 @@
                                                 "height": "105px"
                                             },
                                             {
-                                                "--paper-card-background-color": "rgb(255, 251, 239)"
+                                                "--ha-card-background-color": "rgb(255, 251, 239)"
                                             }
                                         ],
+                                        "custom_fields": {
+                                            "notification": [
+                                                {
+                                                    "border-radius": "50%"
+                                                },
+                                                {
+                                                    "position": "absolute"
+                                                },
+                                                {
+                                                    "left": "11px"
+                                                },
+                                                {
+                                                    "top": "10%"
+                                                },
+                                                {
+                                                    "height": "20px"
+                                                },
+                                                {
+                                                    "width": "20px"
+                                                },
+                                                {
+                                                    "font-size": "8px"
+                                                },
+                                                {
+                                                    "line-height": "20px"
+                                                }
+                                            ]
+                                        },
                                         "grid": [
                                             {
-                                                "grid-template-areas": "\"i\" \"n\" \"s\" \"l\""
-                                            },
-                                            {
-                                                "grid-template-columns": "1fr"
-                                            },
-                                            {
-                                                "grid-template-rows": "1fr min-content min-content"
+                                                "position": "relative"
                                             }
                                         ],
                                         "img_cell": [
@@ -1853,10 +2015,806 @@
                     "panel": false,
                     "path": "qaz",
                     "title": "qaz"
+                },
+                {
+                    "badges": [],
+                    "cards": [
+                        {
+                            "cards": [
+                                {
+                                    "cards": [
+                                        {
+                                            "color": "auto",
+                                            "custom_fields": {
+                                                "notification": "[[[\n  var bri = Math.round(states[entity.entity_id].attributes.brightness / 2.55);\n  if (bri > 0) return bri + '%';\n]]]\n"
+                                            },
+                                            "entity": "switch.office_desk",
+                                            "hold_action": {
+                                                "action": "more-info",
+                                                "haptic": "success"
+                                            },
+                                            "icon": "mdi:lightbulb",
+                                            "name": "Office desk",
+                                            "show_state": true,
+                                            "size": "30%",
+                                            "state": [
+                                                {
+                                                    "styles": {
+                                                        "name": [
+                                                            {
+                                                                "color": "black"
+                                                            }
+                                                        ],
+                                                        "state": [
+                                                            {
+                                                                "color": "gray"
+                                                            }
+                                                        ]
+                                                    },
+                                                    "value": "on"
+                                                },
+                                                {
+                                                    "style": [
+                                                        {
+                                                            "opacity": 0.4
+                                                        }
+                                                    ],
+                                                    "styles": {
+                                                        "icon": [
+                                                            {
+                                                                "color": "gray"
+                                                            }
+                                                        ],
+                                                        "name": [
+                                                            {
+                                                                "color": "gray"
+                                                            }
+                                                        ],
+                                                        "state": [
+                                                            {
+                                                                "color": "gray"
+                                                            }
+                                                        ]
+                                                    },
+                                                    "value": "off"
+                                                },
+                                                {
+                                                    "style": [
+                                                        {
+                                                            "opacity": 0.2
+                                                        },
+                                                        {
+                                                            "color": "black"
+                                                        },
+                                                        {
+                                                            "--paper-item-icon-color": "black"
+                                                        }
+                                                    ],
+                                                    "value": "unavailable"
+                                                }
+                                            ],
+                                            "styles": {
+                                                "card": [
+                                                    {
+                                                        "border-radius": "12px"
+                                                    },
+                                                    {
+                                                        "width": "105px"
+                                                    },
+                                                    {
+                                                        "height": "105px"
+                                                    },
+                                                    {
+                                                        "--ha-card-background-color": "rgb(255, 251, 239)"
+                                                    }
+                                                ],
+                                                "custom_fields": {
+                                                    "notification": [
+                                                        {
+                                                            "border-radius": "50%"
+                                                        },
+                                                        {
+                                                            "position": "absolute"
+                                                        },
+                                                        {
+                                                            "left": "60%"
+                                                        },
+                                                        {
+                                                            "top": "10%"
+                                                        },
+                                                        {
+                                                            "height": "20px"
+                                                        },
+                                                        {
+                                                            "width": "20px"
+                                                        },
+                                                        {
+                                                            "font-size": "8px"
+                                                        },
+                                                        {
+                                                            "line-height": "20px"
+                                                        }
+                                                    ]
+                                                },
+                                                "grid": [
+                                                    {
+                                                        "position": "relative"
+                                                    }
+                                                ],
+                                                "img_cell": [
+                                                    {
+                                                        "align-self": "start"
+                                                    },
+                                                    {
+                                                        "text-align": "start"
+                                                    },
+                                                    {
+                                                        "margin-left": "10px"
+                                                    }
+                                                ],
+                                                "label": [
+                                                    {
+                                                        "color": "gray"
+                                                    },
+                                                    {
+                                                        "font-size": "11px"
+                                                    },
+                                                    {
+                                                        "font-family": "Helvetica"
+                                                    },
+                                                    {
+                                                        "padding": "0px 10px"
+                                                    },
+                                                    {
+                                                        "justify-self": "start"
+                                                    }
+                                                ],
+                                                "name": [
+                                                    {
+                                                        "justify-self": "start"
+                                                    },
+                                                    {
+                                                        "padding-left": "10px"
+                                                    },
+                                                    {
+                                                        "font-weight": "bold"
+                                                    },
+                                                    {
+                                                        "font-family": "Helvetica"
+                                                    },
+                                                    {
+                                                        "font-size": "13px"
+                                                    }
+                                                ],
+                                                "state": [
+                                                    {
+                                                        "font-size": "11px"
+                                                    },
+                                                    {
+                                                        "font-family": "Helvetica"
+                                                    },
+                                                    {
+                                                        "padding": "0px 10px"
+                                                    },
+                                                    {
+                                                        "justify-self": "start"
+                                                    },
+                                                    {
+                                                        "text-transform": "capitalize"
+                                                    },
+                                                    {
+                                                        "font-weight": "bold"
+                                                    },
+                                                    {
+                                                        "padding-left": "10px"
+                                                    }
+                                                ]
+                                            },
+                                            "tap_action": {
+                                                "action": "toggle",
+                                                "haptic": "light"
+                                            },
+                                            "type": "custom:button-card"
+                                        },
+                                        {
+                                            "color": "auto",
+                                            "custom_fields": {
+                                                "notification": "[[[\n  var bri = Math.round(states[entity.entity_id].attributes.brightness / 2.55);\n  if (bri > 0) return bri + '%';\n]]]\n"
+                                            },
+                                            "entity": "light.office_table",
+                                            "hold_action": {
+                                                "action": "browser_mode.more_info",
+                                                "haptic": "success"
+                                            },
+                                            "icon": "mdi:lightbulb",
+                                            "name": "Office table",
+                                            "show_state": true,
+                                            "size": "30%",
+                                            "state": [
+                                                {
+                                                    "styles": {
+                                                        "name": [
+                                                            {
+                                                                "color": "black"
+                                                            }
+                                                        ],
+                                                        "state": [
+                                                            {
+                                                                "color": "gray"
+                                                            }
+                                                        ]
+                                                    },
+                                                    "value": "on"
+                                                },
+                                                {
+                                                    "style": [
+                                                        {
+                                                            "opacity": 0.4
+                                                        }
+                                                    ],
+                                                    "styles": {
+                                                        "icon": [
+                                                            {
+                                                                "color": "gray"
+                                                            }
+                                                        ],
+                                                        "name": [
+                                                            {
+                                                                "color": "gray"
+                                                            }
+                                                        ],
+                                                        "state": [
+                                                            {
+                                                                "color": "gray"
+                                                            }
+                                                        ]
+                                                    },
+                                                    "value": "off"
+                                                },
+                                                {
+                                                    "style": [
+                                                        {
+                                                            "opacity": 0.2
+                                                        },
+                                                        {
+                                                            "color": "black"
+                                                        },
+                                                        {
+                                                            "--ha-item-icon-color": "black"
+                                                        }
+                                                    ],
+                                                    "value": "unavailable"
+                                                }
+                                            ],
+                                            "styles": {
+                                                "card": [
+                                                    {
+                                                        "border-radius": "12px"
+                                                    },
+                                                    {
+                                                        "width": "105px"
+                                                    },
+                                                    {
+                                                        "height": "105px"
+                                                    },
+                                                    {
+                                                        "--ha-card-background-color": "rgb(255, 251, 239)"
+                                                    }
+                                                ],
+                                                "custom_fields": {
+                                                    "notification": [
+                                                        {
+                                                            "border-radius": "50%"
+                                                        },
+                                                        {
+                                                            "position": "absolute"
+                                                        },
+                                                        {
+                                                            "left": "11px"
+                                                        },
+                                                        {
+                                                            "top": "10%"
+                                                        },
+                                                        {
+                                                            "height": "20px"
+                                                        },
+                                                        {
+                                                            "width": "25px"
+                                                        },
+                                                        {
+                                                            "font-size": "10px"
+                                                        },
+                                                        {
+                                                            "line-height": "20px"
+                                                        }
+                                                    ]
+                                                },
+                                                "grid": [
+                                                    {
+                                                        "position": "relative"
+                                                    }
+                                                ],
+                                                "img_cell": [
+                                                    {
+                                                        "align-self": "start"
+                                                    },
+                                                    {
+                                                        "text-align": "start"
+                                                    },
+                                                    {
+                                                        "margin-left": "10px"
+                                                    }
+                                                ],
+                                                "label": [
+                                                    {
+                                                        "color": "gray"
+                                                    },
+                                                    {
+                                                        "font-size": "11px"
+                                                    },
+                                                    {
+                                                        "font-family": "Helvetica"
+                                                    },
+                                                    {
+                                                        "padding": "0px 10px"
+                                                    },
+                                                    {
+                                                        "justify-self": "start"
+                                                    }
+                                                ],
+                                                "name": [
+                                                    {
+                                                        "justify-self": "start"
+                                                    },
+                                                    {
+                                                        "padding-left": "10px"
+                                                    },
+                                                    {
+                                                        "font-weight": "bold"
+                                                    },
+                                                    {
+                                                        "font-family": "Helvetica"
+                                                    },
+                                                    {
+                                                        "font-size": "13px"
+                                                    }
+                                                ],
+                                                "state": [
+                                                    {
+                                                        "font-size": "11px"
+                                                    },
+                                                    {
+                                                        "font-family": "Helvetica"
+                                                    },
+                                                    {
+                                                        "padding": "0px 10px"
+                                                    },
+                                                    {
+                                                        "justify-self": "start"
+                                                    },
+                                                    {
+                                                        "text-transform": "capitalize"
+                                                    },
+                                                    {
+                                                        "font-weight": "bold"
+                                                    },
+                                                    {
+                                                        "padding-left": "10px"
+                                                    }
+                                                ]
+                                            },
+                                            "tap_action": {
+                                                "action": "toggle",
+                                                "haptic": "light"
+                                            },
+                                            "type": "custom:button-card"
+                                        }
+                                    ],
+                                    "type": "horizontal-stack"
+                                },
+                                {
+                                    "cards": [
+                                        {
+                                            "color": "auto",
+                                            "custom_fields": {
+                                                "notification": "[[[\n  var bri = Math.round(states[entity.entity_id].attributes.brightness / 2.55);\n  if (bri > 0) return bri + '%';\n]]]\n"
+                                            },
+                                            "entity": "light.hallway",
+                                            "hold_action": {
+                                                "action": "more-info",
+                                                "haptic": "success"
+                                            },
+                                            "icon": "mdi:lightbulb",
+                                            "name": "Hallway x",
+                                            "show_state": true,
+                                            "size": "30%",
+                                            "state": [
+                                                {
+                                                    "styles": {
+                                                        "name": [
+                                                            {
+                                                                "color": "black"
+                                                            }
+                                                        ],
+                                                        "state": [
+                                                            {
+                                                                "color": "gray"
+                                                            }
+                                                        ]
+                                                    },
+                                                    "value": "on"
+                                                },
+                                                {
+                                                    "style": [
+                                                        {
+                                                            "opacity": 0.4
+                                                        }
+                                                    ],
+                                                    "styles": {
+                                                        "icon": [
+                                                            {
+                                                                "color": "gray"
+                                                            }
+                                                        ],
+                                                        "name": [
+                                                            {
+                                                                "color": "gray"
+                                                            }
+                                                        ],
+                                                        "state": [
+                                                            {
+                                                                "color": "gray"
+                                                            }
+                                                        ]
+                                                    },
+                                                    "value": "off"
+                                                },
+                                                {
+                                                    "style": [
+                                                        {
+                                                            "opacity": 0.2
+                                                        },
+                                                        {
+                                                            "color": "black"
+                                                        },
+                                                        {
+                                                            "--paper-item-icon-color": "black"
+                                                        }
+                                                    ],
+                                                    "value": "unavailable"
+                                                }
+                                            ],
+                                            "styles": {
+                                                "card": [
+                                                    {
+                                                        "border-radius": "12px"
+                                                    },
+                                                    {
+                                                        "width": "105px"
+                                                    },
+                                                    {
+                                                        "height": "105px"
+                                                    },
+                                                    {
+                                                        "--ha-card-background-color": "rgb(255, 251, 239)"
+                                                    }
+                                                ],
+                                                "custom_fields": {
+                                                    "notification": [
+                                                        {
+                                                            "border-radius": "50%"
+                                                        },
+                                                        {
+                                                            "position": "absolute"
+                                                        },
+                                                        {
+                                                            "left": "11px"
+                                                        },
+                                                        {
+                                                            "top": "10%"
+                                                        },
+                                                        {
+                                                            "height": "20px"
+                                                        },
+                                                        {
+                                                            "width": "20px"
+                                                        },
+                                                        {
+                                                            "font-size": "8px"
+                                                        },
+                                                        {
+                                                            "line-height": "20px"
+                                                        }
+                                                    ]
+                                                },
+                                                "grid": [
+                                                    {
+                                                        "position": "relative"
+                                                    }
+                                                ],
+                                                "img_cell": [
+                                                    {
+                                                        "align-self": "start"
+                                                    },
+                                                    {
+                                                        "text-align": "start"
+                                                    },
+                                                    {
+                                                        "margin-left": "10px"
+                                                    }
+                                                ],
+                                                "label": [
+                                                    {
+                                                        "color": "gray"
+                                                    },
+                                                    {
+                                                        "font-size": "11px"
+                                                    },
+                                                    {
+                                                        "font-family": "Helvetica"
+                                                    },
+                                                    {
+                                                        "padding": "0px 10px"
+                                                    },
+                                                    {
+                                                        "justify-self": "start"
+                                                    }
+                                                ],
+                                                "name": [
+                                                    {
+                                                        "justify-self": "start"
+                                                    },
+                                                    {
+                                                        "padding-left": "10px"
+                                                    },
+                                                    {
+                                                        "font-weight": "bold"
+                                                    },
+                                                    {
+                                                        "font-family": "Helvetica"
+                                                    },
+                                                    {
+                                                        "font-size": "13px"
+                                                    }
+                                                ],
+                                                "state": [
+                                                    {
+                                                        "font-size": "11px"
+                                                    },
+                                                    {
+                                                        "font-family": "Helvetica"
+                                                    },
+                                                    {
+                                                        "padding": "0px 10px"
+                                                    },
+                                                    {
+                                                        "justify-self": "start"
+                                                    },
+                                                    {
+                                                        "text-transform": "capitalize"
+                                                    },
+                                                    {
+                                                        "font-weight": "bold"
+                                                    },
+                                                    {
+                                                        "padding-left": "10px"
+                                                    }
+                                                ]
+                                            },
+                                            "tap_action": {
+                                                "action": "toggle",
+                                                "haptic": "light"
+                                            },
+                                            "type": "custom:button-card"
+                                        }
+                                    ],
+                                    "type": "horizontal-stack"
+                                }
+                            ],
+                            "keep": {
+                                "background": true,
+                                "border_radius": true,
+                                "box_shadow": true,
+                                "margin": true
+                            },
+                            "mode": "vertical",
+                            "title": "Lights",
+                            "type": "custom:stack-in-card"
+                        },
+                        {
+                            "entity": "automation.night",
+                            "hold_action": {
+                                "action": "more-info"
+                            },
+                            "name": "Night",
+                            "show_icon": true,
+                            "show_name": true,
+                            "show_state": false,
+                            "tap_action": {
+                                "action": "call-service",
+                                "service": "automation.trigger",
+                                "service_data": {
+                                    "entity_id": "automation.night"
+                                }
+                            },
+                            "type": "button"
+                        }
+                    ],
+                    "path": "wsx",
+                    "title": "wsx"
+                },
+                {
+                    "badges": [],
+                    "cards": [
+                        {
+                            "aspect_ratio": "3/2",
+                            "custom_fields": {
+                                "cpu": "[[[\n  return `<ha-icon\n    icon=\"mdi:chip\"\n    style=\"width: 24px; height: 24px; color: deepskyblue;\">\n    </ha-icon><span>CPU: <span style=\"color: var(--text-color-sensor);\">${states['sensor.processor_use'].state}%</span></span>`\n]]]\n",
+                                "ram": "[[[\n  return `<ha-icon\n    icon=\"mdi:memory\"\n    style=\"width: 24px; height: 24px; color: deepskyblue;\">\n    </ha-icon><span>RAM: <span style=\"color: var(--text-color-sensor);\">${states['sensor.memory_use_percent'].state}%</span></span>`\n]]]\n",
+                                "sd": "[[[\n  return `<ha-icon\n    icon=\"mdi:harddisk\"\n    style=\"width: 24px; height: 24px; color: deepskyblue;\">\n    </ha-icon><span>SD: <span style=\"color: var(--text-color-sensor);\">${states['sensor.disk_use_percent'].state}%</span></span>`\n]]]\n",
+                                "temp": "[[[\n  return `<ha-icon\n    icon=\"mdi:thermometer\"\n    style=\"width: 24px; height: 24px; color: yellow;\">\n    </ha-icon><span>${entity.state}\u00b0C</span>`\n]]]\n"
+                            },
+                            "entity": "sensor.netdata_server_cpu_temp",
+                            "icon": "mdi:arch",
+                            "name": "docker",
+                            "styles": {
+                                "card": [
+                                    {
+                                        "background-color": "#000044"
+                                    },
+                                    {
+                                        "border-radius": "5%"
+                                    },
+                                    {
+                                        "padding": "5%"
+                                    },
+                                    {
+                                        "color": "ivory"
+                                    },
+                                    {
+                                        "font-size": "12px"
+                                    },
+                                    {
+                                        "text-shadow": "0px 0px 5px black"
+                                    }
+                                ],
+                                "custom_fields": {
+                                    "cpu": [
+                                        {
+                                            "padding-bottom": "8px"
+                                        },
+                                        {
+                                            "align-self": "middle"
+                                        },
+                                        {
+                                            "justify-self": "start"
+                                        },
+                                        {
+                                            "--text-color-sensor": "[[[ if (states[\"sensor.processor_use\"].state > 80) return \"red\"; ]]]"
+                                        }
+                                    ],
+                                    "ram": [
+                                        {
+                                            "padding-bottom": "8px"
+                                        },
+                                        {
+                                            "align-self": "middle"
+                                        },
+                                        {
+                                            "justify-self": "start"
+                                        },
+                                        {
+                                            "--text-color-sensor": "[[[ if (states[\"sensor.memory_use_percent\"].state > 80) return \"red\"; ]]]"
+                                        }
+                                    ],
+                                    "sd": [
+                                        {
+                                            "align-self": "middle"
+                                        },
+                                        {
+                                            "justify-self": "start"
+                                        },
+                                        {
+                                            "--text-color-sensor": "[[[ if (states[\"sensor.disk_use_percent\"].state > 80) return \"red\"; ]]]"
+                                        }
+                                    ],
+                                    "temp": [
+                                        {
+                                            "align-self": "start"
+                                        },
+                                        {
+                                            "justify-self": "end"
+                                        },
+                                        {
+                                            "text-align": "left"
+                                        }
+                                    ]
+                                },
+                                "grid": [
+                                    {
+                                        "grid-template-areas": "\"i temp\" \"n n\" \"cpu cpu\" \"ram ram\" \"sd sd\""
+                                    },
+                                    {
+                                        "grid-template-columns": "1fr 1fr"
+                                    },
+                                    {
+                                        "grid-template-rows": "1fr min-content min-content min-content min-content"
+                                    }
+                                ],
+                                "icon": [
+                                    {
+                                        "color": "[[[\n  if (entity.state < 60) return 'lime';\n  if (entity.state >= 60 && entity.state < 80) return 'orange';\n  else return 'red';\n]]]\n"
+                                    },
+                                    {
+                                        "width": "50%"
+                                    },
+                                    {
+                                        "margin-top": "-10%"
+                                    }
+                                ],
+                                "img_cell": [
+                                    {
+                                        "justify-content": "start"
+                                    },
+                                    {
+                                        "align-items": "start"
+                                    },
+                                    {
+                                        "margin": "none"
+                                    }
+                                ],
+                                "name": [
+                                    {
+                                        "font-weight": "bold"
+                                    },
+                                    {
+                                        "font-size": "20px"
+                                    },
+                                    {
+                                        "color": "white"
+                                    },
+                                    {
+                                        "align-self": "middle"
+                                    },
+                                    {
+                                        "justify-self": "start"
+                                    },
+                                    {
+                                        "padding-bottom": "14px"
+                                    }
+                                ]
+                            },
+                            "type": "custom:button-card"
+                        }
+                    ],
+                    "path": "edc",
+                    "title": "edc"
+                },
+                {
+                    "badges": [],
+                    "cards": [
+                        {
+                            "entity": "media_player.spotify_alimustakim",
+                            "type": "media-control"
+                        },
+                        {
+                            "entity": "media_player.office_speaker",
+                            "type": "media-control"
+                        },
+                        {
+                            "account": "default",
+                            "display_style": "grid",
+                            "grid_covers_per_row": 5,
+                            "limit": 10,
+                            "playlist_type": "discover-weekly",
+                            "spotify_entity": "media_player.office_speaker",
+                            "type": "custom:spotify-card"
+                        }
+                    ],
+                    "path": "q1q1",
+                    "title": "q1q1"
                 }
             ]
         }
-    },
-    "key": "lovelace",
-    "version": 1
+    }
 }

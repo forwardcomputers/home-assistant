@@ -9,6 +9,10 @@
   - data: {}
     entity_id: switch.kitchen_sink
     service: switch.turn_on
+  - data: {}
+    entity_id: switch.office_desk
+    service: switch.turn_on
+  mode: single
 - id: '1574096809868'
   alias: Sunrise lights
   description: ''
@@ -21,8 +25,9 @@
     entity_id: all
     service: light.turn_off
   - data: {}
-    entity_id: all
-    service: switch.turn_off
+    entity_id: switch.night_mode
+    service: switch.turn_on
+  mode: single
 - id: '1574278470479'
   alias: Notify when UPS goes on battery
   description: ''
@@ -37,6 +42,7 @@
       message: Lost power @ {{ as_timestamp(now()) | timestamp_custom('%-I:%M%p %d-%b-%Y',
         true) }}
     service: notify.forwardcomputers
+  mode: single
 - id: '1574280082056'
   alias: Notify when UPS goes on online
   description: ''
@@ -51,6 +57,7 @@
       message: Power's back @ {{ as_timestamp(now()) | timestamp_custom('%-I:%M%p
         %d-%b-%Y', true) }}
     service: notify.forwardcomputers
+  mode: single
 - id: '1574280193336'
   alias: Notify when UPS battery needs replacing
   description: ''
@@ -64,6 +71,7 @@
       message: 'UPS battery must be replaced. Search on amazon: https://amzn.to/2wzV4Io
         and https://amzn.to/2MXBQH2'
     service: notify.forwardcomputers
+  mode: single
 - id: '1575054174712'
   alias: Vacation
   description: ''
@@ -100,6 +108,7 @@
   condition: []
   action:
   - service: speedtestdotnet.speedtest
+  mode: single
 - id: '1595596049319'
   alias: Night
   description: ''
@@ -108,15 +117,18 @@
     webhook_id: night
   condition: []
   action:
-  - data:
-      command: HOME
-    entity_id: media_player.nvidia_shield
-    service: androidtv.adb_command
-  - data:
-      command: SLEEP
-    entity_id: media_player.nvidia_shield
-    service: androidtv.adb_command
   - data: {}
-    entity_id: light.office
-    service: light.turn_off
+    entity_id: media_player.nvidia_nshield
+    service: media_player.turn_off
+  - data: {}
+    service: shell_command.macbook_sleep
+  - device_id: 493d7d5d960c40adaf59b97f926030bb
+    domain: switch
+    entity_id: switch.office_desk
+    type: turn_off
+  - brightness_pct: 5
+    device_id: 795eb91b579f42f4b00f468c17cfbc8f
+    domain: light
+    entity_id: light.bedroom
+    type: turn_on
   mode: single

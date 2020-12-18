@@ -65,6 +65,26 @@
                 "id": "95d3217422994a3985ca8a32459867ba",
                 "type": "module",
                 "url": "/hacsfiles/button-card/button-card.js"
+            },
+            {
+                "id": "9994fb8ab0574ca0abd02009cd15286a",
+                "type": "module",
+                "url": "/hacsfiles/stack-in-card/stack-in-card.js"
+            },
+            {
+                "id": "7028932ea7474b3ba3be2b0fd1b77b6f",
+                "type": "module",
+                "url": "/hacsfiles/lovelace-more-info-card/more-info-card.js"
+            },
+            {
+                "id": "6437035fd0b84f47928e17380f030c2d",
+                "type": "module",
+                "url": "/hacsfiles/decluttering-card/decluttering-card.js"
+            },
+            {
+                "id": "0133ece7a6774f62b1453298e1f5fd73",
+                "type": "module",
+                "url": "/hacsfiles/spotify-card/spotify-card.js"
             }
         ]
     },
