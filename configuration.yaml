@@ -427,7 +427,6 @@ sensor:
     name: installed_version
   - platform: uptime
     name: uptime_minutes
-    unit_of_measurement: minutes
     scan_interval: 30
   - platform: template
     sensors:
@@ -543,6 +542,9 @@ sensor:
     value_template: >-
         {% set free = (value.split(" ")[0]) | float %}
         {% set total = states('sensor.wrt_ram') | float %}
+        {% if total == 0 %}
+            {% set total = 1024 %}
+        {% endif %}
         {% set used = ((total - free) / total * 100) | round(0, "floor") %}
         {{- used -}}
 
