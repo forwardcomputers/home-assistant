@@ -755,7 +755,7 @@
                                         },
                                         {
                                             "entity": "media_player.nvidia_oshield",
-                                            "name": "nVIDIA Shield TV 2017"
+                                            "name": "nVIDIA Shield TV Pro 2017"
                                         },
                                         {
                                             "entity": "remote.harmony_hub_living_room",
