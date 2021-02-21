@@ -1,18 +1,22 @@
 #!/usr/local/bin/python3
 
-import sys
-import lxml.html
 import requests
+import re
 
-file=open('/sys/class/dmi/id/product_name')
-name=file.read().strip()
-file.close()
+url = requests.get('https://downloadcenter.intel.com/product/122495/Intel-NUC-Kit-NUC7i3DNKE')
+if url:
+    part = re.search('<a href="(.+?)">BIOS Update', url.text).group(1)
+else:
+    raise SystemExit('0')
+if part:
+    nuc_url = ''.join(['https://downloadcenter.intel.com', part])
+else:
+    raise SystemExit('0')
 
-agent={"User-Agent":"Mozilla/5.0 (Windows NT 6.1; Win64; x64; rv:59.0) Gecko/20100101 Firefox/59.0"}
-url1='https://downloadcenter.intel.com/download/29641'
-url2='+bios'
-url=''.join([url1, name, url2])
-html=requests.get(url1)
-doc=lxml.html.fromstring(html.text)
-rev=doc.xpath('/html/body/div[3]/div[2]/div/div/div/div/div/span[1]/span[2]/text()')
-print(rev)
+url = requests.get(nuc_url)
+if url:
+    part = re.search('<meta name="DownloadVersion" content="(.+?)" />', url.text).group(1)
+else:
+    raise SystemExit('0')
+
+print(part)

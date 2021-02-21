@@ -552,23 +552,17 @@ sensor:
     name: printer_latest_firmware
     command: python3 -c "import ftplib; ftp=ftplib.FTP('ftp.hp.com');ftp.login();ftp.cwd('/pub/networking/software/pfirmware');ftpd=ftp.nlst(); name='HP_LaserJet_Pro_MFP_M130_M132_Ultra_MFP_M134_Printer_'; found=[i for i in ftpd if name in i]; print (found[-1][found[-1].find(name)+len(name):found[-1].rfind('.rfu')])"
     scan_interval: 86400
-  - platform: snmp
+  - platform: command_line
     name: printer_model
-    host: !secret laser_ip
-    baseoid: 1.3.6.1.4.1.11.2.3.9.4.2.1.1.3.2.0
-    accept_errors: true
+    command: curl -s /usr/bin/curl -sL 'http://laser.home.mustakim.com/ePrint/ePrintConfigDyn.xml' | grep -oP '(?<=<dd:MakeAndModel>).*(?=</dd:MakeAndModel>)'
     scan_interval: 86400
-  - platform: snmp
+  - platform: command_line
     name: printer_sn
-    host: !secret laser_ip
-    baseoid: 1.3.6.1.4.1.11.2.3.9.4.2.1.1.3.3.0
-    accept_errors: true
+    command: curl -s /usr/bin/curl -sL 'http://laser.home.mustakim.com/ePrint/ePrintConfigDyn.xml' | grep -oP '(?<=<dd:SerialNumber>).*(?=</dd:SerialNumber>)'
     scan_interval: 86400
-  - platform: snmp
+  - platform: command_line
     name: printer_fw
-    host: !secret laser_ip
-    baseoid: 1.3.6.1.4.1.11.2.3.9.4.2.1.1.3.5.0
-    accept_errors: true
+    command: curl -s /usr/bin/curl -sL 'http://laser.home.mustakim.com/ePrint/ePrintConfigDyn.xml' | grep -oP '(?<=<dd:Date>).*(?=</dd:Date>)' | tr -d '-'
     scan_interval: 3600
   - platform: snmp
     name: printer_toner

@@ -1085,7 +1085,7 @@
                                             "entities": [
                                                 {
                                                     "entity": "sensor.wrt_target",
-                                                    "name": null
+                                                    "name": false
                                                 }
                                             ],
                                             "entity": "sensor.wrt_id",
@@ -1189,7 +1189,7 @@
                                             "entities": [
                                                 {
                                                     "entity": "sensor.printer_toner",
-                                                    "name": null
+                                                    "name": false
                                                 }
                                             ],
                                             "entity": "sensor.printer_toner_pct",
@@ -1201,7 +1201,7 @@
                                             "entities": [
                                                 {
                                                     "entity": "sensor.printer_drum",
-                                                    "name": null
+                                                    "name": false
                                                 }
                                             ],
                                             "entity": "sensor.printer_drum_pct",
@@ -1251,11 +1251,11 @@
                                             "entities": [
                                                 {
                                                     "entity": "sensor.sys_family",
-                                                    "name": null
+                                                    "name": false
                                                 },
                                                 {
                                                     "entity": "sensor.sys_name",
-                                                    "name": null
+                                                    "name": false
                                                 }
                                             ],
                                             "entity": "sensor.sys_family",
