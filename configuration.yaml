@@ -21,8 +21,7 @@ cloud:
         - switch.hallway_spare
         - switch.office_spare
         - switch.macbook_sleep
-        - switch.toggle_pi_hole_1
-        - switch.toggle_pi_hole_2
+        - switch.toggle_pi_hole
   google_actions:
     filter:
       include_domains:
@@ -42,8 +41,7 @@ cloud:
         - switch.hallway_spare
         - switch.office_spare
         - switch.macbook_sleep
-        - switch.toggle_pi_hole_1
-        - switch.toggle_pi_hole_2
+        - switch.toggle_pi_hole
 config:
 frontend:
 history:
@@ -106,8 +104,7 @@ homekit:
       - switch.hallway_spare
       - switch.office_spare
       - switch.macbook_sleep
-      - switch.toggle_pi_hole_1
-      - switch.toggle_pi_hole_2
+      - switch.toggle_pi_hole
 
 media_player:
   - platform: androidtv
@@ -209,14 +206,11 @@ recorder:
 shell_command:
   clean_printer: !secret printer_cleaning_mode_url
   download_ec_forecast_toronto: /usr/bin/wget -O /tmp/toronto.xml https://dd.weather.gc.ca/citypage_weather/xml/ON/s0000458_e.xml
-  download_wrt_firmware: /usr/bin/wget -O /opt/filer/Firmware/openwrt-{{states('sensor.wrt_latest_firmware')}}-{{states('sensor.wrt_target')}}-generic-{{states('sensor.wrt_filename')}} https://downloads.openwrt.org/releases/{{states('sensor.wrt_latest_firmware')}}/targets/{{states('sensor.wrt_target')}}/generic/openwrt-{{states('sensor.wrt_latest_firmware')}}-{{states('sensor.wrt_target')}}-generic-{{states('sensor.wrt_filename')}}
   download_printer_firmware: /usr/bin/wget -O /opt/filer/Firmware/HP_LaserJet_Pro_MFP_M130_M132_Ultra_MFP_M134_Printer_{{states('sensor.printer_latest_firmware')}}.rfu ftp://ftp.hp.com/pub/networking/software/pfirmware/HP_LaserJet_Pro_MFP_M130_M132_Ultra_MFP_M134_Printer_{{states('sensor.printer_latest_firmware')}}.rfu
   download_system_firmware: /usr/bin/wget -O /opt/filer/Firmware/NUC7i5BNK-BN{{states('sensor.sys_latest_firmware')}}.bio https://downloadmirror.intel.com/29347/eng/BN{{states('sensor.sys_latest_firmware')}}.bio
   macbook_sleep: !secret macbook_sleep_cmd
-  pi_hole_1_enable: !secret pi_hole_1_enable_url
-  pi_hole_1_disable: !secret pi_hole_1_disable_url
-  pi_hole_2_enable: !secret pi_hole_2_enable_url
-  pi_hole_2_disable: !secret pi_hole_2_disable_url
+  pi_hole_enable: !secret pi_hole_enable_url
+  pi_hole_disable: !secret pi_hole_disable_url
 
 #speedtestdotnet:
 #  scan_interval:
@@ -228,9 +222,9 @@ shell_command:
 ##  server_id: 2565
 ## Teksavvy ---^
 
-spotcast:
-  sp_dc: !secret sp_dc
-  sp_key: !secret sp_key
+#spotcast:
+#  sp_dc: !secret sp_dc
+#  sp_key: !secret sp_key
 
 spotify:
   client_id: !secret spotify_client_id
@@ -409,16 +403,16 @@ sensor:
             {% endif %}
 
   - platform: netdata
-    host: !secret pi_hole_1_ip
+    host: !secret pi_hole_ip
     scan_interval: 30
     resources:
-      pi_hole_1_uptime_raw:
+      pi_hole_uptime_raw:
         data_group: "system.uptime"
         element: "uptime"
-      pi_hole_1_system_processes_raw:
+      pi_hole_system_processes_raw:
         data_group: "system.active_processes"
         element: "active"
-      pi_hole_1_cpu_temp:
+      pi_hole_cpu_temp:
         data_group: "sensors.temp_thermal_zone0_hwmon_hwmon0"
         element: "sys_devices_virtual_thermal_thermal_zone0_hwmon0_temp1_input"
         icon: mdi:thermometer
@@ -454,99 +448,6 @@ sensor:
       Accept: application/vnd.github.v3+json
       Content-Type: application/json
       User-Agent: Home Assistant REST sensor
-
-  - platform: template
-    sensors:
-      wrt_model:
-        value_template: "Netgear Nighthawk X4S R7800"
-  - platform: template
-    sensors:
-      wrt_target:
-        value_template: "ipq806x"
-  - platform: template
-    sensors:
-      wrt_id:
-        value_template: "OpenWrt"
-  - platform: snmp
-    name: wrt_release
-    host: !secret wrt_ip
-    baseoid: 1.3.6.1.3.19811018.1.101.1
-    accept_errors: true
-    scan_interval: 3600
-  - platform: snmp
-    name: wrt_revision
-    host: !secret wrt_ip
-    baseoid: 1.3.6.1.3.19811018.2.101.1
-    accept_errors: true
-    scan_interval: 3600
-  - platform: snmp
-    name: wrt_filename
-    host: !secret wrt_ip
-    baseoid: 1.3.6.1.3.19811018.3.101.1
-    accept_errors: true
-    scan_interval: 86400
-  - platform: snmp
-    name: wrt_cputemp
-    host: !secret wrt_ip
-    baseoid: 1.3.6.1.3.19811018.4.101.1
-    accept_errors: true
-    scan_interval: 30
-    unit_of_measurement: '°C'
-  - platform: command_line
-    name: wrt_latest_firmware
-    command: python3 -c "import lxml.html; import requests; html=requests.get('https://downloads.openwrt.org'); doc=lxml.html.fromstring(html.text); rev=doc.xpath('/html/body/div/ul[1]/li/strong/a/text()')[0]; print(rev.split()[-1])"
-    scan_interval: 86400
-  - platform: snmp
-    name: wrt_uptime
-    host: !secret wrt_ip
-    baseoid: 1.3.6.1.2.1.25.1.1.0
-    accept_errors: true
-    scan_interval: 30
-    value_template: >-
-        {% set uptime = float(value) / 100 %}
-        {% set updays = (uptime / 86400) | round(0, "floor") %}
-        {% set uphours = uptime | timestamp_custom('%-H:%-M:%-S', false) | regex_replace('^0:','') %}
-        {% if updays == 0 %}
-            {{- uphours -}}
-        {% elif updays == 1 %}
-            {{- updays ~ " Day, " ~ uphours -}}
-        {% else %}
-            {{- updays ~ " Days, " ~ uphours -}}
-        {% endif %}
-  - platform: snmp
-    name: wrt_cpu_load
-    host: !secret wrt_ip
-    baseoid: 1.3.6.1.4.1.2021.11.11.0
-    accept_errors: true
-    scan_interval: 30
-    unit_of_measurement: '%'
-    value_template: >-
-        {% set load = 100 - value | int %}
-        {{- load -}}
-  - platform: snmp
-    name: wrt_ram
-    host: !secret wrt_ip
-    baseoid: 1.3.6.1.4.1.2021.4.5.0
-    accept_errors: true
-    scan_interval: 86400
-    value_template: >-
-        {% set ram = (value.split(" ")[0]) | float %}
-        {{- ram -}}
-  - platform: snmp
-    name: wrt_mem_used
-    host: !secret wrt_ip
-    baseoid: 1.3.6.1.4.1.2021.4.6.0
-    accept_errors: true
-    scan_interval: 30
-    unit_of_measurement: '%'
-    value_template: >-
-        {% set free = (value.split(" ")[0]) | float %}
-        {% set total = states('sensor.wrt_ram') | float %}
-        {% if total == 0 %}
-            {% set total = 1024 %}
-        {% endif %}
-        {% set used = ((total - free) / total * 100) | round(0, "floor") %}
-        {{- used -}}
 
   - platform: command_line
     name: printer_latest_firmware
@@ -941,15 +842,9 @@ sensor:
         value_template: '{{ state_attr("sensor.ttc_97", "upcoming").split(",")[0] }}'
 
   - platform: rest
-    name: pi_hole_1_status
+    name: pi_hole_status
     method: GET
-    resource: !secret pi_hole_1_status_url
-    value_template: '{{ value_json.status }}'
-
-  - platform: rest
-    name: pi_hole_2_status
-    method: GET
-    resource: !secret pi_hole_2_status_url
+    resource: !secret pi_hole_status_url
     value_template: '{{ value_json.status }}'
 
 input_boolean:
@@ -970,17 +865,10 @@ switch:
             data:
               entity_id: automation.night
         icon_template: mdi:sleep
-      toggle_pi_hole_1:
-        friendly_name: Toggle Pi-hole 1
-        value_template: "{{ is_state('sensor.pi_hole_1_status', 'enabled') }}"
+      toggle_pi_hole:
+        friendly_name: Toggle Pi-hole
+        value_template: "{{ is_state('sensor.pi_hole_status', 'enabled') }}"
         turn_on:
-          service: shell_command.pi_hole_1_enable
+          service: shell_command.pi_hole_enable
         turn_off:
-          service: shell_command.pi_hole_1_disable
-      toggle_pi_hole_2:
-        friendly_name: Toggle Pi-hole 2
-        value_template: "{{ is_state('sensor.pi_hole_2_status', 'enabled') }}"
-        turn_on:
-          service: shell_command.pi_hole_2_enable
-        turn_off:
-          service: shell_command.pi_hole_2_disable
+          service: shell_command.pi_hole_disable

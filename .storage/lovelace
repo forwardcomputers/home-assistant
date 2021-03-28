@@ -558,24 +558,23 @@
                         {
                             "cards": [
                                 {
-                                    "aspect_ratio": "93%",
                                     "camera_image": "camera.radar",
                                     "entities": [],
                                     "image": "https://www.home-assistant.io/images/merchandise/shirt-rontpage.png",
-                                    "type": "picture-glance"
+                                    "type": "picture-glance",
+                                    "aspect_ratio": "93%"
                                 },
                                 {
-                                    "type": "custom:layout-break"
-                                },
-                                {
-                                    "aspect_ratio": "93%",
                                     "camera_image": "camera.jet_stream",
                                     "entities": [],
-                                    "type": "picture-glance"
+                                    "type": "picture-glance",
+                                    "aspect_ratio": "93%"
                                 }
                             ],
-                            "layout": "vertical",
-                            "type": "custom:layout-card"
+                            "layout": "horizontal",
+                            "type": "custom:layout-card",
+                            "view_layout": "horizontal",
+                            "layout_type": "horizontal"
                         }
                     ],
                     "icon": "mdi:map",
@@ -823,12 +822,12 @@
                                                         "action": "call-service",
                                                         "service": "switch.toggle",
                                                         "service_data": {
-                                                            "entity_id": "switch.toggle_pi_hole_1"
+                                                            "entity_id": "switch.toggle_pi_hole"
                                                         }
                                                     },
-                                                    "entity": "sensor.pi_hole_1_status",
+                                                    "entity": "sensor.pi_hole_status",
                                                     "icon": "mdi:pi-hole",
-                                                    "label": "[[[\n  var line1 = \n  '<p style=\"text-align:left\">Queries Today: ' + \n  states['sensor.pi_hole_1_dns_queries_today'].state +\n  '<br>Blocked Today: ' + \n  states['sensor.pi_hole_1_ads_blocked_today'].state +\n  '<br>Percent Today: ' + \n  states['sensor.pi_hole_1_ads_percentage_blocked_today'].state +\n  '%</p>';\n  return line1;\n]]]\n",
+                                                    "label": "[[[\n  var line1 = \n  '<p style=\"text-align:left\">Queries Today: ' + \n  states['sensor.pi_hole_dns_queries_today'].state +\n  '<br>Blocked Today: ' + \n  states['sensor.pi_hole_ads_blocked_today'].state +\n  '<br>Percent Today: ' + \n  states['sensor.pi_hole_ads_percentage_blocked_today'].state +\n  '%</p>';\n  return line1;\n]]]\n",
                                                     "name": "#1",
                                                     "show_label": true,
                                                     "state": [
@@ -853,7 +852,7 @@
                                                         "custom_fields": {
                                                             "temp": [
                                                                 {
-                                                                    "background-color": "[[[\n  if (states['sensor.netdata_pi_hole_1_cpu_temp'].state < 60) return 'green';\n  if (states['sensor.netdata_pi_hole_1_cpu_temp'].state >= 60 && \n      states['sensor.netdata_pi_hole_1_cpu_temp'].state < 80) return 'orange';\n  else return \"red\";\n]]]\n"
+                                                                    "background-color": "[[[\n  if (states['sensor.netdata_pi_hole_cpu_temp'].state < 60) return 'green';\n  if (states['sensor.netdata_pi_hole_cpu_temp'].state >= 60 && \n      states['sensor.netdata_pi_hole_cpu_temp'].state < 80) return 'orange';\n  else return \"red\";\n]]]\n"
                                                                 },
                                                                 {
                                                                     "border-radius": "100px"
@@ -871,7 +870,7 @@
                                                                     "height": "20px"
                                                                 },
                                                                 {
-                                                                    "width": "65px"
+                                                                    "width": "25px"
                                                                 },
                                                                 {
                                                                     "font-size": "12px"
@@ -889,50 +888,12 @@
                                                     },
                                                     "tap_action": {
                                                         "action": "url",
-                                                        "url_path": "http://pihole1/admin"
-                                                    },
-                                                    "type": "custom:button-card"
-                                                },
-                                                {
-                                                    "color_type": "card",
-                                                    "double_tap_action": {
-                                                        "action": "call-service",
-                                                        "service": "switch.toggle",
-                                                        "service_data": {
-                                                            "entity_id": "switch.toggle_pi_hole_2"
-                                                        }
-                                                    },
-                                                    "entity": "sensor.pi_hole_2_status",
-                                                    "icon": "mdi:pi-hole",
-                                                    "label": "[[[\n  var line1 = \n  '<p style=\"text-align:left\">Queries Today: ' + \n  states['sensor.pi_hole_2_dns_queries_today'].state +\n  '<br>Blocked Today: ' + \n  states['sensor.pi_hole_2_ads_blocked_today'].state +\n  '<br>Percent Today: ' + \n  states['sensor.pi_hole_2_ads_percentage_blocked_today'].state +\n  '%</p>';\n  return line1;\n]]]\n",
-                                                    "name": "#2",
-                                                    "show_label": true,
-                                                    "state": [
-                                                        {
-                                                            "color": "green",
-                                                            "value": "enabled"
-                                                        },
-                                                        {
-                                                            "color": "red",
-                                                            "icon": "mdi:alert",
-                                                            "styles": {
-                                                                "card": [
-                                                                    {
-                                                                        "animation": "blink 2s ease infinite"
-                                                                    }
-                                                                ]
-                                                            },
-                                                            "value": "disabled"
-                                                        }
-                                                    ],
-                                                    "tap_action": {
-                                                        "action": "url",
-                                                        "url_path": "http://pihole2/admin"
+                                                        "url_path": "http://pihole/admin"
                                                     },
                                                     "type": "custom:button-card"
                                                 }
                                             ],
-                                            "column_num": 2,
+                                            "column_num": 1,
                                             "layout": "horizontal",
                                             "type": "custom:layout-card"
                                         }
@@ -1079,9 +1040,6 @@
                                     "type": "entities"
                                 },
                                 {
-                                    "type": "custom:layout-break"
-                                },
-                                {
                                     "entities": [
                                         {
                                             "entities": [
@@ -1154,7 +1112,9 @@
                             ],
                             "show_header_toggle": false,
                             "type": "custom:layout-card",
-                            "layout": "vertical"
+                            "layout": "horizontal",
+                            "layout_type": "horizontal",
+                            "view_layout": "horizontal"
                         }
                     ],
                     "icon": "mdi:server",
