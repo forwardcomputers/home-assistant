@@ -902,7 +902,47 @@
                                     "type": "entities"
                                 },
                                 {
-                                    "type": "custom:layout-break"
+                                    "entities": [
+                                        {
+                                            "entities": [
+                                                {
+                                                    "entity": "sensor.office_ups_serial_number",
+                                                    "name": "Serial Number"
+                                                }
+                                            ],
+                                            "entity": "sensor.office_ups_model",
+                                            "icon": "mdi:car-battery",
+                                            "name": "Model",
+                                            "type": "custom:multiple-entity-row"
+                                        },
+                                        {
+                                            "entity": "sensor.office_ups_status",
+                                            "icon": "mdi:information-outline",
+                                            "name": "Status"
+                                        },
+                                        {
+                                            "entities": [
+                                                {
+                                                    "entity": "sensor.office_ups_battery_runtime_mins",
+                                                    "name": "Runtime"
+                                                },
+                                                {
+                                                    "entity": "sensor.office_ups_load",
+                                                    "name": "Load"
+                                                },
+                                                {
+                                                    "entity": "sensor.office_ups_battery_charge",
+                                                    "name": "Charge"
+                                                }
+                                            ],
+                                            "entity": "sensor.office_ups_battery_charge",
+                                            "name": "Battery",
+                                            "show_state": false,
+                                            "type": "custom:multiple-entity-row"
+                                        }
+                                    ],
+                                    "title": "UPS",
+                                    "type": "entities"
                                 },
                                 {
                                     "entities": [
@@ -997,47 +1037,7 @@
                                     "type": "entities"
                                 },
                                 {
-                                    "entities": [
-                                        {
-                                            "entities": [
-                                                {
-                                                    "entity": "sensor.office_ups_serial_number",
-                                                    "name": "Serial Number"
-                                                }
-                                            ],
-                                            "entity": "sensor.office_ups_model",
-                                            "icon": "mdi:car-battery",
-                                            "name": "Model",
-                                            "type": "custom:multiple-entity-row"
-                                        },
-                                        {
-                                            "entity": "sensor.office_ups_status",
-                                            "icon": "mdi:information-outline",
-                                            "name": "Status"
-                                        },
-                                        {
-                                            "entities": [
-                                                {
-                                                    "entity": "sensor.office_ups_battery_runtime_mins",
-                                                    "name": "Runtime"
-                                                },
-                                                {
-                                                    "entity": "sensor.office_ups_load",
-                                                    "name": "Load"
-                                                },
-                                                {
-                                                    "entity": "sensor.office_ups_battery_charge",
-                                                    "name": "Charge"
-                                                }
-                                            ],
-                                            "entity": "sensor.office_ups_battery_charge",
-                                            "name": "Battery",
-                                            "show_state": false,
-                                            "type": "custom:multiple-entity-row"
-                                        }
-                                    ],
-                                    "title": "UPS",
-                                    "type": "entities"
+                                    "type": "custom:layout-break"
                                 },
                                 {
                                     "entities": [
@@ -1107,6 +1107,111 @@
                                         "script.download_printer_firmware"
                                     ],
                                     "title": "Printer",
+                                    "type": "entities"
+                                },
+                                {
+                                    "entities": [
+                                        {
+                                            "entity": "sensor.firewall_model",
+                                            "icon": "mdi:router-wireless",
+                                            "name": "Model"
+                                        },
+                                        {
+                                            "entity": "sensor.firewall_cpu_load",
+                                            "entity_row": true,
+                                            "height": "30px",
+                                            "icon": "mdi:chip",
+                                            "name": "CPU Load",
+                                            "severity": [
+                                                {
+                                                    "color": "green",
+                                                    "from": 0,
+                                                    "to": 74
+                                                },
+                                                {
+                                                    "color": "orange",
+                                                    "from": 75,
+                                                    "to": 89
+                                                },
+                                                {
+                                                    "color": "red",
+                                                    "from": 90,
+                                                    "to": 100
+                                                }
+                                            ],
+                                            "type": "custom:bar-card"
+                                        },
+                                        {
+                                            "entity": "sensor.firewall_cpu_temp",
+                                            "entity_row": true,
+                                            "height": "30px",
+                                            "icon": "mdi:thermometer",
+                                            "indicator": "off",
+                                            "name": "CPU Temp",
+                                            "severity": [
+                                                {
+                                                    "color": "green",
+                                                    "from": 0,
+                                                    "to": 74
+                                                },
+                                                {
+                                                    "color": "orange",
+                                                    "from": 75,
+                                                    "to": 89
+                                                },
+                                                {
+                                                    "color": "red",
+                                                    "from": 90,
+                                                    "to": 100
+                                                }
+                                            ],
+                                            "type": "custom:bar-card"
+                                        },
+                                        {
+                                            "entity": "sensor.firewall_mem_used",
+                                            "entity_row": true,
+                                            "height": "30px",
+                                            "icon": "mdi:memory",
+                                            "name": "Ram Used",
+                                            "severity": [
+                                                {
+                                                    "color": "green",
+                                                    "from": 0,
+                                                    "to": 74
+                                                },
+                                                {
+                                                    "color": "orange",
+                                                    "from": 75,
+                                                    "to": 89
+                                                },
+                                                {
+                                                    "color": "red",
+                                                    "from": 90,
+                                                    "to": 100
+                                                }
+                                            ],
+                                            "type": "custom:bar-card"
+                                        },
+                                        {
+                                            "entities": [
+                                                {
+                                                    "entity": "sensor.firewall_latest_firmware",
+                                                    "name": "Latest"
+                                                }
+                                            ],
+                                            "entity": "sensor.firewall_release",
+                                            "icon": "mdi:code-tags",
+                                            "name": "Firmware",
+                                            "type": "custom:multiple-entity-row"
+                                        },
+                                        {
+                                            "entity": "sensor.firewall_uptime",
+                                            "icon": "mdi:clock",
+                                            "name": "Uptime"
+                                        },
+                                        "script.download_router_firmware"
+                                    ],
+                                    "title": "Router",
                                     "type": "entities"
                                 }
                             ],

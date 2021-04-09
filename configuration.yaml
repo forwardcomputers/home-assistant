@@ -62,10 +62,6 @@ zeroconf:
 logger:
   default: info
 
-#http:
-#  ssl_certificate: /acme/*.home.mustakim.com.cer
-#  ssl_key: /acme/*.home.mustakim.com.key
-
 camera:
   - platform: environment_canada
     name: radar
@@ -144,7 +140,7 @@ panel_iframe:
   netdata:
      title: Netdata
      icon: mdi:counter
-     url: !secret netdata_url
+     url: !secret docker_netdata_url
   webcode:
      title: Webcode
      icon: mdi:microsoft-visual-studio-code
@@ -403,19 +399,68 @@ sensor:
             {% endif %}
 
   - platform: netdata
-    host: !secret pi_hole_ip
+    host: !secret firewall_ip
     scan_interval: 30
     resources:
-      pi_hole_uptime_raw:
+      firewall_uptime_raw:
         data_group: "system.uptime"
         element: "uptime"
-      pi_hole_system_processes_raw:
-        data_group: "system.active_processes"
-        element: "active"
-      pi_hole_cpu_temp:
-        data_group: "sensors.temp_thermal_zone0_hwmon_hwmon0"
-        element: "sys_devices_virtual_thermal_thermal_zone0_hwmon0_temp1_input"
-        icon: mdi:thermometer
+      firewall_cpu_temp_raw:
+        data_group: "sensors.temp_thermal_zone2_thermal_thermal_zone2"
+        element: "sys_devices_virtual_thermal_thermal_zone2_temp"
+      firewall_mem_free:
+        data_group: "system.ram"
+        element: "free"
+  - platform: command_line
+    name: firewall_latest_firmware
+    command: python3 -c "import lxml.html; import requests; html=requests.get('https://downloads.openwrt.org'); doc=lxml.html.fromstring(html.text); rev=doc.xpath('/html/body/div/ul[1]/li/strong/a/text()')[0]; print(rev.split()[-1])"
+    scan_interval: 86400
+  - platform: command_line
+    name: firewall_release
+    command: !secret firewall_release
+    scan_interval: 86400
+  - platform: command_line
+    name: firewall_mem_available
+    command: !secret firewall_mem_available
+    scan_interval: 86400
+  - platform: command_line
+    name: firewall_cpu_load
+    command: !secret firewall_cpu_load
+    unit_of_measurement: '%'
+    scan_interval: 30
+  - platform: template
+    sensors:
+      firewall_cpu_temp:
+        value_template: >-
+          {{- states('sensor.netdata_firewall_cpu_temp_raw') | round(0, "floor") -}}
+        unit_of_measurement: '°C'
+      firewall_model:
+        value_template: "QOTOM Q330G4"
+      firewall_uptime:
+        value_template: >-
+            {% set uptime = states('sensor.netdata_firewall_uptime_raw') | float %}
+            {% set updays = (uptime / 86400) | round(0, "floor") %}
+            {% set uphours = uptime | timestamp_custom('%-H:%-M:%-S', false) | regex_replace('^0:','') %}
+            {% if updays == 0 %}
+                {{- uphours -}}
+            {% elif updays == 1 %}
+                {{- updays ~ " Day, " ~ uphours -}}
+            {% else %}
+                {{- updays ~ " Days, " ~ uphours -}}
+            {% endif %}
+      firewall_mem_used:
+        unit_of_measurement: '%'
+        value_template: >-
+            {% set m = float(states('sensor.firewall_mem_available')) %}
+            {% set n = float(states('sensor.netdatat_firewall_mem_free')) %}
+            {% if m == 'unknown' %} {% set m = 0 %}  {% endif %}
+            {% if n == 'unknown' %} {% set n = 0 %}  {% endif %}
+            {% if m != 0 -%}
+                {{ ((n / m) * 100) | round(0, "ceil") }}
+            {% else %}
+                {{ 0 }}
+            {% endif %}
+
 
   - platform: version
     name: installed_version
@@ -455,15 +500,15 @@ sensor:
     scan_interval: 86400
   - platform: command_line
     name: printer_model
-    command: curl -s /usr/bin/curl -sL 'http://laser.home.mustakim.com/ePrint/ePrintConfigDyn.xml' | grep -oP '(?<=<dd:MakeAndModel>).*(?=</dd:MakeAndModel>)'
+    command: !secret printer_model
     scan_interval: 86400
   - platform: command_line
     name: printer_sn
-    command: curl -s /usr/bin/curl -sL 'http://laser.home.mustakim.com/ePrint/ePrintConfigDyn.xml' | grep -oP '(?<=<dd:SerialNumber>).*(?=</dd:SerialNumber>)'
+    command: !secret printer_sn
     scan_interval: 86400
   - platform: command_line
     name: printer_fw
-    command: curl -s /usr/bin/curl -sL 'http://laser.home.mustakim.com/ePrint/ePrintConfigDyn.xml' | grep -oP '(?<=<dd:Date>).*(?=</dd:Date>)' | tr -d '-'
+    command: !secret printer_fw
     scan_interval: 3600
   - platform: snmp
     name: printer_toner
