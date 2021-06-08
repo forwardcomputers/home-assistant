@@ -1,4 +1,6 @@
 {
+    "version": 1,
+    "key": "lovelace_resources",
     "data": {
         "items": [
             {
@@ -82,12 +84,10 @@
                 "url": "/hacsfiles/decluttering-card/decluttering-card.js"
             },
             {
-                "id": "0133ece7a6774f62b1453298e1f5fd73",
+                "url": "/hacsfiles/custom-brand-icons/custom-brand-icons.js",
                 "type": "module",
-                "url": "/hacsfiles/spotify-card/spotify-card.js"
+                "id": "a16ec0088bdd46b7a613e8c3ebe872e2"
             }
         ]
-    },
-    "key": "lovelace_resources",
-    "version": 1
+    }
 }

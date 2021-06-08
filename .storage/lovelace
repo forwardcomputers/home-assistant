@@ -906,49 +906,6 @@
                                         {
                                             "entities": [
                                                 {
-                                                    "entity": "sensor.office_ups_serial_number",
-                                                    "name": "Serial Number"
-                                                }
-                                            ],
-                                            "entity": "sensor.office_ups_model",
-                                            "icon": "mdi:car-battery",
-                                            "name": "Model",
-                                            "type": "custom:multiple-entity-row"
-                                        },
-                                        {
-                                            "entity": "sensor.office_ups_status",
-                                            "icon": "mdi:information-outline",
-                                            "name": "Status"
-                                        },
-                                        {
-                                            "entities": [
-                                                {
-                                                    "entity": "sensor.office_ups_battery_runtime_mins",
-                                                    "name": "Runtime"
-                                                },
-                                                {
-                                                    "entity": "sensor.office_ups_load",
-                                                    "name": "Load"
-                                                },
-                                                {
-                                                    "entity": "sensor.office_ups_battery_charge",
-                                                    "name": "Charge"
-                                                }
-                                            ],
-                                            "entity": "sensor.office_ups_battery_charge",
-                                            "name": "Battery",
-                                            "show_state": false,
-                                            "type": "custom:multiple-entity-row"
-                                        }
-                                    ],
-                                    "title": "UPS",
-                                    "type": "entities"
-                                },
-                                {
-                                    "entities": [
-                                        {
-                                            "entities": [
-                                                {
                                                     "entity": "sensor.nas_serial",
                                                     "name": "Serial Number"
                                                 }
@@ -1044,69 +1001,42 @@
                                         {
                                             "entities": [
                                                 {
-                                                    "entity": "sensor.printer_sn",
+                                                    "entity": "sensor.office_ups_serial_number",
                                                     "name": "Serial Number"
                                                 }
                                             ],
-                                            "entity": "sensor.printer_model",
-                                            "icon": "mdi:printer",
+                                            "entity": "sensor.office_ups_model",
+                                            "icon": "mdi:car-battery",
                                             "name": "Model",
                                             "type": "custom:multiple-entity-row"
                                         },
                                         {
-                                            "entities": [
-                                                {
-                                                    "entity": "sensor.printer_latest_firmware",
-                                                    "name": "Latest"
-                                                }
-                                            ],
-                                            "entity": "sensor.printer_fw",
-                                            "icon": "mdi:code-tags",
-                                            "name": "Firmware",
-                                            "type": "custom:multiple-entity-row"
+                                            "entity": "sensor.office_ups_status",
+                                            "icon": "mdi:information-outline",
+                                            "name": "Status"
                                         },
                                         {
                                             "entities": [
                                                 {
-                                                    "entity": "sensor.printer_toner",
-                                                    "name": false
-                                                }
-                                            ],
-                                            "entity": "sensor.printer_toner_pct",
-                                            "icon": "mdi:blur",
-                                            "name": "Toner",
-                                            "type": "custom:multiple-entity-row"
-                                        },
-                                        {
-                                            "entities": [
+                                                    "entity": "sensor.office_ups_battery_runtime_mins",
+                                                    "name": "Runtime"
+                                                },
                                                 {
-                                                    "entity": "sensor.printer_drum",
-                                                    "name": false
+                                                    "entity": "sensor.office_ups_load",
+                                                    "name": "Load"
+                                                },
+                                                {
+                                                    "entity": "sensor.office_ups_battery_charge",
+                                                    "name": "Charge"
                                                 }
                                             ],
-                                            "entity": "sensor.printer_drum_pct",
-                                            "icon": "mdi:panorama-vertical",
-                                            "name": "Drum",
+                                            "entity": "sensor.office_ups_battery_charge",
+                                            "name": "Battery",
+                                            "show_state": false,
                                             "type": "custom:multiple-entity-row"
-                                        },
-                                        {
-                                            "entity": "sensor.hp_laserjet_mfp_m130fw_printer",
-                                            "icon": "mdi:file-document",
-                                            "name": "Printed"
-                                        },
-                                        {
-                                            "entity": "sensor.hp_laserjet_mfp_m130fw_scanner",
-                                            "name": "Scanned"
-                                        },
-                                        {
-                                            "entity": "sensor.printer_uptime",
-                                            "icon": "mdi:clock",
-                                            "name": "Uptime"
-                                        },
-                                        "script.clean_printer",
-                                        "script.download_printer_firmware"
+                                        }
                                     ],
-                                    "title": "Printer",
+                                    "title": "UPS",
                                     "type": "entities"
                                 },
                                 {
@@ -1212,6 +1142,76 @@
                                         "script.download_router_firmware"
                                     ],
                                     "title": "Router",
+                                    "type": "entities"
+                                },
+                                {
+                                    "entities": [
+                                        {
+                                            "entities": [
+                                                {
+                                                    "entity": "sensor.printer_sn",
+                                                    "name": "Serial Number"
+                                                }
+                                            ],
+                                            "entity": "sensor.printer_model",
+                                            "icon": "mdi:printer",
+                                            "name": "Model",
+                                            "type": "custom:multiple-entity-row"
+                                        },
+                                        {
+                                            "entities": [
+                                                {
+                                                    "entity": "sensor.printer_latest_firmware",
+                                                    "name": "Latest"
+                                                }
+                                            ],
+                                            "entity": "sensor.printer_fw",
+                                            "icon": "mdi:code-tags",
+                                            "name": "Firmware",
+                                            "type": "custom:multiple-entity-row"
+                                        },
+                                        {
+                                            "entities": [
+                                                {
+                                                    "entity": "sensor.printer_toner",
+                                                    "name": false
+                                                }
+                                            ],
+                                            "entity": "sensor.printer_toner_pct",
+                                            "icon": "mdi:blur",
+                                            "name": "Toner",
+                                            "type": "custom:multiple-entity-row"
+                                        },
+                                        {
+                                            "entities": [
+                                                {
+                                                    "entity": "sensor.printer_drum",
+                                                    "name": false
+                                                }
+                                            ],
+                                            "entity": "sensor.printer_drum_pct",
+                                            "icon": "mdi:panorama-vertical",
+                                            "name": "Drum",
+                                            "type": "custom:multiple-entity-row"
+                                        },
+                                        {
+                                            "entity": "sensor.hp_laserjet_mfp_m130fw_printer",
+                                            "icon": "mdi:file-document",
+                                            "name": "Printed"
+                                        },
+                                        {
+                                            "entity": "sensor.hp_laserjet_mfp_m130fw_scanner",
+                                            "name": "Scanned"
+                                        },
+                                        {
+                                            "entity": "sensor.printer_uptime",
+                                            "icon": "mdi:clock",
+                                            "name": "Uptime"
+                                        },
+                                        "script.clean_printer",
+                                        "script.download_printer_firmware"
+                                    ],
+                                    "title": "Printer",
                                     "type": "entities"
                                 }
                             ],
@@ -2778,30 +2778,6 @@
                     ],
                     "path": "edc",
                     "title": "edc"
-                },
-                {
-                    "badges": [],
-                    "cards": [
-                        {
-                            "entity": "media_player.spotify_alimustakim",
-                            "type": "media-control"
-                        },
-                        {
-                            "entity": "media_player.office_speaker",
-                            "type": "media-control"
-                        },
-                        {
-                            "account": "default",
-                            "display_style": "grid",
-                            "grid_covers_per_row": 5,
-                            "limit": 10,
-                            "playlist_type": "discover-weekly",
-                            "spotify_entity": "media_player.office_speaker",
-                            "type": "custom:spotify-card"
-                        }
-                    ],
-                    "path": "q1q1",
-                    "title": "q1q1"
                 }
             ]
         }

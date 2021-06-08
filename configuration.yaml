@@ -1,5 +1,5 @@
 # Configure a default setup, default_config includes these items - https://www.home-assistant.io/integrations/default_config
-#default_config:
+default_config:
 automation: !include automations.yaml
 cloud:
   alexa:
@@ -42,22 +42,20 @@ cloud:
         - switch.office_spare
         - switch.macbook_sleep
         - switch.toggle_pi_hole
-config:
-frontend:
-history:
-#logbook:
-#map:
-mobile_app:
-#person:
+#config:
+#frontend:
+#history:
+##logbook:
+##map:
+#mobile_app:
+##person:
 script: !include scripts.yaml
-ssdp:
-sun:
-system_health:
-updater:
-  include_used_components: true
-  reporting: false
-zeroconf:
-#zone:
+#ssdp:
+#sun:
+#system_health:
+#updater:
+#zeroconf:
+##zone:
 
 logger:
   default: info
@@ -101,6 +99,12 @@ homekit:
       - switch.office_spare
       - switch.macbook_sleep
       - switch.toggle_pi_hole
+
+http:
+  cors_allowed_origins:
+    - https://www.home.mustakim.com
+  ssl_certificate: /opt/filer/os/acme/*.home.mustakim.com/fullchain.cer
+  ssl_key: /opt/filer/os/acme/*.home.mustakim.com/*.home.mustakim.com.key
 
 media_player:
   - platform: androidtv

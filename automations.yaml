@@ -3,15 +3,22 @@
   description: ''
   trigger:
   - platform: template
-    value_template: '{{ states.sun.sun.attributes.elevation | int < 8 }}'
+    value_template: '{{ states.sun.sun.attributes.elevation < 8.5 }}'
   condition: []
   action:
-  - data: {}
+  - type: turn_on
+    device_id: 06115663eedb4542bedae4be22ce6cf6
     entity_id: switch.kitchen_sink
-    service: switch.turn_on
-  - data: {}
+    domain: switch
+  - type: turn_on
+    device_id: 493d7d5d960c40adaf59b97f926030bb
     entity_id: switch.office_desk
-    service: switch.turn_on
+    domain: switch
+  - type: turn_on
+    device_id: dcb083f35f074de2aa94192e8cd9eaa0
+    entity_id: light.office_table
+    domain: light
+    brightness_pct: 80
   mode: single
 - id: '1574096809868'
   alias: Sunrise lights
