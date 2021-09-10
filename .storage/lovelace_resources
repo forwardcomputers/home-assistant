@@ -46,7 +46,7 @@
             {
                 "id": "281dc18fe8f0432b9d0347361eeb7e2b",
                 "type": "module",
-                "url": "/hacsfiles/lovelace-layout-card/layout-card.js"
+                "url": "/hacsfiles/lovelace-layout-card/layout-card.js?hacstag=156434866231"
             },
             {
                 "id": "750b4c99c8854b6e980f34c452f46ce2",
@@ -61,7 +61,7 @@
             {
                 "id": "982da24a9d314e2fa3cc70d62c6ab6d3",
                 "type": "module",
-                "url": "/hacsfiles/lovelace-badge-card/badge-card.js"
+                "url": "/hacsfiles/lovelace-badge-card/badge-card.js?hacstag=2814536085672"
             },
             {
                 "id": "95d3217422994a3985ca8a32459867ba",
@@ -76,7 +76,7 @@
             {
                 "id": "7028932ea7474b3ba3be2b0fd1b77b6f",
                 "type": "module",
-                "url": "/hacsfiles/lovelace-more-info-card/more-info-card.js"
+                "url": "/hacsfiles/lovelace-more-info-card/more-info-card.js?hacstag=1805289500994"
             },
             {
                 "id": "6437035fd0b84f47928e17380f030c2d",
@@ -84,7 +84,7 @@
                 "url": "/hacsfiles/decluttering-card/decluttering-card.js"
             },
             {
-                "url": "/hacsfiles/custom-brand-icons/custom-brand-icons.js",
+                "url": "/hacsfiles/custom-brand-icons/custom-brand-icons.js?hacstag=3668620311023",
                 "type": "module",
                 "id": "a16ec0088bdd46b7a613e8c3ebe872e2"
             }

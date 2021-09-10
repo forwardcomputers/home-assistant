@@ -23,3 +23,24 @@ clean_printer:
   sequence:
   - data: {}
     service: shell_command.clean_printer
+livingroom:
+  sequence:
+  - service: homeassistant.toggle
+    target:
+      device_id: 641a6e14f5a5cae1f47f3025a7ad12af
+  mode: single
+  alias: livingroom
+bedroom:
+  sequence:
+  - service: homeassistant.toggle
+    target:
+      device_id: 5a92be220297079d98d4a44aab8fb613
+  mode: single
+  alias: bedroom
+kitchen:
+  sequence:
+  - service: homeassistant.toggle
+    target:
+      device_id: 62a28dfcde87e9042a8dc0d1911e103b
+  mode: single
+  alias: kitchen

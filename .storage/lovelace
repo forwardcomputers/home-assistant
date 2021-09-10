@@ -21,9 +21,6 @@
                                 {
                                     "entities": [
                                         {
-                                            "entity": "sensor.uk"
-                                        },
-                                        {
                                             "entity": "sensor.97north"
                                         },
                                         {
@@ -398,9 +395,9 @@
                                     "type": "horizontal-stack"
                                 }
                             ],
-                            "view_layout": "vertical",
                             "show_header_toggle": false,
-                            "type": "custom:layout-card"
+                            "type": "custom:layout-card",
+                            "view_layout": "vertical"
                         }
                     ],
                     "icon": "mdi:home",
@@ -595,6 +592,7 @@
                                         },
                                         {
                                             "entity": "light.bedroom_right",
+                                            "icon": "mdi:lamp",
                                             "hide_when_off": true,
                                             "name": "Bedroom Right",
                                             "slider_theme": {
@@ -609,6 +607,7 @@
                                         },
                                         {
                                             "entity": "light.bedroom_left",
+                                            "icon": "mdi:lamp",
                                             "hide_when_off": true,
                                             "name": "Bedroom Left",
                                             "slider_theme": {
@@ -633,6 +632,7 @@
                                         },
                                         {
                                             "entity": "light.hallway_center",
+                                            "icon": "mdi:dome-light",
                                             "hide_when_off": true,
                                             "name": "Hallway Center",
                                             "slider_theme": {
@@ -647,6 +647,7 @@
                                         },
                                         {
                                             "entity": "light.hallway_kitchen",
+                                            "icon": "mdi:dome-light",
                                             "hide_when_off": true,
                                             "name": "Hallway Kitchen",
                                             "slider_theme": {
@@ -661,6 +662,7 @@
                                         },
                                         {
                                             "entity": "light.hallway_door",
+                                            "icon": "mdi:dome-light",
                                             "hide_when_off": true,
                                             "name": "Hallway Entrance",
                                             "slider_theme": {
@@ -684,6 +686,7 @@
                                     "entities": [
                                         {
                                             "entity": "light.office_table",
+                                            "icon": "mdi:lamp",
                                             "hide_when_off": true,
                                             "name": "Table",
                                             "slider_theme": {
@@ -698,7 +701,14 @@
                                         },
                                         {
                                             "entity": "switch.office_desk",
+                                            "icon": "mdi:desk-lamp",
                                             "name": "Desk",
+                                            "state_color": true
+                                        },
+                                        {
+                                            "entity": "switch.office_switch",
+                                            "icon": "mdi:shredder",
+                                            "name": "Shredder",
                                             "state_color": true
                                         },
                                         {
@@ -735,6 +745,7 @@
                                         },
                                         {
                                             "entity": "light.livingroom_led",
+                                            "icon": "mdi:led-strip-variant",
                                             "hide_when_off": true,
                                             "name": "LED",
                                             "slider_theme": {
@@ -749,6 +760,7 @@
                                         },
                                         {
                                             "entity": "light.livingroom_chair",
+                                            "icon": "mdi:floor-lamp",
                                             "hide_when_off": true,
                                             "name": "Floor Lamp",
                                             "slider_theme": {
@@ -787,6 +799,7 @@
                                             "entities": [
                                                 {
                                                     "entity": "switch.kitchen_sink",
+                                                    "icon": "mdi:led-strip-variant",
                                                     "name": "Kitchen"
                                                 }
                                             ],
@@ -799,7 +812,8 @@
                             ],
                             "layout": "vertical",
                             "show_header_toggle": false,
-                            "type": "custom:layout-card"
+                            "type": "custom:layout-card",
+                            "view_layout": "vertical"
                         }
                     ],
                     "icon": "mdi:checkbox-multiple-blank-outline",

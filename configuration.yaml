@@ -81,6 +81,8 @@ group: !include groups.yaml
 
 homeassistant:
   auth_providers:
+    - type: legacy_api_password
+      api_password: !secret api_password
     - type: trusted_networks
       trusted_networks: !secret local_lan
       allow_bypass_login: true
@@ -103,6 +105,7 @@ homekit:
 http:
   cors_allowed_origins:
     - https://www.home.mustakim.com
+    - https://mustakim.orgfree.com
   ssl_certificate: /opt/filer/os/acme/*.home.mustakim.com/fullchain.cer
   ssl_key: /opt/filer/os/acme/*.home.mustakim.com/*.home.mustakim.com.key
 
@@ -635,12 +638,12 @@ sensor:
     display_options:
       - 'time'
       - 'time_utc'
-  - platform: worldclock
-    name: UK
-    time_zone: Europe/London
-  - platform: worldclock
-    name: San Francisco
-    time_zone: America/Los_Angeles
+#  - platform: worldclock
+#    name: UK
+#    time_zone: Europe/London
+#  - platform: worldclock
+#    name: San Francisco
+#    time_zone: America/Los_Angeles
 
   - platform: nut
     name: Office UPS

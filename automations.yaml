@@ -124,18 +124,15 @@
     webhook_id: night
   condition: []
   action:
-  - data: {}
-    entity_id: media_player.nvidia_nshield
-    service: media_player.turn_off
-  - data: {}
-    service: shell_command.macbook_sleep
-  - device_id: 493d7d5d960c40adaf59b97f926030bb
-    domain: switch
-    entity_id: switch.office_desk
-    type: turn_off
-  - brightness_pct: 5
-    device_id: 795eb91b579f42f4b00f468c17cfbc8f
-    domain: light
-    entity_id: light.bedroom
-    type: turn_on
+  - service: media_player.turn_off
+    target:
+      entity_id: media_player.nvidia_nshield
+  - service: light.turn_off
+    target:
+      area_id: 003f372ab8c0412e801d147fa652fe1e
+  - service: light.turn_on
+    target:
+      area_id: cbd0f1f786194e6fb26a1ee47cb53494
+    data:
+      brightness_pct: 3
   mode: single
