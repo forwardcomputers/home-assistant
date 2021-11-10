@@ -136,22 +136,26 @@ panel_iframe:
 #     title: Adguard
 #     icon: mdi:shield-check
 #     url: !secret adguard_url
-  deconz:
-     title: deCONZ
+#  cockpit:
+#     title: Cockpit
+#     icon: mdi:tablet-dashboard
+#     url: !secret cockpit_url
+#  webcode:
+#     title: Webcode
+#     icon: mdi:microsoft-visual-studio-code
+#     url: !secret webcode_url
+#  deconz:
+#     title: deCONZ
+#     icon: mdi:zigbee
+#     url: !secret deconz_url
+  zigbee2mqtt:
+     title: zigbee
      icon: mdi:zigbee
-     url: !secret deconz_url
-  cockpit:
-     title: Cockpit
-     icon: mdi:tablet-dashboard
-     url: !secret cockpit_url
+     url: !secret zigbee2mqtt_url
   netdata:
      title: Netdata
      icon: mdi:counter
      url: !secret docker_netdata_url
-  webcode:
-     title: Webcode
-     icon: mdi:microsoft-visual-studio-code
-     url: !secret webcode_url
 
 plant:
   Coleus:
