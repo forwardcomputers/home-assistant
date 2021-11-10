@@ -61,9 +61,9 @@ logger:
   default: info
 
 camera:
-  - platform: environment_canada
-    name: radar
-    station: WSO
+#  - platform: environment_canada
+#    name: radar
+#    station: WSO
   - platform: generic
     name: jet_stream
     content_type: image/gif
@@ -233,10 +233,10 @@ spotify:
   client_id: !secret spotify_client_id
   client_secret: !secret spotify_client_secret
 
-weather:
-  - platform: environment_canada
-    name: met_ec
-    station: ON/s0000458
+#weather:
+#  - platform: environment_canada
+#    name: met_ec
+#    station: ON/s0000458
 
 sensor:
   - platform: scrape

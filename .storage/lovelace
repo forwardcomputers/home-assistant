@@ -125,7 +125,7 @@
                                 {
                                     "cards": [
                                         {
-                                            "entity": "weather.met_ec",
+                                            "entity": "weather.toronto",
                                             "name": "Toronto",
                                             "type": "weather-forecast"
                                         },
@@ -555,9 +555,8 @@
                         {
                             "cards": [
                                 {
-                                    "camera_image": "camera.radar",
+                                    "camera_image": "camera.toronto_radar",
                                     "entities": [],
-                                    "image": "https://www.home-assistant.io/images/merchandise/shirt-rontpage.png",
                                     "type": "picture-glance",
                                     "aspect_ratio": "93%"
                                 },
@@ -570,8 +569,8 @@
                             ],
                             "layout": "horizontal",
                             "type": "custom:layout-card",
-                            "view_layout": "horizontal",
-                            "layout_type": "horizontal"
+                            "layout_type": "horizontal",
+                            "view_layout": "horizontal"
                         }
                     ],
                     "icon": "mdi:map",
