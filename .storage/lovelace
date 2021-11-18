@@ -21,6 +21,9 @@
                                 {
                                     "entities": [
                                         {
+                                            "entity": "sensor.in_belize"
+                                        },
+                                        {
                                             "entity": "sensor.97north"
                                         },
                                         {
@@ -586,12 +589,11 @@
                                 {
                                     "entities": [
                                         {
-                                            "entity": "sensor.bedroom_remote_battery_level",
+                                            "entity": "sensor.bedroom_remote_battery",
                                             "name": "Bedroom Remote Battery"
                                         },
                                         {
                                             "entity": "light.bedroom_right",
-                                            "icon": "mdi:lamp",
                                             "hide_when_off": true,
                                             "name": "Bedroom Right",
                                             "slider_theme": {
@@ -606,7 +608,6 @@
                                         },
                                         {
                                             "entity": "light.bedroom_left",
-                                            "icon": "mdi:lamp",
                                             "hide_when_off": true,
                                             "name": "Bedroom Left",
                                             "slider_theme": {
@@ -626,12 +627,11 @@
                                 {
                                     "entities": [
                                         {
-                                            "entity": "sensor.hallway_sensor_battery_level",
+                                            "entity": "sensor.hallway_sensor_battery",
                                             "name": "Hallway Motion Sensor Battery"
                                         },
                                         {
                                             "entity": "light.hallway_center",
-                                            "icon": "mdi:dome-light",
                                             "hide_when_off": true,
                                             "name": "Hallway Center",
                                             "slider_theme": {
@@ -646,7 +646,6 @@
                                         },
                                         {
                                             "entity": "light.hallway_kitchen",
-                                            "icon": "mdi:dome-light",
                                             "hide_when_off": true,
                                             "name": "Hallway Kitchen",
                                             "slider_theme": {
@@ -661,7 +660,6 @@
                                         },
                                         {
                                             "entity": "light.hallway_door",
-                                            "icon": "mdi:dome-light",
                                             "hide_when_off": true,
                                             "name": "Hallway Entrance",
                                             "slider_theme": {
@@ -685,7 +683,6 @@
                                     "entities": [
                                         {
                                             "entity": "light.office_table",
-                                            "icon": "mdi:lamp",
                                             "hide_when_off": true,
                                             "name": "Table",
                                             "slider_theme": {
@@ -700,7 +697,6 @@
                                         },
                                         {
                                             "entity": "switch.office_desk",
-                                            "icon": "mdi:desk-lamp",
                                             "name": "Desk",
                                             "state_color": true
                                         },
@@ -719,7 +715,7 @@
                                         },
                                         {
                                             "entity": "media_player.office_speaker",
-                                            "icon": "mdi:google",
+                                            "icon": "phu:home-mini",
                                             "name": "Google Home Mini"
                                         }
                                     ],
@@ -744,7 +740,6 @@
                                         },
                                         {
                                             "entity": "light.livingroom_led",
-                                            "icon": "mdi:led-strip-variant",
                                             "hide_when_off": true,
                                             "name": "LED",
                                             "slider_theme": {
@@ -759,7 +754,6 @@
                                         },
                                         {
                                             "entity": "light.livingroom_chair",
-                                            "icon": "mdi:floor-lamp",
                                             "hide_when_off": true,
                                             "name": "Floor Lamp",
                                             "slider_theme": {
@@ -797,8 +791,11 @@
                                         {
                                             "entities": [
                                                 {
+                                                    "entity": "sensor.kitchen_sensor_battery",
+                                                    "name": "Kitchen Motion Sensor Battery"
+                                                },
+                                                {
                                                     "entity": "switch.kitchen_sink",
-                                                    "icon": "mdi:led-strip-variant",
                                                     "name": "Kitchen"
                                                 }
                                             ],

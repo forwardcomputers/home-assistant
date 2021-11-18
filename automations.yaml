@@ -90,7 +90,7 @@
   condition: []
   action:
   - data:
-      date: 15/2/2020
+      date: 4/12/2021
       name: Belize
       type: in
     service: python_script.date_countdown
@@ -135,4 +135,41 @@
       area_id: cbd0f1f786194e6fb26a1ee47cb53494
     data:
       brightness_pct: 3
+  mode: single
+- id: '1636589286942'
+  alias: Hallway motion
+  description: ''
+  trigger:
+  - platform: state
+    entity_id: binary_sensor.hallway_sensor_occupancy
+    to: 'off'
+  - platform: state
+    entity_id: binary_sensor.hallway_sensor_occupancy
+    to: 'on'
+  condition: []
+  action:
+  - service: light.toggle
+    target:
+      device_id: c7067e95c87122708f02871df47dd85d
+  mode: single
+- id: '1637176086365'
+  alias: kitchen lights
+  description: ''
+  trigger:
+  - platform: state
+    entity_id: binary_sensor.kitchen_sensor_occupancy
+    to: 'on'
+  condition:
+  - condition: and
+    conditions:
+    - condition: time
+      before: 00:00:00
+    - condition: numeric_state
+      entity_id: sensor.kitchen_sensor_illuminance_lux
+      below: '20'
+  action:
+  - type: turn_on
+    device_id: a0774a7aead4608a299204b4cb5d3232
+    entity_id: switch.kitchen_sink
+    domain: switch
   mode: single

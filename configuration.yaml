@@ -11,16 +11,15 @@ cloud:
       exclude_entities:
         - light.bedroom_left
         - light.bedroom_right
-        - light.configuration_tool_1
         - light.desk
         - light.hallway_center
         - light.hallway_door
         - light.hallway_kitchen
         - light.kitchen
-        - light.office
-        - switch.hallway_spare
-        - switch.office_spare
-        - switch.macbook_sleep
+        - switch.kitchen
+        - switch.night_mode
+        - switch.office
+        - switch.office_desk
         - switch.toggle_pi_hole
   google_actions:
     filter:
@@ -31,16 +30,15 @@ cloud:
       exclude_entities:
         - light.bedroom_left
         - light.bedroom_right
-        - light.configuration_tool_1
         - light.desk
         - light.hallway_center
         - light.hallway_door
         - light.hallway_kitchen
         - light.kitchen
-        - light.office
-        - switch.hallway_spare
-        - switch.office_spare
-        - switch.macbook_sleep
+        - switch.kitchen
+        - switch.night_mode
+        - switch.office
+        - switch.office_desk
         - switch.toggle_pi_hole
 #config:
 #frontend:
@@ -61,9 +59,6 @@ logger:
   default: info
 
 camera:
-#  - platform: environment_canada
-#    name: radar
-#    station: WSO
   - platform: generic
     name: jet_stream
     content_type: image/gif
@@ -96,18 +91,27 @@ homekit:
       - light
       - switch
     exclude_entities:
-      - light.configuration_tool_1
-      - switch.hallway_spare
-      - switch.office_spare
-      - switch.macbook_sleep
+      - switch.kitchen
+      - switch.night_mode
+      - switch.office
+      - switch.office_desk
       - switch.toggle_pi_hole
 
 http:
   cors_allowed_origins:
     - https://www.home.mustakim.com
     - https://mustakim.orgfree.com
+    - https://alim.is
   ssl_certificate: /opt/filer/os/acme/*.home.mustakim.com/fullchain.cer
   ssl_key: /opt/filer/os/acme/*.home.mustakim.com/*.home.mustakim.com.key
+
+light:
+  - platform: switch
+    name: kitchen
+    entity_id: switch.kitchen
+  - platform: switch
+    name: office_desk
+    entity_id: switch.office_desk
 
 media_player:
   - platform: androidtv
@@ -148,14 +152,14 @@ panel_iframe:
 #     title: deCONZ
 #     icon: mdi:zigbee
 #     url: !secret deconz_url
-  zigbee2mqtt:
-     title: zigbee
-     icon: mdi:zigbee
-     url: !secret zigbee2mqtt_url
-  netdata:
-     title: Netdata
-     icon: mdi:counter
-     url: !secret docker_netdata_url
+#  zigbee2mqtt:
+#     title: zigbee
+#     icon: mdi:zigbee
+#     url: !secret zigbee2mqtt_url
+#  netdata:
+#     title: Netdata
+#     icon: mdi:counter
+#     url: !secret docker_netdata_url
 
 plant:
   Coleus:
@@ -219,30 +223,17 @@ shell_command:
   pi_hole_enable: !secret pi_hole_enable_url
   pi_hole_disable: !secret pi_hole_disable_url
 
-#speedtestdotnet:
-#  scan_interval:
-#    minutes: 30
-#  monitored_conditions:
-#    - ping
-#    - download
-#    - upload
-##  server_id: 2565
-## Teksavvy ---^
-
-#spotcast:
-#  sp_dc: !secret sp_dc
-#  sp_key: !secret sp_key
-
 spotify:
   client_id: !secret spotify_client_id
   client_secret: !secret spotify_client_secret
 
-#weather:
-#  - platform: environment_canada
-#    name: met_ec
-#    station: ON/s0000458
-
 sensor:
+  - platform: rest
+    name: aqhi
+    resource: https://dd.weather.gc.ca/air_quality/aqhi/ont/observation/realtime/xml/AQ_OBS_FEUZB_CURRENT.xml
+    scan_interval: 3600
+    json_attributes_path: '$.*'
+    value_template: '{{ value_json.conditionAirQuality.airQualityHealthIndex | round(0) }}'
   - platform: scrape
     name: pollen
     resource: https://www.theweathernetwork.com/ca/forecasts/pollen/ontario/toronto
@@ -642,12 +633,12 @@ sensor:
     display_options:
       - 'time'
       - 'time_utc'
-#  - platform: worldclock
-#    name: UK
-#    time_zone: Europe/London
-#  - platform: worldclock
-#    name: San Francisco
-#    time_zone: America/Los_Angeles
+  - platform: worldclock
+    name: UK
+    time_zone: Europe/London
+  - platform: worldclock
+    name: San Francisco
+    time_zone: America/Los_Angeles
 
   - platform: nut
     name: Office UPS
@@ -709,8 +700,6 @@ sensor:
 
   - platform: template
     sensors:
-      aqhi:
-        value_template: "{{ states('sensor.air_quality_health_index') }}"
       aqi:
         value_template: "{{ states('sensor.waqi_toronto') }}"
       o3:
