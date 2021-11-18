@@ -15,7 +15,7 @@ cloud:
         - light.hallway_center
         - light.hallway_door
         - light.hallway_kitchen
-        - switch.kitchen
+        - switch.kitchen_sink
         - switch.night_mode
         - switch.office
         - switch.office_desk
@@ -33,7 +33,7 @@ cloud:
         - light.hallway_center
         - light.hallway_door
         - light.hallway_kitchen
-        - switch.kitchen
+        - switch.kitchen_sink
         - switch.night_mode
         - switch.office
         - switch.office_desk
@@ -89,7 +89,7 @@ homekit:
       - light
       - switch
     exclude_entities:
-      - switch.kitchen
+      - switch.kitchen_sink
       - switch.night_mode
       - switch.office
       - switch.office_desk
@@ -106,7 +106,7 @@ http:
 light:
   - platform: switch
     name: kitchen
-    entity_id: switch.kitchen
+    entity_id: switch.kitchen_sink
   - platform: switch
     name: office_desk
     entity_id: switch.office_desk
