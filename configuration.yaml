@@ -309,9 +309,6 @@ sensor:
     name: ec_6_summary_text
     command: "python3 -c \"import lxml.etree; doc=lxml.etree.parse('/tmp/toronto.xml'); rev=doc.xpath('//forecastGroup/forecast[6]/textSummary/text()')[0]; print(rev[:250])\""
 
-  - platform: environment_canada
-    station: ON/s0000458
-
   - platform: systemmonitor
     scan_interval: 5
     resources:
@@ -354,7 +351,7 @@ sensor:
     scan_interval: 86400
   - platform: command_line
     name: sys_latest_firmware
-    command: python3 /config/scripts/intel_latest_firmware
+    command: python3 /config/scripts/intel_latest_firmware || true
     scan_interval: 86400
   - platform: rest
     scan_interval: 3600
@@ -440,7 +437,7 @@ sensor:
         value_template: "QOTOM Q330G4"
       firewall_uptime:
         value_template: >-
-            {% set uptime = states('sensor.netdata_firewall_uptime_raw') | float %}
+            {% set uptime = states('sensor.netdata_firewall_uptime_raw') | float(0) + states('sensor.netdata_firewall_uptime_raw') | float(0)  %}
             {% set updays = (uptime / 86400) | round(0, "floor") %}
             {% set uphours = uptime | timestamp_custom('%-H:%-M:%-S', false) | regex_replace('^0:','') %}
             {% if updays == 0 %}
@@ -453,8 +450,8 @@ sensor:
       firewall_mem_used:
         unit_of_measurement: '%'
         value_template: >-
-            {% set m = float(states('sensor.firewall_mem_available')) %}
-            {% set n = float(states('sensor.netdatat_firewall_mem_free')) %}
+            {% set m = states('sensor.firewall_mem_available') | float(0) + states('sensor.firewall_mem_available') | float(0)  %}
+            {% set n = states('sensor.netdatat_firewall_mem_free') | float(0) + states('sensor.netdatat_firewall_mem_free') | float(0)  %}
             {% if m == 'unknown' %} {% set m = 0 %}  {% endif %}
             {% if n == 'unknown' %} {% set n = 0 %}  {% endif %}
             {% if m != 0 -%}
@@ -469,11 +466,12 @@ sensor:
   - platform: uptime
     name: uptime_minutes
     scan_interval: 30
+#            {% set uptime = states('sensor.uptime_minutes') | float * 60 | float(0) %}
   - platform: template
     sensors:
       hass_uptime:
         value_template: >-
-            {% set uptime = states('sensor.uptime_minutes') | float * 60 %}
+            {% set uptime = states('sensor.uptime_minutes') | float(0) + (states('sensor.uptime_minutes') * 60 ) | float(0) %}
             {% set updays = (uptime / 86400) | round(0, "floor") %}
             {% set uphours = uptime | timestamp_custom('%-H:%-M:%-S', false) | regex_replace('^0:','') %}
             {% if updays == 0 %}
@@ -640,16 +638,16 @@ sensor:
     name: San Francisco
     time_zone: America/Los_Angeles
 
-  - platform: nut
-    name: Office UPS
-    username: ups
-    host: !secret synology_ip
-    resources:
-      - ups.status.display
-      - ups.load
-      - battery.runtime
-      - battery.charge
-      - ups.status
+#  - platform: nut
+#    name: Office UPS
+#    username: ups
+#    host: !secret synology_ip
+#    resources:
+#      - ups.status.display
+#      - ups.load
+#      - battery.runtime
+#      - battery.charge
+#      - ups.status
   - platform: template
     sensors:
       office_ups_battery_runtime_mins:

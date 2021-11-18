@@ -140,18 +140,24 @@
   alias: Hallway motion
   description: ''
   trigger:
-  - platform: state
+  - type: motion
+    platform: device
+    device_id: c05bdd1022c56193433d26a23d948f5f
     entity_id: binary_sensor.hallway_sensor_occupancy
-    to: 'off'
-  - platform: state
-    entity_id: binary_sensor.hallway_sensor_occupancy
-    to: 'on'
-  condition: []
+    domain: binary_sensor
   action:
-  - service: light.toggle
+  - service: light.turn_on
     target:
       device_id: c7067e95c87122708f02871df47dd85d
-  mode: single
+  - wait_for_trigger:
+    - platform: state
+      entity_id: binary_sensor.hallway_sensor_occupancy
+      to: 'off'
+      for: 00:00:15
+  - service: light.turn_off
+    target:
+      device_id: c7067e95c87122708f02871df47dd85d
+  mode: restart
 - id: '1637176086365'
   alias: kitchen lights
   description: ''
@@ -163,7 +169,8 @@
   - condition: and
     conditions:
     - condition: time
-      before: 00:00:00
+      after: '16:00:00'
+      before: '23:59:00'
     - condition: numeric_state
       entity_id: sensor.kitchen_sensor_illuminance_lux
       below: '20'
