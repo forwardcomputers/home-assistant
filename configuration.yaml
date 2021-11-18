@@ -250,64 +250,64 @@ sensor:
     scan_interval: 3600
   - platform: command_line
     name: ec_current_summary_text
-    command: "python3 -c \"import lxml.etree; doc=lxml.etree.parse('/tmp/toronto.xml'); rev=doc.xpath('//currentConditions/condition/text()')[0]; print(rev[:250])\""
+    command: "python3 -c \"import lxml.etree; doc=lxml.etree.parse('/tmp/toronto.xml'); rev=doc.xpath('//currentConditions/condition/text()')[0]; print(rev[:250])\" || true"
   - platform: command_line
     name: ec_current_icon
-    command: "python3 -c \"import lxml.etree; doc=lxml.etree.parse('/tmp/toronto.xml'); rev=doc.xpath('//currentConditions/iconCode/text()'); print(*rev)\""
+    command: "python3 -c \"import lxml.etree; doc=lxml.etree.parse('/tmp/toronto.xml'); rev=doc.xpath('//currentConditions/iconCode/text()'); print(*rev)\" || true"
   - platform: command_line
     name: ec_1_name
-    command: "python3 -c \"import lxml.etree; doc=lxml.etree.parse('/tmp/toronto.xml'); rev=doc.xpath('//forecastGroup/forecast[1]/period/text()'); print(*rev)\""
+    command: "python3 -c \"import lxml.etree; doc=lxml.etree.parse('/tmp/toronto.xml'); rev=doc.xpath('//forecastGroup/forecast[1]/period/text()'); print(*rev)\" || true"
   - platform: command_line
     name: ec_1_icon
-    command: "python3 -c \"import lxml.etree; doc=lxml.etree.parse('/tmp/toronto.xml'); rev=doc.xpath('//forecastGroup/forecast[1]/abbreviatedForecast/iconCode/text()'); print(*rev)\""
+    command: "python3 -c \"import lxml.etree; doc=lxml.etree.parse('/tmp/toronto.xml'); rev=doc.xpath('//forecastGroup/forecast[1]/abbreviatedForecast/iconCode/text()'); print(*rev)\" || true"
   - platform: command_line
     name: ec_1_summary_text
-    command: "python3 -c \"import lxml.etree; doc=lxml.etree.parse('/tmp/toronto.xml'); rev=doc.xpath('//forecastGroup/forecast[1]/textSummary/text()')[0]; print(rev[:250])\""
+    command: "python3 -c \"import lxml.etree; doc=lxml.etree.parse('/tmp/toronto.xml'); rev=doc.xpath('//forecastGroup/forecast[1]/textSummary/text()')[0]; print(rev[:250])\" || true"
   - platform: command_line
     name: ec_2_name
-    command: "python3 -c \"import lxml.etree; doc=lxml.etree.parse('/tmp/toronto.xml'); rev=doc.xpath('//forecastGroup/forecast[2]/period/text()'); print(*rev)\""
+    command: "python3 -c \"import lxml.etree; doc=lxml.etree.parse('/tmp/toronto.xml'); rev=doc.xpath('//forecastGroup/forecast[2]/period/text()'); print(*rev)\" || true"
   - platform: command_line
     name: ec_2_icon
-    command: "python3 -c \"import lxml.etree; doc=lxml.etree.parse('/tmp/toronto.xml'); rev=doc.xpath('//forecastGroup/forecast[2]/abbreviatedForecast/iconCode/text()'); print(*rev)\""
+    command: "python3 -c \"import lxml.etree; doc=lxml.etree.parse('/tmp/toronto.xml'); rev=doc.xpath('//forecastGroup/forecast[2]/abbreviatedForecast/iconCode/text()'); print(*rev)\" || true"
   - platform: command_line
     name: ec_2_summary_text
-    command: "python3 -c \"import lxml.etree; doc=lxml.etree.parse('/tmp/toronto.xml'); rev=doc.xpath('//forecastGroup/forecast[2]/textSummary/text()')[0]; print(rev[:250])\""
+    command: "python3 -c \"import lxml.etree; doc=lxml.etree.parse('/tmp/toronto.xml'); rev=doc.xpath('//forecastGroup/forecast[2]/textSummary/text()')[0]; print(rev[:250])\" || true"
   - platform: command_line
     name: ec_3_name
-    command: "python3 -c \"import lxml.etree; doc=lxml.etree.parse('/tmp/toronto.xml'); rev=doc.xpath('//forecastGroup/forecast[3]/period/text()'); print(*rev)\""
+    command: "python3 -c \"import lxml.etree; doc=lxml.etree.parse('/tmp/toronto.xml'); rev=doc.xpath('//forecastGroup/forecast[3]/period/text()'); print(*rev)\" || true"
   - platform: command_line
     name: ec_3_icon
-    command: "python3 -c \"import lxml.etree; doc=lxml.etree.parse('/tmp/toronto.xml'); rev=doc.xpath('//forecastGroup/forecast[3]/abbreviatedForecast/iconCode/text()'); print(*rev)\""
+    command: "python3 -c \"import lxml.etree; doc=lxml.etree.parse('/tmp/toronto.xml'); rev=doc.xpath('//forecastGroup/forecast[3]/abbreviatedForecast/iconCode/text()'); print(*rev)\" || true"
   - platform: command_line
     name: ec_3_summary_text
-    command: "python3 -c \"import lxml.etree; doc=lxml.etree.parse('/tmp/toronto.xml'); rev=doc.xpath('//forecastGroup/forecast[3]/textSummary/text()')[0]; print(rev[:250])\""
+    command: "python3 -c \"import lxml.etree; doc=lxml.etree.parse('/tmp/toronto.xml'); rev=doc.xpath('//forecastGroup/forecast[3]/textSummary/text()')[0]; print(rev[:250])\" || true"
   - platform: command_line
     name: ec_4_name
-    command: "python3 -c \"import lxml.etree; doc=lxml.etree.parse('/tmp/toronto.xml'); rev=doc.xpath('//forecastGroup/forecast[4]/period/text()'); print(*rev)\""
+    command: "python3 -c \"import lxml.etree; doc=lxml.etree.parse('/tmp/toronto.xml'); rev=doc.xpath('//forecastGroup/forecast[4]/period/text()'); print(*rev)\" || true"
   - platform: command_line
     name: ec_4_icon
-    command: "python3 -c \"import lxml.etree; doc=lxml.etree.parse('/tmp/toronto.xml'); rev=doc.xpath('//forecastGroup/forecast[4]/abbreviatedForecast/iconCode/text()'); print(*rev)\""
+    command: "python3 -c \"import lxml.etree; doc=lxml.etree.parse('/tmp/toronto.xml'); rev=doc.xpath('//forecastGroup/forecast[4]/abbreviatedForecast/iconCode/text()'); print(*rev)\" || true"
   - platform: command_line
     name: ec_4_summary_text
-    command: "python3 -c \"import lxml.etree; doc=lxml.etree.parse('/tmp/toronto.xml'); rev=doc.xpath('//forecastGroup/forecast[4]/textSummary/text()')[0]; print(rev[:250])\""
+    command: "python3 -c \"import lxml.etree; doc=lxml.etree.parse('/tmp/toronto.xml'); rev=doc.xpath('//forecastGroup/forecast[4]/textSummary/text()')[0]; print(rev[:250])\" || true"
   - platform: command_line
     name: ec_5_name
-    command: "python3 -c \"import lxml.etree; doc=lxml.etree.parse('/tmp/toronto.xml'); rev=doc.xpath('//forecastGroup/forecast[5]/period/text()'); print(*rev)\""
+    command: "python3 -c \"import lxml.etree; doc=lxml.etree.parse('/tmp/toronto.xml'); rev=doc.xpath('//forecastGroup/forecast[5]/period/text()'); print(*rev)\" || true"
   - platform: command_line
     name: ec_5_icon
-    command: "python3 -c \"import lxml.etree; doc=lxml.etree.parse('/tmp/toronto.xml'); rev=doc.xpath('//forecastGroup/forecast[5]/abbreviatedForecast/iconCode/text()'); print(*rev)\""
+    command: "python3 -c \"import lxml.etree; doc=lxml.etree.parse('/tmp/toronto.xml'); rev=doc.xpath('//forecastGroup/forecast[5]/abbreviatedForecast/iconCode/text()'); print(*rev)\" || true"
   - platform: command_line
     name: ec_5_summary_text
-    command: "python3 -c \"import lxml.etree; doc=lxml.etree.parse('/tmp/toronto.xml'); rev=doc.xpath('//forecastGroup/forecast[5]/textSummary/text()')[0]; print(rev[:250])\""
+    command: "python3 -c \"import lxml.etree; doc=lxml.etree.parse('/tmp/toronto.xml'); rev=doc.xpath('//forecastGroup/forecast[5]/textSummary/text()')[0]; print(rev[:250])\" || true"
   - platform: command_line
     name: ec_6_name
-    command: "python3 -c \"import lxml.etree; doc=lxml.etree.parse('/tmp/toronto.xml'); rev=doc.xpath('//forecastGroup/forecast[6]/period/text()'); print(*rev)\""
+    command: "python3 -c \"import lxml.etree; doc=lxml.etree.parse('/tmp/toronto.xml'); rev=doc.xpath('//forecastGroup/forecast[6]/period/text()'); print(*rev)\" || true"
   - platform: command_line
     name: ec_6_icon
-    command: "python3 -c \"import lxml.etree; doc=lxml.etree.parse('/tmp/toronto.xml'); rev=doc.xpath('//forecastGroup/forecast[6]/abbreviatedForecast/iconCode/text()'); print(*rev)\""
+    command: "python3 -c \"import lxml.etree; doc=lxml.etree.parse('/tmp/toronto.xml'); rev=doc.xpath('//forecastGroup/forecast[6]/abbreviatedForecast/iconCode/text()'); print(*rev)\" || true"
   - platform: command_line
     name: ec_6_summary_text
-    command: "python3 -c \"import lxml.etree; doc=lxml.etree.parse('/tmp/toronto.xml'); rev=doc.xpath('//forecastGroup/forecast[6]/textSummary/text()')[0]; print(rev[:250])\""
+    command: "python3 -c \"import lxml.etree; doc=lxml.etree.parse('/tmp/toronto.xml'); rev=doc.xpath('//forecastGroup/forecast[6]/textSummary/text()')[0]; print(rev[:250])\" || true"
 
   - platform: systemmonitor
     scan_interval: 5
@@ -318,23 +318,23 @@ sensor:
       - type: processor_use
       - type: swap_use_percent
   - platform: command_line
-    command: python3 -c "import requests; print(requests.get('http://127.0.0.1:19999/api/v1/info').json()['host_labels']['_os_name'])"
+    command: python3 -c "import requests; print(requests.get('http://127.0.0.1:19999/api/v1/info').json()['host_labels']['_os_name'])" || true
     name: OS
     scan_interval: 86400
   - platform: command_line
-    command: python3 -c "import requests; print(requests.get('http://127.0.0.1:19999/api/v1/info').json()['host_labels']['_os_version'])"
+    command: python3 -c "import requests; print(requests.get('http://127.0.0.1:19999/api/v1/info').json()['host_labels']['_os_version'])" || true
     name: Version
     scan_interval: 86400
   - platform: command_line
-    command: python3 -c "import requests; print(requests.get('http://127.0.0.1:19999/api/v1/info').json()['host_labels']['_kernel_version'])"
+    command: python3 -c "import requests; print(requests.get('http://127.0.0.1:19999/api/v1/info').json()['host_labels']['_kernel_version'])" || true
     name: Kernel Version
     scan_interval: 86400
   - platform: command_line
-    command: python3 -c "import requests; print(requests.get('http://127.0.0.1:2375/info').json()['ServerVersion'])"
+    command: python3 -c "import requests; print(requests.get('http://127.0.0.1:2375/info').json()['ServerVersion'])" || true
     name: Docker Version
     scan_interval: 86400
   - platform: command_line
-    command: python3 -c "import requests; print(requests.get('http://127.0.0.1:2375/info').json()['ContainersRunning'])"
+    command: python3 -c "import requests; print(requests.get('http://127.0.0.1:2375/info').json()['ContainersRunning'])" || true
     name: Docker Containers
     scan_interval: 86400
   - platform: command_line
@@ -412,7 +412,7 @@ sensor:
         element: "free"
   - platform: command_line
     name: firewall_latest_firmware
-    command: python3 -c "import lxml.html; import requests; html=requests.get('https://downloads.openwrt.org'); doc=lxml.html.fromstring(html.text); rev=doc.xpath('/html/body/div/ul[1]/li/strong/a/text()')[0]; print(rev.split()[-1])"
+    command: python3 -c "import lxml.html; import requests; html=requests.get('https://downloads.openwrt.org'); doc=lxml.html.fromstring(html.text); rev=doc.xpath('/html/body/div/ul[1]/li/strong/a/text()')[0]; print(rev.split()[-1])" || true
     scan_interval: 86400
   - platform: command_line
     name: firewall_release
@@ -496,7 +496,7 @@ sensor:
 
   - platform: command_line
     name: printer_latest_firmware
-    command: python3 -c "import ftplib; ftp=ftplib.FTP('ftp.hp.com');ftp.login();ftp.cwd('/pub/networking/software/pfirmware');ftpd=ftp.nlst(); name='HP_LaserJet_Pro_MFP_M130_M132_Ultra_MFP_M134_Printer_'; found=[i for i in ftpd if name in i]; print (found[-1][found[-1].find(name)+len(name):found[-1].rfind('.rfu')])"
+    command: python3 -c "import ftplib; ftp=ftplib.FTP('ftp.hp.com');ftp.login();ftp.cwd('/pub/networking/software/pfirmware');ftpd=ftp.nlst(); name='HP_LaserJet_Pro_MFP_M130_M132_Ultra_MFP_M134_Printer_'; found=[i for i in ftpd if name in i]; print (found[-1][found[-1].find(name)+len(name):found[-1].rfind('.rfu')])" || true
     scan_interval: 86400
   - platform: command_line
     name: printer_model

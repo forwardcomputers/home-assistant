@@ -173,7 +173,7 @@
       before: '23:59:00'
     - condition: numeric_state
       entity_id: sensor.kitchen_sensor_illuminance_lux
-      below: '20'
+      below: '25'
   action:
   - type: turn_on
     device_id: a0774a7aead4608a299204b4cb5d3232
