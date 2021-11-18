@@ -15,7 +15,6 @@ cloud:
         - light.hallway_center
         - light.hallway_door
         - light.hallway_kitchen
-        - light.kitchen
         - switch.kitchen
         - switch.night_mode
         - switch.office
@@ -34,7 +33,6 @@ cloud:
         - light.hallway_center
         - light.hallway_door
         - light.hallway_kitchen
-        - light.kitchen
         - switch.kitchen
         - switch.night_mode
         - switch.office
