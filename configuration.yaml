@@ -105,7 +105,7 @@ http:
 
 light:
   - platform: switch
-    name: kitchen
+    name: kitchen_sink
     entity_id: switch.kitchen_sink
   - platform: switch
     name: office_desk
