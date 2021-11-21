@@ -1,0 +1,13 @@
+#!/usr/local/bin/python3
+
+import requests
+import re
+
+url = requests.get('https://www.intel.com/content/www/us/en/download/18838/bios-update-bnkbl357.html')
+if url:
+    part = re.search('meta name="DownloadVersion" content="(.+?)"', url.text).group(1)
+else:
+    raise SystemExit('0')
+
+print(part)
+
