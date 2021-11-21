@@ -50,7 +50,7 @@ script: !include scripts.yaml
 #sun:
 #system_health:
 #updater:
-#zeroconf:
+zeroconf:
 ##zone:
 
 logger:
@@ -67,6 +67,9 @@ camera:
   - platform: generic
     name: YYZ
     still_image_url: https://511on.ca/map/Cctv/loc33--2
+
+downloader:
+  download_dir: /tmp
 
 ffmpeg:
 
@@ -101,6 +104,7 @@ http:
     - https://www.home.mustakim.com
     - https://mustakim.orgfree.com
     - https://alim.is
+    - https://alim.ml
   ssl_certificate: /opt/filer/os/acme/*.home.mustakim.com/fullchain.cer
   ssl_key: /opt/filer/os/acme/*.home.mustakim.com/*.home.mustakim.com.key
 
@@ -116,9 +120,11 @@ media_player:
   - platform: androidtv
     name: nvidia_oshield
     host: !secret oshield_ip
+    adbkey: "/config/adb/adbkey"
   - platform: androidtv
     name: nvidia_nshield
     host: !secret nshield_ip
+    adbkey: "/config/adb/adbkey"
 
 notify:
   - name: alimustakim
@@ -213,14 +219,20 @@ recorder:
       - sensor.speedtest_upload
   purge_keep_days: 30
 
+rest_command:
+  clean_printer:
+    method: post
+    payload: "CleaningMode=Start"
+    url: !secret printer_cleaning_url
+  pi_hole_disable:
+    method: get
+    url: "http://pihole.home.mustakim.com/admin/api.php?disable&auth="
+  pi_hole_enable:
+    method: get
+    url: "http://pihole.home.mustakim.com/admin/api.php?enable&auth="
+
 shell_command:
-  clean_printer: !secret printer_cleaning_mode_url
-  download_ec_forecast_toronto: /usr/bin/wget -O /tmp/toronto.xml https://dd.weather.gc.ca/citypage_weather/xml/ON/s0000458_e.xml
-  download_printer_firmware: /usr/bin/wget -O /opt/filer/Firmware/HP_LaserJet_Pro_MFP_M130_M132_Ultra_MFP_M134_Printer_{{states('sensor.printer_latest_firmware')}}.rfu ftp://ftp.hp.com/pub/networking/software/pfirmware/HP_LaserJet_Pro_MFP_M130_M132_Ultra_MFP_M134_Printer_{{states('sensor.printer_latest_firmware')}}.rfu
-  download_system_firmware: /usr/bin/wget -O /opt/filer/Firmware/NUC7i5BNK-BN{{states('sensor.sys_latest_firmware')}}.bio https://downloadmirror.intel.com/29347/eng/BN{{states('sensor.sys_latest_firmware')}}.bio
   macbook_sleep: !secret macbook_sleep_cmd
-  pi_hole_enable: !secret pi_hole_enable_url
-  pi_hole_disable: !secret pi_hole_disable_url
 
 spotify:
   client_id: !secret spotify_client_id
@@ -250,63 +262,83 @@ sensor:
   - platform: command_line
     name: ec_current_summary_text
     command: "python3 -c \"import lxml.etree; doc=lxml.etree.parse('/tmp/toronto.xml'); rev=doc.xpath('//currentConditions/condition/text()')[0]; print(rev[:250])\" || true"
+    scan_interval: 1800
   - platform: command_line
     name: ec_current_icon
     command: "python3 -c \"import lxml.etree; doc=lxml.etree.parse('/tmp/toronto.xml'); rev=doc.xpath('//currentConditions/iconCode/text()'); print(*rev)\" || true"
+    scan_interval: 1800
   - platform: command_line
     name: ec_1_name
     command: "python3 -c \"import lxml.etree; doc=lxml.etree.parse('/tmp/toronto.xml'); rev=doc.xpath('//forecastGroup/forecast[1]/period/text()'); print(*rev)\" || true"
+    scan_interval: 1800
   - platform: command_line
     name: ec_1_icon
     command: "python3 -c \"import lxml.etree; doc=lxml.etree.parse('/tmp/toronto.xml'); rev=doc.xpath('//forecastGroup/forecast[1]/abbreviatedForecast/iconCode/text()'); print(*rev)\" || true"
+    scan_interval: 1800
   - platform: command_line
     name: ec_1_summary_text
     command: "python3 -c \"import lxml.etree; doc=lxml.etree.parse('/tmp/toronto.xml'); rev=doc.xpath('//forecastGroup/forecast[1]/textSummary/text()')[0]; print(rev[:250])\" || true"
+    scan_interval: 1800
   - platform: command_line
     name: ec_2_name
     command: "python3 -c \"import lxml.etree; doc=lxml.etree.parse('/tmp/toronto.xml'); rev=doc.xpath('//forecastGroup/forecast[2]/period/text()'); print(*rev)\" || true"
+    scan_interval: 1800
   - platform: command_line
     name: ec_2_icon
     command: "python3 -c \"import lxml.etree; doc=lxml.etree.parse('/tmp/toronto.xml'); rev=doc.xpath('//forecastGroup/forecast[2]/abbreviatedForecast/iconCode/text()'); print(*rev)\" || true"
+    scan_interval: 1800
   - platform: command_line
     name: ec_2_summary_text
     command: "python3 -c \"import lxml.etree; doc=lxml.etree.parse('/tmp/toronto.xml'); rev=doc.xpath('//forecastGroup/forecast[2]/textSummary/text()')[0]; print(rev[:250])\" || true"
+    scan_interval: 1800
   - platform: command_line
     name: ec_3_name
     command: "python3 -c \"import lxml.etree; doc=lxml.etree.parse('/tmp/toronto.xml'); rev=doc.xpath('//forecastGroup/forecast[3]/period/text()'); print(*rev)\" || true"
+    scan_interval: 1800
   - platform: command_line
     name: ec_3_icon
     command: "python3 -c \"import lxml.etree; doc=lxml.etree.parse('/tmp/toronto.xml'); rev=doc.xpath('//forecastGroup/forecast[3]/abbreviatedForecast/iconCode/text()'); print(*rev)\" || true"
+    scan_interval: 1800
   - platform: command_line
     name: ec_3_summary_text
     command: "python3 -c \"import lxml.etree; doc=lxml.etree.parse('/tmp/toronto.xml'); rev=doc.xpath('//forecastGroup/forecast[3]/textSummary/text()')[0]; print(rev[:250])\" || true"
+    scan_interval: 1800
   - platform: command_line
     name: ec_4_name
     command: "python3 -c \"import lxml.etree; doc=lxml.etree.parse('/tmp/toronto.xml'); rev=doc.xpath('//forecastGroup/forecast[4]/period/text()'); print(*rev)\" || true"
+    scan_interval: 1800
   - platform: command_line
     name: ec_4_icon
     command: "python3 -c \"import lxml.etree; doc=lxml.etree.parse('/tmp/toronto.xml'); rev=doc.xpath('//forecastGroup/forecast[4]/abbreviatedForecast/iconCode/text()'); print(*rev)\" || true"
+    scan_interval: 1800
   - platform: command_line
     name: ec_4_summary_text
     command: "python3 -c \"import lxml.etree; doc=lxml.etree.parse('/tmp/toronto.xml'); rev=doc.xpath('//forecastGroup/forecast[4]/textSummary/text()')[0]; print(rev[:250])\" || true"
+    scan_interval: 1800
   - platform: command_line
     name: ec_5_name
     command: "python3 -c \"import lxml.etree; doc=lxml.etree.parse('/tmp/toronto.xml'); rev=doc.xpath('//forecastGroup/forecast[5]/period/text()'); print(*rev)\" || true"
+    scan_interval: 1800
   - platform: command_line
     name: ec_5_icon
     command: "python3 -c \"import lxml.etree; doc=lxml.etree.parse('/tmp/toronto.xml'); rev=doc.xpath('//forecastGroup/forecast[5]/abbreviatedForecast/iconCode/text()'); print(*rev)\" || true"
+    scan_interval: 1800
   - platform: command_line
     name: ec_5_summary_text
     command: "python3 -c \"import lxml.etree; doc=lxml.etree.parse('/tmp/toronto.xml'); rev=doc.xpath('//forecastGroup/forecast[5]/textSummary/text()')[0]; print(rev[:250])\" || true"
+    scan_interval: 1800
   - platform: command_line
     name: ec_6_name
     command: "python3 -c \"import lxml.etree; doc=lxml.etree.parse('/tmp/toronto.xml'); rev=doc.xpath('//forecastGroup/forecast[6]/period/text()'); print(*rev)\" || true"
+    scan_interval: 1800
   - platform: command_line
     name: ec_6_icon
     command: "python3 -c \"import lxml.etree; doc=lxml.etree.parse('/tmp/toronto.xml'); rev=doc.xpath('//forecastGroup/forecast[6]/abbreviatedForecast/iconCode/text()'); print(*rev)\" || true"
+    scan_interval: 1800
   - platform: command_line
     name: ec_6_summary_text
     command: "python3 -c \"import lxml.etree; doc=lxml.etree.parse('/tmp/toronto.xml'); rev=doc.xpath('//forecastGroup/forecast[6]/textSummary/text()')[0]; print(rev[:250])\" || true"
+    scan_interval: 1800
 
   - platform: systemmonitor
     scan_interval: 5
@@ -350,7 +382,7 @@ sensor:
     scan_interval: 86400
   - platform: command_line
     name: sys_latest_firmware
-    command: python3 /config/scripts/intel_latest_firmware || true
+    command: python3 /config/scripts/NUC7i3DNKE_firmware || true
     scan_interval: 86400
   - platform: rest
     scan_interval: 3600
@@ -498,10 +530,6 @@ sensor:
     command: python3 -c "import ftplib; ftp=ftplib.FTP('ftp.hp.com');ftp.login();ftp.cwd('/pub/networking/software/pfirmware');ftpd=ftp.nlst(); name='HP_LaserJet_Pro_MFP_M130_M132_Ultra_MFP_M134_Printer_'; found=[i for i in ftpd if name in i]; print (found[-1][found[-1].find(name)+len(name):found[-1].rfind('.rfu')])" || true
     scan_interval: 86400
   - platform: command_line
-    name: printer_model
-    command: !secret printer_model
-    scan_interval: 86400
-  - platform: command_line
     name: printer_sn
     command: !secret printer_sn
     scan_interval: 86400
@@ -509,6 +537,10 @@ sensor:
     name: printer_fw
     command: !secret printer_fw
     scan_interval: 3600
+  - platform: template
+    sensors:
+      printer_model:
+        value_template: 'HP MFP M130fw'
   - platform: snmp
     name: printer_toner
     host: !secret laser_ip
@@ -911,6 +943,6 @@ switch:
         friendly_name: Toggle Pi-hole
         value_template: "{{ is_state('sensor.pi_hole_status', 'enabled') }}"
         turn_on:
-          service: shell_command.pi_hole_enable
+          service: rest_command.pi_hole_enable
         turn_off:
-          service: shell_command.pi_hole_disable
+          service: rest_command.pi_hole_disable

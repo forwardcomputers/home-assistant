@@ -104,7 +104,10 @@
     platform: time_pattern
   condition: []
   action:
-  - service: shell_command.download_ec_forecast_toronto
+  - service: downloader.download_file
+    data:
+      url: https://dd.weather.gc.ca/citypage_weather/xml/ON/s0000458_e.xml
+      filename: toronto.xml
   mode: single
 - id: '1578970908730'
   alias: Speedtest @ startup
@@ -169,11 +172,11 @@
   - condition: and
     conditions:
     - condition: time
-      after: '16:00:00'
+      after: '15:00:00'
       before: '23:59:00'
     - condition: numeric_state
       entity_id: sensor.kitchen_sensor_illuminance_lux
-      below: '25'
+      below: '30'
   action:
   - type: turn_on
     device_id: a0774a7aead4608a299204b4cb5d3232

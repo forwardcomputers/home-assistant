@@ -1489,7 +1489,7 @@
                                     "custom_fields": {
                                         "cpu": "[[[\n  return `<ha-icon\n    icon=\"mdi:chip\"\n    style=\"width: 12px; height: 12px; color: deepskyblue;\">\n    </ha-icon><span>CPU: <span style=\"color: var(--text-color-sensor);\">${states['sensor.processor_use'].state}%</span></span>`\n]]]\n",
                                         "ram": "[[[\n  return `<ha-icon\n    icon=\"mdi:memory\"\n    style=\"width: 12px; height: 12px; color: deepskyblue;\">\n    </ha-icon><span>RAM: <span style=\"color: var(--text-color-sensor);\">${states['sensor.memory_use_percent'].state}%</span></span>`\n]]]\n",
-                                        "sd": "[[[\n  return `<ha-icon\n    icon=\"mdi:harddisk\"\n    style=\"width: 12px; height: 12px; color: deepskyblue;\">\n    </ha-icon><span>SD: <span style=\"color: var(--text-color-sensor);\">${states['sensor.disk_use_percent'].state}%</span></span>`\n]]]\n",
+                                        "ssd": "[[[\n  return `<ha-icon\n    icon=\"mdi:harddisk\"\n    style=\"width: 12px; height: 12px; color: deepskyblue;\">\n    </ha-icon><span>SSD: <span style=\"color: var(--text-color-sensor);\">${states['sensor.disk_use_percent'].state}%</span></span>`\n]]]\n",
                                         "temp": "[[[\n  return `<ha-icon\n    icon=\"mdi:thermometer\"\n    style=\"width: 12px; height: 12px; color: yellow;\">\n    </ha-icon><span>${entity.state}\u00b0C</span>`\n]]]\n"
                                     },
                                     "entity": "sensor.netdata_server_cpu_temp",
@@ -1545,7 +1545,7 @@
                                                     "--text-color-sensor": "[[[ if (states[\"sensor.memory_use_percent\"].state > 80) return \"red\"; ]]]"
                                                 }
                                             ],
-                                            "sd": [
+                                            "ssd": [
                                                 {
                                                     "align-self": "middle"
                                                 },
@@ -1567,7 +1567,7 @@
                                         },
                                         "grid": [
                                             {
-                                                "grid-template-areas": "\"i temp\" \"n n\" \"cpu cpu\" \"ram ram\" \"sd sd\""
+                                                "grid-template-areas": "\"i temp\" \"n n\" \"cpu cpu\" \"ram ram\" \"ssd ssd\""
                                             },
                                             {
                                                 "grid-template-columns": "1fr 1fr"
@@ -1979,7 +1979,7 @@
                                         ],
                                         "state": [
                                             {
-                                                "font-size": "11px"
+                                                "font-size": "0px"
                                             },
                                             {
                                                 "font-family": "Helvetica"

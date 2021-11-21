@@ -5,24 +5,36 @@ update_speedtest:
 download_printer_firmware:
   alias: Download printer firmware
   sequence:
-  - data: {}
-    service: shell_command.download_printer_firmware
+  - service: downloader.download_file
+    data:
+      overwrite: true
+      url: ftp://ftp.hp.com/pub/networking/software/pfirmware/HP_LaserJet_Pro_MFP_M130_M132_Ultra_MFP_M134_Printer_{{states('sensor.printer_latest_firmware')}}.rfu
+      subdir: /opt/filer/Firmware/HP_LaserJet_Pro_MFP_M130_M132_Ultra_MFP_M134_Printer_{{states('sensor.printer_latest_firmware')}}.rfu
+  mode: single
 download_router_firmware:
   alias: Download router firmware
   sequence:
-  - data: {}
-    service: shell_command.download_router_firmware
+  - service: downloader.download_file
+    data:
+      overwrite: true
+      url: https://downloads.openwrt.org/releases/{{states('sensor.router_latest_firmware')}}/targets/{{states('sensor.router_target')}}/generic/openwrt-{{states('sensor.                     router_latest_firmware')}}-{{states('sensor.router_target')}}-generic-{{states('sensor.router_filename')}}
+      subdir: /opt/filer/Firmware/openwrt-{{states('sensor.router_latest_firmware')}}-{{states('sensor.router_target')}}-generic-{{states('sensor.
+        router_filename')}}
+  mode: single
 download_system_firmware:
   alias: Download system firmware
   sequence:
-  - data: {}
-    service: shell_command.download_system_firmware
+  - service: downloader.download_file
+    data:
+      overwrite: true
+      url: https://downloadmirror.intel.com/683944/eng/DN{{states('sensor.sys_latest_firmware')}}.bio
+      subdir: /opt/filer/Firmware/NUC7i5BNK-BN{{states('sensor.sys_latest_firmware')}}.bio
+  mode: single
 clean_printer:
   alias: Clean Printer
   mode: single
   sequence:
-  - data: {}
-    service: shell_command.clean_printer
+  - service: rest_command.clean_printer
 livingroom:
   sequence:
   - service: homeassistant.toggle
