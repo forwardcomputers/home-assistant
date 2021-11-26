@@ -141,6 +141,10 @@ notify:
     access_token_secret: !secret forwardcomputers_access_token_secret_key
   
 panel_iframe:
+  configurator:
+     title: Configurator
+     icon: mdi:wrench
+     url: !secret hass_config_url
 #  adguard:
 #     title: Adguard
 #     icon: mdi:shield-check
