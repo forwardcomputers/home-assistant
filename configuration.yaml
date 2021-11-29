@@ -105,6 +105,7 @@ http:
     - https://mustakim.orgfree.com
     - https://alim.is
     - https://alim.ml
+    - https://macdock.home.mustakim.com
     - https://localhost
   ssl_certificate: /opt/filer/os/acme/*.home.mustakim.com/fullchain.cer
   ssl_key: /opt/filer/os/acme/*.home.mustakim.com/*.home.mustakim.com.key
