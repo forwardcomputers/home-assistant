@@ -29,8 +29,9 @@
   condition: []
   action:
   - data: {}
-    entity_id: all
     service: light.turn_off
+    target:
+      entity_id: All
   - data: {}
     entity_id: switch.night_mode
     service: switch.turn_on

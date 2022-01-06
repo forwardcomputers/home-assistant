@@ -107,6 +107,8 @@ http:
     - https://alim.ml
     - https://macdock.home.mustakim.com
     - https://localhost
+    - https://amhome.herokuapp.com
+    - http://amhome.herokuapp.com
   ssl_certificate: /opt/filer/os/acme/*.home.mustakim.com/fullchain.cer
   ssl_key: /opt/filer/os/acme/*.home.mustakim.com/*.home.mustakim.com.key
 

@@ -1,5 +1,6 @@
 {
     "version": 1,
+    "minor_version": 1,
     "key": "lovelace_resources",
     "data": {
         "items": [
@@ -16,7 +17,7 @@
             {
                 "id": "81fc1a3a627e48719f8c7c422cd732ac",
                 "type": "js",
-                "url": "/hacsfiles/lovelace-multiple-entity-row/multiple-entity-row.js"
+                "url": "/hacsfiles/lovelace-multiple-entity-row/multiple-entity-row.js?hacstag=178921037441"
             },
             {
                 "id": "8b869187600c4c488854ce7e520e7325",
@@ -84,7 +85,7 @@
                 "url": "/hacsfiles/decluttering-card/decluttering-card.js"
             },
             {
-                "url": "/hacsfiles/custom-brand-icons/custom-brand-icons.js?hacstag=3668620311042",
+                "url": "/hacsfiles/custom-brand-icons/custom-brand-icons.js?hacstag=3668620311048",
                 "type": "module",
                 "id": "a16ec0088bdd46b7a613e8c3ebe872e2"
             }

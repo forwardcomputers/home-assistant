@@ -1,5 +1,6 @@
 {
     "version": 1,
+    "minor_version": 1,
     "key": "lovelace",
     "data": {
         "config": {
@@ -921,7 +922,7 @@
                                                 }
                                             ],
                                             "entity": "sensor.nas_name",
-                                            "icon": "mdi:nas",
+                                            "icon": "phu:nas-v2",
                                             "name": "Model",
                                             "type": "custom:multiple-entity-row"
                                         },
@@ -1016,7 +1017,7 @@
                                                 }
                                             ],
                                             "entity": "sensor.office_ups_model",
-                                            "icon": "mdi:car-battery",
+                                            "icon": "phu:apc-ups-upright",
                                             "name": "Model",
                                             "type": "custom:multiple-entity-row"
                                         },
@@ -1041,6 +1042,7 @@
                                                 }
                                             ],
                                             "entity": "sensor.office_ups_battery_charge",
+                                            "icon": "mdi:car-battery",
                                             "name": "Battery",
                                             "show_state": false,
                                             "type": "custom:multiple-entity-row"
@@ -1485,15 +1487,10 @@
                         {
                             "cards": [
                                 {
+                                    "type": "custom:button-card",
                                     "aspect_ratio": "3/2",
-                                    "custom_fields": {
-                                        "cpu": "[[[\n  return `<ha-icon\n    icon=\"mdi:chip\"\n    style=\"width: 12px; height: 12px; color: deepskyblue;\">\n    </ha-icon><span>CPU: <span style=\"color: var(--text-color-sensor);\">${states['sensor.processor_use'].state}%</span></span>`\n]]]\n",
-                                        "ram": "[[[\n  return `<ha-icon\n    icon=\"mdi:memory\"\n    style=\"width: 12px; height: 12px; color: deepskyblue;\">\n    </ha-icon><span>RAM: <span style=\"color: var(--text-color-sensor);\">${states['sensor.memory_use_percent'].state}%</span></span>`\n]]]\n",
-                                        "ssd": "[[[\n  return `<ha-icon\n    icon=\"mdi:harddisk\"\n    style=\"width: 12px; height: 12px; color: deepskyblue;\">\n    </ha-icon><span>SSD: <span style=\"color: var(--text-color-sensor);\">${states['sensor.disk_use_percent'].state}%</span></span>`\n]]]\n",
-                                        "temp": "[[[\n  return `<ha-icon\n    icon=\"mdi:thermometer\"\n    style=\"width: 12px; height: 12px; color: yellow;\">\n    </ha-icon><span>${entity.state}\u00b0C</span>`\n]]]\n"
-                                    },
                                     "entity": "sensor.netdata_server_cpu_temp",
-                                    "icon": "mdi:raspberry-pi",
+                                    "icon": "mdi:arch",
                                     "name": "docker",
                                     "styles": {
                                         "card": [
@@ -1581,10 +1578,10 @@
                                                 "color": "[[[\n  if (entity.state < 60) return 'lime';\n  if (entity.state >= 60 && entity.state < 80) return 'orange';\n  else return 'red';\n]]]\n"
                                             },
                                             {
-                                                "width": "70%"
+                                                "width": "80%"
                                             },
                                             {
-                                                "margin-top": "-10%"
+                                                "margin-top": "-5%"
                                             }
                                         ],
                                         "img_cell": [
@@ -1619,7 +1616,12 @@
                                             }
                                         ]
                                     },
-                                    "type": "custom:button-card"
+                                    "custom_fields": {
+                                        "cpu": "[[[\n  return `<ha-icon\n    icon=\"mdi:chip\"\n    style=\"width: 12px; height: 12px; color: deepskyblue;\">\n    </ha-icon><span>CPU: <span style=\"color: var(--text-color-sensor);\">${states['sensor.processor_use'].state}%</span></span>`\n]]]\n",
+                                        "ram": "[[[\n  return `<ha-icon\n    icon=\"mdi:memory\"\n    style=\"width: 12px; height: 12px; color: deepskyblue;\">\n    </ha-icon><span>RAM: <span style=\"color: var(--text-color-sensor);\">${states['sensor.memory_use_percent'].state}%</span></span>`\n]]]\n",
+                                        "ssd": "[[[\n  return `<ha-icon\n    icon=\"mdi:harddisk\"\n    style=\"width: 12px; height: 12px; color: deepskyblue;\">\n    </ha-icon><span>SSD: <span style=\"color: var(--text-color-sensor);\">${states['sensor.disk_use_percent'].state}%</span></span>`\n]]]\n",
+                                        "temp": "[[[\n  return `<ha-icon\n    icon=\"mdi:thermometer\"\n    style=\"width: 12px; height: 12px; color: yellow;\">\n    </ha-icon><span>${entity.state}\u00b0C</span>`\n]]]\n"
+                                    }
                                 },
                                 {
                                     "color": "auto",
