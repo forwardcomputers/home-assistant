@@ -32,7 +32,7 @@
             {
                 "id": "7bd25256ce2c4776ac520b725be25de1",
                 "type": "module",
-                "url": "/hacsfiles/mini-graph-card/mini-graph-card-bundle.js"
+                "url": "/hacsfiles/mini-graph-card/mini-graph-card-bundle.js?hacstag=1512800620110"
             },
             {
                 "id": "3cbeef3a33784627b0c36b30f1a440e4",
@@ -57,7 +57,7 @@
             {
                 "id": "3cd313ee084544f8a8bec2d0304dd1f1",
                 "type": "module",
-                "url": "/hacsfiles/lovelace-card-mod/card-mod.js?hacstag=190927524311"
+                "url": "/hacsfiles/lovelace-card-mod/card-mod.js?hacstag=190927524312"
             },
             {
                 "id": "982da24a9d314e2fa3cc70d62c6ab6d3",
@@ -85,9 +85,14 @@
                 "url": "/hacsfiles/decluttering-card/decluttering-card.js"
             },
             {
-                "url": "/hacsfiles/custom-brand-icons/custom-brand-icons.js?hacstag=3668620311048",
+                "url": "/hacsfiles/custom-brand-icons/custom-brand-icons.js?hacstag=3668620311052",
                 "type": "module",
                 "id": "a16ec0088bdd46b7a613e8c3ebe872e2"
+            },
+            {
+                "url": "/hacsfiles/lovelace-mushroom/mushroom.js?hacstag=444350375112",
+                "type": "module",
+                "id": "e55592ae219841bbbf35f9902bed2dae"
             }
         ]
     }

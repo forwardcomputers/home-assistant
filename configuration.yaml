@@ -106,7 +106,9 @@ http:
     - https://alim.is
     - https://alim.ml
     - https://macdock.home.mustakim.com
+    - http://macdock.home.mustakim.com
     - https://localhost
+    - http://localhost
     - https://amhome.herokuapp.com
     - http://amhome.herokuapp.com
   ssl_certificate: /opt/filer/os/acme/*.home.mustakim.com/fullchain.cer
@@ -949,7 +951,7 @@ switch:
         icon_template: mdi:sleep
       toggle_pi_hole:
         friendly_name: Toggle Pi-hole
-        value_template: "{{ is_state('sensor.pi_hole_status', 'enabled') }}"
+        value_template: "{{ is_state('sensor.pi_hole_status', 'on') }}"
         turn_on:
           service: rest_command.pi_hole_enable
         turn_off:

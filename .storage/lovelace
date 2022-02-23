@@ -718,6 +718,11 @@
                                             "entity": "media_player.office_speaker",
                                             "icon": "phu:home-mini",
                                             "name": "Google Home Mini"
+                                        },
+                                        {
+                                            "entity": "media_player.office",
+                                            "icon": "phu:homepod-mini",
+                                            "name": "Apple HomePod mini"
                                         }
                                     ],
                                     "title": "Office",
@@ -836,7 +841,7 @@
                                                             "entity_id": "switch.toggle_pi_hole"
                                                         }
                                                     },
-                                                    "entity": "sensor.pi_hole_status",
+                                                    "entity": "binary_sensor.pi_hole",
                                                     "icon": "mdi:pi-hole",
                                                     "label": "[[[\n  var line1 = \n  '<p style=\"text-align:left\">Queries Today: ' + \n  states['sensor.pi_hole_dns_queries_today'].state +\n  '<br>Blocked Today: ' + \n  states['sensor.pi_hole_ads_blocked_today'].state +\n  '<br>Percent Today: ' + \n  states['sensor.pi_hole_ads_percentage_blocked_today'].state +\n  '%</p>';\n  return line1;\n]]]\n",
                                                     "name": "#1",
@@ -844,7 +849,7 @@
                                                     "state": [
                                                         {
                                                             "color": "green",
-                                                            "value": "enabled"
+                                                            "value": "on"
                                                         },
                                                         {
                                                             "color": "red",
@@ -856,7 +861,7 @@
                                                                     }
                                                                 ]
                                                             },
-                                                            "value": "disabled"
+                                                            "value": "off"
                                                         }
                                                     ],
                                                     "styles": {
