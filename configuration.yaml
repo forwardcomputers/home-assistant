@@ -122,15 +122,15 @@ light:
     name: office_desk
     entity_id: switch.office_desk
 
-media_player:
-  - platform: androidtv
-    name: nvidia_oshield
-    host: !secret oshield_ip
-    adbkey: "/config/adb/adbkey"
-  - platform: androidtv
-    name: nvidia_nshield
-    host: !secret nshield_ip
-    adbkey: "/config/adb/adbkey"
+#media_player:
+#  - platform: androidtv
+#    name: nvidia_oshield
+#    host: !secret oshield_ip
+#    adbkey: "/config/adb/adbkey"
+#  - platform: androidtv
+#    name: nvidia_nshield
+#    host: !secret nshield_ip
+#    adbkey: "/config/adb/adbkey"
 
 notify:
   - name: alimustakim
@@ -537,7 +537,7 @@ sensor:
 
   - platform: command_line
     name: printer_latest_firmware
-    command: python3 -c "import ftplib; ftp=ftplib.FTP('ftp.hp.com');ftp.login();ftp.cwd('/pub/networking/software/pfirmware');ftpd=ftp.nlst(); name='HP_LaserJet_Pro_MFP_M130_M132_Ultra_MFP_M134_Printer_'; found=[i for i in ftpd if name in i]; print (found[-1][found[-1].find(name)+len(name):found[-1].rfind('.rfu')])"
+    command: python3 -c "import ftplib,re;ftp=ftplib.FTP('ftp.hp.com');ftp.login();ftp.cwd('/pub/networking/software/pfirmware');ftpd=ftp.nlst();pattern='HP_LaserJet_Pro_M130a_M132a_and_Ultra_M134a_Printer_Firmware_(\d+).rfu';r=re.compile(pattern);fname=list(filter(r.match,ftpd));print(re.search(pattern,fname[-1]).group(1))"
     scan_interval: 86400
   - platform: command_line
     name: printer_sn
@@ -556,76 +556,84 @@ sensor:
     host: !secret laser_ip
     baseoid: 1.3.6.1.2.1.43.11.1.1.6.1.1
     accept_errors: true
+    default_value: ''
     scan_interval: 86400
   - platform: snmp
     name: printer_toner_now
     host: !secret laser_ip
     baseoid: 1.3.6.1.2.1.43.11.1.1.9.1.1
     accept_errors: true
+    default_value: '0'
     scan_interval: 1800
   - platform: snmp
     name: printer_toner_max
     host: !secret laser_ip
     baseoid: 1.3.6.1.2.1.43.11.1.1.8.1.1
     accept_errors: true
+    default_value: '0'
     scan_interval: 86400
   - platform: template
     sensors:
       printer_toner_pct:
         unit_of_measurement: '%'
         value_template: >-
-            {% set m = float(states('sensor.printer_toner_max')) %}
-            {% set n = float(states('sensor.printer_toner_now')) %}
-            {% if m == 'unknown' %} {% set m = 0 %}  {% endif %}
-            {% if n == 'unknown' %} {% set n = 0 %}  {% endif %}
+            {% set m = float(0) + states('sensor.printer_toner_max') | float(0) %}
+            {% set n = float(0) + states('sensor.printer_toner_now') | float(0) %}
             {% if m != 0 -%}
                 {{ ((n / m) * 100) | round(0) }}
             {% else %}
                 {{ 0 }}
             {% endif %}
+#            {% if m == 'unknown' %} {% set m = 0 %}  {% endif %}
+#            {% if n == 'unknown' %} {% set n = 0 %}  {% endif %}
   - platform: snmp
     name: printer_drum
     host: !secret laser_ip
     baseoid: 1.3.6.1.2.1.43.11.1.1.6.1.5
     accept_errors: true
+    default_value: ''
     scan_interval: 86400
   - platform: snmp
     name: printer_drum_now
     host: !secret laser_ip
     baseoid: 1.3.6.1.2.1.43.11.1.1.9.1.5
     accept_errors: true
+    default_value: '0'
     scan_interval: 1800
   - platform: snmp
     name: printer_drum_max
     host: !secret laser_ip
     baseoid: 1.3.6.1.2.1.43.11.1.1.8.1.5
     accept_errors: true
+    default_value: '0'
     scan_interval: 86400
   - platform: template
     sensors:
       printer_drum_pct:
         unit_of_measurement: '%'
         value_template: >-
-            {% set m = float(states('sensor.printer_drum_max')) %}
-            {% set n = float(states('sensor.printer_drum_now')) %}
-            {% if m == 'unknown' %} {% set m = 0 %}  {% endif %}
-            {% if n == 'unknown' %} {% set n = 0 %}  {% endif %}
+            {% set m = float(0) + states('sensor.printer_drum_max') | float(0) %}
+            {% set n = float(0) + states('sensor.printer_drum_now') | float(0) %}
             {% if m != 0 -%}
                 {{ ((n / m) * 100) | round(0) }}
             {% else %}
                 {{ 0 }}
             {% endif %}
+#            {% if m == 'unknown' %} {% set m = 0 %}  {% endif %}
+#            {% if n == 'unknown' %} {% set n = 0 %}  {% endif %}
   - platform: snmp
     name: printer_pages
     host: !secret laser_ip
     baseoid: 1.3.6.1.2.1.43.10.2.1.4.1.1
     accept_errors: true
+    default_value: '0'
     scan_interval: 1800
   - platform: snmp
     name: printer_uptime
     host: !secret laser_ip
     baseoid: 1.3.6.1.2.1.1.3.0
     accept_errors: true
+    default_value: '0'
     scan_interval: 30
     value_template: >-
         {% set uptime = float(value) / 100 %}
@@ -704,22 +712,61 @@ sensor:
         value_template: "{{ states('sensor.office_ups_status_data').split(' ')[0] }}"
 
   - platform: snmp
+    name: nas_status
+    host: !secret synology_ip
+    baseoid: 1.3.6.1.4.1.6574.1.1.0
+    accept_errors: true
+    default_value: '0'
+    scan_interval: 30
+  - platform: snmp
+    name: nas_cpu_temp
+    host: !secret synology_ip
+    baseoid: 1.3.6.1.4.1.6574.1.2.0
+    accept_errors: true
+    unit_of_measurement: '°C'
+    default_value: '0'
+    scan_interval: 30
+  - platform: snmp
+    name: nas_sys_fan_status
+    host: !secret synology_ip
+    baseoid: 1.3.6.1.4.1.6574.1.4.1.0
+    accept_errors: true
+    default_value: '0'
+    scan_interval: 30
+  - platform: snmp
+    name: nas_cpu_fan_status
+    host: !secret synology_ip
+    baseoid: 1.3.6.1.4.1.6574.1.4.2.0
+    accept_errors: true
+    default_value: '0'
+    scan_interval: 30
+  - platform: snmp
     name: nas_name
     host: !secret synology_ip
     baseoid: 1.3.6.1.4.1.6574.1.5.1.0
     accept_errors: true
+    default_value: ''
     scan_interval: 86400
   - platform: snmp
     name: nas_serial
     host: !secret synology_ip
     baseoid: 1.3.6.1.4.1.6574.1.5.2.0
     accept_errors: true
+    default_value: ''
+    scan_interval: 86400
+  - platform: snmp
+    name: nas_firmware
+    host: !secret synology_ip
+    baseoid: 1.3.6.1.4.1.6574.1.5.3.0
+    accept_errors: true
+    default_value: ''
     scan_interval: 86400
   - platform: snmp
     name: nas_uptime
     host: !secret synology_ip
-    baseoid: 1.3.6.1.2.1.25.1.1.0
+    baseoid: 1.3.6.1.2.1.1.3.0
     accept_errors: true
+    default_value: '0'
     scan_interval: 30
     value_template: >-
         {% set uptime = float(value) / 100 %}

@@ -8,8 +8,8 @@ download_printer_firmware:
   - service: downloader.download_file
     data:
       overwrite: true
-      url: ftp://ftp.hp.com/pub/networking/software/pfirmware/HP_LaserJet_Pro_MFP_M130_M132_Ultra_MFP_M134_Printer_{{states('sensor.printer_latest_firmware')}}.rfu
-      subdir: /opt/filer/Firmware/HP_LaserJet_Pro_MFP_M130_M132_Ultra_MFP_M134_Printer_{{states('sensor.printer_latest_firmware')}}.rfu
+      url: ftp://ftp.hp.com/pub/networking/software/pfirmware/HP_LaserJet_Pro_M130a_M132a_and_Ultra_M134a_Printer_Firmware_{{states('sensor.printer_latest_firmware')}}.rfu
+      subdir: /opt/filer/Firmware/HP_LaserJet_Pro_M130a_M132a_and_Ultra_M134a_Printer_Firmware_{{states('sensor.printer_latest_firmware')}}.rfu
   mode: single
 download_router_firmware:
   alias: Download router firmware
