@@ -28,10 +28,9 @@
     platform: sun
   condition: []
   action:
-  - data: {}
-    service: light.turn_off
-    target:
-      entity_id: All
+  - service: light.turn_off
+    data: {}
+    entity_id: all
   - data: {}
     entity_id: switch.night_mode
     service: switch.turn_on

@@ -27,7 +27,7 @@
             {
                 "id": "ed3616ef07fc4ceca6cd53d3bed8ba9e",
                 "type": "module",
-                "url": "/hacsfiles/lovelace-auto-entities/auto-entities.js"
+                "url": "/hacsfiles/lovelace-auto-entities/auto-entities.js?hacstag=1677445841101"
             },
             {
                 "id": "7bd25256ce2c4776ac520b725be25de1",
@@ -47,7 +47,7 @@
             {
                 "id": "281dc18fe8f0432b9d0347361eeb7e2b",
                 "type": "module",
-                "url": "/hacsfiles/lovelace-layout-card/layout-card.js?hacstag=156434866231"
+                "url": "/hacsfiles/lovelace-layout-card/layout-card.js?hacstag=156434866242"
             },
             {
                 "id": "750b4c99c8854b6e980f34c452f46ce2",
@@ -90,7 +90,7 @@
                 "id": "a16ec0088bdd46b7a613e8c3ebe872e2"
             },
             {
-                "url": "/hacsfiles/lovelace-mushroom/mushroom.js?hacstag=444350375112",
+                "url": "/hacsfiles/lovelace-mushroom/mushroom.js?hacstag=444350375125",
                 "type": "module",
                 "id": "e55592ae219841bbbf35f9902bed2dae"
             }

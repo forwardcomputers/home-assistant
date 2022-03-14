@@ -797,6 +797,14 @@
                                         {
                                             "entities": [
                                                 {
+                                                    "entity": "sensor.kitchen_sensor_temperature",
+                                                    "name": "Kitchen Temperature"
+                                                },
+                                                {
+                                                    "entity": "sensor.kitchen_sensor_illuminance_lux",
+                                                    "name": "Kitchen Lux"
+                                                },
+                                                {
                                                     "entity": "sensor.kitchen_sensor_battery",
                                                     "name": "Kitchen Motion Sensor Battery"
                                                 },
@@ -904,7 +912,7 @@
                                                     },
                                                     "tap_action": {
                                                         "action": "url",
-                                                        "url_path": "http://pihole/admin"
+                                                        "url_path": "http://pihole1/admin"
                                                     },
                                                     "type": "custom:button-card"
                                                 }
@@ -1289,7 +1297,7 @@
                                                 }
                                             ],
                                             "entity": "sensor.sys_family",
-                                            "icon": "mdi:network",
+                                            "icon": "phu:intel-nuc",
                                             "name": "Name",
                                             "show_state": false,
                                             "type": "custom:multiple-entity-row"

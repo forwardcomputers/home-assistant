@@ -236,10 +236,10 @@ rest_command:
     url: !secret printer_cleaning_url
   pi_hole_disable:
     method: get
-    url: "http://pihole.home.mustakim.com/admin/api.php?disable&auth="
+    url: !secret pi_hole_disable_url
   pi_hole_enable:
     method: get
-    url: "http://pihole.home.mustakim.com/admin/api.php?enable&auth="
+    url: !secret pi_hole_enable_url
 
 shell_command:
   macbook_sleep: !secret macbook_sleep_cmd
@@ -424,10 +424,10 @@ sensor:
     sensors:
       server_system_processes:
         value_template: >-
-          {{- states('sensor.netdata_server_system_processes_raw') | int -}}
+          {{- int(0) + states('sensor.netdata_server_system_processes_raw') | int(0) -}}
       server_uptime:
         value_template: >-
-            {% set uptime = states('sensor.netdata_server_uptime_raw') | float %}
+            {% set uptime = float(0) + states('sensor.netdata_server_uptime_raw') | float(0) %}
             {% set updays = (uptime / 86400) | round(0, "floor") %}
             {% set uphours = uptime | timestamp_custom('%-H:%-M:%-S', false) | regex_replace('^0:','') %}
             {% if updays == 0 %}
@@ -502,8 +502,6 @@ sensor:
             {% endif %}
 
 
-  - platform: version
-    name: installed_version
   - platform: uptime
     name: uptime_minutes
     scan_interval: 30
@@ -802,7 +800,7 @@ sensor:
         friendly_name: AQHI
         icon_template: mdi:chemical-weapon
         value_template: >-
-          {% set l = states('sensor.aqhi') | int %}
+          {% set l = int(0) + states('sensor.aqhi') | int(0) %}
           {% if l <= 3 %} Low
           {% elif l <= 6 %} Moderate
           {% elif l <= 10 %} High
@@ -812,7 +810,7 @@ sensor:
         friendly_name: AQI
         icon_template: mdi:chemical-weapon
         value_template: >-
-          {% set l = states('sensor.aqi') | int %}
+          {% set l = int(0) + states('sensor.aqi') | int(0) %}
           {% if l <= 99 %} Low
           {% elif l <= 149 %} Moderate
           {% elif l <= 199 %} High
@@ -822,7 +820,7 @@ sensor:
         friendly_name: O₃
         icon_template: mdi:earth
         value_template: >-
-          {% set l = states('sensor.o3') | int %}
+          {% set l = int(0) + states('sensor.o3') | int(0) %}
           {% if l < 0 %} unknown
           {% elif l <= 54 %} Good
           {% elif l <= 70 %} Moderate
@@ -833,7 +831,7 @@ sensor:
         friendly_name: PM₂.₅
         icon_template: mdi:chart-bubble
         value_template: >-
-          {% set l = states('sensor.pm') | int %}
+          {% set l = int(0) + states('sensor.pm') | int(0) %}
           {% if l < 0 %} unknown
           {% elif l <= 50 %} Good
           {% elif l <= 100 %} Moderate
@@ -844,7 +842,7 @@ sensor:
         friendly_name: NO₂
         icon_template: mdi:car
         value_template: >-
-          {% set l = states('sensor.no2') | int %}
+          {% set l = int(0) + states('sensor.no2') | int(0) %}
           {% if l < 0 %} unknown
           {% elif l <= 50 %} Good
           {% elif l <= 100 %} Moderate
@@ -855,7 +853,7 @@ sensor:
         friendly_name: CO
         icon_template: mdi:fire
         value_template: >-
-          {% set l = states('sensor.co') | float %}
+          {% set l = float(0) + states('sensor.co') | float(0) %}
           {% if l < 0 %} unknown
           {% elif l <= 4.4 %} Good
           {% elif l <= 9.4 %} Moderate
@@ -866,7 +864,7 @@ sensor:
         friendly_name: SO₂
         icon_template: mdi:factory
         value_template: >-
-          {% set l = states('sensor.so2') | int %}
+          {% set l = int(0) + states('sensor.so2') | int(0) %}
           {% if l < 0 %} unknown
           {% elif l <= 34 %} Good
           {% elif l <= 144 %} Moderate
